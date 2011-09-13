@@ -182,7 +182,7 @@ Quality of the output image ( required only if output-format is jpeg ). 0 to 100
 
 **tools-list**
 
-If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: SHARPEN, BRIGHTNESS, CONTRAST, SATURATION, ROTATE, FLIP, BLUR, EFFECTS, COLORS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT
+If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: SHARPEN, BRIGHTNESS, CONTRAST, SATURATION, ROTATE, FLIP, BLUR, EFFECTS, COLORS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH
 
 
 **hide-exit-unsave-confirmation**
