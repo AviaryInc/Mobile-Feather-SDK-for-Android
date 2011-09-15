@@ -86,7 +86,7 @@ From here, select all the .jar files included in the “libs” folder of the Av
 Add some entries to the manifest file of your application.
 
 **Permissions**
-AviaryFeather requires both internet access and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml <manifest> tag:
+AviaryFeather requires both internet access and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -94,7 +94,7 @@ AviaryFeather requires both internet access and write access to external storage
 
 **Activity declaration**
 
-Then, inside the <application> tag, add a reference to the FeatherActivity:
+Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
 
     <activity android:name="com.aviary.android.feather.FeatherActivity"
         android:theme="@style/FeatherTheme.Custom"
@@ -245,7 +245,7 @@ Open your res/values/themes.xml file which should be like this:
     </resources>
 
 
-Now let’s say we want to change the top bar and bottom bar default font family. To do this just place a ttf font file into your “assets/fonts” directory ( for instance “helvetica.ttf”) and add these lines inside the <style></style> tag of your themes.xml file:
+Now let’s say we want to change the top bar and bottom bar default font family. To do this just place a ttf font file into your “assets/fonts” directory ( for instance “helvetica.ttf”) and add these lines inside the &lt;style&gt;&lt;/style&gt; tag of your themes.xml file:
 
     <item name="toolbarFont">fonts/Helvetica.ttf</item>
     <item name="bottombarFont">fonts/Helvetica.ttf</item>
@@ -257,7 +257,7 @@ Or let’s say you want to change the default toolbar background. Just add this 
     <item name="toolbarBackground">#FFCCCCCC</item>
 
 
-For a complete list of customizables, just open AviaryFeather/res/values/themes.xml and see what’s inside the main <style> tag
+For a complete list of customizables, just open AviaryFeather/res/values/themes.xml and see what’s inside the main &lt;style&gt; tag
 
 
 ### 7 Localization
@@ -269,7 +269,7 @@ Here the instructions to create a new language for all the labels messages of fe
 * Go into the **AviaryFeather/res** folder
 * Create a new folder "values-it". 
 * Copy the file **res/values/strings.xml** into the **res/values-it** folder.
-* Open the **res/values-it/strings.xml** file with any text editor and translate all the strings within the <string></string> tag. For instance, the original version of the string "Save" is:
+* Open the **res/values-it/strings.xml** file with any text editor and translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. For instance, the original version of the string "Save" is:
 
     
 	`<string name="save">Save</string>`
