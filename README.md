@@ -5,6 +5,8 @@ This document will guide you through the creation of a sample application using 
 
 ### 1.1 Prerequisites
 
+Aviary Android SDK requires Android 2.2 as [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min).
+
 I assume you already have the Android environment installed on your system and Eclipse with the required ADT plugin.
 See http://developer.android.com/sdk/installing.html and http://developer.android.com/sdk/eclipse-adt.html if you need instructions on how to setup the Android environment.
 
@@ -256,3 +258,29 @@ Or let’s say you want to change the default toolbar background. Just add this 
 
 
 For a complete list of customizables, just open AviaryFeather/res/values/themes.xml and see what’s inside the main <style> tag
+
+
+### 7 Localization
+
+Android is really smart regarding localization. Localizing resources and strings is very easy.
+
+Here the instructions to create a new language for all the labels messages of feather (let's say we want to add italian support):
+
+* Go into the **AviaryFeather/res** folder
+* Create a new folder "values-it". 
+* Copy the file **res/values/strings.xml** into the **res/values-it** folder.
+* Open the **res/values-it/strings.xml** file with any text editor and translate all the strings within the <string></string> tag. For instance, the original version of the string "Save" is:
+
+    
+	`<string name="save">Save</string>`
+
+* in your localized strings.xml file it will be:
+
+    `<string name="save">Salva</string>`
+
+Now just clean and recompile your application. If your device has set italian as default language you will see feather in italian.
+
+For a more detailed tutorial about android localization look at this page: http://developer.android.com/resources/tutorials/localization/index.html
+
+
+ 
