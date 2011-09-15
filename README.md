@@ -260,7 +260,7 @@ Or let’s say you want to change the default toolbar background. Just add this 
 For a complete list of customizables, just open AviaryFeather/res/values/themes.xml and see what’s inside the main &lt;style&gt; tag
 
 
-### 7 Localization
+## 7 Localization
 
 Android is really smart regarding localization. Localizing resources and strings is very easy.
 
