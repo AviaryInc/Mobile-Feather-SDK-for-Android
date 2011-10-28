@@ -101,6 +101,14 @@ Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity
         android:configChanges="orientation|keyboardHidden"
         android:screenOrientation="portrait" />
 
+And also a reference to the Info screen:
+
+	<activity
+		android:configChanges="orientation|keyboardHidden"
+		android:name="com.aviary.android.feather.InfoScreenActivity"
+		android:screenOrientation="portrait"
+		android:theme="@style/FeatherTheme.Custom" />
+
 
 ### 4.4 themes.xml
 
