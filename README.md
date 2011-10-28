@@ -76,7 +76,7 @@ Next, navigate to the “Java Build Path” section of the project properties di
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
 
-From here, select all the .jar files included in the “libs” folder of the AviaryFeather project (**aviaryfx.jar**, **imagezoom.jar** and **featherlibrary.jar**).
+From here, select all the .jar files included in the “libs” folder of the AviaryFeather project (**aviaryimagesdk.jar**, and **aviaryfeatherlibrary.jar**).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
