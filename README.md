@@ -1,3 +1,27 @@
+Aviary Feather Android Setup Guide
+==============================
+
+Contents
+--------
+
+* Introduction
+	* Prerequisites
+* Workspace setup
+* Sample Application
+* Include AviaryFeather in a new Application
+	* Create a new Android project
+	* Project references
+	* AndroidManifest.xml
+	* themes.xml
+* Invoke Feather
+	* Intent parameters
+	* Result parameters
+* Extras
+	* Stickers
+	* Other configurations
+	* UI Customization
+* Localization
+
 ## 1 Introduction
 
 This document will guide you through the creation of a sample application using the AviaryFeather Android library.
@@ -76,7 +100,7 @@ Next, navigate to the “Java Build Path” section of the project properties di
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
 
-From here, select all the .jar files included in the “libs” folder of the AviaryFeather project (**aviaryimagesdk.jar**, and **aviaryfeatherlibrary.jar**).
+From here, select all the .jar files included in the “libs” folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
@@ -86,9 +110,10 @@ From here, select all the .jar files included in the “libs” folder of the Av
 Add some entries to the manifest file of your application.
 
 **Permissions**
-AviaryFeather requires both internet access and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
+AviaryFeather requires internet, network read state and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
     <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
@@ -97,7 +122,7 @@ AviaryFeather requires both internet access and write access to external storage
 Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
 
     <activity android:name="com.aviary.android.feather.FeatherActivity"
-        android:theme="@style/FeatherTheme.Custom"
+        android:theme="@style/FeatherDefaultTheme"
         android:configChanges="orientation|keyboardHidden"
         android:screenOrientation="portrait" />
 
@@ -107,8 +132,22 @@ And also a reference to the Info screen:
 		android:configChanges="orientation|keyboardHidden"
 		android:name="com.aviary.android.feather.InfoScreenActivity"
 		android:screenOrientation="portrait"
-		android:theme="@style/FeatherTheme.Custom" />
+		android:theme="@style/FeatherDefaultTheme" />
 
+
+If you enable the new stickers panel (see Intent parameters section) you also must include this receiver in your manifest:
+
+	<receiver 
+		android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver" 
+		android:exported="true" 
+		android:process=":feather_system_receiver">
+		<intent-filter>
+			<action android:name="android.intent.action.PACKAGE_ADDED" />
+			<action android:name="android.intent.action.PACKAGE_REMOVED" />
+			<action android:name="android.intent.action.PACKAGE_REPLACED" />
+			<data android:scheme="package" />
+		</intent-filter>
+	</receiver>
 
 ### 4.4 themes.xml
 
@@ -116,7 +155,7 @@ The android:theme entry in the manifest file is also required for Feather to wor
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <style name="FeatherTheme.Custom" parent="FeatherTheme.Dark" />
+        <style name="FeatherTheme.Custom" parent="FeatherDefaultTheme" />
     </resources>
 
 
@@ -137,9 +176,8 @@ In order to invoke Feather from your activity, you need to pass some parameters 
     Intent newIntent = new Intent( this, FeatherActivity.class );
     // set the source image uri
     newIntent.setData( uri );
-    // pass the required api key/secret ( http://developers.aviary.com/geteffectskey )
+    // pass the required api key ( http://developers.aviary.com/ )
     newIntent.putExtra( "API_KEY", “xxx” );
-    newIntent.putExtra( "API_SECRET", “xxx” );
     // pass the uri of the destination image file (optional)
     // This will be the same uri you will receive in the onActivityResult
     newIntent.putExtra( “output”, Uri.parse( "file://" + mOutputFile.getAbsolutePath() ) );
@@ -150,9 +188,15 @@ In order to invoke Feather from your activity, you need to pass some parameters 
     // you can force feather to display only a certain tools
     // newIntent.putExtra( "tools-list", new String[]{"SHARPEN", "BRIGHTNESS" } );
 
+	// enable fast rendering preview
+	newIntent.putExtra( "effect-enable-fast-preview", true );
+	
+	// enable the new sticker panel
+	newIntent.putExtra( "enable-more-stickers", true );
+
     // you want to hide the exit alert dialog shown when back is pressed
     // without saving image first
-    // newIntent.putExtra( Constants.EXTRA_HIDE_EXIT_UNSAVE_CONFIRMATION, true );
+    // newIntent.putExtra( "hide-exit-unsave-confirmation", true );
     
     // ..and start feather
     startActivityForResult( newIntent, ACTION_REQUEST_FEATHER );
@@ -163,45 +207,66 @@ In order to invoke Feather from your activity, you need to pass some parameters 
 
 Here’s a description of the required parameters:
 
-**Uri**
+* **Uri**
 
-( intent data ) This is the source uri of the image to be used as input by Feather
-
-
-**API_KEY/API_SECRET**
-
-api key and secret required to use remote filters. Go to http://developers.aviary.com/geteffectskey for more information on how to obtain your api key and secret
+	( intent data ) This is the source uri of the image to be used as input by Feather
 
 
-**output**
+* **API_KEY**
 
-This is the uri of the destination file where Feather will write the result image
-
-
-**output-format**
-
-Format of the output file ( jpg or png )
+	api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com for more information on how to obtain your api key and secret
 
 
+* **output**
 
-**output-quality**
-
-Quality of the output image ( required only if output-format is jpeg ). 0 to 100
-
+	This is the uri of the destination file where Feather will write the result image
 
 
-**tools-list**
+* **output-format**
 
-If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: SHARPEN, BRIGHTNESS, CONTRAST, SATURATION, ROTATE, FLIP, BLUR, EFFECTS, COLORS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME
+	Format of the output file ( jpg or png )
 
 
-**hide-exit-unsave-confirmation**
+* **output-quality**
 
-When the user click on the back-button and the image contains unsaved data a confirmation dialog appears by default. Setting this flag to true will hide that confirmation and the application will terminate.
+	Quality of the output image ( required only if output-format is jpeg ). 0 to 100
+
+
+* **effect-enable-fast-preview**
+
+	Depending on the current image size and the current user device, some effects can take longer than expected to render the image.
+Passing in the caller intent this flag as boolean "true" the effect panel will no longer use the default
+progress modal dialog while rendering an effect but instead will use a small "loading" view while rendering
+a small image preview. User will see "almost" immediately the small preview while the full size image is being
+processed in background. Once the full size image is processed it will replace the small preview image.
+Default behavior is to enable this feature only on fast devices ( fast enough to allow the small preview to be
+rendered immediately ).
+Pass "false" if you want to force the "progress modal" rendering model. No small preview, only a modal progress while rendering the image.
+
+
+* **enable-more-stickers**
+
+	Enable the new Stickers panel which has the "get more" market link embedded. Otherwise disabled and use the old style panel
+
+
+* **hide-exit-unsave-confirmation**
+
+	If you want to hide the exit alert dialog shown when back key (or the top cancel button) is pressed without saving image first.
+
+
+* **tools-list**
+
+	If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: SHARPEN, BRIGHTNESS, CONTRAST, SATURATION, ROTATE, FLIP, BLUR, EFFECTS, COLORS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME
+
+
+* **hide-exit-unsave-confirmation**
+
+	When the user click on the back-button and the image contains unsaved data a confirmation dialog appears by default. Setting this flag to true will hide that confirmation and the application will terminate.
 
 
 
 ## 5.2 Result parameters
+
 
 Once the user clicks “save” in the Feather activity, the “onActivityResult” of your Activity will be invoked, passing back **“ACTION_REQUEST_FEATHER”** as requestCode.
 The Uri data of the returned intent will be the output path of the result image:
@@ -241,7 +306,7 @@ Inside the AviaryFeather/res/values is a config.xml file. This file contains som
 
 ## 6.3 UI Customization
 
-Feather comes with the default FeatherTheme.Dark theme, the one you need to extends from your themes.xml file ( see section 4.4 ). You can modify almost every part of the UI by overriding the values of FeatherTheme.Dark into your theme.
+Feather comes with the default FeatherDefaultTheme theme, the one you need to extends from your themes.xml file ( see section 4.4 ). You can modify almost every part of the UI by overriding the values of FeatherDefaultTheme into your theme.
 
 Here some examples.
 Open your res/values/themes.xml file which should be like this:
@@ -249,7 +314,7 @@ Open your res/values/themes.xml file which should be like this:
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <style name="FeatherTheme.Custom" parent="FeatherTheme.Dark"></style>
+        <style name="FeatherTheme.Custom" parent="FeatherDefaultTheme"></style>
     </resources>
 
 
