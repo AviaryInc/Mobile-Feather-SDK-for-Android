@@ -29,7 +29,7 @@ This document will guide you through the creation of a sample application using 
 
 ### 1.1 Prerequisites
 
-Aviary Android SDK requires Android 2.2 as [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min).
+Aviary Android SDK supports Android 2.2+ as [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), but it must be compiled using Android 4.0 (API level 14) as target sdk. This means that your application must have selected "Android 4.0" in the "Project Build Target" eclipse panel.
 
 I assume you already have the Android environment installed on your system and Eclipse with the required ADT plugin.
 See http://developer.android.com/sdk/installing.html and http://developer.android.com/sdk/eclipse-adt.html if you need instructions on how to setup the Android environment.
@@ -66,7 +66,7 @@ Next, we need to create an Android application in order to use Feather. You can 
 
 Just import the sample application by following the same procedures described above, but select sample-app.zip at step 3. 
 
-A new project called “AviaryLauncher” will be created in your workspace.
+A new project called “AviaryLauncher” will be created in your workspace. You can inspect this app to see a sample usage of the aviary sdk.
 
 The imported application should have all the references already set and it should be ready to use. If you want to include AviaryFeather in a different Android project or add it to a new one, follow the instructions in step 4; otherwise you can skip to step 5.
 
@@ -78,18 +78,11 @@ If you don’t want to use the included sample application to test Feather, here
 
 ### 4.1 Create a new Android project
 
-Just create a new Android project as usual from Eclipse.
+Just create a new Android project as usual from Eclipse and select Android 4.0 in the Build Target Panel.
 
 ![new eclipse project](http://labs.sephiroth.it/tmp/android/4.png)
 
-
-
-### 4.2 Project references
 Once the new project has been created, open the project properties and navigate to the “Android” section.
-
-![project setup](http://labs.sephiroth.it/tmp/android/5.png)
-
-
 Click the “Add...” button of the “Library” subsection and select “AviaryFeather” from the dialog.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/6.png)
@@ -99,57 +92,59 @@ Next, navigate to the “Java Build Path” section of the project properties di
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-
-From here, select all the .jar files included in the “libs” folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
+From here, select all the .jar file included in the “libs” folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
 
-
-### 4.3 AndroidManifest.xml
+### 4.2 AndroidManifest.xml
 Add some entries to the manifest file of your application.
 
 **Permissions**
-AviaryFeather requires internet, network read state and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
+AviaryFeather requires internet and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
     <uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+An additional permission is necessary, but not mandatory:
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+	
+This permission will enable the vibration feedback on some feather components, for a better user experience. Omit this permission if you dont want the vibration feedback.
 
 
 **Activity declaration**
 
+As said before, aviary sdk supports android 2.2 as minimum android version, for this reason the "uses-sdk" xml node of your manifest should look like this:
+    <uses-sdk android:minSdkVersion="8" />
+
 Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
 
-    <activity android:name="com.aviary.android.feather.FeatherActivity"
-        android:theme="@style/FeatherDefaultTheme"
+    <activity
+        android:name="com.aviary.android.feather.FeatherActivity"
         android:configChanges="orientation|keyboardHidden"
-        android:screenOrientation="portrait" />
+        android:screenOrientation="unspecified"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
+        android:theme="@style/FeatherDefaultTheme.Custom" />
 
-And also a reference to the Info screen:
+And also a reference to the plugins receiver is necessary:
 
-	<activity
-		android:configChanges="orientation|keyboardHidden"
-		android:name="com.aviary.android.feather.InfoScreenActivity"
-		android:screenOrientation="portrait"
-		android:theme="@style/FeatherDefaultTheme" />
+    <receiver
+        android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver"
+        android:exported="true"
+        android:process=":feather_system_receiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+    </receiver>
 
 
-If you enable the new stickers panel (see Intent parameters section) you also must include this receiver in your manifest:
-
-	<receiver 
-		android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver" 
-		android:exported="true" 
-		android:process=":feather_system_receiver">
-		<intent-filter>
-			<action android:name="android.intent.action.PACKAGE_ADDED" />
-			<action android:name="android.intent.action.PACKAGE_REMOVED" />
-			<action android:name="android.intent.action.PACKAGE_REPLACED" />
-			<data android:scheme="package" />
-		</intent-filter>
-	</receiver>
-
-### 4.4 themes.xml
+### 4.3 Theme and Styles
 
 The android:theme entry in the manifest file is also required for Feather to work properly, so add an entry to your themes.xml file (if you don’t have one, create a new file called themes.xml in your res/values folder):
 
@@ -161,9 +156,9 @@ The android:theme entry in the manifest file is also required for Feather to wor
 
 By default, this entry will use the default Feather theme.
 If you’d like to customize the Feather UI, you can do that simply by adding entries to your “Feather.Custom” style. Check out
-the **themes.xml** file included in AviaryFeather/res/values for the list of available keys.
+the **styles.xml** file included in AviaryFeather/res/values for the list of available styles.
 
-
+Note that many ui elements depends both on the styles.xml and on the config.xml file included. The styles.xml declares the ui components general appearance, while in the config.xml you'll find component specific dimensions ( like for text or lists ) and most of the properties for customize feather's panels behavior.
 
 ## 5. Invoke Feather
 
@@ -191,9 +186,6 @@ In order to invoke Feather from your activity, you need to pass some parameters 
 	// enable fast rendering preview
 	newIntent.putExtra( "effect-enable-fast-preview", true );
 	
-	// enable the new sticker panel
-	newIntent.putExtra( "enable-more-stickers", true );
-
     // you want to hide the exit alert dialog shown when back is pressed
     // without saving image first
     // newIntent.putExtra( "hide-exit-unsave-confirmation", true );
@@ -244,11 +236,6 @@ rendered immediately ).
 Pass "false" if you want to force the "progress modal" rendering model. No small preview, only a modal progress while rendering the image.
 
 
-* **enable-more-stickers**
-
-	Enable the new Stickers panel which has the "get more" market link embedded. Otherwise disabled and use the old style panel
-
-
 * **hide-exit-unsave-confirmation**
 
 	If you want to hide the exit alert dialog shown when back key (or the top cancel button) is pressed without saving image first.
@@ -289,13 +276,21 @@ The Uri data of the returned intent will be the output path of the result image:
 
 ### 6.1 Stickers
 
+The sample application already includes a set of stickers which will be shown as default pack. In addition users can install from the market more packs and they will be added automatically into the stickers panel.
+If you want to use those stickers just copy the folder "assets/stickers" into your application project. 
+If you don't want to include default stickers you need to change a value in the file "plugins.xml" included in the res/values folder:
 
-Feather uses the “assets/stickers” folder of your application as input for the stickers tool, so your application must include the list of sticker files inside that folder. (The AviaryLauncher sample application already has a bunch of images inside its assets/stickers folder by default.) 
+Change the line:
 
-**Note**: If your application does not have the above folder or if that folder is empty, the stickers tool will be automatically hidden in Feather
+    <integer name="is_sticker">1</integer>
+
+into:
+
+    <integer name="is_sticker">0</integer>
+
+In this way users won't see any default stickers pack, but instead only a link to download more packs.
 
 ![stickers](http://labs.sephiroth.it/tmp/android/9.png)
-
 
 
 ## 6.2 Other configurations
@@ -306,32 +301,7 @@ Inside the AviaryFeather/res/values is a config.xml file. This file contains som
 
 ## 6.3 UI Customization
 
-Feather comes with the default FeatherDefaultTheme theme, the one you need to extends from your themes.xml file ( see section 4.4 ). You can modify almost every part of the UI by overriding the values of FeatherDefaultTheme into your theme.
-
-Here some examples.
-Open your res/values/themes.xml file which should be like this:
-
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <resources>
-        <style name="FeatherTheme.Custom" parent="FeatherDefaultTheme"></style>
-    </resources>
-
-
-Now let’s say we want to change the top bar and bottom bar default font family. To do this just place a ttf font file into your “assets/fonts” directory ( for instance “helvetica.ttf”) and add these lines inside the &lt;style&gt;&lt;/style&gt; tag of your themes.xml file:
-
-    <item name="toolbarFont">fonts/Helvetica.ttf</item>
-    <item name="bottombarFont">fonts/Helvetica.ttf</item>
-
-
-Or let’s say you want to change the default toolbar background. Just add this line:
-
-
-    <item name="toolbarBackground">#FFCCCCCC</item>
-
-
-For a complete list of customizables, just open AviaryFeather/res/values/themes.xml and see what’s inside the main &lt;style&gt; tag
-
+You can customize almost every aspect of the application by editing the "styles.xml" file included in the res folder.
 
 ## 7 Localization
 
@@ -355,5 +325,3 @@ Now just clean and recompile your application. If your device has set italian as
 
 For a more detailed tutorial about android localization look at this page: http://developer.android.com/resources/tutorials/localization/index.html
 
-
- 
