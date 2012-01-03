@@ -296,9 +296,8 @@ is pressed without saving the image first.
 If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
 The value must be a String[] array and the available values are: 
 	
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, 
-    TEXT, BLEMISH, MEME, ADJUST, ENHANCE
-
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
 **hide-exit-unsave-confirmation**
 
