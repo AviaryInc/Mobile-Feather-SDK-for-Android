@@ -76,7 +76,6 @@ you must include in your application if you want to use Aviary to manipulate ima
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/3.png)
 
 
-
 <a name="sample-app"></a>
 3 Sample Application
 ------------------
