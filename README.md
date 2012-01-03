@@ -26,23 +26,23 @@ Contents
 ------------
 
 This document will guide you through the creation of a 
-sample application using the AviaryFeather Android library.
+sample application using the Aviary Android library (codename: Feather).
 
 <a name="prerequisites"></a>
-### Prerequisites
+### 1.1 Prerequisites
 
-Aviary Android SDK supports Android 2.2+ as 
+The Aviary Android SDK supports Android 2.2+ as the 
 [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), 
-but it must be compiled using Android 4.0 (API level 14) as target sdk. 
-This means that your application must have selected "Android 4.0" 
-in the "Project Build Target" eclipse panel.
+but it must be compiled using Android 4.0 (API level 14) as the target sdk. 
+This means that your application must have "Android 4.0" selected 
+in the "Project Build Target" Eclipse panel.
 
-I assume you already have the Android environment installed 
+This guide assumes that you already have the Android environment installed 
 on your system and Eclipse with the required ADT plugin.
 See the Android documentation for 
 [installing](http://developer.android.com/sdk/installing.html) and 
 [Eclipse](http://developer.android.com/sdk/eclipse-adt.html) 
-if you need instructions on how to setup the Android environment.
+if you need instructions on how to set up the Android environment.
 
 You will also need an Aviary API key/secret pair to access the 
 remote effect API. To sign up or learn more, please visit 
@@ -67,7 +67,7 @@ select "Existing Projects into Workspace," and then click "Next."
 
 In the new dialog, click on the "Select archive file" radio button 
 and then click the "Browse" button on the right. From here, select 
-the aviaryfeather.zip file included with this document.
+the `aviaryfeather.zip` file included with this document.
 Click on the "Finish" button at the bottom of the dialog. 
 A new Android library project called "AviaryFeather" will be created 
 in your current workspace. This is the required library project which 
@@ -81,7 +81,7 @@ you must include in your application if you want to use Aviary to manipulate ima
 3 Sample Application
 ------------------
 
-Next, we need to create an Android application in order to use Aviary. 
+Next, we need to create an Android application in order to use the Aviary editor. 
 You can see a real example of how to use the Aviary editor by opening 
 the included `sample-app.zip` project.
 
@@ -89,7 +89,7 @@ Just import the sample application by following the same procedures
 described above, but select `sample-app.zip` at step 3. 
 
 A new project called "AviaryLauncher" will be created in your workspace. 
-You can inspect this app to see a sample usage of the aviary sdk.
+You can inspect this app to see a sample usage of the Aviary sdk.
 
 The imported application should have all the references already set and 
 it should be ready to use. If you want to include AviaryFeather in a 
@@ -123,7 +123,7 @@ dialog and click on "Add JARs..." button of the "Libraries" subsection.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-From here, select all the `.jar` file included in the "libs" folder of the 
+From here, select the `.jar` file included in the "libs" folder of the 
 AviaryFeather project (`aviaryfeatherlibrary.jar`).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
@@ -133,6 +133,7 @@ AviaryFeather project (`aviaryfeatherlibrary.jar`).
 Add some entries to the manifest file of your application.
 
 **Permissions**
+
 AviaryFeather requires internet and write access to external storage. 
 To grant these permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
@@ -285,12 +286,6 @@ to force the "progress modal" rendering model. No small preview, only a modal pr
 rendering the image.
 
 
-**hide-exit-unsave-confirmation**
-
-If you want to hide the exit alert dialog shown when the back key (or the top cancel button) 
-is pressed without saving the image first.
-
-
 **tools-list**
 
 If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
@@ -348,7 +343,7 @@ into:
 
     <integer name="is_sticker">0</integer>
 
-This will mean that users won't see any default sticker pack, but instead only a link to download more packs 
+This will mean that users won't see any default sticker pack, but instead only a link to download packs 
 from the marketplace.
 
 ![stickers](http://labs.sephiroth.it/tmp/android/9.png)
@@ -362,13 +357,13 @@ application default values and can be modified before compilation.
 Here is the description for tool-specific configuration variables:
 
 #### Orientation Tool
-`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation
+`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation.
 
 `feather_adjust_tool_reset_anim_time` Defines the reset animation duration 
-( ie. when the user clicked on cancel/back button )
+(i.e., when the user clicks the cancel/back button).
 
-`feather_adjust_tool_enable_3d_flip` If device is running android 4.x 
-you can enable a flip animation in 3D style by setting this param to 1
+`feather_adjust_tool_enable_3d_flip` If device is running Android 4.x 
+you can enable a flip animation in 3D style by setting this param to 1.
 
 #### Text Tool
 `feather_text_minSize` Minimum text size allowed when user is resizing the text rect.
@@ -408,9 +403,9 @@ area with a simple click on the crop rect itself.
 
 `feather_crop_highlight_stroke_width` Stroke size of the crop area.
 
-`feather_crop_highlight_internal_stroke_width` Stroke size of the internal crop lines
+`feather_crop_highlight_internal_stroke_width` Stroke size of the internal crop lines.
 
-`feather_crop_highlight_internal_stroke_alpha` Alpha ( 0 - 255 ) of the internal lines
+`feather_crop_highlight_internal_stroke_alpha` Alpha (0 - 255) of the internal lines.
 
 `feather_crop_highlight_internal_stroke_alpha_down` Alpha of the internal lines when crop rect is pressed.
 
@@ -423,7 +418,7 @@ and `feather_crop_values`.
 
 `feather_crop_names` Defines the labes for the button.
 
-Every item in the feather_crop_values defines how the crop rect will be presented. For instance, the following item:
+Every item in the `feather_crop_values` defines how the crop rect will be presented. For instance, the following item:
     
 	<item>3:2</item>
 	
@@ -431,7 +426,7 @@ will create a crop area restricted in its proportions to 3 by 2. Or the followin
 
     <item>-1:-1</item>
 	
-will create a crop area restricted using the original image width and height.
+will create a crop area restricted to the original image width and height.
 
 All the previous examples will create a crop area with restricted proportions. 
 If you want to allow the user to have a crop rect without limitations, just use an item like this:
@@ -447,21 +442,21 @@ If you want to allow the user to have a crop rect without limitations, just use 
 `feather_default_colors` defines the available brush colors.
 
 #### Stickers
-`feather_sticker_highlight_minsize` minimum size of the sticker while resizing.
+`feather_sticker_highlight_minsize` Minimum size of the sticker while resizing.
 
-`feather_sticker_highlight_padding` padding of the highlight area from the sticker edges.
+`feather_sticker_highlight_padding` Padding of the highlight area from the sticker edges.
 
-`feather_sticker_highlight_stroke_width` stroke size of the highlight area.
+`feather_sticker_highlight_stroke_width` Stroke size of the highlight area.
 
-`feather_sticker_highlight_ellipse` ellipse size of the highlight area borders.
+`feather_sticker_highlight_ellipse` Ellipse size of the highlight area borders.
 
-`feather_sticker_highlight_stroke` highlight stroke color.
+`feather_sticker_highlight_stroke` Highlight stroke color.
 
-`feather_sticker_highlight_stroke_down` highlight stroke color when pressed.
+`feather_sticker_highlight_stroke_down` Highlight stroke color when pressed.
 
-`feather_sticker_highlight_outline` highlight fill color.
+`feather_sticker_highlight_outline` Highlight fill color.
 
-`feather_sticker_highlight_outline_down` highlight fill color when pressed.
+`feather_sticker_highlight_outline_down` Highlight fill color when pressed.
 
 <a name="customization"></a>
 ### 6.3 UI Customization
@@ -481,9 +476,7 @@ Here are the instructions to create a new language for all the label messages of
 * Go into the **AviaryFeather/res** folder
 * Create a new folder "values-it". 
 * Copy the file `res/values/strings.xml` into the **res/values-it** folder.
-* Open the `res/values-it/strings.xml` file with any text editor and 
-translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. 
-For instance, the original version of the string "Save" is:
+* Open the `res/values-it/strings.xml` file with any text editor and translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. For instance, the original version of the string "Save" is:
 
     
 	`<string name="save">Save</string>`
