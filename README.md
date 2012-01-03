@@ -4,41 +4,52 @@ Aviary Android SDK Setup Guide
 Contents
 --------
 
-* [Introduction](#introduction)
-	* [Prerequisites](#prerequisites)
-* [Workspace setup](#workspace-setup)
-* [Sample Application](#sample-app)
-* [Include AviaryFeather in a new Application](#include)
-	* [Create a new Android project](#create-new)
-	* [AndroidManifest.xml](#manifest)
-	* [themes.xml](#themes)
-* [Invoke Feather](#invoke)
-	* [Intent parameters](#intent-parameters)
-	* [Result parameters](#result-parameters)
-* [Extras](#extras)
-	* [Stickers](#stickers)
-	* [Other configurations](#other-configurations)
-	* [UI Customization](#customization)
-* [Localization](#localization)
+* [1 Introduction](#introduction)
+	* [1.1 Prerequisites](#prerequisites)
+* [2 Workspace setup](#workspace-setup)
+* [3 Sample Application](#sample-app)
+* [4 Include AviaryFeather in a new Application](#include)
+	* [4.1 Create a new Android project](#create-new)
+	* [4.2 AndroidManifest.xml](#manifest)
+	* [4.3 themes.xml](#themes)
+* [5 Invoke Feather](#invoke)
+	* [5.1 Intent parameters](#intent-parameters)
+	* [5.2 Result parameters](#result-parameters)
+* [6 Extras](#extras)
+	* [6.1 Stickers](#stickers)
+	* [6.2 Other configurations](#other-configurations)
+	* [6.3 UI Customization](#customization)
+* [7 Localization](#localization)
 
 <a name="introduction"></a>
-Introduction
+1 Introduction
 ------------
 
-This document will guide you through the creation of a sample application using the AviaryFeather Android library.
+This document will guide you through the creation of a 
+sample application using the AviaryFeather Android library.
 
 <a name="prerequisites"></a>
 ### Prerequisites
 
-Aviary Android SDK supports Android 2.2+ as [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), but it must be compiled using Android 4.0 (API level 14) as target sdk. This means that your application must have selected "Android 4.0" in the "Project Build Target" eclipse panel.
+Aviary Android SDK supports Android 2.2+ as 
+[minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), 
+but it must be compiled using Android 4.0 (API level 14) as target sdk. 
+This means that your application must have selected "Android 4.0" 
+in the "Project Build Target" eclipse panel.
 
-I assume you already have the Android environment installed on your system and Eclipse with the required ADT plugin.
-See http://developer.android.com/sdk/installing.html and http://developer.android.com/sdk/eclipse-adt.html if you need instructions on how to setup the Android environment.
+I assume you already have the Android environment installed 
+on your system and Eclipse with the required ADT plugin.
+See the Android documentation for 
+[installing](http://developer.android.com/sdk/installing.html) and 
+[Eclipse](http://developer.android.com/sdk/eclipse-adt.html) 
+if you need instructions on how to setup the Android environment.
 
-You will also need an Aviary API key/secret pair to access the remove effect API. To sign up or learn more, please visit http://developers.aviary.com/geteffectskey.
+You will also need an Aviary API key/secret pair to access the 
+remote effect API. To sign up or learn more, please visit 
+[http://www.aviary.com/android-key](http://www.aviary.com/android-key).
 
 <a name="workspace-setup"></a>
-Workspace setup
+2 Workspace setup
 ---------------
 
 First, we’ll need to import the 2 Eclipse projects into our workspace.
@@ -48,38 +59,51 @@ Open Eclipse and select “Import” from the file menu.
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/1.png)
 
 
-The import dialog will appear. From the list of import options, select “Existing Projects into Workspace,” and then click “Next.”
+The import dialog will appear. From the list of import options, 
+select “Existing Projects into Workspace,” and then click “Next.”
 
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/2.png)
 
 
-In the new dialog, click on the “Select archive file” radio button and then click the “Browse” button on the right. From here, select the aviaryfeather.zip file included with this document.
-Click on the “Finish” button at the bottom of the dialog. A new Android library project called “AviaryFeather” will be created in your current workspace. This is the required library project which you must include in your application if you want to use Feather to manipulate images.
+In the new dialog, click on the “Select archive file” radio button 
+and then click the “Browse” button on the right. From here, select 
+the aviaryfeather.zip file included with this document.
+Click on the “Finish” button at the bottom of the dialog. 
+A new Android library project called “AviaryFeather” will be created 
+in your current workspace. This is the required library project which 
+you must include in your application if you want to use Aviary to manipulate images.
 
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/3.png)
 
 
 
 <a name="sample-app"></a>
-Sample Application
+3 Sample Application
 ------------------
 
-Next, we need to create an Android application in order to use Feather. You can see a real example of how to use Feather by opening the included sample-app.zip project.
+Next, we need to create an Android application in order to use Aviary. 
+You can see a real example of how to use the Aviary editor by opening 
+the included `sample-app.zip` project.
 
-Just import the sample application by following the same procedures described above, but select sample-app.zip at step 3. 
+Just import the sample application by following the same procedures 
+described above, but select `sample-app.zip` at step 3. 
 
-A new project called “AviaryLauncher” will be created in your workspace. You can inspect this app to see a sample usage of the aviary sdk.
+A new project called “AviaryLauncher” will be created in your workspace. 
+You can inspect this app to see a sample usage of the aviary sdk.
 
-The imported application should have all the references already set and it should be ready to use. If you want to include AviaryFeather in a different Android project or add it to a new one, follow the instructions in step 4; otherwise you can skip to step 5.
+The imported application should have all the references already set and 
+it should be ready to use. If you want to include AviaryFeather in a 
+different Android project or add it to a new one, follow the instructions 
+in step 4; otherwise you can skip to step 5.
 
 <a name="include"></a>
-Include AviaryFeather in a new Application
+4 Include AviaryFeather in a new Application
 ------------------------------------------
 
 If you don’t want to use the included sample application to test Feather, here’s a step by step guide on how to include Feather in a new Android application.
 
 <a name="create-new"></a>
-### Create a new Android project
+### 4.1 Create a new Android project
 
 Just create a new Android project as usual from Eclipse and select Android 4.0 in the Build Target Panel.
 
@@ -100,7 +124,7 @@ From here, select all the .jar file included in the “libs” folder of the Avi
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
 <a name="manifest"></a>
-### AndroidManifest.xml
+### 4.2 AndroidManifest.xml
 Add some entries to the manifest file of your application.
 
 **Permissions**
@@ -147,7 +171,7 @@ And also a reference to the plugins receiver is necessary:
     </receiver>
 
 <a name="theme"></a>
-### Theme and Styles
+### 4.3 Theme and Styles
 
 The android:theme entry in the manifest file is also required for Feather to work properly, so add an entry to your themes.xml file (if you don’t have one, create a new file called themes.xml in your res/values folder):
 
@@ -164,7 +188,7 @@ the **styles.xml** file included in AviaryFeather/res/values for the list of ava
 Note that many ui elements depends both on the styles.xml and on the config.xml file included. The styles.xml declares the ui components general appearance, while in the config.xml you'll find component specific dimensions ( like for text or lists ) and most of the properties for customize feather's panels behavior.
 
 <a name="invoke"></a>
-Invoke Feather
+5 Invoke Feather
 --------------
 
 If you’re calling Feather from a new application, you’ll need to add the below code in order to start Feather. Otherwise (if you’re using the demo application) you can find this code inside the MainActivity.java file.
@@ -200,7 +224,7 @@ In order to invoke Feather from your activity, you need to pass some parameters 
 
 
 <a name="intent-parameters"></a>
-### Intent parameters
+### 5.1 Intent parameters
 
 Here’s a description of the required parameters:
 
@@ -257,7 +281,7 @@ Pass "false" if you want to force the "progress modal" rendering model. No small
 
 
 <a name="result-parameters"></a>
-### Result parameters
+### 5.2 Result parameters
 
 
 Once the user clicks “save” in the Feather activity, the “onActivityResult” of your Activity will be invoked, passing back **“ACTION_REQUEST_FEATHER”** as requestCode.
@@ -276,11 +300,11 @@ The Uri data of the returned intent will be the output path of the result image:
 
 
 <a name="extras"></a>
-Extras
+6 Extras
 ------
 
 <a name="stickers"></a>
-### Stickers
+### 6.1 Stickers
 
 The sample application already includes a set of stickers which will be shown as default pack. In addition users can install from the market more packs and they will be added automatically into the stickers panel.
 If you want to use those stickers just copy the folder "assets/stickers" into your application project. 
@@ -299,13 +323,13 @@ In this way users won't see any default stickers pack, but instead only a link t
 ![stickers](http://labs.sephiroth.it/tmp/android/9.png)
 
 <a name="other-configurations"></a>
-### Other configurations
+### 6.2 Other configurations
 
 Inside the AviaryFeather/res/values is a config.xml file. This file contains some application default values and can be modified before compilation.
 
 
 <a name="customization"></a>
-### UI Customization
+### 6.3 UI Customization
 
 You can customize almost every aspect of the application by editing the "styles.xml" file included in the res folder.
 
