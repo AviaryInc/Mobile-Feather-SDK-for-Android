@@ -247,53 +247,54 @@ Here's a description of the required parameters:
 
 **Uri**
 
-	(intent data) This is the source URI of the image to be used as input by Aviary
+(intent data) This is the source URI of the image to be used as input by Aviary
 
 **API_KEY**
 
-	An api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com 
-	for more information on how to obtain your api key and secret
+An api key IS REQUIRED to use remote filters. Please visit 
+[http://www.aviary.com/android-key](http://www.aviary.com/android-key) 
+for more information on how to obtain your api key and secret
 
 
 **output**
 
-	This is the uri of the destination file where Aviary will write the result image
+This is the uri of the destination file where Aviary will write the result image
 
 
 **output-format**
 
-	Format of the output file (jpg or png)
+Format of the output file (jpg or png)
 
 
 **output-quality**
 
-	Quality of the output image (required only if output-format is jpeg). 0 to 100
+Quality of the output image (required only if output-format is jpeg). 0 to 100
 
 
 **effect-enable-fast-preview**
 
-	Depending on the current image size and the current user device, some effects can 
-	take longer than expected to render the image. Passing in the caller intent this 
-	flag as boolean "true" the effect panel will no longer use the default progress modal 
-	dialog while rendering an effect but instead will use a small "loading" view while rendering 
-	a small image preview. User will almost immediately see the small preview while the full size 
-	image is being processed in background. Once the full size image is processed, it will replace 
-	the small preview image. The default behavior is to enable this feature only on fast devices 
-	(fast enough to allow the small preview to be rendered immediately). Pass "false" if you want 
-	to force the "progress modal" rendering model. No small preview, only a modal progress bar while 
-	rendering the image.
+Depending on the current image size and the current user device, some effects can 
+take longer than expected to render the image. Passing in the caller intent this 
+flag as boolean "true" the effect panel will no longer use the default progress modal 
+dialog while rendering an effect but instead will use a small "loading" view while rendering 
+a small image preview. User will almost immediately see the small preview while the full size 
+image is being processed in background. Once the full size image is processed, it will replace 
+the small preview image. The default behavior is to enable this feature only on fast devices 
+(fast enough to allow the small preview to be rendered immediately). Pass "false" if you want 
+to force the "progress modal" rendering model. No small preview, only a modal progress bar while 
+rendering the image.
 
 
 **hide-exit-unsave-confirmation**
 
-	If you want to hide the exit alert dialog shown when the back key (or the top cancel button) 
-	is pressed without saving the image first.
+If you want to hide the exit alert dialog shown when the back key (or the top cancel button) 
+is pressed without saving the image first.
 
 
 **tools-list**
 
-	If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
-	The value must be a String[] array and the available values are: 
+If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
+The value must be a String[] array and the available values are: 
 	
     SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, 
     TEXT, BLEMISH, MEME, ADJUST, ENHANCE
@@ -301,9 +302,9 @@ Here's a description of the required parameters:
 
 **hide-exit-unsave-confirmation**
 
-	When the user clicks the back button and the image contains unsaved data, a confirmation 
-	dialog appears by default. Setting this flag to true will hide that confirmation and the 
-	application will terminate without a warning to the user.
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
 
 
 <a name="result-parameters"></a>
