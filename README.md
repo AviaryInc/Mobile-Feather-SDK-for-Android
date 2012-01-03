@@ -205,9 +205,12 @@ and most of the properties for customizing Aviary's panel behavior.
 5 Invoke Feather
 --------------
 
-If you're calling Feather from a new application, you'll need to add the below code in order to start Feather. Otherwise (if you're using the demo application) you can find this code inside the MainActivity.java file.
+If you're calling Aviary from a new application, you'll need to add the below code 
+in order to start the editor. Otherwise (if you're using the demo application), you 
+can find this code inside the `MainActivity.java` file.
 
-In order to invoke Feather from your activity, you need to pass some parameters to the FeatherActivity. Here's an example of how to invoke the new activity:
+In order to invoke Aviary from your activity, you need to pass some parameters to the 
+FeatherActivity. Here's an example of how to invoke the new activity:
 
 
     // Create the intent needed to start feather
@@ -244,63 +247,72 @@ Here's a description of the required parameters:
 
 * **Uri**
 
-	( intent data ) This is the source uri of the image to be used as input by Feather
+	(intent data) This is the source URI of the image to be used as input by Aviary
 
 
 * **API_KEY**
 
-	api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com for more information on how to obtain your api key and secret
+	An api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com 
+	for more information on how to obtain your api key and secret
 
 
 * **output**
 
-	This is the uri of the destination file where Feather will write the result image
+	This is the uri of the destination file where Aviary will write the result image
 
 
 * **output-format**
 
-	Format of the output file ( jpg or png )
+	Format of the output file (jpg or png)
 
 
 * **output-quality**
 
-	Quality of the output image ( required only if output-format is jpeg ). 0 to 100
+	Quality of the output image (required only if output-format is jpeg). 0 to 100
 
 
 * **effect-enable-fast-preview**
 
-	Depending on the current image size and the current user device, some effects can take longer than expected to render the image.
-Passing in the caller intent this flag as boolean "true" the effect panel will no longer use the default
-progress modal dialog while rendering an effect but instead will use a small "loading" view while rendering
-a small image preview. User will see "almost" immediately the small preview while the full size image is being
-processed in background. Once the full size image is processed it will replace the small preview image.
-Default behavior is to enable this feature only on fast devices ( fast enough to allow the small preview to be
-rendered immediately ).
-Pass "false" if you want to force the "progress modal" rendering model. No small preview, only a modal progress while rendering the image.
+	Depending on the current image size and the current user device, some effects can 
+	take longer than expected to render the image. Passing in the caller intent this 
+	flag as boolean "true" the effect panel will no longer use the default progress modal 
+	dialog while rendering an effect but instead will use a small "loading" view while rendering 
+	a small image preview. User will almost immediately see the small preview while the full size 
+	image is being processed in background. Once the full size image is processed, it will replace 
+	the small preview image. The default behavior is to enable this feature only on fast devices 
+	(fast enough to allow the small preview to be rendered immediately). Pass "false" if you want 
+	to force the "progress modal" rendering model. No small preview, only a modal progress bar while 
+	rendering the image.
 
 
 * **hide-exit-unsave-confirmation**
 
-	If you want to hide the exit alert dialog shown when back key (or the top cancel button) is pressed without saving image first.
+	If you want to hide the exit alert dialog shown when the back key (or the top cancel button) 
+	is pressed without saving the image first.
 
 
 * **tools-list**
 
-	If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: 
+	If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
+	The value must be a String[] array and the available values are: 
 	
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE,
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, 
+    TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
 
 * **hide-exit-unsave-confirmation**
 
-	When the user click on the back-button and the image contains unsaved data a confirmation dialog appears by default. Setting this flag to true will hide that confirmation and the application will terminate.
+	When the user clicks the back button and the image contains unsaved data, a confirmation 
+	dialog appears by default. Setting this flag to true will hide that confirmation and the 
+	application will terminate without a warning to the user.
 
 
 <a name="result-parameters"></a>
 ### 5.2 Result parameters
 
 
-Once the user clicks "save" in the Feather activity, the "onActivityResult" of your Activity will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
+Once the user clicks "save" in the Feather activity, the "onActivityResult" of your Activity 
+will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
 The Uri data of the returned intent will be the output path of the result image:
 
     @Override
@@ -322,9 +334,11 @@ The Uri data of the returned intent will be the output path of the result image:
 <a name="stickers"></a>
 ### 6.1 Stickers
 
-The sample application already includes a set of stickers which will be shown as default pack. In addition users can install from the market more packs and they will be added automatically into the stickers panel.
-If you want to use those stickers just copy the folder "assets/stickers" into your application project. 
-If you don't want to include default stickers you need to change a value in the file "plugins.xml" included in the res/values folder:
+The sample application already includes a set of stickers which will be shown as a default pack. 
+In addition, users can install more packs from the market and they will be added automatically 
+into the stickers panel. If you want to use default stickers, just copy the folder 
+"assets/stickers" into your application project. If you don't want to include default 
+stickers, you need to change a value in the file `plugins.xml`, included in the res/values folder:
 
 Change the line:
 
@@ -334,20 +348,23 @@ into:
 
     <integer name="is_sticker">0</integer>
 
-In this way users won't see any default stickers pack, but instead only a link to download more packs.
+This will mean that users won't see any default sticker pack, but instead only a link to download more packs 
+from the marketplace.
 
 ![stickers](http://labs.sephiroth.it/tmp/android/9.png)
 
 <a name="other-configurations"></a>
 ### 6.2 Other configurations
 
-Inside the AviaryFeather/res/values is a config.xml file. This file contains some application default values and can be modified before compilation.
+Inside the AviaryFeather/res/values is a `config.xml` file. This file contains some 
+application default values and can be modified before compilation.
 
 
 <a name="customization"></a>
 ### 6.3 UI Customization
 
-You can customize almost every aspect of the application by editing the "styles.xml" file included in the res folder.
+You can customize almost every aspect of the application by editing the `styles.xml` 
+file included in the res folder.
 
 <a name="localization"></a>
 7 Localization
@@ -355,21 +372,26 @@ You can customize almost every aspect of the application by editing the "styles.
 
 Android is really smart regarding localization. Localizing resources and strings is very easy.
 
-Here the instructions to create a new language for all the labels messages of feather (let's say we want to add italian support):
+Here are the instructions to create a new language for all the label messages of Aviary 
+(let's say we want to add Italian support):
 
 * Go into the **AviaryFeather/res** folder
 * Create a new folder "values-it". 
-* Copy the file **res/values/strings.xml** into the **res/values-it** folder.
-* Open the **res/values-it/strings.xml** file with any text editor and translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. For instance, the original version of the string "Save" is:
+* Copy the file `res/values/strings.xml` into the **res/values-it** folder.
+* Open the `res/values-it/strings.xml` file with any text editor and 
+translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. 
+For instance, the original version of the string "Save" is:
 
     
 	`<string name="save">Save</string>`
 
-* in your localized strings.xml file it will be:
+* in your localized `strings.xml` file it will be:
 
     `<string name="save">Salva</string>`
 
-Now just clean and recompile your application. If your device has set italian as default language you will see feather in italian.
+Now just clean and recompile your application. If your device has set Italian 
+as the default language, you will see Aviary in Italian.
 
-For a more detailed tutorial about android localization look at this page: http://developer.android.com/resources/tutorials/localization/index.html
+For a more detailed tutorial about Android localization, you can refer to 
+[this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
 
