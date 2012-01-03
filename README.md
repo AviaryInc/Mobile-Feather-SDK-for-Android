@@ -245,9 +245,8 @@ FeatherActivity. Here's an example of how to invoke the new activity:
 
 Here's a description of the required parameters:
 
-* **Uri**
-
-	(intent data) This is the source URI of the image to be used as input by Aviary
+**Uri**
+(intent data) This is the source URI of the image to be used as input by Aviary
 
 
 * **API_KEY**
