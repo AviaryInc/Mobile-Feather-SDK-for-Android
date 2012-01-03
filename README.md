@@ -133,6 +133,7 @@ AviaryFeather project (`aviaryfeatherlibrary.jar`).
 Add some entries to the manifest file of your application.
 
 **Permissions**
+
 AviaryFeather requires internet and write access to external storage. 
 To grant these permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
