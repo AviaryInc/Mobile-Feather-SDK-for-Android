@@ -52,24 +52,24 @@ remote effect API. To sign up or learn more, please visit
 2 Workspace setup
 ---------------
 
-First, we’ll need to import the 2 Eclipse projects into our workspace.
+First, we'll need to import the 2 Eclipse projects into our workspace.
 
-Open Eclipse and select “Import” from the file menu.
+Open Eclipse and select "Import" from the file menu.
 
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/1.png)
 
 
 The import dialog will appear. From the list of import options, 
-select “Existing Projects into Workspace,” and then click “Next.”
+select "Existing Projects into Workspace," and then click "Next."
 
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/2.png)
 
 
-In the new dialog, click on the “Select archive file” radio button 
-and then click the “Browse” button on the right. From here, select 
+In the new dialog, click on the "Select archive file" radio button 
+and then click the "Browse" button on the right. From here, select 
 the aviaryfeather.zip file included with this document.
-Click on the “Finish” button at the bottom of the dialog. 
-A new Android library project called “AviaryFeather” will be created 
+Click on the "Finish" button at the bottom of the dialog. 
+A new Android library project called "AviaryFeather" will be created 
 in your current workspace. This is the required library project which 
 you must include in your application if you want to use Aviary to manipulate images.
 
@@ -88,7 +88,7 @@ the included `sample-app.zip` project.
 Just import the sample application by following the same procedures 
 described above, but select `sample-app.zip` at step 3. 
 
-A new project called “AviaryLauncher” will be created in your workspace. 
+A new project called "AviaryLauncher" will be created in your workspace. 
 You can inspect this app to see a sample usage of the aviary sdk.
 
 The imported application should have all the references already set and 
@@ -100,7 +100,7 @@ in step 4; otherwise you can skip to step 5.
 4 Include AviaryFeather in a new Application
 ------------------------------------------
 
-If you don’t want to use the included sample application to test Feather, here’s a step by step guide on how to include Feather in a new Android application.
+If you don't want to use the included sample application to test Feather, here's a step by step guide on how to include Feather in a new Android application.
 
 <a name="create-new"></a>
 ### 4.1 Create a new Android project
@@ -109,17 +109,17 @@ Just create a new Android project as usual from Eclipse and select Android 4.0 i
 
 ![new eclipse project](http://labs.sephiroth.it/tmp/android/4.png)
 
-Once the new project has been created, open the project properties and navigate to the “Android” section.
-Click the “Add...” button of the “Library” subsection and select “AviaryFeather” from the dialog.
+Once the new project has been created, open the project properties and navigate to the "Android" section.
+Click the "Add..." button of the "Library" subsection and select "AviaryFeather" from the dialog.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/6.png)
 
 
-Next, navigate to the “Java Build Path” section of the project properties dialog and click on “Add JARs...” button of the “Libraries” subsection.
+Next, navigate to the "Java Build Path" section of the project properties dialog and click on "Add JARs..." button of the "Libraries" subsection.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-From here, select all the .jar file included in the “libs” folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
+From here, select all the .jar file included in the "libs" folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
@@ -173,7 +173,7 @@ And also a reference to the plugins receiver is necessary:
 <a name="theme"></a>
 ### 4.3 Theme and Styles
 
-The android:theme entry in the manifest file is also required for Feather to work properly, so add an entry to your themes.xml file (if you don’t have one, create a new file called themes.xml in your res/values folder):
+The android:theme entry in the manifest file is also required for Feather to work properly, so add an entry to your themes.xml file (if you don't have one, create a new file called themes.xml in your res/values folder):
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
@@ -182,7 +182,7 @@ The android:theme entry in the manifest file is also required for Feather to wor
 
 
 By default, this entry will use the default Feather theme.
-If you’d like to customize the Feather UI, you can do that simply by adding entries to your “Feather.Custom” style. Check out
+If you'd like to customize the Feather UI, you can do that simply by adding entries to your "Feather.Custom" style. Check out
 the **styles.xml** file included in AviaryFeather/res/values for the list of available styles.
 
 Note that many ui elements depends both on the styles.xml and on the config.xml file included. The styles.xml declares the ui components general appearance, while in the config.xml you'll find component specific dimensions ( like for text or lists ) and most of the properties for customize feather's panels behavior.
@@ -191,9 +191,9 @@ Note that many ui elements depends both on the styles.xml and on the config.xml 
 5 Invoke Feather
 --------------
 
-If you’re calling Feather from a new application, you’ll need to add the below code in order to start Feather. Otherwise (if you’re using the demo application) you can find this code inside the MainActivity.java file.
+If you're calling Feather from a new application, you'll need to add the below code in order to start Feather. Otherwise (if you're using the demo application) you can find this code inside the MainActivity.java file.
 
-In order to invoke Feather from your activity, you need to pass some parameters to the FeatherActivity. Here’s an example of how to invoke the new activity:
+In order to invoke Feather from your activity, you need to pass some parameters to the FeatherActivity. Here's an example of how to invoke the new activity:
 
 
     // Create the intent needed to start feather
@@ -201,14 +201,14 @@ In order to invoke Feather from your activity, you need to pass some parameters 
     // set the source image uri
     newIntent.setData( uri );
     // pass the required api key ( http://developers.aviary.com/ )
-    newIntent.putExtra( "API_KEY", “xxx” );
+    newIntent.putExtra( "API_KEY", "xxx" );
     // pass the uri of the destination image file (optional)
     // This will be the same uri you will receive in the onActivityResult
-    newIntent.putExtra( “output”, Uri.parse( "file://" + mOutputFile.getAbsolutePath() ) );
+    newIntent.putExtra( "output", Uri.parse( "file://" + mOutputFile.getAbsolutePath() ) );
     // format of the destination image (optional)
-    newIntent.putExtra( “output-format”, Bitmap.CompressFormat.JPEG.name() );
+    newIntent.putExtra( "output-format", Bitmap.CompressFormat.JPEG.name() );
     // output format quality (optional)
-    newIntent.putExtra( “output-quality”, 85 );
+    newIntent.putExtra( "output-quality", 85 );
     // you can force feather to display only a certain tools
     // newIntent.putExtra( "tools-list", new String[]{"ADJUST", "BRIGHTNESS" } );
 
@@ -226,7 +226,7 @@ In order to invoke Feather from your activity, you need to pass some parameters 
 <a name="intent-parameters"></a>
 ### 5.1 Intent parameters
 
-Here’s a description of the required parameters:
+Here's a description of the required parameters:
 
 * **Uri**
 
@@ -286,7 +286,7 @@ Pass "false" if you want to force the "progress modal" rendering model. No small
 ### 5.2 Result parameters
 
 
-Once the user clicks “save” in the Feather activity, the “onActivityResult” of your Activity will be invoked, passing back **“ACTION_REQUEST_FEATHER”** as requestCode.
+Once the user clicks "save" in the Feather activity, the "onActivityResult" of your Activity will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
 The Uri data of the returned intent will be the output path of the result image:
 
     @Override
