@@ -116,11 +116,13 @@ Click the "Add..." button of the "Library" subsection and select "AviaryFeather"
 ![project setup](http://labs.sephiroth.it/tmp/android/6.png)
 
 
-Next, navigate to the "Java Build Path" section of the project properties dialog and click on "Add JARs..." button of the "Libraries" subsection.
+Next, navigate to the "Java Build Path" section of the project properties dialog and 
+click on "Add JARs..." button of the "Libraries" subsection.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-From here, select all the .jar file included in the "libs" folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
+From here, select all the .jar file included in the "libs" folder of the AviaryFeather 
+project (**aviaryfeatherlibrary.jar**).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
@@ -129,7 +131,8 @@ From here, select all the .jar file included in the "libs" folder of the AviaryF
 Add some entries to the manifest file of your application.
 
 **Permissions**
-AviaryFeather requires internet and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
+AviaryFeather requires internet and write access to external storage. To grant those permissions, 
+add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -139,12 +142,14 @@ An additional permission is necessary, but not mandatory:
 
     <uses-permission android:name="android.permission.VIBRATE" />
 	
-This permission will enable the vibration feedback on some feather components, for a better user experience. Omit this permission if you dont want the vibration feedback.
+This permission will enable the vibration feedback on some feather components, 
+for a better user experience. Omit this permission if you dont want the vibration feedback.
 
 
 **Activity declaration**
 
-As said before, aviary sdk supports android 2.2 as minimum android version, for this reason the "uses-sdk" xml node of your manifest should look like this:
+As said before, aviary sdk supports android 2.2 as minimum android version, for this reason 
+the "uses-sdk" xml node of your manifest should look like this:
     <uses-sdk android:minSdkVersion="8" />
 
 Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
@@ -174,7 +179,9 @@ And also a reference to the plugins receiver is necessary:
 <a name="theme"></a>
 ### 4.3 Theme and Styles
 
-The android:theme entry in the manifest file is also required for Feather to work properly, so add an entry to your themes.xml file (if you don't have one, create a new file called themes.xml in your res/values folder):
+The android:theme entry in the manifest file is also required for Feather to work properly, 
+so add an entry to your themes.xml file (if you don't have one, create a new file called 
+themes.xml in your res/values folder):
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
@@ -183,18 +190,25 @@ The android:theme entry in the manifest file is also required for Feather to wor
 
 
 By default, this entry will use the default Feather theme.
-If you'd like to customize the Feather UI, you can do that simply by adding entries to your "Feather.Custom" style. Check out
-the **styles.xml** file included in AviaryFeather/res/values for the list of available styles.
+If you'd like to customize the Feather UI, you can do that simply by adding entries to 
+your "Feather.Custom" style. Check out the **styles.xml** file included in AviaryFeather/res/values 
+for the list of available styles.
 
-Note that many ui elements depends both on the styles.xml and on the config.xml file included. The styles.xml declares the ui components general appearance, while in the config.xml you'll find component specific dimensions ( like for text or lists ) and most of the properties for customize feather's panels behavior.
+Note that many ui elements depends both on the styles.xml and on the config.xml file included. 
+The styles.xml declares the ui components general appearance, while in the config.xml 
+you'll find component specific dimensions ( like for text or lists ) and most of the properties 
+for customize feather's panels behavior.
 
 <a name="invoke"></a>
 5 Invoke Feather
 --------------
 
-If you're calling Feather from a new application, you'll need to add the below code in order to start Feather. Otherwise (if you're using the demo application) you can find this code inside the MainActivity.java file.
+If you're calling Feather from a new application, you'll need to add the below code in order 
+to start Feather. Otherwise (if you're using the demo application) you can find this code 
+inside the MainActivity.java file.
 
-In order to invoke Feather from your activity, you need to pass some parameters to the FeatherActivity. Here's an example of how to invoke the new activity:
+In order to invoke Feather from your activity, you need to pass some parameters to the 
+FeatherActivity. Here's an example of how to invoke the new activity:
 
 
     // Create the intent needed to start feather
@@ -236,7 +250,8 @@ Here's a description of the required parameters:
 
 * **API_KEY**
 
-	api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com for more information on how to obtain your api key and secret
+	api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com for more 
+	information on how to obtain your api key and secret
 
 
 * **output**
@@ -256,38 +271,45 @@ Here's a description of the required parameters:
 
 * **effect-enable-fast-preview**
 
-	Depending on the current image size and the current user device, some effects can take longer than expected to render the image.
-Passing in the caller intent this flag as boolean "true" the effect panel will no longer use the default
-progress modal dialog while rendering an effect but instead will use a small "loading" view while rendering
-a small image preview. User will see "almost" immediately the small preview while the full size image is being
-processed in background. Once the full size image is processed it will replace the small preview image.
-Default behavior is to enable this feature only on fast devices ( fast enough to allow the small preview to be
-rendered immediately ).
-Pass "false" if you want to force the "progress modal" rendering model. No small preview, only a modal progress while rendering the image.
+	Depending on the current image size and the current user device, some effects can take 
+	longer than expected to render the image. Passing in the caller intent this flag as boolean 
+	"true" the effect panel will no longer use the default progress modal dialog while rendering 
+	an effect but instead will use a small "loading" view while rendering a small image preview. 
+	User will see "almost" immediately the small preview while the full size image is being 
+	processed in background. Once the full size image is processed it will replace the small preview image. 
+	Default behavior is to enable this feature only on fast devices ( fast enough to allow the small 
+	preview to be rendered immediately ). Pass "false" if you want to force the "progress modal" 
+	rendering model. No small preview, only a modal progress while rendering the image.
 
 
 * **hide-exit-unsave-confirmation**
 
-	If you want to hide the exit alert dialog shown when back key (or the top cancel button) is pressed without saving image first.
+	If you want to hide the exit alert dialog shown when back key (or the top cancel button) 
+	is pressed without saving image first.
 
 
 * **tools-list**
 
-	If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: 
+	If specified in the extras of the passed intent it will tell feather to display only 
+	certain tools. The value must be a String[] array and the available values are: 
 	
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE,
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, 
+    DRAWING, STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE,
 
 
 * **hide-exit-unsave-confirmation**
 
-	When the user click on the back-button and the image contains unsaved data a confirmation dialog appears by default. Setting this flag to true will hide that confirmation and the application will terminate.
+	When the user click on the back-button and the image contains unsaved data a 
+	confirmation dialog appears by default. Setting this flag to true will hide that 
+	confirmation and the application will terminate.
 
 
 <a name="result-parameters"></a>
 ### 5.2 Result parameters
 
 
-Once the user clicks "save" in the Feather activity, the "onActivityResult" of your Activity will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
+Once the user clicks "save" in the Feather activity, the "onActivityResult" of your Activity 
+will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
 The Uri data of the returned intent will be the output path of the result image:
 
     @Override
@@ -309,9 +331,11 @@ The Uri data of the returned intent will be the output path of the result image:
 <a name="stickers"></a>
 ### 6.1 Stickers
 
-The sample application already includes a set of stickers which will be shown as default pack. In addition users can install from the market more packs and they will be added automatically into the stickers panel.
+The sample application already includes a set of stickers which will be shown as default pack. 
+In addition users can install from the market more packs and they will be added automatically into the stickers panel.
 If you want to use those stickers just copy the folder "assets/stickers" into your application project. 
-If you don't want to include default stickers you need to change a value in the file "plugins.xml" included in the res/values folder:
+If you don't want to include default stickers you need to change a value in the file "plugins.xml" 
+included in the res/values folder:
 
 Change the line:
 
