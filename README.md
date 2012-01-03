@@ -296,6 +296,34 @@ is pressed without saving the image first.
 If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
 The value must be a String[] array and the available values are: 
 	
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+
+**hide-exit-unsave-confirmation**
+=======
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+>>>>>>> External Changes
+
+<<<<<<< Local Changes
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+=======
+**hide-exit-unsave-confirmation**
+
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+>>>>>>> External Changes
+=======
     SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
     STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
@@ -304,6 +332,57 @@ The value must be a String[] array and the available values are:
 When the user clicks the back button and the image contains unsaved data, a confirmation 
 dialog appears by default. Setting this flag to true will hide that confirmation and the 
 application will terminate without a warning to the user.
+>>>>>>> External Changes
+=======
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+
+**hide-exit-unsave-confirmation**
+
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+>>>>>>> External Changes
+=======
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+
+**hide-exit-unsave-confirmation**
+
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+>>>>>>> External Changes
+=======
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+
+**hide-exit-unsave-confirmation**
+
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+>>>>>>> External Changes
+=======
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+
+**hide-exit-unsave-confirmation**
+
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+>>>>>>> External Changes
+=======
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
+
+**hide-exit-unsave-confirmation**
+
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
+>>>>>>> External Changes
 
 
 <a name="result-parameters"></a>
@@ -355,9 +434,112 @@ from the marketplace.
 <a name="other-configurations"></a>
 ### 6.2 Other configurations
 
-Inside the AviaryFeather/res/values is a `config.xml` file. This file contains some 
+Inside the AviaryFeather/res/values folder is a `config.xml` file. This file contains some 
 application default values and can be modified before compilation.
 
+Here is the description for tool-specific configuration variables:
+
+#### Orientation Tool
+`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation
+
+`feather_adjust_tool_reset_anim_time` Defines the reset animation duration 
+( ie. when the user clicked on cancel/back button )
+
+`feather_adjust_tool_enable_3d_flip` If device is running android 4.x 
+you can enable a flip animation in 3D style by setting this param to 1
+
+#### Text Tool
+`feather_text_minSize` Minimum text size allowed when user is resizing the text rect.
+
+`feather_text_defaultSize` Initial text size when a new text is added to the canvas.
+
+`feather_text_padding` Padding space between the text edges and the move/resize area rectangle.
+
+`feather_text_highlight_stroke_width` Stroke with of the move/resize rect.
+
+`feather_text_highlight_stroke` Stroke color of the move/resize rect.
+
+`feather_text_highlight_stroke_down` Stroke color of the move/resize rect on pressed state.
+
+`feather_text_highlight_ellipse` Move/resize round rectangle ellipse size.
+
+`feather_text_selected_color` Fill color of the move/resize rectangle on pressed state.
+
+`feather_text_fill_colors` An array of all the available colors available for the text tool.
+
+`feather_text_stroke_colors` This array must have the same length of the `feather_text_fill_colors`. 
+For every fill color you can specify a different stroke color.
+
+#### Crop Tool
+`feather_crop_min_size` Minimum area size while resizing the crop area.
+
+`feather_crop_allow_inverse` If value is 1 allow user to invert the current crop 
+area with a simple click on the crop rect itself.
+
+`feather_crop_highlight` Stroke color of the crop area.
+
+`feather_crop_highlight_down` Stroke color of the crop area when pressed.
+
+`feather_crop_highlight_outside` Fill color of the inactive area. The one outside the crop rect.
+
+`feather_crop_highlight_outside_down` Inactive area color when crop rect is pressed.
+
+`feather_crop_highlight_stroke_width` Stroke size of the crop area.
+
+`feather_crop_highlight_internal_stroke_width` Stroke size of the internal crop lines
+
+`feather_crop_highlight_internal_stroke_alpha` Alpha ( 0 - 255 ) of the internal lines
+
+`feather_crop_highlight_internal_stroke_alpha_down` Alpha of the internal lines when crop rect is pressed.
+
+Feather by default comes with a predefined number of crop ratios available
+to the user (original, custom, square, 4:3, etc). If you want to change them, 
+read this carefully. There are 2 xml entries responsible for this: `feather_crop_names` 
+and `feather_crop_values`.
+
+`feather_crop_values` Defines the crop predefined ratio for every button.
+
+`feather_crop_names` Defines the labes for the button.
+
+Every item in the feather_crop_values defines how the crop rect will be presented. For instance, the following item:
+    
+	<item>3:2</item>
+	
+will create a crop area restricted in its proportions to 3 by 2. Or the following one:
+
+    <item>-1:-1</item>
+	
+will create a crop area restricted using the original image width and height.
+
+All the previous examples will create a crop area with restricted proportions. 
+If you want to allow the user to have a crop rect without limitations, just use an item like this:
+
+    <item>0:0</item>
+	
+#### Red Eye, Whiten, Blemish and Draw Tool
+`feather_brush_sizes` An array containing all the brush size available for the user.
+
+#### Draw Panel
+`feather_brush_softValue` defines the softness value for the brush pen.
+
+`feather_default_colors` defines the available brush colors.
+
+#### Stickers
+`feather_sticker_highlight_minsize` minimum size of the sticker while resizing.
+
+`feather_sticker_highlight_padding` padding of the highlight area from the sticker edges.
+
+`feather_sticker_highlight_stroke_width` stroke size of the highlight area.
+
+`feather_sticker_highlight_ellipse` ellipse size of the highlight area borders.
+
+`feather_sticker_highlight_stroke` highlight stroke color.
+
+`feather_sticker_highlight_stroke_down` highlight stroke color when pressed.
+
+`feather_sticker_highlight_outline` highlight fill color.
+
+`feather_sticker_highlight_outline_down` highlight fill color when pressed.
 
 <a name="customization"></a>
 ### 6.3 UI Customization
@@ -393,4 +575,3 @@ as the default language, you will see Aviary in Italian.
 
 For a more detailed tutorial about Android localization, you can refer to 
 [this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
-
