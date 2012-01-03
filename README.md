@@ -295,94 +295,16 @@ is pressed without saving the image first.
 
 If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
 The value must be a String[] array and the available values are: 
-	
-<<<<<<< Local Changes
-<<<<<<< Local Changes
-<<<<<<< Local Changes
-<<<<<<< Local Changes
-<<<<<<< Local Changes
-<<<<<<< Local Changes
-<<<<<<< Local Changes
+
     SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
     STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
-**hide-exit-unsave-confirmation**
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
->>>>>>> External Changes
-
-<<<<<<< Local Changes
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
-=======
-**hide-exit-unsave-confirmation**
-
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
->>>>>>> External Changes
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
 **hide-exit-unsave-confirmation**
 
 When the user clicks the back button and the image contains unsaved data, a confirmation 
 dialog appears by default. Setting this flag to true will hide that confirmation and the 
 application will terminate without a warning to the user.
->>>>>>> External Changes
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
-
-**hide-exit-unsave-confirmation**
-
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
->>>>>>> External Changes
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
-
-**hide-exit-unsave-confirmation**
-
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
->>>>>>> External Changes
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
-
-**hide-exit-unsave-confirmation**
-
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
->>>>>>> External Changes
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
-
-**hide-exit-unsave-confirmation**
-
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
->>>>>>> External Changes
-=======
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
-
-**hide-exit-unsave-confirmation**
-
-When the user clicks the back button and the image contains unsaved data, a confirmation 
-dialog appears by default. Setting this flag to true will hide that confirmation and the 
-application will terminate without a warning to the user.
->>>>>>> External Changes
 
 
 <a name="result-parameters"></a>
