@@ -246,31 +246,31 @@ FeatherActivity. Here's an example of how to invoke the new activity:
 Here's a description of the required parameters:
 
 **Uri**
-(intent data) This is the source URI of the image to be used as input by Aviary
 
+	(intent data) This is the source URI of the image to be used as input by Aviary
 
-* **API_KEY**
+**API_KEY**
 
 	An api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com 
 	for more information on how to obtain your api key and secret
 
 
-* **output**
+**output**
 
 	This is the uri of the destination file where Aviary will write the result image
 
 
-* **output-format**
+**output-format**
 
 	Format of the output file (jpg or png)
 
 
-* **output-quality**
+**output-quality**
 
 	Quality of the output image (required only if output-format is jpeg). 0 to 100
 
 
-* **effect-enable-fast-preview**
+**effect-enable-fast-preview**
 
 	Depending on the current image size and the current user device, some effects can 
 	take longer than expected to render the image. Passing in the caller intent this 
@@ -284,13 +284,13 @@ Here's a description of the required parameters:
 	rendering the image.
 
 
-* **hide-exit-unsave-confirmation**
+**hide-exit-unsave-confirmation**
 
 	If you want to hide the exit alert dialog shown when the back key (or the top cancel button) 
 	is pressed without saving the image first.
 
 
-* **tools-list**
+**tools-list**
 
 	If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
 	The value must be a String[] array and the available values are: 
@@ -299,7 +299,7 @@ Here's a description of the required parameters:
     TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
 
-* **hide-exit-unsave-confirmation**
+**hide-exit-unsave-confirmation**
 
 	When the user clicks the back button and the image contains unsaved data, a confirmation 
 	dialog appears by default. Setting this flag to true will hide that confirmation and the 
