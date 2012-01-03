@@ -100,7 +100,8 @@ in step 4; otherwise you can skip to step 5.
 4 Include AviaryFeather in a new Application
 ------------------------------------------
 
-If you don't want to use the included sample application to test Feather, here's a step by step guide on how to include Feather in a new Android application.
+If you don't want to use the included sample application to test Feather, 
+here's a step by step guide on how to include Feather in a new Android application.
 
 <a name="create-new"></a>
 ### 4.1 Create a new Android project
