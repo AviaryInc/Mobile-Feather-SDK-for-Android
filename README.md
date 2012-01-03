@@ -100,27 +100,31 @@ in step 4; otherwise you can skip to step 5.
 4 Include AviaryFeather in a new Application
 ------------------------------------------
 
-If you don't want to use the included sample application to test Feather, 
-here's a step by step guide on how to include Feather in a new Android application.
+If you don't want to use the included sample application to test Aviary, 
+here's a step by step guide on how to include it in a new Android application.
 
 <a name="create-new"></a>
 ### 4.1 Create a new Android project
 
-Just create a new Android project as usual from Eclipse and select Android 4.0 in the Build Target Panel.
+Just create a new Android project as usual from Eclipse and select 
+Android 4.0 in the Build Target Panel.
 
 ![new eclipse project](http://labs.sephiroth.it/tmp/android/4.png)
 
-Once the new project has been created, open the project properties and navigate to the "Android" section.
-Click the "Add..." button of the "Library" subsection and select "AviaryFeather" from the dialog.
+Once the new project has been created, open the project properties 
+and navigate to the "Android" section. Click the "Add..." button of 
+the "Library" subsection and select "AviaryFeather" from the dialog.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/6.png)
 
 
-Next, navigate to the "Java Build Path" section of the project properties dialog and click on "Add JARs..." button of the "Libraries" subsection.
+Next, navigate to the "Java Build Path" section of the project properties 
+dialog and click on "Add JARs..." button of the "Libraries" subsection.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-From here, select all the .jar file included in the "libs" folder of the AviaryFeather project (**aviaryfeatherlibrary.jar**).
+From here, select all the `.jar` file included in the "libs" folder of the 
+AviaryFeather project (`aviaryfeatherlibrary.jar`).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
@@ -129,22 +133,25 @@ From here, select all the .jar file included in the "libs" folder of the AviaryF
 Add some entries to the manifest file of your application.
 
 **Permissions**
-AviaryFeather requires internet and write access to external storage. To grant those permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
+AviaryFeather requires internet and write access to external storage. 
+To grant these permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-An additional permission is necessary, but not mandatory:
+An additional permission is necessary if you want to turn on vibration feedback, but not mandatory:
 
     <uses-permission android:name="android.permission.VIBRATE" />
 	
-This permission will enable the vibration feedback on some feather components, for a better user experience. Omit this permission if you dont want the vibration feedback.
+This permission will enable the vibration feedback on some tool components, 
+for a better user experience. Omit this permission if you don't want the vibration feedback.
 
 
 **Activity declaration**
 
-As said before, aviary sdk supports android 2.2 as minimum android version, for this reason the "uses-sdk" xml node of your manifest should look like this:
+As mentioned above, the Aviary sdk supports Android 2.2 as the minimum Android version, 
+so the "uses-sdk" xml node of your manifest should look like this:
     <uses-sdk android:minSdkVersion="8" />
 
 Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
@@ -157,7 +164,7 @@ Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity
         android:largeHeap="true"
         android:theme="@style/FeatherDefaultTheme.Custom" />
 
-And also a reference to the plugins receiver is necessary:
+And a reference to the plugins receiver is also necessary:
 
     <receiver
         android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver"
@@ -174,7 +181,9 @@ And also a reference to the plugins receiver is necessary:
 <a name="theme"></a>
 ### 4.3 Theme and Styles
 
-The android:theme entry in the manifest file is also required for Feather to work properly, so add an entry to your themes.xml file (if you don't have one, create a new file called themes.xml in your res/values folder):
+The `android:theme` entry in the manifest file is also required for Aviary to work properly, 
+so add an entry to your `themes.xml` file (if you don't have one, create a new file called 
+`themes.xml` in your res/values folder):
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
@@ -182,11 +191,15 @@ The android:theme entry in the manifest file is also required for Feather to wor
     </resources>
 
 
-By default, this entry will use the default Feather theme.
-If you'd like to customize the Feather UI, you can do that simply by adding entries to your "Feather.Custom" style. Check out
-the **styles.xml** file included in AviaryFeather/res/values for the list of available styles.
+By default, this entry will use the default Aviary theme. If you'd like to 
+customize the editor's UI, you can do that simply by adding entries to your 
+"Feather.Custom" style. Check out the `styles.xml` file included in 
+AviaryFeather/res/values for the list of available styles.
 
-Note that many ui elements depends both on the styles.xml and on the config.xml file included. The styles.xml declares the ui components general appearance, while in the config.xml you'll find component specific dimensions ( like for text or lists ) and most of the properties for customize feather's panels behavior.
+Note that many UI elements depend on both the `styles.xml` and `config.xml` files included. 
+The `styles.xml` file declares the UI components' general appearance, while in the 
+`config.xml` file you'll find component specific dimensions (like for text or lists) 
+and most of the properties for customizing Aviary's panel behavior.
 
 <a name="invoke"></a>
 5 Invoke Feather
