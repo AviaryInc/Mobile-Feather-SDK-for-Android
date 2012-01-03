@@ -12,7 +12,7 @@ Contents
 	* [4.1 Create a new Android project](#create-new)
 	* [4.2 AndroidManifest.xml](#manifest)
 	* [4.3 themes.xml](#themes)
-* [5 Invoke Feather](#invoke)
+* [5 Invoke the Editor](#invoke)
 	* [5.1 Intent parameters](#intent-parameters)
 	* [5.2 Result parameters](#result-parameters)
 * [6 Extras](#extras)
@@ -76,6 +76,7 @@ you must include in your application if you want to use Aviary to manipulate ima
 ![import project in eclipse](http://labs.sephiroth.it/tmp/android/3.png)
 
 
+
 <a name="sample-app"></a>
 3 Sample Application
 ------------------
@@ -99,29 +100,31 @@ in step 4; otherwise you can skip to step 5.
 4 Include AviaryFeather in a new Application
 ------------------------------------------
 
-If you don't want to use the included sample application to test Feather, 
-here's a step by step guide on how to include Feather in a new Android application.
+If you don't want to use the included sample application to test Aviary, 
+here's a step by step guide on how to include it in a new Android application.
 
 <a name="create-new"></a>
 ### 4.1 Create a new Android project
 
-Just create a new Android project as usual from Eclipse and select Android 4.0 in the Build Target Panel.
+Just create a new Android project as usual from Eclipse and select 
+Android 4.0 in the Build Target Panel.
 
 ![new eclipse project](http://labs.sephiroth.it/tmp/android/4.png)
 
-Once the new project has been created, open the project properties and navigate to the "Android" section.
-Click the "Add..." button of the "Library" subsection and select "AviaryFeather" from the dialog.
+Once the new project has been created, open the project properties 
+and navigate to the "Android" section. Click the "Add..." button of 
+the "Library" subsection and select "AviaryFeather" from the dialog.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/6.png)
 
 
-Next, navigate to the "Java Build Path" section of the project properties dialog and 
-click on "Add JARs..." button of the "Libraries" subsection.
+Next, navigate to the "Java Build Path" section of the project properties 
+dialog and click on "Add JARs..." button of the "Libraries" subsection.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-From here, select all the .jar file included in the "libs" folder of the AviaryFeather 
-project (**aviaryfeatherlibrary.jar**).
+From here, select all the `.jar` file included in the "libs" folder of the 
+AviaryFeather project (`aviaryfeatherlibrary.jar`).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
@@ -130,25 +133,25 @@ project (**aviaryfeatherlibrary.jar**).
 Add some entries to the manifest file of your application.
 
 **Permissions**
-AviaryFeather requires internet and write access to external storage. To grant those permissions, 
-add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
+AviaryFeather requires internet and write access to external storage. 
+To grant these permissions, add these entries inside the AndroidManifest.xml &lt;manifest&gt; tag:
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-An additional permission is necessary, but not mandatory:
+An additional permission is necessary if you want to turn on vibration feedback, but not mandatory:
 
     <uses-permission android:name="android.permission.VIBRATE" />
 	
-This permission will enable the vibration feedback on some feather components, 
-for a better user experience. Omit this permission if you dont want the vibration feedback.
+This permission will enable the vibration feedback on some tool components, 
+for a better user experience. Omit this permission if you don't want the vibration feedback.
 
 
 **Activity declaration**
 
-As said before, aviary sdk supports android 2.2 as minimum android version, for this reason 
-the "uses-sdk" xml node of your manifest should look like this:
+As mentioned above, the Aviary sdk supports Android 2.2 as the minimum Android version, 
+so the "uses-sdk" xml node of your manifest should look like this:
     <uses-sdk android:minSdkVersion="8" />
 
 Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
@@ -161,7 +164,7 @@ Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity
         android:largeHeap="true"
         android:theme="@style/FeatherDefaultTheme.Custom" />
 
-And also a reference to the plugins receiver is necessary:
+And a reference to the plugins receiver is also necessary:
 
     <receiver
         android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver"
@@ -178,9 +181,9 @@ And also a reference to the plugins receiver is necessary:
 <a name="theme"></a>
 ### 4.3 Theme and Styles
 
-The android:theme entry in the manifest file is also required for Feather to work properly, 
-so add an entry to your themes.xml file (if you don't have one, create a new file called 
-themes.xml in your res/values folder):
+The `android:theme` entry in the manifest file is also required for Aviary to work properly, 
+so add an entry to your `themes.xml` file (if you don't have one, create a new file called 
+`themes.xml` in your res/values folder):
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
@@ -188,25 +191,25 @@ themes.xml in your res/values folder):
     </resources>
 
 
-By default, this entry will use the default Feather theme.
-If you'd like to customize the Feather UI, you can do that simply by adding entries to 
-your "Feather.Custom" style. Check out the **styles.xml** file included in AviaryFeather/res/values 
-for the list of available styles.
+By default, this entry will use the default Aviary theme. If you'd like to 
+customize the editor's UI, you can do that simply by adding entries to your 
+"Feather.Custom" style. Check out the `styles.xml` file included in 
+AviaryFeather/res/values for the list of available styles.
 
-Note that many ui elements depends both on the styles.xml and on the config.xml file included. 
-The styles.xml declares the ui components general appearance, while in the config.xml 
-you'll find component specific dimensions ( like for text or lists ) and most of the properties 
-for customize feather's panels behavior.
+Note that many UI elements depend on both the `styles.xml` and `config.xml` files included. 
+The `styles.xml` file declares the UI components' general appearance, while in the 
+`config.xml` file you'll find component specific dimensions (like for text or lists) 
+and most of the properties for customizing Aviary's panel behavior.
 
 <a name="invoke"></a>
 5 Invoke Feather
 --------------
 
-If you're calling Feather from a new application, you'll need to add the below code in order 
-to start Feather. Otherwise (if you're using the demo application) you can find this code 
-inside the MainActivity.java file.
+If you're calling Aviary from a new application, you'll need to add the below code 
+in order to start the editor. Otherwise (if you're using the demo application), you 
+can find this code inside the `MainActivity.java` file.
 
-In order to invoke Feather from your activity, you need to pass some parameters to the 
+In order to invoke Aviary from your activity, you need to pass some parameters to the 
 FeatherActivity. Here's an example of how to invoke the new activity:
 
 
@@ -242,65 +245,65 @@ FeatherActivity. Here's an example of how to invoke the new activity:
 
 Here's a description of the required parameters:
 
-* **Uri**
+**Uri**
 
-	( intent data ) This is the source uri of the image to be used as input by Feather
+(intent data) This is the source URI of the image to be used as input by Aviary
 
+**API_KEY**
 
-* **API_KEY**
-
-	api key IS REQUIRED to use remote filters. Go to http://developers.aviary.com for more 
-	information on how to obtain your api key and secret
-
-
-* **output**
-
-	This is the uri of the destination file where Feather will write the result image
+An api key IS REQUIRED to use remote filters. Please visit 
+[http://www.aviary.com/android-key](http://www.aviary.com/android-key) 
+for more information on how to obtain your api key and secret
 
 
-* **output-format**
+**output**
 
-	Format of the output file ( jpg or png )
-
-
-* **output-quality**
-
-	Quality of the output image ( required only if output-format is jpeg ). 0 to 100
+This is the uri of the destination file where Aviary will write the result image
 
 
-* **effect-enable-fast-preview**
+**output-format**
 
-	Depending on the current image size and the current user device, some effects can take 
-	longer than expected to render the image. Passing in the caller intent this flag as boolean 
-	"true" the effect panel will no longer use the default progress modal dialog while rendering 
-	an effect but instead will use a small "loading" view while rendering a small image preview. 
-	User will see "almost" immediately the small preview while the full size image is being 
-	processed in background. Once the full size image is processed it will replace the small preview image. 
-	Default behavior is to enable this feature only on fast devices ( fast enough to allow the small 
-	preview to be rendered immediately ). Pass "false" if you want to force the "progress modal" 
-	rendering model. No small preview, only a modal progress while rendering the image.
+Format of the output file (jpg or png)
 
 
-* **hide-exit-unsave-confirmation**
+**output-quality**
 
-	If you want to hide the exit alert dialog shown when back key (or the top cancel button) 
-	is pressed without saving image first.
+Quality of the output image (required only if output-format is jpeg). 0 to 100
 
 
-* **tools-list**
+**effect-enable-fast-preview**
 
-	If specified in the extras of the passed intent it will tell feather to display only 
-	certain tools. The value must be a String[] array and the available values are: 
+Depending on the current image size and the current user device, some effects can 
+take longer than expected to render the image. Passing in the caller intent this 
+flag as boolean "true" the effect panel will no longer use the default progress modal 
+dialog while rendering an effect but instead will use a small "loading" view while rendering 
+a small image preview. User will almost immediately see the small preview while the full size 
+image is being processed in background. Once the full size image is processed, it will replace 
+the small preview image. The default behavior is to enable this feature only on fast devices 
+(fast enough to allow the small preview to be rendered immediately). Pass "false" if you want 
+to force the "progress modal" rendering model. No small preview, only a modal progress bar while 
+rendering the image.
+
+
+**hide-exit-unsave-confirmation**
+
+If you want to hide the exit alert dialog shown when the back key (or the top cancel button) 
+is pressed without saving the image first.
+
+
+**tools-list**
+
+If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
+The value must be a String[] array and the available values are: 
 	
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, 
-    DRAWING, STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE,
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE
 
+**hide-exit-unsave-confirmation**
 
-* **hide-exit-unsave-confirmation**
-
-	When the user click on the back-button and the image contains unsaved data a 
-	confirmation dialog appears by default. Setting this flag to true will hide that 
-	confirmation and the application will terminate.
+When the user clicks the back button and the image contains unsaved data, a confirmation 
+dialog appears by default. Setting this flag to true will hide that confirmation and the 
+application will terminate without a warning to the user.
 
 
 <a name="result-parameters"></a>
@@ -330,11 +333,11 @@ The Uri data of the returned intent will be the output path of the result image:
 <a name="stickers"></a>
 ### 6.1 Stickers
 
-The sample application already includes a set of stickers which will be shown as default pack. 
-In addition users can install from the market more packs and they will be added automatically into the stickers panel.
-If you want to use those stickers just copy the folder "assets/stickers" into your application project. 
-If you don't want to include default stickers you need to change a value in the file "plugins.xml" 
-included in the res/values folder:
+The sample application already includes a set of stickers which will be shown as a default pack. 
+In addition, users can install more packs from the market and they will be added automatically 
+into the stickers panel. If you want to use default stickers, just copy the folder 
+"assets/stickers" into your application project. If you don't want to include default 
+stickers, you need to change a value in the file `plugins.xml`, included in the res/values folder:
 
 Change the line:
 
@@ -344,124 +347,23 @@ into:
 
     <integer name="is_sticker">0</integer>
 
-In this way users won't see any default stickers pack, but instead only a link to download more packs.
+This will mean that users won't see any default sticker pack, but instead only a link to download more packs 
+from the marketplace.
 
 ![stickers](http://labs.sephiroth.it/tmp/android/9.png)
 
 <a name="other-configurations"></a>
 ### 6.2 Other configurations
 
-Inside the AviaryFeather/res/values folder is a `config.xml` file. This file contains some 
+Inside the AviaryFeather/res/values is a `config.xml` file. This file contains some 
 application default values and can be modified before compilation.
 
-Here is the description for tool-specific configuration variables:
-
-#### Orientation Tool
-`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation
-
-`feather_adjust_tool_reset_anim_time` Defines the reset animation duration 
-( ie. when the user clicked on cancel/back button )
-
-`feather_adjust_tool_enable_3d_flip` If device is running android 4.x 
-you can enable a flip animation in 3D style by setting this param to 1
-
-#### Text Tool
-`feather_text_minSize` Minimum text size allowed when user is resizing the text rect.
-
-`feather_text_defaultSize` Initial text size when a new text is added to the canvas.
-
-`feather_text_padding` Padding space between the text edges and the move/resize area rectangle.
-
-`feather_text_highlight_stroke_width` Stroke with of the move/resize rect.
-
-`feather_text_highlight_stroke` Stroke color of the move/resize rect.
-
-`feather_text_highlight_stroke_down` Stroke color of the move/resize rect on pressed state.
-
-`feather_text_highlight_ellipse` Move/resize round rectangle ellipse size.
-
-`feather_text_selected_color` Fill color of the move/resize rectangle on pressed state.
-
-`feather_text_fill_colors` An array of all the available colors available for the text tool.
-
-`feather_text_stroke_colors` This array must have the same length of the `feather_text_fill_colors`. 
-For every fill color you can specify a different stroke color.
-
-#### Crop Tool
-`feather_crop_min_size` Minimum area size while resizing the crop area.
-
-`feather_crop_allow_inverse` If value is 1 allow user to invert the current crop 
-area with a simple click on the crop rect itself.
-
-`feather_crop_highlight` Stroke color of the crop area.
-
-`feather_crop_highlight_down` Stroke color of the crop area when pressed.
-
-`feather_crop_highlight_outside` Fill color of the inactive area. The one outside the crop rect.
-
-`feather_crop_highlight_outside_down` Inactive area color when crop rect is pressed.
-
-`feather_crop_highlight_stroke_width` Stroke size of the crop area.
-
-`feather_crop_highlight_internal_stroke_width` Stroke size of the internal crop lines
-
-`feather_crop_highlight_internal_stroke_alpha` Alpha ( 0 - 255 ) of the internal lines
-
-`feather_crop_highlight_internal_stroke_alpha_down` Alpha of the internal lines when crop rect is pressed.
-
-Feather by default comes with a predefined number of crop ratios available
-to the user (original, custom, square, 4:3, etc). If you want to change them, 
-read this carefully. There are 2 xml entries responsible for this: `feather_crop_names` 
-and `feather_crop_values`.
-
-`feather_crop_values` Defines the crop predefined ratio for every button.
-
-`feather_crop_names` Defines the labes for the button.
-
-Every item in the feather_crop_values defines how the crop rect will be presented. For instance, the following item:
-    
-	<item>3:2</item>
-	
-will create a crop area restricted in its proportions to 3 by 2. Or the following one:
-
-    <item>-1:-1</item>
-	
-will create a crop area restricted using the original image width and height.
-
-All the previous examples will create a crop area with restricted proportions. 
-If you want to allow the user to have a crop rect without limitations, just use an item like this:
-
-    <item>0:0</item>
-	
-#### Red Eye, Whiten, Blemish and Draw Tool
-`feather_brush_sizes` An array containing all the brush size available for the user.
-
-#### Draw Panel
-`feather_brush_softValue` defines the softness value for the brush pen.
-
-`feather_default_colors` defines the available brush colors.
-
-#### Stickers
-`feather_sticker_highlight_minsize` minimum size of the sticker while resizing.
-
-`feather_sticker_highlight_padding` padding of the highlight area from the sticker edges.
-
-`feather_sticker_highlight_stroke_width` stroke size of the highlight area.
-
-`feather_sticker_highlight_ellipse` ellipse size of the highlight area borders.
-
-`feather_sticker_highlight_stroke` highlight stroke color.
-
-`feather_sticker_highlight_stroke_down` highlight stroke color when pressed.
-
-`feather_sticker_highlight_outline` highlight fill color.
-
-`feather_sticker_highlight_outline_down` highlight fill color when pressed.
 
 <a name="customization"></a>
 ### 6.3 UI Customization
 
-You can customize almost every aspect of the application by editing the `styles.xml` file included in the res folder.
+You can customize almost every aspect of the application by editing the `styles.xml` 
+file included in the res folder.
 
 <a name="localization"></a>
 7 Localization
@@ -469,7 +371,7 @@ You can customize almost every aspect of the application by editing the `styles.
 
 Android is really smart regarding localization. Localizing resources and strings is very easy.
 
-Here are the instructions to create a new language for all the label messages of the editor 
+Here are the instructions to create a new language for all the label messages of Aviary 
 (let's say we want to add Italian support):
 
 * Go into the **AviaryFeather/res** folder
@@ -478,6 +380,7 @@ Here are the instructions to create a new language for all the label messages of
 * Open the `res/values-it/strings.xml` file with any text editor and 
 translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. 
 For instance, the original version of the string "Save" is:
+
     
 	`<string name="save">Save</string>`
 
@@ -485,8 +388,8 @@ For instance, the original version of the string "Save" is:
 
     `<string name="save">Salva</string>`
 
-Now just clean and recompile your application. If your device has 
-Italian set as the default language, you will see the editor in Italian.
+Now just clean and recompile your application. If your device has set Italian 
+as the default language, you will see Aviary in Italian.
 
 For a more detailed tutorial about Android localization, you can refer to 
 [this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
