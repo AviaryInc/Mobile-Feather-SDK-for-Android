@@ -181,7 +181,7 @@ In order to invoke Feather from your activity, you need to pass some parameters 
     // output format quality (optional)
     newIntent.putExtra( “output-quality”, 85 );
     // you can force feather to display only a certain tools
-    // newIntent.putExtra( "tools-list", new String[]{"SHARPEN", "BRIGHTNESS" } );
+    // newIntent.putExtra( "tools-list", new String[]{"ADJUST", "BRIGHTNESS" } );
 
 	// enable fast rendering preview
 	newIntent.putExtra( "effect-enable-fast-preview", true );
@@ -243,7 +243,9 @@ Pass "false" if you want to force the "progress modal" rendering model. No small
 
 * **tools-list**
 
-	If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: SHARPEN, BRIGHTNESS, CONTRAST, SATURATION, ROTATE, FLIP, BLUR, EFFECTS, COLORS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME
+	If specified in the extras of the passed intent it will tell feather to display only certain tools. The value must be a String[] array and the available values are: 
+	
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE,
 
 
 * **hide-exit-unsave-confirmation**
