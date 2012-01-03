@@ -327,41 +327,74 @@ In this way users won't see any default stickers pack, but instead only a link t
 <a name="other-configurations"></a>
 ### 6.2 Other configurations
 
-Inside the AviaryFeather/res/values is a config.xml file. This file contains some application default values and can be modified before compilation.
-Here's the description about tools specific configuration variables
+Inside the AviaryFeather/res/values folder is a `config.xml` file. This file contains some 
+application default values and can be modified before compilation.
+
+Here is the description for tool-specific configuration variables:
 
 #### Orientation Tool
-`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation<br />
-`feather_adjust_tool_reset_anim_time` Defines the reset animation duration ( ie. when the user clicked on cancel/back button )<br />
-`feather_adjust_tool_enable_3d_flip` if device is running android 4.x you can enable a flip animation in 3D style by setting this param to 1<br />
+`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation
+
+`feather_adjust_tool_reset_anim_time` Defines the reset animation duration 
+( ie. when the user clicked on cancel/back button )
+
+`feather_adjust_tool_enable_3d_flip` If device is running android 4.x 
+you can enable a flip animation in 3D style by setting this param to 1
 
 #### Text Tool
-`feather_text_minSize` Minimum text size allowed when user is resizing the text rect.<br />
-`feather_text_defaultSize` Initial text size when a new text is added to the canvas.<br />
-`feather_text_padding` Padding space between the text edges and the move/resize area rectangle.<br />
-`feather_text_highlight_stroke_width` Stroke with of the move/resize rect.<br />
-`feather_text_highlight_stroke` Stroke color of the move/resize rect.<br />
-`feather_text_highlight_stroke_down` Stroke color of the move/resize rect on pressed state<br />
-`feather_text_highlight_ellipse` move/resize round rectangle ellipse size<br />
-`feather_text_selected_color` fill color of the move/resize rectangle on pressed state<br />
-`feather_text_fill_colors` its an array of all the available colors available for the text tool.<br />
-`feather_text_stroke_colors` this array must have the same length of the `feather_text_fill_colors`. For every fill color you can specify a different stroke color.<br/>
+`feather_text_minSize` Minimum text size allowed when user is resizing the text rect.
+
+`feather_text_defaultSize` Initial text size when a new text is added to the canvas.
+
+`feather_text_padding` Padding space between the text edges and the move/resize area rectangle.
+
+`feather_text_highlight_stroke_width` Stroke with of the move/resize rect.
+
+`feather_text_highlight_stroke` Stroke color of the move/resize rect.
+
+`feather_text_highlight_stroke_down` Stroke color of the move/resize rect on pressed state.
+
+`feather_text_highlight_ellipse` Move/resize round rectangle ellipse size.
+
+`feather_text_selected_color` Fill color of the move/resize rectangle on pressed state.
+
+`feather_text_fill_colors` An array of all the available colors available for the text tool.
+
+`feather_text_stroke_colors` This array must have the same length of the `feather_text_fill_colors`. 
+For every fill color you can specify a different stroke color.
 
 #### Crop Tool
-`feather_crop_min_size` minimum area size while resizing the crop area.<br />
-`feather_crop_allow_inverse` if value is 1 allow user to invert the current crop area with a simple click on the crop rect itself.<br />
-`feather_crop_highlight` stroke color of the crop area.<br />
-`feather_crop_highlight_down` stroke color of the crop area when pressed.<br />
-`feather_crop_highlight_outside` fill color of the inactive area. The one outside the crop rect.<br />
-`feather_crop_highlight_outside_down` inactive area color when crop rect is pressed.<br />
-`feather_crop_highlight_stroke_width` stroke size of the crop area.<br />
-`feather_crop_highlight_internal_stroke_width` stroke size of the internal crop lines<br />
-`feather_crop_highlight_internal_stroke_alpha` alpha ( 0 - 255 ) of the internal lines<br />
-`feather_crop_highlight_internal_stroke_alpha_down` alpha of the internal lines when crop rect is pressed.<br /><br >
-Feather by default comes with a predefined number of crop ratio availables to the user ( original, curstom, square, 4:3, etc). If you want to change them read this carefully. There are 2 xml entries responsible of this: `feather_crop_names` and `feather_crop_values`.<br />
-`feather_crop_values` defines the crop predefined ratio for every button.<br />
-`feather_crop_names` defines the labes for the button.<br />
-Every item in the feather_crop_values defines how the crop rect will be presented. For instance the following item:<br />
+`feather_crop_min_size` Minimum area size while resizing the crop area.
+
+`feather_crop_allow_inverse` If value is 1 allow user to invert the current crop 
+area with a simple click on the crop rect itself.
+
+`feather_crop_highlight` Stroke color of the crop area.
+
+`feather_crop_highlight_down` Stroke color of the crop area when pressed.
+
+`feather_crop_highlight_outside` Fill color of the inactive area. The one outside the crop rect.
+
+`feather_crop_highlight_outside_down` Inactive area color when crop rect is pressed.
+
+`feather_crop_highlight_stroke_width` Stroke size of the crop area.
+
+`feather_crop_highlight_internal_stroke_width` Stroke size of the internal crop lines
+
+`feather_crop_highlight_internal_stroke_alpha` Alpha ( 0 - 255 ) of the internal lines
+
+`feather_crop_highlight_internal_stroke_alpha_down` Alpha of the internal lines when crop rect is pressed.
+
+Feather by default comes with a predefined number of crop ratios available
+to the user (original, custom, square, 4:3, etc). If you want to change them, 
+read this carefully. There are 2 xml entries responsible for this: `feather_crop_names` 
+and `feather_crop_values`.
+
+`feather_crop_values` Defines the crop predefined ratio for every button.
+
+`feather_crop_names` Defines the labes for the button.
+
+Every item in the feather_crop_values defines how the crop rect will be presented. For instance, the following item:
     
 	<item>3:2</item>
 	
@@ -369,35 +402,42 @@ will create a crop area restricted in its proportions to 3 by 2. Or the followin
 
     <item>-1:-1</item>
 	
-will create a crop area restricted using the original image width and height.<br />
-All the previous examples will create a crop area with restricted proportions. If you want to allow user to have a crop rect without limitations just use an item like this:
+will create a crop area restricted using the original image width and height.
+
+All the previous examples will create a crop area with restricted proportions. 
+If you want to allow the user to have a crop rect without limitations, just use an item like this:
 
     <item>0:0</item>
 	
 #### Red Eye, Whiten, Blemish and Draw Tool
-`feather_brush_sizes` it's an array containing all the brush size available for the user.<br />
+`feather_brush_sizes` An array containing all the brush size available for the user.
 
 #### Draw Panel
-`feather_brush_softValue` defines the softness value for the brush pen.<br />
-`feather_default_colors` defines the available brush colors.<br />
+`feather_brush_softValue` defines the softness value for the brush pen.
+
+`feather_default_colors` defines the available brush colors.
 
 #### Stickers
-`feather_sticker_highlight_minsize` minimum size of the sticker while resizing<br />
-`feather_sticker_highlight_padding` padding of the highlight area from the sticker edges.<br />
-`feather_sticker_highlight_stroke_width` stroke size of the highlight area.<br />
-`feather_sticker_highlight_ellipse` ellipse size of the highlight area borders.<br />
-`feather_sticker_highlight_stroke` highlight stroke color.<br />
-`feather_sticker_highlight_stroke_down` highlight stroke color when pressed.<br />
-`feather_sticker_highlight_outline` highlight fill color.<br />
-`feather_sticker_highlight_outline_down` highlight fill color when pressed.<br />
+`feather_sticker_highlight_minsize` minimum size of the sticker while resizing.
 
+`feather_sticker_highlight_padding` padding of the highlight area from the sticker edges.
 
-	
+`feather_sticker_highlight_stroke_width` stroke size of the highlight area.
+
+`feather_sticker_highlight_ellipse` ellipse size of the highlight area borders.
+
+`feather_sticker_highlight_stroke` highlight stroke color.
+
+`feather_sticker_highlight_stroke_down` highlight stroke color when pressed.
+
+`feather_sticker_highlight_outline` highlight fill color.
+
+`feather_sticker_highlight_outline_down` highlight fill color when pressed.
 
 <a name="customization"></a>
 ### 6.3 UI Customization
 
-You can customize almost every aspect of the application by editing the "styles.xml" file included in the res folder.
+You can customize almost every aspect of the application by editing the `styles.xml` file included in the res folder.
 
 <a name="localization"></a>
 7 Localization
@@ -405,21 +445,25 @@ You can customize almost every aspect of the application by editing the "styles.
 
 Android is really smart regarding localization. Localizing resources and strings is very easy.
 
-Here the instructions to create a new language for all the labels messages of feather (let's say we want to add italian support):
+Here are the instructions to create a new language for all the label messages of the editor 
+(let's say we want to add Italian support):
 
 * Go into the **AviaryFeather/res** folder
 * Create a new folder "values-it". 
-* Copy the file **res/values/strings.xml** into the **res/values-it** folder.
-* Open the **res/values-it/strings.xml** file with any text editor and translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. For instance, the original version of the string "Save" is:
-
+* Copy the file `res/values/strings.xml` into the **res/values-it** folder.
+* Open the `res/values-it/strings.xml` file with any text editor and 
+translate all the strings within the &lt;string&gt;&lt;/string&gt; tag. 
+For instance, the original version of the string "Save" is:
     
 	`<string name="save">Save</string>`
 
-* in your localized strings.xml file it will be:
+* in your localized `strings.xml` file it will be:
 
     `<string name="save">Salva</string>`
 
-Now just clean and recompile your application. If your device has set italian as default language you will see feather in italian.
+Now just clean and recompile your application. If your device has 
+Italian set as the default language, you will see the editor in Italian.
 
-For a more detailed tutorial about android localization look at this page: http://developer.android.com/resources/tutorials/localization/index.html
+For a more detailed tutorial about Android localization, you can refer to 
+[this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
 
