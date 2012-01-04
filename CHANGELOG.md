@@ -18,6 +18,8 @@
 * Removed the big aviary logo at top.
 * Changed the way stickers work. Added the possibility to download more stickers from the market. Follow the README file for more informations.
 
+---
+
 ## Version 42
 
 * Added "effect-enable-fast-preview" in the input Intent to enable the fast preview rendering.
