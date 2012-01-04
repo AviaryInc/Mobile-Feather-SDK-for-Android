@@ -20,6 +20,8 @@ Contents
 	* [6.2 Other configurations](#other-configurations)
 	* [6.3 UI Customization](#customization)
 * [7 Localization](#localization)
+* [8 Proguard](#proguard)
+* [9 Crash Report](#crash_report)
 
 <a name="introduction"></a>
 1 Introduction
@@ -490,3 +492,14 @@ as the default language, you will see Aviary in Italian.
 
 For a more detailed tutorial about Android localization, you can refer to 
 [this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
+
+<a name="proguard"></a>
+8 Proguard
+------
+If your application is compiled using [proguard](http://developer.android.com/guide/developing/tools/proguard.html) you need to update your `proguard.cfg` file according to the proguard.cfg file included in the sample application.
+
+
+<a name="crash_report"></a>
+9 Crash Report
+------
+The crash reporting tool provided with the standard android market is often useless due to the minimum amount of informations provided. If you want to report to us of crashes occurred in our application we suggest you to include in your application an external crash report tool like [ACRA](http://code.google.com/p/acra/)

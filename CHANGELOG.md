@@ -1,7 +1,7 @@
 # Feather Android Changelog
 
-## Version 50
-* major version release, lot of changes
+## Version 2.0
+* major version release, now the SDK_VERSION is a String saying "2.0".
 * added optional permission &lt;uses-permission android:name="android.permission.VIBRATE" /&gt; to enhance user experience with some components
 * changed all the style elements
 * changed most of the configuration items ( see config.xml )
