@@ -331,10 +331,10 @@ The Uri data of the returned intent will be the output path of the result image:
 <a name="stickers"></a>
 ### 6.1 Stickers
 
-The sample application already includes a set of stickers which will be shown as a default pack. 
+The sample application includes just a couple of demo stickers which will be shown as a default pack. 
 In addition, users can install more packs from the market and they will be added automatically 
-into the stickers panel. If you want to use default stickers, just copy the folder 
-"assets/stickers" into your application project. If you don't want to include default 
+into the stickers panel. If you want to use default stickers, just make sure to create a folder  
+"stickers" into your "asset" folder. Then just include in that folder all the .png stickers you want to include as default pack. Otherwise, if you don't want to include default 
 stickers, you need to change a value in the file `plugins.xml`, included in the res/values folder:
 
 Change the line:
