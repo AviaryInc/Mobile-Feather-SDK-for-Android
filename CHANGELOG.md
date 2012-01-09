@@ -1,26 +1,6 @@
-# Feather Android Changelog
+# Aviary Android SDK Changelog
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
-
-## Version 2.0
-* major version release, now the SDK_VERSION is a String saying "2.0".
-* added optional permission &lt;uses-permission android:name="android.permission.VIBRATE" /&gt; to enhance user experience with some components
-* changed all the style elements
-* changed most of the configuration items ( see config.xml )
-* The Project Build Target must be set to "Android 4.0" (API level 14), even if the minSdkVersion still remains Android 2.2 (API level 8).
-* Purchasable content. Added the possibility to download more stickers. For this reason you need to add a new entry (a receiver) in the manifest xml file. Please refer to the readme for more informations.
-* Removed the InfoScreenActivity, so you need to remove that entry from the manifest file too.
-* Changed the default effects
-* Removed the "sharpen" and "blur" panels. Now there's only 1 "sharpness" panel
-* Red-eye, Whiten and Blemish panels now support drawing paths instead of a single touch.
-* Added the "Enhance" panel, with 4 different auto-enhance filters.
-* Added "Orientation" panel with rotation and flip transformations.
-* Crop panel. Now user has the possibility to chose between a custom crop rect or different "fixed" ratio crop rectangles. Read the readme file for more informations on how to add more default values.
-* brigthness, contrast and saturation now use a wheel component instead of the 4 thumbnails.
-* Removed the big aviary logo at top.
-* Changed the way stickers work. Added the possibility to download more stickers from the market. Follow the README file for more informations.
-
----
 
 ## Version 42
 
