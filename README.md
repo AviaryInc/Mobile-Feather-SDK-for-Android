@@ -308,6 +308,13 @@ dialog appears by default. Setting this flag to true will hide that confirmation
 application will terminate without a warning to the user.
 
 
+**effect-enable-external-pack**
+
+By default feather allows users to download and install external filters packs from the android market.
+If you want to disable this feature you can pass this extra boolean to the launching intent as "false".
+The default behavior is to enable the external filters.
+
+
 <a name="result-parameters"></a>
 ### 5.2 Result parameters
 

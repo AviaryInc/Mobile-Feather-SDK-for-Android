@@ -20,6 +20,7 @@
 * Removed the big aviary logo at top.
 * Changed the way stickers work. Added the possibility to download more stickers from the market. Follow the README file for more informations.
 * Added purchasable effects
+* Purchasable effects can be disabled using the launching Intent ( see the README for more info )
 
 ---
 
