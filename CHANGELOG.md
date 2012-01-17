@@ -19,6 +19,7 @@
 * brigthness, contrast and saturation now use a wheel component instead of the 4 thumbnails.
 * Removed the big aviary logo at top.
 * Changed the way stickers work. Added the possibility to download more stickers from the market. Follow the README file for more informations.
+* Added purchasable effects
 
 ---
 
