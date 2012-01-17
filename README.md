@@ -130,6 +130,9 @@ AviaryFeather project (`aviaryfeatherlibrary.jar`).
 
 ![project setup](http://labs.sephiroth.it/tmp/android/8.png)
 
+You also need to add the `android-support-v4.jar` library. 
+Please go to the official android [support package page](http://developer.android.com/sdk/compatibility-library.html#Downloading) in order to obtain your copy of the jar file.
+
 <a name="manifest"></a>
 ### 4.2 AndroidManifest.xml
 Add some entries to the manifest file of your application.
@@ -155,7 +158,8 @@ for a better user experience. Omit this permission if you don't want the vibrati
 
 As mentioned above, the Aviary sdk supports Android 2.2 as the minimum Android version, 
 so the "uses-sdk" xml node of your manifest should look like this:
-    <uses-sdk android:minSdkVersion="8" />
+    
+	<uses-sdk android:minSdkVersion="8" />
 
 Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity:
 
@@ -190,13 +194,13 @@ so add an entry to your `themes.xml` file (if you don't have one, create a new f
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <style name="FeatherTheme.Custom" parent="FeatherDefaultTheme" />
+        <style name="FeatherDefaultTheme.Custom" parent="FeatherDefaultTheme" />
     </resources>
 
 
 By default, this entry will use the default Aviary theme. If you'd like to 
 customize the editor's UI, you can do that simply by adding entries to your 
-"Feather.Custom" style. Check out the `styles.xml` file included in 
+"FeatherDefaultTheme.Custom" style. Check out the `styles.xml` file included in 
 AviaryFeather/res/values for the list of available styles.
 
 Note that many UI elements depend on both the `styles.xml` and `config.xml` files included. 
@@ -366,6 +370,9 @@ Here is the description for tool-specific configuration variables:
 
 `feather_adjust_tool_enable_3d_flip` If device is running Android 4.x 
 you can enable a flip animation in 3D style by setting this param to 1.
+
+#### Brightness, Contrast, Saturation
+`feather_brightness_live_preview` Enable/Disable the live preview while the wheel component is scrolling. Default is enabled
 
 #### Text Tool
 `feather_text_minSize` Minimum text size allowed when user is resizing the text rect.

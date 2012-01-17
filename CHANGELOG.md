@@ -1,4 +1,4 @@
-# Feather Android Changelog
+# Aviary Android SDK Changelog
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
