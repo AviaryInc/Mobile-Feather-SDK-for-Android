@@ -2,6 +2,9 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.0.1
+* fixed a couple of issues on honeycomb devices ( in the effects and ehnance panel )
+
 ## Version 2.0
 * major version release, now the SDK_VERSION is a String saying "2.0".
 * added optional permission &lt;uses-permission android:name="android.permission.VIBRATE" /&gt; to enhance user experience with some components
