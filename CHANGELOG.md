@@ -2,6 +2,10 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.0.2
+* fixed an issue in the Meme tool displaying an incorrect text size
+* In the passed intent, added "max-image-size" key to allow developers to change the maximum allowed image size at runtime. ( see the README for more info)
+
 ## Version 2.0.1
 * fixed a couple of issues on honeycomb devices ( in the effects and ehnance panel )
 

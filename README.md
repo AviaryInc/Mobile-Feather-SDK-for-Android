@@ -239,6 +239,9 @@ FeatherActivity. Here's an example of how to invoke the new activity:
 	// enable fast rendering preview
 	newIntent.putExtra( "effect-enable-fast-preview", true );
 	
+	// limit the image size
+	// newIntent.putExtra( "max-image-size", 800 );
+	
     // you want to hide the exit alert dialog shown when back is pressed
     // without saving image first
     // newIntent.putExtra( "hide-exit-unsave-confirmation", true );
@@ -314,6 +317,12 @@ By default feather allows users to download and install external filters packs f
 If you want to disable this feature you can pass this extra boolean to the launching intent as "false".
 The default behavior is to enable the external filters.
 
+
+**max-image-size**
+
+By default feather will resize the loaded image according to the device memory. If you want to change the maximum image size limit
+you can pass this key to the extra bundle. But keep in mind that the available memory for the current application is shared between your host
+application and the aviary editor, so don't use a too large image size otherwise the system will throw an OutOfMemoryError.
 
 <a name="result-parameters"></a>
 ### 5.2 Result parameters
