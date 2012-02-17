@@ -22,6 +22,7 @@ Contents
 * [7 Localization](#localization)
 * [8 Proguard](#proguard)
 * [9 Crash Report](#crash_report)
+* [10 Hi-Resolution editing](#hires)
 
 <a name="introduction"></a>
 1 Introduction
@@ -184,6 +185,18 @@ And a reference to the plugins receiver is also necessary:
                 <data android:scheme="package" />
             </intent-filter>
     </receiver>
+	
+If you plan to enable the High resolution image process ( see [section 10](#hires) ) you also must add this entry to the AndroidManifest:
+
+        <!-- Required for the hi-res image processing -->
+        <!-- authorities can have the value you prefer -->
+        <provider 
+            android:name="com.aviary.android.feather.library.providers.FeatherContentProvider"
+            android:exported="false"
+            android:authorities="com.aviary.launcher.HiResProvider">
+        </provider>
+		
+Note that the "android:autorities" is arbitrary, you can use the string value you prefer.
 
 <a name="theme"></a>
 ### 4.3 Theme and Styles
@@ -240,7 +253,17 @@ FeatherActivity. Here's an example of how to invoke the new activity:
 	newIntent.putExtra( "effect-enable-fast-preview", true );
 	
 	// limit the image size
+	// You can pass the current display size as max image size because after
+	// the execution of Aviary you can save the HI-RES image so you don't need a big
+	// image for the preview
 	// newIntent.putExtra( "max-image-size", 800 );
+	
+	// HI-RES
+	// You need to generate a new session id key to pass to Aviary feather
+	// this is the key used to operate with the hi-res image ( and must be unique for every new instance of Feather )
+	// The session-id key must be 64 char length
+	String mSessionId = StringUtils.getSha256( System.currentTimeMillis() + API_KEY );
+	newIntent.putExtra( "output-hires-session-id", mSessionId );	
 	
     // you want to hide the exit alert dialog shown when back is pressed
     // without saving image first
@@ -318,11 +341,26 @@ If you want to disable this feature you can pass this extra boolean to the launc
 The default behavior is to enable the external filters.
 
 
+**stickers-enable-external-pack**
+
+By default feather allows users to download and install external stickers packs from the android market.
+If you want to disable this feature you can pass this extra boolean to the launching intent as "false".
+The default behavior is to enable the external stickers.
+
+
 **max-image-size**
 
 By default feather will resize the loaded image according to the device memory. If you want to change the maximum image size limit
 you can pass this key to the extra bundle. But keep in mind that the available memory for the current application is shared between your host
 application and the aviary editor, so don't use a too large image size otherwise the system will throw an OutOfMemoryError.
+If you're planning to enable the hi-res output too, I strongly suggest to set the preview image size as little as possible.
+
+
+**output-hires-session-id**
+
+If you want to enable the high resolution image process, once FeatherActivity has completed ( but eventually also during its execution ), you need to pass a unique session id to the calling Intent. 
+The session id string must be unique and must be 64 chars length
+
 
 <a name="result-parameters"></a>
 ### 5.2 Result parameters
@@ -516,6 +554,8 @@ as the default language, you will see Aviary in Italian.
 For a more detailed tutorial about Android localization, you can refer to 
 [this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
 
+The current version of the SDK comes with a bunch of localized languages, you can find them inside the "res" folder of the Feather project.
+
 <a name="proguard"></a>
 8 Proguard
 ------
@@ -526,3 +566,90 @@ If your application is compiled using [proguard](http://developer.android.com/gu
 9 Crash Report
 ------
 The crash reporting tool provided with the standard android market is often useless due to the minimum amount of informations provided. If you want to report to us of crashes occurred in our application we suggest you to include in your application an external crash report tool like [ACRA](http://code.google.com/p/acra/)
+
+
+<a name="hires"></a>
+10 Hi-Resolution Image Editing
+------
+By default feather works on a medium resolution image, this to speed up the performance of the editor. 
+But you can also save the hi-res version of the image:
+
+* In the calling Intent you must pass an extra string, the hi-res session id in this way:
+	
+		final String session_name = StringUtils.getSha256( System.currentTimeMillis() + API_KEY );
+		newIntent.putExtra( "output-hires-session-id", session_name );
+		
+	The session string must be unique and must be 64 char lenght.
+	Once feather starts it will start collecting informations of every action performed on the image and will store those
+	actions in the internal ContentProvider ( remember to add the provider tag to the AndroidManifest first! ).
+	
+* Once your activity will call the "onActivityResult" method you can process the HD image.
+
+	First create a new file where the HD image will be stored
+	
+		File destination = getNextFileName();
+		
+	Initialize the session instance
+
+		FeatherContentProvider.SessionsDbColumns.Session session = null;
+	
+	session_name is the same session string you passed in the calling intent
+		
+		Uri sessionUri = FeatherContentProvider.SessionsDbColumns.getContentUri( session_name );
+		
+	This query will return a cursor with the informations about the given session
+		
+		Cursor cursor = getContentResolver().query( sessionUri, null, null, null, null );
+		
+		if ( null != cursor ) {
+			session = FeatherContentProvider.SessionsDbColumns.Session.Create( cursor );
+			cursor.close();
+		}
+		
+	At this point you will have a Session object with the following informations:
+	
+	* session.id, the internal id of the session
+	* session.name, the session 64 char wide value
+	* session.ctime, the session creation time
+	* session.file_name, the original image used for editing ( the same you passed in the calling Intent )
+	
+		
+	Now you must query the ContentProvider to get the list of actions to be applied on the original image:
+	
+		Uri actionsUri = FeatherContentProvider.ActionsDbColumns.getContentUri( session.session );
+		Cursor cursor = getContentResolver().query( actionsUri, null, null, null, null );
+	
+	And finally the steps to load, apply the actions and save the HD image. ( obviously these steps should be performed in a separate thread, like an AsyncTask):
+	
+	Create an instance of MoaHD class
+	
+		MoaHD moa = new MoaHD();
+		
+	Load the image in memory, note that the srcPath can be either a string absolute path or an int ( see ParcelFileDescriptor.getFd() )
+
+		// result will be Error.NoError is load completed succesfully
+		MoaHD.Error result = moa.load( srcPath );
+		
+	Then, for every row in the actions cursor, apply the action to the moa instance:
+	
+		if( result == MoaHD.Error.NoError ){
+			do {
+				// utility to get the action object from the current cursor
+				Action action = Action.Create( cursor );
+				moa.applyActions( action.getActions() );
+			} while( cursor.moveToNext() );
+		}
+	
+	Finally you can save the output image. dstPath must be an absolute string path:
+	
+		result = moa.save( dstPath );
+		// if image was saved result will be Error.NoError
+		if( result == Error.NoError ){
+			// unload the image from memory
+			moa.unload();
+		}
+		moa.dispose();
+		
+	...And remember to close the cursor:
+	
+		cursor.close();

@@ -2,6 +2,14 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.0.3
+* added "stickers-enable-external-pack" in the calling Intent to disable the purchasable stickers
+* fixed crashes on ldpi devices
+* added HI-RES support, please see the README for more informations
+* added localized strings in various languages
+* fixed issue in the effects panel on screen rotation
+* fixed update issue on honeycomn system
+
 ## Version 2.0.2
 * fixed an issue in the Meme tool displaying an incorrect text size
 * In the passed intent, added "max-image-size" key to allow developers to change the maximum allowed image size at runtime. ( see the README for more info)
