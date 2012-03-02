@@ -362,6 +362,12 @@ If you want to enable the high resolution image process, once FeatherActivity ha
 The session id string must be unique and must be 64 chars length
 
 
+**effect-enable-borders**
+
+By default most of the filters ( those in the effect tool ) come with additional borders. If you want to disable the default borders you can pass this extra with a boolean false value. 
+It is true by default.
+
+
 <a name="result-parameters"></a>
 ### 5.2 Result parameters
 

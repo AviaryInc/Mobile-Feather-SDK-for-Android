@@ -2,6 +2,15 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.0.4
+* fixed a bug in the crop panel when using custom crop values
+* fixed adjust panel after changing device orientation
+* fixed an orientation bug on some devices
+* fixed hires image load on honeycomb tablets
+* added the possibility to disable borders from the effects ( see README for more info )
+* text panel. Now the cursor will be hidden correctly when apply is clicked
+* fixed loading images from remote urls. now redirects are supported too.
+
 ## Version 2.0.3
 * added "stickers-enable-external-pack" in the calling Intent to disable the purchasable stickers
 * fixed crashes on ldpi devices
