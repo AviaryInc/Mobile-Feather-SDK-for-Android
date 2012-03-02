@@ -2,28 +2,28 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
-## Version 2.0.4
+## Version 2.0.4 - March 2, 2012
 * fixed a bug in the crop panel when using custom crop values
 * fixed adjust panel after changing device orientation
 * fixed an orientation bug on some devices
 * fixed hires image load on honeycomb tablets
-* added the possibility to disable borders from the effects ( see README for more info )
-* text panel. Now the cursor will be hidden correctly when apply is clicked
+* added the possibility to disable borders from the effects (see [README](http://www.aviary.com/android-documentation) for more info)
+* fixed a bug which kept the cursor from being hidden correctly after clicking apply from the text panel
 * fixed loading images from remote urls. now redirects are supported too.
 
-## Version 2.0.3
+## Version 2.0.3 - February 17, 2012
 * added "stickers-enable-external-pack" in the calling Intent to disable the purchasable stickers
 * fixed crashes on ldpi devices
-* added HI-RES support, please see the README for more informations
+* added HI-RES support, please see the [README](http://www.aviary.com/android-documentation) for more information
 * added localized strings in various languages
 * fixed issue in the effects panel on screen rotation
-* fixed update issue on honeycomn system
+* fixed update issue on honeycomb system
 
-## Version 2.0.2
+## Version 2.0.2 - January 30, 2012
 * fixed an issue in the Meme tool displaying an incorrect text size
 * In the passed intent, added "max-image-size" key to allow developers to change the maximum allowed image size at runtime. ( see the README for more info)
 
-## Version 2.0.1
+## Version 2.0.1 - January 19, 2012
 * fixed a couple of issues on honeycomb devices ( in the effects and ehnance panel )
 
 ## Version 2.0
