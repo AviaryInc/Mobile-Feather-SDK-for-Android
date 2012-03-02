@@ -136,6 +136,7 @@ Please go to the official android [support package page](http://developer.androi
 
 <a name="manifest"></a>
 ### 4.2 AndroidManifest.xml
+
 Add some entries to the manifest file of your application.
 
 **Permissions**
@@ -147,7 +148,7 @@ To grant these permissions, add these entries inside the AndroidManifest.xml &lt
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-An additional permission is necessary if you want to turn on vibration feedback, but not mandatory:
+An additional permission is necessary if you want to turn on vibration feedback, but the vibration is optional:
 
     <uses-permission android:name="android.permission.VIBRATE" />
 	
@@ -186,7 +187,7 @@ And a reference to the plugins receiver is also necessary:
             </intent-filter>
     </receiver>
 	
-If you plan to enable the High resolution image process ( see [section 10](#hires) ) you also must add this entry to the AndroidManifest:
+If you plan to enable the High Resolution image processing (see [section 10](#hires)), you also need to include this entry in the AndroidManifest:
 
         <!-- Required for the hi-res image processing -->
         <!-- authorities can have the value you prefer -->
@@ -196,7 +197,7 @@ If you plan to enable the High resolution image process ( see [section 10](#hire
             android:authorities="com.aviary.launcher.HiResProvider">
         </provider>
 		
-Note that the "android:autorities" is arbitrary, you can use the string value you prefer.
+Note that the `android:authorities` is arbitrary; you can use any string value you prefer.
 
 <a name="theme"></a>
 ### 4.3 Theme and Styles
@@ -280,28 +281,28 @@ Here's a description of the required parameters:
 
 **Uri**
 
-(intent data) This is the source URI of the image to be used as input by Aviary
+(intent data) This is the source URI of the image to be used as input by Aviary.
 
 **API_KEY**
 
 An api key IS REQUIRED to use remote filters. Please visit 
 [http://www.aviary.com/android-key](http://www.aviary.com/android-key) 
-for more information on how to obtain your api key and secret
+for more information on how to obtain your api key and secret.
 
 
 **output**
 
-This is the uri of the destination file where Aviary will write the result image
+This is the uri of the destination file where Aviary will write the result image.
 
 
 **output-format**
 
-Format of the output file (jpg or png)
+Format of the output file (jpg or png).
 
 
 **output-quality**
 
-Quality of the output image (required only if output-format is jpeg). 0 to 100
+Quality of the output image (required only if output-format is jpeg), from 0 to 100.
 
 
 **effect-enable-fast-preview**
@@ -336,35 +337,31 @@ application will terminate without a warning to the user.
 
 **effect-enable-external-pack**
 
-By default feather allows users to download and install external filters packs from the android market.
-If you want to disable this feature you can pass this extra boolean to the launching intent as "false".
+By default, the Aviary editor allows users to download and install external filter packs from the Android Market.
+If you want to disable this feature, you can pass this extra boolean to the launching intent as "false".
 The default behavior is to enable the external filters.
 
 
 **stickers-enable-external-pack**
 
-By default feather allows users to download and install external stickers packs from the android market.
-If you want to disable this feature you can pass this extra boolean to the launching intent as "false".
+By default, the Aviary editor allows users to download and install external sticker packs from the Android Market.
+If you want to disable this feature, you can pass this extra boolean to the launching intent as "false".
 The default behavior is to enable the external stickers.
 
 
 **max-image-size**
 
-By default feather will resize the loaded image according to the device memory. If you want to change the maximum image size limit
-you can pass this key to the extra bundle. But keep in mind that the available memory for the current application is shared between your host
-application and the aviary editor, so don't use a too large image size otherwise the system will throw an OutOfMemoryError.
-If you're planning to enable the hi-res output too, I strongly suggest to set the preview image size as little as possible.
+By default, the Aviary editor will resize the loaded image according to the device memory. If you want to change the maximum image size limit, you can pass this key to the extra bundle. But keep in mind that the available memory for the current application is shared between your host application and the Aviary editor, so don't use too big an image size, otherwise the system will throw an OutOfMemoryError. If you're planning to enable the hi-res output as well, we strongly suggest that you set the preview image size to as small as possible.
 
 
 **output-hires-session-id**
 
-If you want to enable the high resolution image process, once FeatherActivity has completed ( but eventually also during its execution ), you need to pass a unique session id to the calling Intent. 
-The session id string must be unique and must be 64 chars length
+If you want to enable the high resolution image processing, once FeatherActivity has completed (but eventually also during its execution), you need to pass a unique session id to the calling Intent. The session id string must be unique and must be 64 chars in length.
 
 
 **effect-enable-borders**
 
-By default most of the filters ( those in the effect tool ) come with additional borders. If you want to disable the default borders you can pass this extra with a boolean false value. 
+By default, most of the filters (those in the Effects tool) come with additional borders. If you want to disable the default borders you can pass this extra with a boolean false value and it will turn off ALL borders.
 It is true by default.
 
 
@@ -372,9 +369,9 @@ It is true by default.
 ### 5.2 Result parameters
 
 
-Once the user clicks "save" in the Feather activity, the "onActivityResult" of your Activity 
+Once the user clicks "Done" (save) in the Feather activity, the "onActivityResult" of your Activity 
 will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
-The Uri data of the returned intent will be the output path of the result image:
+The Uri data of the returned intent will be the output path of the resulting image:
 
     @Override
     public void onActivityResult( int requestCode, int resultCode, Intent data ) {
@@ -395,24 +392,7 @@ The Uri data of the returned intent will be the output path of the result image:
 <a name="stickers"></a>
 ### 6.1 Stickers
 
-The sample application includes just a couple of demo stickers which will be shown as a default pack. 
-In addition, users can install more packs from the market and they will be added automatically 
-into the stickers panel. If you want to use default stickers, just make sure to create a folder  
-"stickers" into your "asset" folder. Then just include in that folder all the .png stickers you want to include as default pack. Otherwise, if you don't want to include default 
-stickers, you need to change a value in the file `plugins.xml`, included in the res/values folder:
-
-Change the line:
-
-    <integer name="is_sticker">1</integer>
-
-into:
-
-    <integer name="is_sticker">0</integer>
-
-This will mean that users won't see any default sticker pack, but instead only a link to download packs 
-from the marketplace.
-
-![stickers](http://labs.sephiroth.it/tmp/android/9.png)
+The sample application includes a couple of demo stickers which will be shown as a default pack. The actual Aviary SDK comes with a default pack of stickers which users can install for free from the market (and in the future, there will be more packs to choose from). If you don't want to include the Aviary pack of stickers, just [disable the tool](#intent-parameters).
 
 <a name="other-configurations"></a>
 ### 6.2 Other configurations
@@ -428,11 +408,11 @@ Here is the description for tool-specific configuration variables:
 `feather_adjust_tool_reset_anim_time` Defines the reset animation duration 
 (i.e., when the user clicks the cancel/back button).
 
-`feather_adjust_tool_enable_3d_flip` If device is running Android 4.x 
+`feather_adjust_tool_enable_3d_flip` If the device is running Android 4.x, 
 you can enable a flip animation in 3D style by setting this param to 1.
 
 #### Brightness, Contrast, Saturation
-`feather_brightness_live_preview` Enable/Disable the live preview while the wheel component is scrolling. Default is enabled
+`feather_brightness_live_preview` Enable/Disable the live preview while the wheel component is scrolling. Default is enabled.
 
 #### Text Tool
 `feather_text_minSize` Minimum text size allowed when user is resizing the text rect.
@@ -459,7 +439,7 @@ For every fill color you can specify a different stroke color.
 #### Crop Tool
 `feather_crop_min_size` Minimum area size while resizing the crop area.
 
-`feather_crop_allow_inverse` If value is 1 allow user to invert the current crop 
+`feather_crop_allow_inverse` If value is 1, allow user to invert the current crop 
 area with a simple click on the crop rect itself.
 
 `feather_crop_highlight` Stroke color of the crop area.
@@ -483,9 +463,9 @@ to the user (original, custom, square, 4:3, etc). If you want to change them,
 read this carefully. There are 2 xml entries responsible for this: `feather_crop_names` 
 and `feather_crop_values`.
 
-`feather_crop_values` Defines the crop predefined ratio for every button.
+`feather_crop_values` Defines the crop predefined ratio for each button.
 
-`feather_crop_names` Defines the labes for the button.
+`feather_crop_names` Defines the labels for each button.
 
 Every item in the `feather_crop_values` defines how the crop rect will be presented. For instance, the following item:
     
@@ -503,15 +483,15 @@ If you want to allow the user to have a crop rect without limitations, just use 
     <item>0:0</item>
 	
 #### Red Eye, Whiten, Blemish and Draw Tool
-`feather_brush_sizes` An array containing all the brush size available for the user.
+`feather_brush_sizes` An array containing all the brush sizes available for the user.
 
 #### Draw Panel
-`feather_brush_softValue` defines the softness value for the brush pen.
+`feather_brush_softValue` Defines the softness value for the brush pen.
 
-`feather_default_colors` defines the available brush colors.
+`feather_default_colors` Defines the available brush colors.
 
 #### Stickers
-`feather_sticker_highlight_minsize` Minimum size of the sticker while resizing.
+`feather_sticker_highlight_minsize` Minimum size of stickers while resizing.
 
 `feather_sticker_highlight_padding` Padding of the highlight area from the sticker edges.
 
@@ -560,36 +540,39 @@ as the default language, you will see Aviary in Italian.
 For a more detailed tutorial about Android localization, you can refer to 
 [this tutorial](http://developer.android.com/resources/tutorials/localization/index.html).
 
-The current version of the SDK comes with a bunch of localized languages, you can find them inside the "res" folder of the Feather project.
+The current version of the SDK comes with a bunch of localized languages, you can find them inside the "res" folder of the Feather project. If you need a language that isn't yet available, you can contact us at [api@aviary.com](mailto:api@aviary.com) and we'll work with you to add it!
 
 <a name="proguard"></a>
 8 Proguard
 ------
-If your application is compiled using [proguard](http://developer.android.com/guide/developing/tools/proguard.html) you need to update your `proguard.cfg` file according to the proguard.cfg file included in the sample application.
+
+If your application is compiled using [proguard](http://developer.android.com/guide/developing/tools/proguard.html), you need to update your `proguard.cfg` file according to the proguard.cfg file included in the sample application.
 
 
 <a name="crash_report"></a>
 9 Crash Report
 ------
-The crash reporting tool provided with the standard android market is often useless due to the minimum amount of informations provided. If you want to report to us of crashes occurred in our application we suggest you to include in your application an external crash report tool like [ACRA](http://code.google.com/p/acra/)
+
+The crash reporting tool provided with the standard Android Market is often useless due to the minimal amount of information provided. If you want to report crashes which occur in our application to us, we suggest that you include an external crash report tool like [ACRA](http://code.google.com/p/acra/) in your application.
 
 
 <a name="hires"></a>
 10 Hi-Resolution Image Editing
 ------
-By default feather works on a medium resolution image, this to speed up the performance of the editor. 
-But you can also save the hi-res version of the image:
 
-* In the calling Intent you must pass an extra string, the hi-res session id in this way:
+By default, the Aviary editor works on a medium resolution image, to speed up the performance of the editor. 
+But you can also enable hi-res saving of images:
+
+* In the calling Intent you must pass an extra string, the hi-res session id, like this:
 	
 		final String session_name = StringUtils.getSha256( System.currentTimeMillis() + API_KEY );
 		newIntent.putExtra( "output-hires-session-id", session_name );
 		
-	The session string must be unique and must be 64 char lenght.
-	Once feather starts it will start collecting informations of every action performed on the image and will store those
-	actions in the internal ContentProvider ( remember to add the provider tag to the AndroidManifest first! ).
+	The session string must be unique and must be 64 char in length.
+	Once Aviary starts, it will start collecting the information of every action performed on the image and will store those
+	actions in the internal ContentProvider (remember to add the provider tag to the AndroidManifest first!).
 	
-* Once your activity will call the "onActivityResult" method you can process the HD image.
+* Once your activity calls the "onActivityResult" method, you can process the HD image.
 
 	First create a new file where the HD image will be stored
 	
@@ -603,7 +586,7 @@ But you can also save the hi-res version of the image:
 		
 		Uri sessionUri = FeatherContentProvider.SessionsDbColumns.getContentUri( session_name );
 		
-	This query will return a cursor with the informations about the given session
+	This query will return a cursor with the information about the given session
 		
 		Cursor cursor = getContentResolver().query( sessionUri, null, null, null, null );
 		
@@ -612,12 +595,12 @@ But you can also save the hi-res version of the image:
 			cursor.close();
 		}
 		
-	At this point you will have a Session object with the following informations:
+	At this point, you will have a Session object with the following information:
 	
 	* session.id, the internal id of the session
 	* session.name, the session 64 char wide value
 	* session.ctime, the session creation time
-	* session.file_name, the original image used for editing ( the same you passed in the calling Intent )
+	* session.file_name, the original image used for editing (the same you passed in the calling Intent)
 	
 		
 	Now you must query the ContentProvider to get the list of actions to be applied on the original image:
@@ -625,13 +608,13 @@ But you can also save the hi-res version of the image:
 		Uri actionsUri = FeatherContentProvider.ActionsDbColumns.getContentUri( session.session );
 		Cursor cursor = getContentResolver().query( actionsUri, null, null, null, null );
 	
-	And finally the steps to load, apply the actions and save the HD image. ( obviously these steps should be performed in a separate thread, like an AsyncTask):
+	And finally the steps to load, apply the actions and save the HD image (these steps should be performed in a separate thread, like an AsyncTask):
 	
 	Create an instance of MoaHD class
 	
 		MoaHD moa = new MoaHD();
 		
-	Load the image in memory, note that the srcPath can be either a string absolute path or an int ( see ParcelFileDescriptor.getFd() )
+	Load the image in memory, note that the srcPath can be either a string absolute path or an int (see `ParcelFileDescriptor.getFd()`)
 
 		// result will be Error.NoError is load completed succesfully
 		MoaHD.Error result = moa.load( srcPath );
@@ -646,7 +629,7 @@ But you can also save the hi-res version of the image:
 			} while( cursor.moveToNext() );
 		}
 	
-	Finally you can save the output image. dstPath must be an absolute string path:
+	Finally you can save the output image. `dstPath` must be an absolute string path:
 	
 		result = moa.save( dstPath );
 		// if image was saved result will be Error.NoError
