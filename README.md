@@ -72,7 +72,7 @@ In the new dialog, click on the "Select archive file" radio button
 and then click the "Browse" button on the right. From here, select 
 the `aviaryfeather.zip` file included with this document.
 Click on the "Finish" button at the bottom of the dialog. 
-A new Android library project called "AviaryFeather" will be created 
+A new Android library project called "Android-Feather" will be created 
 in your current workspace. This is the required library project which 
 you must include in your application if you want to use Aviary to manipulate images.
 
@@ -126,12 +126,7 @@ dialog and click on "Add JARs..." button of the "Libraries" subsection.
 
 ![project setup](http://labs.sephiroth.it/tmp/android/7.png)
 
-From here, select the `.jar` file included in the "libs" folder of the 
-AviaryFeather project (`aviaryfeatherlibrary.jar`).
-
-![project setup](http://labs.sephiroth.it/tmp/android/8.png)
-
-You also need to add the `android-support-v4.jar` library. 
+You need to add the `android-support-v4.jar` library. 
 Please go to the official android [support package page](http://developer.android.com/sdk/compatibility-library.html#Downloading) in order to obtain your copy of the jar file.
 
 <a name="manifest"></a>

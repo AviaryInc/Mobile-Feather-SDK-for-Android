@@ -3,7 +3,8 @@
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
 ## Version 2.0.6, March 28, 2012
-* Rotation tool. Added free rotation using fingers ( see README for more info )
+* Updated so Android SDK-17 ( http://developer.android.com/sdk/index.html )
+* Rotation tool. Added free rotation using fingers (see [README](http://www.aviary.com/android-documentation) for more info)
 * Added support for arm-5 devices
 * updated redeye, whiten and blemish tools
 * updated brightness and contrast tool to a better algorithm
