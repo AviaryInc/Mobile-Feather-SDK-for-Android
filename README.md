@@ -431,6 +431,22 @@ Here is the description for tool-specific configuration variables:
 `feather_adjust_tool_enable_3d_flip` If device is running Android 4.x 
 you can enable a flip animation in 3D style by setting this param to 1.
 
+`feather_rotate_enable_free_rotate` If set to `1` the adjust panel will enable the free rotation using fingers. Users will be able to rotate the image, other than using the panel's buttons, also using fingers.
+
+`feather_rotate_highlight_stroke_color` (only with free rotate enabled) stroke color or the clipping rectangle 
+
+`feather_rotate_highlight_stroke_width` (only with free rotate enabled) stroke width of the clipping rectangle
+
+`feather_rotate_highlight_outside` (only with free rotate enabled) color of the masked area outside the clipping rectangle
+
+`feather_rotate_highlight_grid_stroke_color` (only with free rotate enabled) color of the internal grid
+
+
+`feather_rotate_highlight_grid_stroke_width` (only with free rotate enabled) stroke width of the internal grid lines
+
+
+
+
 #### Brightness, Contrast, Saturation
 `feather_brightness_live_preview` Enable/Disable the live preview while the wheel component is scrolling. Default is enabled
 
@@ -472,11 +488,9 @@ area with a simple click on the crop rect itself.
 
 `feather_crop_highlight_stroke_width` Stroke size of the crop area.
 
-`feather_crop_highlight_internal_stroke_width` Stroke size of the internal crop lines.
+`feather_crop_highlight_internal` Internal crop lines color.
 
-`feather_crop_highlight_internal_stroke_alpha` Alpha (0 - 255) of the internal lines.
-
-`feather_crop_highlight_internal_stroke_alpha_down` Alpha of the internal lines when crop rect is pressed.
+`feather_crop_highlight_internal_down` Internal crop lines when crop rect is pressed.
 
 Feather by default comes with a predefined number of crop ratios available
 to the user (original, custom, square, 4:3, etc). If you want to change them, 
@@ -502,11 +516,13 @@ If you want to allow the user to have a crop rect without limitations, just use 
 
     <item>0:0</item>
 	
-#### Red Eye, Whiten, Blemish and Draw Tool
-`feather_brush_sizes` An array containing all the brush size available for the user.
+#### Red Eye, Whiten, Blemish Tool
+`feather_spot_brush_sizes` An array containing all the brush size available for the user.
 
 #### Draw Panel
 `feather_brush_softValue` defines the softness value for the brush pen.
+
+`feather_brush_sizes` An array containing all the brush size available for the user.
 
 `feather_default_colors` defines the available brush colors.
 

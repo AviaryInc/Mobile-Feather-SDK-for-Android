@@ -2,6 +2,18 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.0.6
+* Rotation tool. Added free rotation using fingers ( see README for more info )
+* Added support for arm-5 devices
+* updated redeye, whiten and blemish tools
+* updated brightness and contrast tool to a better algorithm
+* updated sharpness tool
+* stickers can now be dragged
+
+## Version 2.0.5
+* Fixed an error with the chinese translations
+* Fixed an error which prevented to load huge images
+
 ## Version 2.0.4
 * fixed a bug in the crop panel when using custom crop values
 * fixed adjust panel after changing device orientation
