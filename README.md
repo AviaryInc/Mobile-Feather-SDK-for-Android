@@ -570,7 +570,7 @@ The crash reporting tool provided with the standard Android Market is often usel
 ------
 
 By default, the Aviary editor works on a medium resolution image, to speed up the performance of the editor. 
-But you can also enable hi-res saving of images:
+But you can also enable hi-res saving of images, up to 3MP. If you need higher resolution output, please contact us at [partners@aviary.com](mailto:partners@aviary.com).
 
 * In the calling Intent you must pass an extra string, the hi-res session id, like this:
 	

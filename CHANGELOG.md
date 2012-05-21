@@ -2,18 +2,17 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
-## Version 2.0.6, March 28, 2012
-* Updated so Android SDK-17 ( http://developer.android.com/sdk/index.html )
-* Rotation tool. Added free rotation using fingers (see [README](http://www.aviary.com/android-documentation) for more info)
+## Version 2.0.6 - March 28, 2012
+* Updated to Android SDK-17 (http://developer.android.com/sdk/index.html)
 * Added support for arm-5 devices
-* updated redeye, whiten and blemish tools
-* updated brightness and contrast tool to a better algorithm
-* updated sharpness tool
-* stickers can now be dragged
+* Updated redeye and whiten tools
+* Updated brightness and contrast tools to a new algorithm with better results
+* Updated sharpness tool; should be much faster
+* Stickers can now be dragged onto the canvas
 
 ## Version 2.0.5
-* Fixed an error with the chinese translations
-* Fixed an error which prevented to load huge images
+* Fixed an error with Chinese localization
+* Fixed an error which prevented loading huge images
 
 ## Version 2.0.4 - March 2, 2012
 * fixed a bug in the crop panel when using custom crop values
