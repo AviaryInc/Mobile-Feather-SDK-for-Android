@@ -2,6 +2,17 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.1.0 - May 21, 2012
+* Updated to Android SDK-19 (http://developer.android.com/sdk/index.html)
+* Native libraries compiled with NDK-r8
+* Fixed a bug in the stickers panel
+* updated redeye and whiten
+* updated blemish
+* removed unused code, improved backward compatibility using reflections
+* reduced size of fast preview in effects panel ( for faster preview )
+* deferred tools initialization
+* updated enhance and sharpness actions name
+
 ## Version 2.0.6 - March 28, 2012
 * Updated to Android SDK-17 (http://developer.android.com/sdk/index.html)
 * Added support for arm-5 devices
