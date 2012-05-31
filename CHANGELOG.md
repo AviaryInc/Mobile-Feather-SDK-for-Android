@@ -2,6 +2,10 @@
 
 [Subscribe to updates](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
 
+## Version 2.1.2 - May 31, 2012
+* Fixed crash in the drawing panel and rotation panel on some devices
+* Added Warm tool
+
 ## Version 2.1.0 - May 21, 2012
 * Updated to Android SDK-19 (http://developer.android.com/sdk/index.html)
 * Native libraries compiled with NDK-r8
