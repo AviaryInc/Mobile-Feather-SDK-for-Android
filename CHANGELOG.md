@@ -1,6 +1,7 @@
 # Aviary Android SDK Changelog
 
 [Subscribe to updates: RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom)
+
 [Subscribe to updates: Twitter](https://twitter.com/aviarychangelog)
 
 ## Version 2.1.2 - May 31, 2012
