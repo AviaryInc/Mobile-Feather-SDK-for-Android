@@ -357,12 +357,11 @@ If you want to enable the high resolution image processing, once FeatherActivity
 
 **effect-enable-borders**
 
-By default, most of the filters (those in the Effects tool) come with additional borders. If you want to disable the default borders you can pass this extra with a boolean false value and it will turn off ALL borders.
-It is true by default.
+By default, most of the filters (those in the Effects tool) come with additional borders. If you want to disable the default borders you can pass this extra with a boolean false value and it will turn off ALL borders. It is true by default.
 
 
 **tools-vibration-disabled**
-Passing this key in the calling intent, with any value, will disable the haptic vibration used in certain tools
+Passing this key in the calling intent, with any value, will disable the haptic vibration used in certain tools.
 
 
 <a name="result-parameters"></a>
@@ -662,10 +661,9 @@ But you can also enable hi-res saving of images, up to 3MP. If you need higher r
 11 Retain EXIF Tags
 ------
 
-By default Aviary will retain the original image exif and save them into the output image. But when you process the hi-res image after Aviary is closed, this is not true.
-In order to retain the original image EXIF tags into the hi-res image follow these steps:
+By default Aviary will retain the original image's EXIF data and save it into the edited image. But when you process the hi-res image after Aviary is closed, you'll need to do some additional configuration to retain the EXIF data:
 
-* Use the included **ExifInterfaceWrapper** class ( inside com.aviary.android.feather.library.media package ), which can handle a larger number of tags rather than the Android default ExifInterface class
+* Use the included **ExifInterfaceWrapper** class (inside the com.aviary.android.feather.library.media package), which can handle a larger number of tags, rather than the Android default ExifInterface class.
 
 * Create a new instance of ExifInterfaceWrapper, passing the original source image:<br />
 
@@ -686,7 +684,7 @@ In order to retain the original image EXIF tags into the hi-res image follow the
 		newExif.setAttribute( ExifInterfaceWrapper.TAG_DATETIME, ExifInterfaceWrapper.getExifFormattedDate( new Date() ) );						
 </code>
 
-* Save the new exif tags:
+* Save the new EXIF tags:
 
 				try {
 					newExif.saveAttributes();
