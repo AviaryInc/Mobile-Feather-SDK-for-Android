@@ -10,6 +10,7 @@ Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-
 * EXIF data is retained by default within the editor. ( see the README for informations on how to retain EXIF data for hires images )
 * Added Exif load/save examples in the sample app
 * Added B&W and Sepia effects
+* Fixed backspace bug in text and meme panels.
 
 ## Version 2.1.2 - May 31, 2012
 * Fixed crash in the drawing panel and rotation panel on some devices
