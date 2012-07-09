@@ -662,8 +662,7 @@ But you can also enable hi-res saving of images, up to 3MP. If you need higher r
 11 Retain EXIF Tags
 ------
 
-By default Aviary will retain the original image exif and save them into the output image. But when you process the hi-res image after Aviary is closed, this is not true.
-In order to retain the original image EXIF tags into the hi-res image follow these steps (you can also see a real working example inside the sample app provided):
+By default Aviary will retain the original image's EXIF data and save it into the edited image. But when you process the hi-res image after Aviary is closed, you'll need to do some additional configuration to retain the EXIF data:
 
 * Use the included **ExifInterfaceWrapper** class ( inside com.aviary.android.feather.library.media package ), which can handle a larger number of tags rather than the Android default ExifInterface class
 
