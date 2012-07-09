@@ -5,16 +5,16 @@ Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-
 ## Version 2.1.5 - July 9, 2012
 * Updated to Android SDK r20 (http://developer.android.com/sdk/index.html)
 * Added the possibility to disable vibration feedback in certain tools (see the README for more info)
-* Fixed a bug when pressing back button and the image was not fully loaded.
-* Other minor bug fixing
-* EXIF data is retained by default within the editor. ( see the README for informations on how to retain EXIF data for hires images )
-* Added Exif load/save examples in the sample app
+* Fixed a bug when pressing back button before the image was fully loaded
+* EXIF data is retained by default within the editor. (see the README for information on how to retain EXIF data for hires images)
+* Added EXIF load/save examples in the sample app
 * Added B&W and Sepia effects
-* Fixed backspace bug in text and meme panels.
+* Fixed backspace bug in text and meme tools
+* Other general bug fixes and improvements
 
 ## Version 2.1.2 - May 31, 2012
 * Fixed crash in the drawing panel and rotation panel on some devices
-* Added Warm tool
+* Added Warmth tool (color temperature)
 
 ## Version 2.1.0 - May 21, 2012
 * Updated to Android SDK-19 (http://developer.android.com/sdk/index.html)
