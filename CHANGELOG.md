@@ -8,6 +8,7 @@ Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-
 * Fixed a bug when pressing back button and the image was not fully loaded.
 * Other minor bug fixing
 * EXIF data is retained by default within the editor. ( see the README for informations on how to retain EXIF data for hires images )
+* Added Exif load/save examples in the sample app
 
 ## Version 2.1.2 - May 31, 2012
 * Fixed crash in the drawing panel and rotation panel on some devices
