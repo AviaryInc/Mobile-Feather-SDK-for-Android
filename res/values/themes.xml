@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="FeatherDefaultTheme" parent="@android:style/Theme.Black.NoTitleBar">
+		<item name="android:textColorPrimary">@color/feather_primary_text_dark</item>
+		<item name="android:textColorSecondary">@color/feather_secondary_text_dark</item>
+		<item name="android:windowBackground">@android:color/background_dark</item>
+	</style>
+</resources>
