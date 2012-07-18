@@ -211,8 +211,8 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 		// Check and only continue drawing when the IBitmapDrawable is not recycled
 		// There might be a better fix, since I haven't looked deeply into the source code
 		// and found dangerous recycle() calls.
-		if(super.getDrawable() instanceof IBitmapDrawable
-			&& ((IBitmapDrawable)super.getDrawable()).getBitmap().isRecycled()) {
+		if((getDrawable() instanceof IBitmapDrawable)
+			&& ((IBitmapDrawable)getDrawable()).getBitmap().isRecycled()) {
 			// Don't continue drawing.
 			// We won't lose user's drawing input since the drawing effect was applied before
 			return;
