@@ -1,5 +1,7 @@
 package com.aviary.android.feather.widget;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -205,7 +207,20 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 	 */
 	@Override
 	protected void onDraw( Canvas canvas ) {
-		super.onDraw( canvas );
+        // This is to fix RuntimeException: trying to use a recycled bitmap
+        // Check and only continue drawing when the IBitmapDrawable is not recycled
+        // There might be a better fix, since I haven't looked deeply into the source code
+        // and found dangerous recycle() calls.
+		if(super.getDrawable() instanceof IBitmapDrawable) {
+            IBitmapDrawable bd = (IBitmapDrawable)super.getDrawable();
+            if(bd.getBitmap().isRecycled()) {
+                // Don't continue drawing.
+                // We won't lose user's drawing input since the drawing effect was applied before
+                return;
+            }
+        }
+
+        super.onDraw( canvas );
 
 		//canvas.drawPath( tmpPath, mPaint );
 
