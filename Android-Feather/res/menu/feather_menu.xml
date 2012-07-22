@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/edit_reset"
+		android:icon="@drawable/feather_ic_menu_revert"
+		android:title="@string/menu_reset"
+		android:showAsAction="ifRoom|withText" />
+	
+	<item
+		android:id="@+id/edit_premium"
+		android:icon="@drawable/feather_ic_menu_premium"
+		android:title="@string/menu_premium"
+		android:showAsAction="ifRoom|withText" />
+	
+	<item
+		android:id="@+id/edit_cancel"
+		android:icon="@drawable/feather_ic_menu_close_clear_cancel"
+		android:title="@string/menu_cancel"
+		android:showAsAction="ifRoom|withText" />
+	
+	<item
+		android:id="@+id/edit_save"
+		android:icon="@drawable/feather_ic_menu_save"
+		android:title="@string/save"
+		android:showAsAction="ifRoom|withText" />
+</menu>

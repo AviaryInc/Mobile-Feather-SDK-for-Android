@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.aviary.launcher"
+    android:versionCode="65"
+    android:versionName="2.1.5" >
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="14" />
+
+    <!-- REQUIRED PERMISSIONS -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- OPTIONAL PERMISSION, used to enhance the wheel experience -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
+    <!-- Required to send logcat using ACRA -->
+    <uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
+
+    <application
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:name=".MainApplication"
+        android:largeHeap="true" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+
+            <!-- required field for launching application from the app list -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- filters to allow this app to receive image intents from the system -->
+            <intent-filter>
+                <action android:name="android.intent.action.CHOOSER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- 
+        AVIARY FEATHER ENTRIES
+         -->
+        
+        <!-- feather activity must be defined here -->
+        <activity
+            android:name="com.aviary.android.feather.FeatherActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:largeHeap="true"
+            android:screenOrientation="unspecified"
+            android:theme="@style/FeatherDefaultTheme.Custom" />
+        
+        <!-- image info activity -->
+        <activity 
+            android:name=".ImageInfoActivity"
+            android:label="@string/image_details"
+            android:noHistory="true"
+            android:launchMode="singleTop"
+            android:theme="@style/FeatherDefaultTheme.Dialog" />        
+
+        <!-- receiver. gets the newly installed plugins -->
+        <receiver
+            android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver"
+            android:exported="true"
+            android:process=":feather_system_receiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>            
+        </receiver>
+        
+        <!-- Required for the hi-res image processing -->
+        <!-- authorities can have the value you prefer -->
+        <provider 
+            android:name="com.aviary.android.feather.library.providers.FeatherContentProvider"
+            android:exported="false"
+            android:authorities="com.aviary.launcher.HiResProvider">
+        </provider>
+        
+    </application>
+
+</manifest>

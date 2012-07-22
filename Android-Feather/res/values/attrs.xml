@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Wheel">
+        <attr format="integer" name="ticks" />
+        <attr format="integer" name="numRotations" />
+    </declare-styleable>
+    
+    <declare-styleable name="WheelRadio">
+        <attr format="integer" name="smallTicks" />
+        <attr format="integer" name="bigTicks" />
+        <attr format="color|reference" name="valueIndicatorColor" />
+        <attr format="color|reference" name="bigIndicatorColor" />
+        <attr format="color|reference" name="smallIndicatorColor" />        
+    </declare-styleable>
+    
+    <declare-styleable name="ImageRadioButton">
+        <attr format="integer" name="buttonIcon" />
+        <attr format="integer" name="buttonText" />
+        <attr format="boolean" name="checked" />
+    </declare-styleable>
+    
+    <declare-styleable name="ImageButtonRadioGroup">
+        <attr format="integer" name="checkedButton" />
+        <attr format="integer" name="firstButton" />
+        <attr format="integer" name="centerButton" />
+        <attr format="integer" name="lastButton" />
+        <attr name="orientation" />
+    </declare-styleable>
+
+    
+    <declare-styleable name="ToolbarView">
+        <attr name="fontname" format="string|reference"></attr>
+    </declare-styleable>
+    
+    <declare-styleable name="WorkspaceIndicator">
+        <attr name="indicatorId" format="reference" />
+    </declare-styleable>
+    
+    <declare-styleable name="Workspace">
+        <attr name="defaultScreen" format="integer"  />
+        <attr name="overscroll" format="integer" />
+    </declare-styleable>   
+    
+    <declare-styleable name="CellLayout">
+        <attr name="startPadding" format="dimension" />
+        <attr name="endPadding" format="dimension" />
+        <attr name="topPadding" format="dimension" />
+        <attr name="bottomPadding" format="dimension" />
+        <attr name="horizontalPadding" format="dimension" />
+        <attr name="verticalPadding" format="dimension" />
+        <attr name="cells" format="integer" />
+        <attr name="rows" format="integer" />
+    </declare-styleable>
+    
+    <!-- <attr format="reference" name="imageButtonRadioButtonStyle" /> -->
+    
+    <attr name="orientation">
+        <enum name="horizontal" value="0" />
+        <enum name="vertical" value="1" />
+    </attr>
+
+</resources>

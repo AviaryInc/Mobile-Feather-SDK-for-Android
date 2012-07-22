@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aviary="http://schemas.android.com/apk/res/com.aviary.android.feather"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:background="#FF363636"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/roll_open_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_alignBottom="@+id/RelativeLayout01" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1" >
+
+            <com.aviary.android.feather.widget.HorizontialFixedListView
+                android:id="@+id/gallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="9dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/top_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/feather_options_panel_height_shadow"
+        android:layout_above="@+id/RelativeLayout01"
+        android:background="@drawable/feather_shadow_up" >
+    </LinearLayout>
+
+    <!-- content -->
+
+    <LinearLayout
+        android:id="@+id/workspace_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical"
+        android:weightSum="1" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feather_options_panel_height_with_shadow"
+            android:background="@drawable/feather_stickers_panel_background_upper" >
+
+            <com.aviary.android.feather.widget.wp.Workspace
+                android:id="@+id/workspace"
+                style="@style/FeatherStickersWorkspace"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@drawable/feather_stickers_panel_background_lower">
+
+            <com.aviary.android.feather.widget.wp.WorkspaceIndicator
+                android:id="@+id/workspace_indicator"
+                style="@style/FeatherStickersIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="bottom|center_horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- end of content -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/feather_stickers_panel_shadow_left"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/feather_stickers_panel_shadow_right"
+        android:scaleType="fitXY" />
+
+    <AbsoluteLayout
+        android:id="@+id/cannister_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" >
+    </AbsoluteLayout>
+
+</RelativeLayout>
