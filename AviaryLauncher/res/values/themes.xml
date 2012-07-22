@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="FeatherDefaultTheme.Custom" parent="FeatherDefaultTheme">
+	
+	<!-- 
+		If you want to change the topbar and bottombar font
+		just add these entries to your current theme
+		and be sure to use a valid filename.
+		The font file must be placed inside your project "assets/" directory
+		
+		<item name="toolbarFont">fonts/BigCaslon.ttf</item>
+		<item name="bottombarFont">fonts/BigCaslon.ttf</item>
+	-->
+	
+	</style>
+	
+	
+	<style name="FeatherDefaultTheme.Dialog" parent="android:Theme.Dialog">
+	    <item name="dialog_layout">@null</item>
+	    <item name="dialog_button">@android:style/Widget.Button</item>
+	</style>	
+</resources>

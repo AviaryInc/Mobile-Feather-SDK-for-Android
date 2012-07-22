@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FeatherPanelCropCheckbox"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:layerType="hardware"
+    android:text="@string/crop" >
+
+    <TextView
+        style="@style/FeatherPanelCropCheckbox.Text"
+        android:id="@+id/text"
+        android:bufferType="normal"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="@string/crop" />
+
+</RelativeLayout>

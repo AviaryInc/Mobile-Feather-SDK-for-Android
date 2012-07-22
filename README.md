@@ -676,7 +676,7 @@ By default Aviary will retain the original image's EXIF data and save it into th
 
 * Copy the original exif tags into the destination exif:<br/>
 
-		originalExif.copyTo( newExif );<br />
+		originalExif.copyTo( newExif );
 		// the editor auto rotate the image pixels
 		newExif.setAttribute( ExifInterfaceWrapper.TAG_ORIENTATION, "0" );
 		// let's update the software tag too

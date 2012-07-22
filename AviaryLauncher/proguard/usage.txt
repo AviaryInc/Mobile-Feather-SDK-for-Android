@@ -1,0 +1,994 @@
+com.aviary.android.feather.Constants:
+    public static final int BOGO_CPU_FAST
+    public static final int BOGO_CPU_MEDIUM
+    public static final float IMAGE_VIEW_MAX_ZOOM
+    public static final int MIN_MEMORY_FOR_THUMBS
+    public static final int MIN_MEMORY_FOR_CONVOLUTION_THUMBS
+    public static final java.lang.String API_KEY
+    public static final java.lang.String EXTRA_RETURN_DATA
+    public static final java.lang.String EXTRA_OUTPUT
+    public static final java.lang.String EXTRA_OUTPUT_FORMAT
+    public static final java.lang.String EXTRA_OUTPUT_QUALITY
+    public static final java.lang.String EXTRA_TOOLS_LIST
+    public static final java.lang.String EXTRA_HIDE_EXIT_UNSAVE_CONFIRMATION
+    public static final java.lang.String EXTRA_EFFECTS_ENABLE_FAST_PREVIEW
+    141:141:public static int getMaxImageSize()
+com.aviary.android.feather.FeatherActivity:
+    private static final boolean TEST_MODE
+    private static final int ALERT_CONFIRM_EXIT
+    private static final int ALERT_DOWNLOAD_ERROR
+    private static final int ALERT_REVERT_IMAGE
+    public static final int SDK_VERSION
+    public static final java.lang.String ID
+    394:408:private android.net.Uri pickRandomImage()
+    770:770:public com.aviary.android.feather.widget.wp.Workspace getWorkspace()
+    828:829:public void onCancelClick()
+    1130:1130:java.lang.String getApiKey()
+    1134:1134:android.os.Handler getUIHandler()
+com.aviary.android.feather.FilterManager:
+    public static final int STATE_OPENING
+    public static final int STATE_OPENED
+    public static final int STATE_CLOSING
+    public static final int STATE_CLOSED
+    public static final int STATE_DISABLED
+    234:234:public com.aviary.android.feather.effects.AbstractEffectPanel getCurrentPanel()
+    281:288:public boolean isConnectedOrConnecting()
+    442:443:void setNextBitmap(android.graphics.Bitmap)
+com.aviary.android.feather.MonitoredActivity$LifeCycleAdapter:
+    36:36:public void onActivityPaused(com.aviary.android.feather.MonitoredActivity)
+    39:39:public void onActivityResumed(com.aviary.android.feather.MonitoredActivity)
+com.aviary.android.feather.MonitoredActivity$LifeCycleListener:
+    public abstract void onActivityPaused(com.aviary.android.feather.MonitoredActivity)
+    public abstract void onActivityResumed(com.aviary.android.feather.MonitoredActivity)
+com.aviary.android.feather.R$anim:
+    public static final int fade_out_fast
+    public static final int feather_itoast_exit
+    public static final int feather_push_down_out
+com.aviary.android.feather.R$array:
+    public static final int filters_list
+com.aviary.android.feather.R$attr
+com.aviary.android.feather.R$color:
+    public static final int feather_default_panel_color
+    public static final int feather_effect_text_color_selector
+    public static final int feather_infoscreen_button_textcolor_selector
+    public static final int feather_inline_loading_color
+    public static final int feather_option_panel_text_selector
+    public static final int feather_panel_bottom_line_color
+    public static final int feather_panel_top_line_color
+    public static final int feather_primary_text_dark
+    public static final int feather_secondary_text_dark
+    public static final int feather_stickers_pack_text_color_selector
+    public static final int feather_tool_text_color_selector
+    public static final int feather_toolbar_button
+    public static final int feather_toolbar_color
+com.aviary.android.feather.R$dimen
+com.aviary.android.feather.R$drawable:
+    public static final int aviary_logo_small
+    public static final int background
+    public static final int feather_blue_button_background_normal
+    public static final int feather_blue_button_background_pressed
+    public static final int feather_center_button_background
+    public static final int feather_center_button_background_normal
+    public static final int feather_center_button_background_pressed
+    public static final int feather_color_mask
+    public static final int feather_color_masked
+    public static final int feather_default_button_background
+    public static final int feather_default_button_background_normal
+    public static final int feather_default_button_background_pressed
+    public static final int feather_default_panel_background
+    public static final int feather_default_panel_top_line
+    public static final int feather_default_tool_background_normal
+    public static final int feather_default_tool_background_pressed
+    public static final int feather_default_tool_selector
+    public static final int feather_draw_panel_hline
+    public static final int feather_draw_rubber
+    public static final int feather_effects_big_right_canister
+    public static final int feather_flip_horizontal
+    public static final int feather_flip_vertical
+    public static final int feather_green_checkmark
+    public static final int feather_h_line_light
+    public static final int feather_hidden_edit_text
+    public static final int feather_hidden_textfield
+    public static final int feather_icon_backlight_enhance
+    public static final int feather_icon_balance_enhance
+    public static final int feather_icon_brightness_big
+    public static final int feather_icon_brightness_small
+    public static final int feather_icon_contrast_big
+    public static final int feather_icon_contrast_small
+    public static final int feather_icon_enhance
+    public static final int feather_icon_night_enhance
+    public static final int feather_icon_saturation_big
+    public static final int feather_icon_saturation_small
+    public static final int feather_icon_sharpness_big
+    public static final int feather_icon_sharpness_small
+    public static final int feather_infoscreen_background
+    public static final int feather_left_button_background
+    public static final int feather_left_button_background_normal
+    public static final int feather_left_button_background_pressed
+    public static final int feather_lens_button_background_normal
+    public static final int feather_lens_button_background_pressed
+    public static final int feather_lens_button_background_selector
+    public static final int feather_lens_button_selector
+    public static final int feather_lens_normal
+    public static final int feather_lens_selected
+    public static final int feather_loading_background
+    public static final int feather_main_background_tile
+    public static final int feather_main_image_background_repeater
+    public static final int feather_panel_bottom_indicator
+    public static final int feather_panel_top_indicator
+    public static final int feather_plugin_filter_andy_thumb
+    public static final int feather_plugin_filter_aqua_thumb
+    public static final int feather_plugin_filter_edgewood_thumb
+    public static final int feather_plugin_filter_indiglow_thumb
+    public static final int feather_plugin_filter_joecool_thumb
+    public static final int feather_plugin_filter_sancarmen_thumb
+    public static final int feather_plugin_filter_singe_thumb
+    public static final int feather_plugin_filter_softfocus_thumb
+    public static final int feather_plugin_filter_thresh_thumb
+    public static final int feather_plugin_filter_undefined_thumb
+    public static final int feather_plugin_filter_vivid_thumb
+    public static final int feather_right_button_background
+    public static final int feather_right_button_background_normal
+    public static final int feather_right_button_background_pressed
+    public static final int feather_rotate_left
+    public static final int feather_rotate_right
+    public static final int feather_rounded_black_shape
+    public static final int feather_shadow_down
+    public static final int feather_shadow_up
+    public static final int feather_stickers_big_right_paper
+    public static final int feather_stickers_panel_background_lower
+    public static final int feather_stickers_panel_background_upper
+    public static final int feather_stickers_panel_shadow_left
+    public static final int feather_stickers_panel_shadow_right
+    public static final int feather_stickers_panel_shadow_top
+    public static final int feather_submit_button_background
+    public static final int feather_temp
+    public static final int feather_toolbar_button
+    public static final int feather_toolbar_button_normal
+    public static final int feather_toolbar_button_pressed
+    public static final int feather_top_success_checkmark
+    public static final int feather_wheel_background_bottom
+    public static final int feather_wheel_background_top
+    public static final int feather_wheel_radio_background
+    public static final int feather_workspace_indicator
+    public static final int feather_workspace_page_background_normal
+    public static final int feather_workspace_page_background_selected
+    public static final int ic_menu_close_clear_cancel
+    public static final int ic_menu_premium
+    public static final int ic_menu_revert
+    public static final int ic_menu_save
+    public static final int ic_stickers
+    public static final int image_background
+    public static final int image_default
+com.aviary.android.feather.R$id:
+    public static final int RelativeLayout01
+    public static final int blank
+    public static final int button
+    public static final int cannister
+    public static final int checkmark
+    public static final int content
+    public static final int egg_view
+    public static final int get_sdk
+    public static final int home_small_progress
+    public static final int horizontal
+    public static final int image_container
+    public static final int main_content
+    public static final int nonblank
+    public static final int roll_open_container
+    public static final int shadow_up
+    public static final int size_preview
+    public static final int stickers_bottombar
+    public static final int top_shadow
+    public static final int unused
+    public static final int vertical
+    public static final int view_documentation
+    public static final int wheel_parent
+com.aviary.android.feather.R$integer:
+    public static final int feather_config_shortAnimTime
+    public static final int feather_crop_button_text_style
+    public static final int is_filter
+    public static final int is_sticker
+    public static final int is_tool
+com.aviary.android.feather.R$layout:
+    public static final int feather_bottombar
+    public static final int feather_full_shadow
+    public static final int feather_infoscreen
+    public static final int feather_option_panel_content
+    public static final int feather_pixelbrush_content
+    public static final int feather_toast_success
+    public static final int feather_toolbar
+    public static final int feather_top_indicator
+    public static final int main
+com.aviary.android.feather.R$menu:
+    public static final int main_menu
+com.aviary.android.feather.R$string:
+    public static final int app_name
+    public static final int apply
+    public static final int auto
+    public static final int auto_enhance_label
+    public static final int back_enhance_label
+    public static final int balance_enhance_label
+    public static final int blur
+    public static final int blur_max
+    public static final int blur_none
+    public static final int brush
+    public static final int brush_picker
+    public static final int cancel
+    public static final int capital_off
+    public static final int capital_on
+    public static final int choose_color
+    public static final int choose_photo
+    public static final int clear
+    public static final int color
+    public static final int color_picker
+    public static final int colors
+    public static final int comic_book
+    public static final int connection_not_available
+    public static final int crash_dialog_comment_prompt
+    public static final int crash_dialog_text
+    public static final int crash_notif_text
+    public static final int crash_notif_ticker_text
+    public static final int crash_notif_title
+    public static final int done
+    public static final int edit_bottom_text
+    public static final int edit_top_text
+    public static final int edit_your_photo
+    public static final int emboss
+    public static final int emboss_more
+    public static final int eraser
+    public static final int external_storage_na_message
+    public static final int external_storage_na_title
+    public static final int feather_plugin_filter_andy_name
+    public static final int feather_plugin_filter_aqua_name
+    public static final int feather_plugin_filter_edgewood_name
+    public static final int feather_plugin_filter_indiglow_name
+    public static final int feather_plugin_filter_joecool_name
+    public static final int feather_plugin_filter_sancarmen_name
+    public static final int feather_plugin_filter_singe_name
+    public static final int feather_plugin_filter_softfocus_name
+    public static final int feather_plugin_filter_thresh_name
+    public static final int feather_plugin_filter_undefined_name
+    public static final int feather_plugin_filter_vivid_name
+    public static final int feather_text_default_font
+    public static final int filter_name
+    public static final int first_camera
+    public static final int flip
+    public static final int get_mobile_library
+    public static final int hard_brushes
+    public static final int info_screen_link
+    public static final int info_screen_text
+    public static final int infoscreen_app_name
+    public static final int infoscreen_are_developer
+    public static final int infoscreen_bottom_button
+    public static final int infoscreen_get_sdk
+    public static final int infoscreen_submit
+    public static final int infoscreen_text
+    public static final int instant
+    public static final int launch_editor
+    public static final int loading_image
+    public static final int menu_cancel
+    public static final int menu_premium
+    public static final int menu_reset
+    public static final int menu_save
+    public static final int mirror
+    public static final int mobile_sdk_version
+    public static final int night_enhance_label
+    public static final int retro
+    public static final int rotate
+    public static final int save
+    public static final int size
+    public static final int soft_brushes
+    public static final int sticker_apply_message
+    public static final int sticker_delete_message
+    public static final int sticker_delete_title
+    public static final int sticker_name
+    public static final int tool
+    public static final int tool_name
+    public static final int view_documentation
+    public static final int yes_remove
+com.aviary.android.feather.R$style:
+    public static final int Animations
+    public static final int FeatherCellLayout
+    public static final int FeatherDefault
+    public static final int FeatherDefaultTheme
+    public static final int FeatherDefaultTheme_Custom
+    public static final int FeatherHiddenEditText
+    public static final int FeatherInfoScreen
+    public static final int FeatherInfoScreen_SubmitButton
+    public static final int FeatherOptionPanel
+    public static final int FeatherOptionPanel_Background
+    public static final int FeatherOptionPanel_BottomLine
+    public static final int FeatherOptionPanel_TopLine
+    public static final int FeatherOptionPanelButton
+    public static final int FeatherOptionPanelImageButton
+    public static final int FeatherOptionPanelImageButtons
+    public static final int FeatherOptionPanelImageButtons_Center
+    public static final int FeatherOptionPanelImageButtons_Left
+    public static final int FeatherOptionPanelImageButtons_Right
+    public static final int FeatherOptionPanelTextButton
+    public static final int FeatherOptionPanelWheel
+    public static final int FeatherOptionPanelWheel_Background
+    public static final int FeatherPanelCropCheckbox
+    public static final int FeatherPanelCropCheckbox_Text
+    public static final int FeatherRadioButton
+    public static final int FeatherRadioButton_Auto
+    public static final int FeatherRadioButton_Back
+    public static final int FeatherRadioButton_Balance
+    public static final int FeatherRadioButton_Night
+    public static final int FeatherRadioButtonGroup
+    public static final int FeatherStickerPack
+    public static final int FeatherStickersIndicator
+    public static final int FeatherStickersWorkspace
+    public static final int FeatherTool
+    public static final int FeatherTool_Info
+    public static final int FeatherToolText
+    public static final int FeatherToolbar
+    public static final int FeatherToolbarButton
+    public static final int FeatherToolbarTitle
+    public static final int FeatherToolsIndicator
+    public static final int FeatherToolsWorkspace
+    public static final int FeatherWheel
+    public static final int FeatherWheelRadio
+    public static final int FeatherWorkspaceContainer
+    public static final int TextAppearance
+    public static final int TextAppearance_StickersPack
+    public static final int TextAppearance_ToolText
+    public static final int TextAppearance_Toolbar
+    public static final int TextAppearance_Toolbar_Button
+com.aviary.android.feather.R$styleable:
+    public static final int CellLayout_bottomPadding
+    public static final int CellLayout_cells
+    public static final int CellLayout_endPadding
+    public static final int CellLayout_horizontalPadding
+    public static final int CellLayout_rows
+    public static final int CellLayout_startPadding
+    public static final int CellLayout_topPadding
+    public static final int CellLayout_verticalPadding
+    public static final int ImageButtonRadioGroup_centerButton
+    public static final int ImageButtonRadioGroup_checkedButton
+    public static final int ImageButtonRadioGroup_firstButton
+    public static final int ImageButtonRadioGroup_lastButton
+    public static final int ImageButtonRadioGroup_orientation
+    public static final int ImageRadioButton_buttonIcon
+    public static final int ImageRadioButton_buttonText
+    public static final int ImageRadioButton_checked
+    public static final int ToolbarView_fontname
+    public static final int Wheel_numRotations
+    public static final int Wheel_ticks
+    public static final int WheelRadio_bigTicks
+    public static final int WheelRadio_smallTicks
+    public static final int Workspace_defaultScreen
+    public static final int Workspace_overscroll
+    public static final int WorkspaceIndicator_indicatorId
+com.aviary.android.feather.async_tasks.AssetsAsyncDownloadManager:
+    public static final int THUMBNAIL_LOADED
+    private static final int HARD_CACHE_CAPACITY
+    private static final int DELAY_BEFORE_PURGE
+    70:70:public int getThumbSize()
+    145:183:public void loadAssetIcon(android.content.pm.ApplicationInfo,android.content.pm.PackageManager,android.widget.ImageView)
+    240:251:android.graphics.Bitmap downloadIcon(android.content.pm.ApplicationInfo,android.content.pm.PackageManager,android.view.View)
+com.aviary.android.feather.async_tasks.AssetsAsyncDownloadManager$1:
+    private static final long serialVersionUID
+com.aviary.android.feather.async_tasks.AssetsAsyncDownloadManager$4
+com.aviary.android.feather.effects.AbstractEffectPanel:
+    static final int PREVIEW_BITMAP_CHANGED
+    static final int PREVIEW_FILTER_CHANGED
+    static final int FILTER_SAVE_COMPLETED
+    static final int PROGRESS_START
+    static final int PROGRESS_END
+    367:368:protected void onPreviewChanged(android.graphics.Bitmap)
+    public abstract android.graphics.Bitmap render()
+com.aviary.android.feather.effects.AbstractEffectPanel$ContentPanel:
+    public abstract android.view.View getContentView()
+com.aviary.android.feather.effects.AbstractEffectPanel$DynamicHeightOptionPanel
+com.aviary.android.feather.effects.AbstractOptionPanel:
+    42:42:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.AdjustEffectPanel:
+    1:1:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.ColorMatrixEffectPanel:
+    1:1:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.CropPanel:
+    155:155:public android.graphics.Bitmap render()
+    207:214:private android.graphics.Bitmap generateBitmap(android.graphics.Bitmap,android.graphics.Rect)
+com.aviary.android.feather.effects.DrawingPanel:
+    387:387:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.EffectLoaderService:
+    public static final java.lang.String NAME
+    139:144:public boolean hasStickers()
+com.aviary.android.feather.effects.EnhanceEffectPanel:
+    92:92:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.MemePanel:
+    1:1:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.NativeEffectRangePanel:
+    1:1:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.NativeEffectsPanel:
+    272:272:private android.content.pm.ApplicationInfo[] getInstalledFilterPacks()
+    1:1:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.SpotDrawPanel:
+    protected android.view.View mDrawingPanel
+    92:92:protected int getBrusSize(int)
+    296:296:private java.lang.String printRect(android.graphics.Rect)
+    306:306:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.SpotDrawPanel$MyHandlerThread:
+    365:367:public void unpause()
+com.aviary.android.feather.effects.StickersPanel:
+    486:496:private void onApplyOrClearCurrent(boolean)
+    505:521:private void onAskApplyCurrent(boolean)
+    529:545:private void onAskClearCurrent()
+    640:640:public android.graphics.Bitmap render()
+com.aviary.android.feather.effects.StickersPanel$2
+com.aviary.android.feather.effects.StickersPanel$3
+com.aviary.android.feather.effects.TextPanel:
+    1:1:public android.graphics.Bitmap render()
+com.aviary.android.feather.graphics.AnimatedRotateDrawable:
+    167:167:public android.graphics.drawable.Drawable getDrawable()
+com.aviary.android.feather.graphics.CropCheckboxDrawable:
+    23:24:public CropCheckboxDrawable(android.content.res.Resources,boolean,int,float,int)
+com.aviary.android.feather.graphics.GalleryCircleDrawable:
+    47:50:public void setStrokeWidth(float)
+com.aviary.android.feather.graphics.LinearGradientDrawable:
+    180:182:public void setCornerRadius(float)
+com.aviary.android.feather.graphics.PreviewCircleDrawable:
+    39:40:public void setPaint(android.graphics.Paint)
+com.aviary.android.feather.graphics.ToolIconsDrawable:
+    static final int state_pressed
+com.aviary.android.feather.library.content.FeatherIntent:
+    public static final java.lang.String ACTION_PLUGIN_ADDED
+    public static final java.lang.String ACTION_PLUGIN_REMOVED
+    public static final java.lang.String ACTION_PLUGIN_REPLACED
+com.aviary.android.feather.library.filters.AbstractColorMatrixFilter:
+    public abstract float getAmount(int,int)
+com.aviary.android.feather.library.filters.BlurFilter:
+    com.aviary.android.feather.library.moa.MoaAction mAction
+com.aviary.android.feather.library.filters.BrightnessFilter:
+    15:25:public float getAmount(int,int)
+com.aviary.android.feather.library.filters.ContrastFilter:
+    37:47:public float getAmount(int,int)
+com.aviary.android.feather.library.filters.ConvolutionMatrixFilter
+com.aviary.android.feather.library.filters.EnhanceFilter:
+    45:45:public void executeInPlace(android.graphics.Bitmap)
+com.aviary.android.feather.library.filters.ILevelFilter:
+    public abstract android.graphics.ColorMatrixColorFilter apply(float)
+    public abstract float getAmount(int,int)
+com.aviary.android.feather.library.filters.INativeFiler:
+    public abstract void executeInPlace(android.graphics.Bitmap)
+com.aviary.android.feather.library.filters.INativeRangeFilter:
+    public abstract com.aviary.android.feather.library.moa.MoaFloatParameter getValue()
+com.aviary.android.feather.library.filters.NativeFilterProxy:
+    43:47:public static android.graphics.Bitmap executeActions(com.aviary.android.feather.library.moa.MoaActionList,android.graphics.Bitmap,android.graphics.Bitmap,int,int)
+    125:128:public static java.lang.String encodeActions(com.aviary.android.feather.library.moa.MoaActionList)
+com.aviary.android.feather.library.filters.NativeRangeFilter:
+    32:32:public com.aviary.android.feather.library.moa.MoaFloatParameter getValue()
+com.aviary.android.feather.library.filters.SaturationFilter:
+    15:25:public float getAmount(int,int)
+com.aviary.android.feather.library.filters.SharpnessFilter:
+    21:21:public void executeInPlace(android.graphics.Bitmap)
+    43:46:public com.aviary.android.feather.library.moa.MoaFloatParameter getValue()
+com.aviary.android.feather.library.graphics.CubicCurve:
+    61:61:public android.graphics.PointF getA()
+com.aviary.android.feather.library.graphics.FlattenPath:
+    61:74:public float[] getPoints()
+    105:105:public android.graphics.PointF getLastPoint()
+    112:116:public void clear()
+com.aviary.android.feather.library.graphics.Point2D:
+    50:50:public static double angleBetweenPoints(android.graphics.PointF,android.graphics.PointF)
+    62:62:public static double angleBetweenPoints(android.graphics.PointF,android.graphics.PointF,float)
+    106:106:public static double radians(double)
+com.aviary.android.feather.library.graphics.drawable.CircleDrawable
+com.aviary.android.feather.library.graphics.drawable.EditableDrawable:
+    public abstract float getTextSize()
+    public abstract float getFontMetrics(android.graphics.Paint$FontMetrics)
+com.aviary.android.feather.library.graphics.drawable.FeatherDrawable:
+    public abstract void copyBounds(android.graphics.Rect)
+    public abstract android.graphics.Rect copyBounds()
+    public abstract android.graphics.Rect getBounds()
+    public abstract void setChangingConfigurations(int)
+    public abstract int getChangingConfigurations()
+    public abstract void setDither(boolean)
+    public abstract void setFilterBitmap(boolean)
+    public abstract void setCallback(android.graphics.drawable.Drawable$Callback)
+    public abstract void invalidateSelf()
+    public abstract void scheduleSelf(java.lang.Runnable,long)
+    public abstract void unscheduleSelf(java.lang.Runnable)
+    public abstract void setAlpha(int)
+    public abstract void setColorFilter(android.graphics.ColorFilter)
+    public abstract void setColorFilter(int,android.graphics.PorterDuff$Mode)
+    public abstract void clearColorFilter()
+    public abstract boolean isStateful()
+    public abstract boolean setState(int[])
+    public abstract int[] getState()
+    public abstract android.graphics.drawable.Drawable getCurrent()
+    public abstract boolean setLevel(int)
+    public abstract int getLevel()
+    public abstract boolean setVisible(boolean,boolean)
+    public abstract boolean isVisible()
+    public abstract int getOpacity()
+    public abstract android.graphics.Region getTransparentRegion()
+    public abstract int getMinimumWidth()
+    public abstract int getMinimumHeight()
+    public abstract boolean getPadding(android.graphics.Rect)
+    public abstract android.graphics.drawable.Drawable mutate()
+com.aviary.android.feather.library.graphics.drawable.TextDrawable:
+    292:293:public void setStrokeColor(int)
+    331:332:public void setMinTextSize(float)
+com.aviary.android.feather.library.log.LoggerFactory:
+    public static final java.lang.String LOG_TAG
+com.aviary.android.feather.library.moa.JSONWriter$JSONEncode
+com.aviary.android.feather.library.moa.MoaAction:
+    protected java.lang.String description
+    protected org.json.JSONArray jsonParameters
+    27:28:public java.lang.Object getValue(java.lang.String,java.lang.Object)
+    40:41:public void setValue(java.lang.String,java.lang.String)
+    52:53:public void setValue(java.lang.String,double)
+    60:60:public java.util.Set keySet()
+    72:80:public void decode()
+    83:95:void decodeParameters(org.json.JSONArray)
+com.aviary.android.feather.library.moa.MoaActionFactory:
+    18:24:public static com.aviary.android.feather.library.moa.MoaAction decodeAction(org.json.JSONObject)
+    28:33:public static java.util.List decodeActions(org.json.JSONArray)
+    37:47:static com.aviary.android.feather.library.moa.MoaParameter decodeParameter(org.json.JSONObject)
+com.aviary.android.feather.library.moa.MoaActionList:
+    27:29:protected MoaActionList(com.aviary.android.feather.library.moa.MoaAction)
+    39:39:public int indexOf(com.aviary.android.feather.library.moa.MoaAction)
+com.aviary.android.feather.library.moa.MoaFloatParameter:
+    22:22:java.lang.Float parseValue(org.json.JSONObject,java.lang.String)
+    1:1:java.lang.Object parseValue(org.json.JSONObject,java.lang.String)
+com.aviary.android.feather.library.moa.MoaHD:
+    private long m_ptr
+    private java.lang.String mInputFile
+    private java.lang.String mOutputFile
+    11:15:public MoaHD(java.lang.String,java.lang.String)
+    18:18:public java.lang.String getOutputFilePath()
+    22:22:public long getPtr()
+    26:26:public boolean isValid()
+    30:31:public void applyActions(java.lang.String)
+    34:34:public boolean save()
+    39:40:public void dispose()
+com.aviary.android.feather.library.moa.MoaMatrixParameter
+com.aviary.android.feather.library.moa.MoaMetadata:
+    40:40:public int imageWidth()
+    44:44:public int imageHeight()
+    64:66:public void setCellSize(int,int)
+    69:71:public void setGridSize(int,int)
+com.aviary.android.feather.library.moa.MoaParameter:
+    public static final java.lang.String TYPE_FLOAT
+    public static final java.lang.String TYPE_POINT
+    public static final java.lang.String TYPE_MATRIX
+    java.lang.String uid
+    java.lang.String name
+    java.lang.String description
+    boolean has_limits
+    java.lang.Object minValue
+    java.lang.Object maxValue
+    java.lang.Object defaultValue
+    33:45:public void decode(org.json.JSONObject)
+    abstract java.lang.Object parseValue(org.json.JSONObject,java.lang.String)
+    50:50:public java.lang.Object getValue()
+    54:54:public boolean hasLimits()
+    62:62:public java.lang.String getUID()
+    66:66:public java.lang.String getName()
+    70:70:public java.lang.String getType()
+    74:74:public java.lang.String getDescription()
+com.aviary.android.feather.library.moa.MoaPointParameter:
+    19:22:public MoaPointParameter(double,double)
+    46:50:double[] parseValue(org.json.JSONObject,java.lang.String)
+    1:1:java.lang.Object parseValue(org.json.JSONObject,java.lang.String)
+com.aviary.android.feather.library.services.EffectContext:
+    public abstract int getApplicationMaxMemory()
+    public abstract boolean isConnectedOrConnecting()
+    public abstract void runOnUiThread(java.lang.Runnable)
+    public abstract com.aviary.android.feather.library.content.EffectEntry getCurrentEffect()
+    public abstract void setToolbarTitle(java.lang.CharSequence)
+com.aviary.android.feather.library.services.PluginService:
+    public static final java.lang.String STICKER_LABEL
+    public static final java.lang.String STICKER_ICON
+    public static final java.lang.String STICKERS
+    public static final java.lang.String FILTER_LABEL
+    public static final java.lang.String FILTER_ICON
+    public static final java.lang.String FILTER_FILE
+    public static final java.lang.String FILTERS
+    112:112:public java.lang.Boolean isUpdating()
+    210:210:public android.content.pm.ApplicationInfo[] getInstalledFilters()
+    222:224:public long getInstalledDate(android.content.pm.ApplicationInfo)
+    233:233:public android.graphics.drawable.Drawable loadIcon(android.content.pm.ApplicationInfo)
+    242:242:public java.lang.CharSequence loadLabel(android.content.pm.ApplicationInfo)
+    268:272:public java.lang.CharSequence loadFilterLabel(android.content.pm.ApplicationInfo)
+    363:363:public int getIdentifier(android.content.res.Resources,java.lang.String,java.lang.String)
+    387:387:public android.content.pm.ApplicationInfo getFilter(java.lang.String)
+    425:470:public long loadFilter(android.content.Context,android.content.pm.ApplicationInfo)
+    482:483:public boolean installFilter(android.content.Context,long,java.lang.String)
+    496:497:public boolean uninstallFilter(android.content.Context,long,java.lang.String)
+    508:508:public java.lang.String[] getFilterEntryPoints(android.content.Context,android.content.pm.ApplicationInfo)
+    512:516:public java.lang.String[] getFilterEntryPoints(android.content.Context,java.lang.String)
+com.aviary.android.feather.library.tracking.AviarySessionUploader
+com.aviary.android.feather.library.tracking.Constants:
+    public static final java.lang.String EXTRAS_APP_NAME
+    public static final java.lang.String EXTRAS_API_KEY
+    public static final java.lang.String EXTRAS_SDK_VERSION
+    public static final java.lang.String LOCALYTICS_CLIENT_LIBRARY_VERSION
+    public static final java.lang.String LOCALYTICS_PACKAGE_NAME
+    public static final int MAX_NUM_SESSIONS
+    public static final int MAX_NUM_ATTRIBUTES
+    public static final int MAX_NAME_LENGTH
+    public static final java.lang.String LOG_TAG
+com.aviary.android.feather.library.tracking.DatapointHelper:
+    private static final java.lang.String INVALID_ANDROID_ID
+    private static final java.lang.String LEGACY_DEVICE_ID_FILE
+com.aviary.android.feather.library.tracking.ExceptionHandler
+com.aviary.android.feather.library.tracking.JsonObjects
+com.aviary.android.feather.library.tracking.JsonObjects$BlobHeader
+com.aviary.android.feather.library.tracking.JsonObjects$BlobHeader$Attributes
+com.aviary.android.feather.library.tracking.JsonObjects$EventFlow
+com.aviary.android.feather.library.tracking.JsonObjects$EventFlow$Element
+com.aviary.android.feather.library.tracking.JsonObjects$OptEvent
+com.aviary.android.feather.library.tracking.JsonObjects$SessionClose
+com.aviary.android.feather.library.tracking.JsonObjects$SessionEvent
+com.aviary.android.feather.library.tracking.JsonObjects$SessionOpen
+com.aviary.android.feather.library.tracking.LocalyticsProvider:
+    static final java.lang.String DATABASE_FILE
+    private static final int DATABASE_VERSION
+    345:360:void close()
+com.aviary.android.feather.library.tracking.LocalyticsProvider$ApiKeysDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsProvider$AttributesDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsProvider$DatabaseHelper:
+    private static final java.lang.String SQLITE_BOOLEAN_TRUE
+    private static final java.lang.String SQLITE_BOOLEAN_FALSE
+com.aviary.android.feather.library.tracking.LocalyticsProvider$EventHistoryDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsProvider$EventsDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsProvider$SessionsDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsProvider$UploadBlobEventsDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsProvider$UploadBlobsDbColumns
+com.aviary.android.feather.library.tracking.LocalyticsSession:
+    static final java.lang.String EVENT_FORMAT
+    302:303:public void setOptOut(boolean)
+    355:356:public void tagEvent(java.lang.String)
+    450:459:public void tagScreen(java.lang.String)
+    508:527:public static java.lang.String createRangedAttribute(int,int,int,int)
+    547:578:public static java.lang.String createRangedAttribute(int,int[])
+com.aviary.android.feather.library.tracking.LocalyticsSession$SessionHandler:
+    public static final int MESSAGE_INIT
+    public static final int MESSAGE_OPEN
+    public static final int MESSAGE_CLOSE
+    public static final int MESSAGE_TAG_EVENT
+    public static final int MESSAGE_UPLOAD
+    public static final int MESSAGE_UPLOAD_CALLBACK
+    public static final int MESSAGE_OPT_OUT
+    public static final int MESSAGE_TAG_SCREEN
+com.aviary.android.feather.library.tracking.LocalyticsSession$UploadHandler:
+    private static final java.lang.String UPLOAD_CALLBACK_THREAD_NAME
+    private static final java.lang.String ANALYTICS_URL
+    private static final java.lang.String AVIARY_ANALYTICS_URL
+    public static final int MESSAGE_UPLOAD
+    public static final int MESSAGE_RETRY_UPLOAD_REQUEST
+com.aviary.android.feather.library.tracking.ReflectionUtils:
+    43:43:public static java.lang.Object tryInvokeStatic(java.lang.Class,java.lang.String,java.lang.Class[],java.lang.Object[])
+    65:65:public static java.lang.Object tryInvokeStatic(java.lang.String,java.lang.String,java.lang.Class[],java.lang.Object[])
+com.aviary.android.feather.library.tracking.Tracker:
+    private static final java.lang.String localyticsKey
+com.aviary.android.feather.library.utils.BitmapUtils:
+    private static int[] $SWITCH_TABLE$com$aviary$android$feather$library$utils$BitmapUtils$FLIP_MODE
+    62:62:public static android.graphics.Bitmap createThumbnail(android.graphics.Bitmap,int,int,android.graphics.ColorMatrixColorFilter,int)
+    74:74:public static android.graphics.Bitmap createThumbnail(android.graphics.Bitmap,int,int,int,int)
+    201:201:public static android.graphics.Bitmap createThumbnail(android.graphics.Bitmap,int,int,com.aviary.android.feather.library.utils.BitmapUtils$ROTATION,int)
+    206:220:public static android.graphics.Bitmap flip(android.graphics.Bitmap,com.aviary.android.feather.library.utils.BitmapUtils$FLIP_MODE)
+    402:409:public static android.graphics.Bitmap rotateBitmap(android.graphics.Bitmap,com.aviary.android.feather.library.utils.BitmapUtils$ROTATION)
+    27:27:static int[] $SWITCH_TABLE$com$aviary$android$feather$library$utils$BitmapUtils$FLIP_MODE()
+com.aviary.android.feather.library.utils.ConnectionUtils
+com.aviary.android.feather.library.utils.IDisposable
+com.aviary.android.feather.library.utils.IOUtils:
+    24:28:public static void closeSilently(android.os.ParcelFileDescriptor)
+    31:36:public static void copyFile(java.io.InputStream,java.io.OutputStream)
+    45:59:public static java.lang.String getNewFileName(java.lang.String)
+com.aviary.android.feather.library.utils.ImageLoader:
+    73:73:public static android.graphics.Bitmap loadFromAsset(android.content.Context,java.lang.String,int,int)
+    205:224:public static java.lang.String getRealFilePath(android.content.Context,android.net.Uri)
+com.aviary.android.feather.library.utils.MemoryUtils
+com.aviary.android.feather.library.utils.ResourceManager:
+    97:101:public java.lang.CharSequence loadFilterLabel(java.lang.CharSequence)
+    137:137:public android.graphics.drawable.Drawable getDrawable(int)
+    146:150:public android.content.res.ColorStateList getColorStateList(java.lang.String)
+    161:165:public int getColor(java.lang.String,int)
+    174:175:public float getDimension(java.lang.String)
+    218:223:public int[] getPadding(java.lang.String)
+    227:229:public android.content.res.XmlResourceParser getLayout(java.lang.String)
+    243:243:public int getIdentifier(java.lang.String)
+com.aviary.android.feather.library.utils.StringUtils
+com.aviary.android.feather.library.utils.UserTask:
+    private static final java.lang.String LOG_TAG
+    private static final int CORE_POOL_SIZE
+    private static final int MAXIMUM_POOL_SIZE
+    private static final int KEEP_ALIVE
+    private static final int MESSAGE_POST_RESULT
+    private static final int MESSAGE_POST_PROGRESS
+    private static final int MESSAGE_POST_CANCEL
+    218:218:public final com.aviary.android.feather.library.utils.UserTask$Status getStatus()
+    323:323:public final java.lang.Object get()
+    346:346:public final java.lang.Object get(long,java.util.concurrent.TimeUnit)
+com.aviary.android.feather.receivers.FeatherSystemReceiver:
+    public static final java.lang.String PLUGIN_BASE_PACKAGE
+    public static final java.lang.String APPLICATION_CONTEXT
+    public static final java.lang.String IS_STICKER
+    public static final java.lang.String IS_FILTER
+    public static final java.lang.String IS_TOOL
+    154:163:private void printBundle(android.os.Bundle)
+com.aviary.android.feather.services.BackgroundService:
+    public static final int TASK_COMPLETED
+com.aviary.android.feather.services.CacheManagerService:
+    25:25:public java.io.File createTempFile(java.lang.String,java.lang.String)
+com.aviary.android.feather.utils.UIUtils:
+    35:36:public static void showCustomToast(int)
+    39:40:public static void showCustomToast(int,int)
+    50:58:public static void showCustomToast(int,int,int)
+com.aviary.android.feather.widget.AbsSpinner:
+    282:285:public void setSelection(int)
+    1:1:public void setAdapter(android.widget.Adapter)
+com.aviary.android.feather.widget.AdapterView:
+    public static final int ITEM_VIEW_TYPE_IGNORE
+    public static final int ITEM_VIEW_TYPE_HEADER_OR_FOOTER
+    static final int SYNC_SELECTED_POSITION
+    static final int SYNC_FIRST_POSITION
+    static final int SYNC_MAX_DURATION_MILLIS
+    public static final int INVALID_POSITION
+    public static final long INVALID_ROW_ID
+    263:264:public void setOnItemClickListener(com.aviary.android.feather.widget.AdapterView$OnItemClickListener)
+    270:270:public final com.aviary.android.feather.widget.AdapterView$OnItemClickListener getOnItemClickListener()
+    328:332:public void setOnItemLongClickListener(com.aviary.android.feather.widget.AdapterView$OnItemLongClickListener)
+    339:339:public final com.aviary.android.feather.widget.AdapterView$OnItemLongClickListener getOnItemLongClickListener()
+    383:384:public void setOnItemSelectedListener(com.aviary.android.feather.widget.AdapterView$OnItemSelectedListener)
+    387:387:public final com.aviary.android.feather.widget.AdapterView$OnItemSelectedListener getOnItemSelectedListener()
+    public abstract void setAdapter(android.widget.Adapter)
+    570:575:public java.lang.Object getSelectedItem()
+    public abstract void setSelection(int)
+    653:658:public void setEmptyView(android.view.View)
+    667:667:public android.view.View getEmptyView()
+    757:758:public java.lang.Object getItemAtPosition(int)
+com.aviary.android.feather.widget.AdapterView$AdapterDataSetObserver:
+    834:835:public void clearSavedState()
+com.aviary.android.feather.widget.AdjustImageView:
+    static final java.lang.String LOG_TAG
+    156:157:public void setEasing(it.sephiroth.android.library.imagezoom.easing.Easing)
+    206:210:public void setAdjustViewBounds(boolean)
+    229:230:public void setMaxWidth(int)
+    249:250:public void setMaxHeight(int)
+    256:256:public android.graphics.drawable.Drawable getDrawable()
+    274:282:public void setImageResource(int)
+    297:305:public void setImageURI(android.net.Uri)
+    343:349:public void setImageState(int[],boolean)
+    364:369:public void setImageLevel(int)
+    431:443:public void setScaleType(com.aviary.android.feather.widget.AdjustImageView$ScaleType)
+    453:453:public com.aviary.android.feather.widget.AdjustImageView$ScaleType getScaleType()
+    462:462:public android.graphics.Matrix getImageMatrix()
+    467:477:public void setImageMatrix(android.graphics.Matrix)
+    913:917:public void setBaseline(int)
+    928:932:public void setBaselineAlignBottom(boolean)
+    940:940:public boolean getBaselineAlignBottom()
+    954:955:public final void setColorFilter(int,android.graphics.PorterDuff$Mode)
+    965:966:public final void setColorFilter(int)
+    969:970:public final void clearColorFilter()
+    979:985:public void setColorFilter(android.graphics.ColorFilter)
+    988:995:public void setAlpha(int)
+    1256:1256:public boolean isRunning()
+com.aviary.android.feather.widget.BrushHighlight:
+    static final java.lang.String LOG_TAG
+com.aviary.android.feather.widget.CropImageView:
+    public static final int GROW
+    public static final int SHRINK
+    70:71:public void setOnLayoutListener(com.aviary.android.feather.widget.CropImageView$OnLayoutListener)
+    204:204:static float distance(float,float,float,float)
+    406:406:public double getAspectRatio()
+com.aviary.android.feather.widget.DrawableHighlightView:
+    static final int GROW_NONE
+    static final int GROW_LEFT_EDGE
+    static final int GROW_RIGHT_EDGE
+    static final int GROW_TOP_EDGE
+    static final int GROW_BOTTOM_EDGE
+    static final int ROTATE
+    static final int MOVE
+    private static final float HIT_TOLERANCE
+    179:190:public void draw(android.graphics.Canvas,android.graphics.Matrix)
+    198:198:public android.graphics.Rect getCropRect()
+    220:222:public android.graphics.RectF getDisplayRectF()
+    323:323:public float getRotation()
+    553:558:public void update(android.graphics.Matrix,android.graphics.Rect)
+com.aviary.android.feather.widget.Gallery:
+    private static final java.lang.String TAG
+    private static final int MSG_VIBRATE
+    private static final int SCROLL_TO_FLING_UNCERTAINTY_TIMEOUT
+    279:280:public void setAutoScrollToCenter(boolean)
+    308:309:public void setCallbackOnUnselectedItemClick(boolean)
+    320:321:public void setAnimationDuration(int)
+    344:345:public void setUnselectedAlpha(float)
+    494:505:int getLimitedMotionScrollAmount2(boolean,int)
+    1510:1514:public void setGravity(int)
+com.aviary.android.feather.widget.Gallery$Fling8Runnable:
+    1602:1603:public void springBack(int)
+com.aviary.android.feather.widget.Gallery$Fling9Runnable:
+    1646:1647:public void springBack(int)
+com.aviary.android.feather.widget.Gallery$FlingRunnable:
+    public abstract void springBack(int)
+com.aviary.android.feather.widget.HighlightView:
+    private static final java.lang.String LOG_TAG
+    static final int GROW_NONE
+    static final int GROW_LEFT_EDGE
+    static final int GROW_RIGHT_EDGE
+    static final int GROW_TOP_EDGE
+    static final int GROW_BOTTOM_EDGE
+    static final int MOVE
+    85:86:public void setHidden(boolean)
+    397:398:public void setAspectRatio(float)
+    401:402:public void setMaintainAspectRatio(boolean)
+    405:409:public void update(android.graphics.Matrix,android.graphics.Rect)
+com.aviary.android.feather.widget.HorizontialFixedListView:
+    protected static final java.lang.String LOG_TAG
+com.aviary.android.feather.widget.HorizontialListView:
+    172:172:private int getRealHeight()
+    177:177:private int getRealWidth()
+    307:309:public synchronized void scrollTo(int)
+com.aviary.android.feather.widget.IToast:
+    56:56:public void update()
+com.aviary.android.feather.widget.ImageButtonRadioButton:
+    70:71:public void setButtonText(java.lang.String)
+    74:75:public void setOnCheckedChangeListener(com.aviary.android.feather.widget.ImageButtonRadioButton$OnCheckedChangeListener)
+com.aviary.android.feather.widget.ImageButtonRadioGroup:
+    113:125:public void check(int)
+    146:146:public int getCheckedRadioButtonId()
+    150:151:public void clearCheck()
+com.aviary.android.feather.widget.ImageViewDrawableOverlay:
+    79:80:public void setOnLayoutListener(com.aviary.android.feather.widget.ImageViewDrawableOverlay$OnLayoutListener)
+com.aviary.android.feather.widget.ImageViewSpotDraw:
+    protected static final float TOUCH_TOLERANCE
+    102:102:public android.graphics.Paint getPaint()
+    106:107:public void setPaint(android.graphics.Paint)
+com.aviary.android.feather.widget.ImageViewTouchAndDraw:
+    protected static final float TOUCH_TOLERANCE
+    63:63:public com.aviary.android.feather.widget.ImageViewTouchAndDraw$TouchMode getDrawMode()
+    90:90:public android.graphics.Paint getPaint()
+    200:200:public android.graphics.Bitmap getOverlayBitmap()
+com.aviary.android.feather.widget.ImageViewTouchBrush:
+    50:51:public void setOnSingleTapConfirmedListener(com.aviary.android.feather.widget.ImageViewTouchBrush$OnSingleTapConfirmedListener)
+    83:84:public void setTapRadius(float)
+    87:88:public void setBrushDuration(long)
+com.aviary.android.feather.widget.ToolbarView:
+    private static final int MSG_SHOW_CHILD
+    108:108:public long getOutAnimationTime()
+    197:197:public com.aviary.android.feather.widget.ToolbarView$STATE getState()
+    211:212:public void setApplyEnabled(boolean)
+    241:249:private void enableChildrenCache()
+    253:254:private void clearChildrenCache()
+    257:258:public void setApplyEnabled(boolean,boolean)
+com.aviary.android.feather.widget.ToolbarView$OnToolbarClickListener:
+    public abstract void onCancelClick()
+com.aviary.android.feather.widget.Wheel:
+    static final int MSG_VIBRATE
+    348:348:public float getTickSpace()
+    501:509:int getLimitedMotionScrollAmount(boolean,int)
+com.aviary.android.feather.widget.WheelRadio:
+    static final java.lang.String LOG_TAG
+com.aviary.android.feather.widget.wp.CellLayout:
+    110:114:public void setNumRows(int)
+    140:140:int getCountX()
+    144:144:int getCountY()
+    160:160:public com.aviary.android.feather.widget.wp.CellLayout$CellInfo findVacantCell()
+    255:268:void pointToCellExact(int,int,int[])
+    281:282:void pointToCellRounded(int,int,int[])
+    296:300:void cellToPoint(int,int,int[])
+    303:303:int getCellWidth()
+    307:307:int getCellHeight()
+    311:311:int getLeftPadding()
+    315:315:int getTopPadding()
+    319:319:int getRightPadding()
+    323:323:int getBottomPadding()
+    442:456:public void cellToRect(int,int,int,int,android.graphics.RectF)
+    471:475:public boolean getVacantCell(int[],int,int)
+    480:499:static boolean findVacantCell(int[],int,int,int,int,boolean[][])
+    503:513:boolean[] getOccupiedCells()
+    517:537:private void findOccupiedCells(int,int,boolean[][],android.view.View)
+    652:652:public boolean lastDownOnOccupiedCell()
+com.aviary.android.feather.widget.wp.CellLayout$CellInfo:
+    boolean valid
+    648:648:public void clearVacantCells()
+com.aviary.android.feather.widget.wp.EdgeGlow:
+    private static final int RECEDE_TIME
+    private static final int PULL_TIME
+    private static final int PULL_DECAY_TIME
+    private static final float MAX_ALPHA
+    private static final float HELD_EDGE_SCALE_Y
+    private static final float MAX_GLOW_HEIGHT
+    private static final float PULL_GLOW_BEGIN
+    private static final float PULL_EDGE_BEGIN
+    private static final int MIN_VELOCITY
+    private static final float EPSILON
+    private static final int STATE_IDLE
+    private static final int STATE_PULL
+    private static final int STATE_ABSORB
+    private static final int STATE_RECEDE
+    private static final int STATE_PULL_DECAY
+    private static final int PULL_DISTANCE_EDGE_FACTOR
+    private static final int PULL_DISTANCE_GLOW_FACTOR
+    private static final float PULL_DISTANCE_ALPHA_GLOW_FACTOR
+    private static final int VELOCITY_EDGE_FACTOR
+    private static final int VELOCITY_GLOW_FACTOR
+    102:103:public void finish()
+com.aviary.android.feather.widget.wp.ItemInfo
+com.aviary.android.feather.widget.wp.Workspace:
+    private static final int INVALID_SCREEN
+    public static final int OVER_SCROLL_NEVER
+    public static final int OVER_SCROLL_ALWAYS
+    public static final int OVER_SCROLL_IF_CONTENT_SCROLLS
+    private static final int SNAP_VELOCITY
+    private static final int TOUCH_STATE_REST
+    private static final int TOUCH_STATE_SCROLLING
+    private static final int INVALID_POINTER
+    private static final float NANOTIME_DIV
+    private static final float SMOOTHING_SPEED
+    private static final float BASELINE_FLING_VELOCITY
+    private static final float FLING_VELOCITY_INFLUENCE
+    208:209:public void setAllowChildSelection(boolean)
+    280:280:boolean isDefaultScreenShowing()
+    302:307:void setCurrentScreen(int)
+    1284:1289:public void scrollLeft()
+    1292:1297:public void scrollRight()
+    1300:1310:public int getScreenForView(android.view.View)
+    1314:1325:public android.view.View getViewForTag(java.lang.Object)
+    1332:1332:public boolean allowLongPress()
+    1340:1341:public void setAllowLongPress(boolean)
+    1344:1350:void moveToDefaultScreen(boolean)
+    1455:1455:public android.view.View getScreenAt(int)
+com.aviary.android.feather.widget.wp.Workspace$WorkspaceOvershootInterpolator:
+    private static final float DEFAULT_TENSION
+com.aviary.launcher.MainActivity:
+    private static final int ACTION_REQUEST_GALLERY
+    private static final int ACTION_REQUEST_FEATHER
+    private static final int EXTERNAL_STORAGE_UNAVAILABLE
+    private static final java.lang.String API_KEY
+    private static final java.lang.String FOLDER_NAME
+    protected static final java.lang.String LOG_TAG
+com.aviary.launcher.R
+com.aviary.launcher.R$anim
+com.aviary.launcher.R$array
+com.aviary.launcher.R$attr
+com.aviary.launcher.R$color
+com.aviary.launcher.R$dimen
+com.aviary.launcher.R$drawable
+com.aviary.launcher.R$id
+com.aviary.launcher.R$integer
+com.aviary.launcher.R$layout
+com.aviary.launcher.R$menu
+com.aviary.launcher.R$string
+com.aviary.launcher.R$style
+com.aviary.launcher.R$styleable
+it.sephiroth.android.library.imagezoom.ImageViewTouch:
+    static final float MIN_ZOOM
+    59:59:public boolean getDoubleTapEnabled()
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase:
+    public static final java.lang.String LOG_TAG
+    76:80:public void setFitToScreen(boolean)
+    339:342:protected void zoomTo(float)
+    441:442:public void dispose()
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase$Command
+it.sephiroth.android.library.imagezoom.RotateBitmap
+it.sephiroth.android.library.imagezoom.ScaleGestureDetector:
+    private static final java.lang.String TAG
+    private static final float PRESSURE_THRESHOLD
+    651:651:public float getCurrentSpanX()
+    661:661:public float getCurrentSpanY()
+    686:686:public float getPreviousSpanX()
+    696:696:public float getPreviousSpanY()
+    720:720:public long getTimeDelta()
+    729:729:public long getEventTime()
+it.sephiroth.android.library.imagezoom.easing.Back
+it.sephiroth.android.library.imagezoom.easing.Bounce
+it.sephiroth.android.library.imagezoom.easing.Circ
+it.sephiroth.android.library.imagezoom.easing.Cubic:
+    12:12:public double easeIn(double,double,double,double)
+it.sephiroth.android.library.imagezoom.easing.Easing:
+    public abstract double easeIn(double,double,double,double)
+it.sephiroth.android.library.imagezoom.easing.Elastic
+it.sephiroth.android.library.imagezoom.easing.Expo:
+    12:12:public double easeIn(double,double,double,double)
+it.sephiroth.android.library.imagezoom.easing.Linear
+it.sephiroth.android.library.imagezoom.easing.Quad
+it.sephiroth.android.library.imagezoom.easing.Quart
+it.sephiroth.android.library.imagezoom.easing.Quint
+it.sephiroth.android.library.imagezoom.easing.Sine:
+    12:12:public double easeIn(double,double,double,double)

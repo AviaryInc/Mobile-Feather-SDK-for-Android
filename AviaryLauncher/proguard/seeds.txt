@@ -1,0 +1,216 @@
+com.aviary.android.feather.library.moa.Moa
+com.aviary.android.feather.library.moa.MoaResult
+com.aviary.android.feather.services.CacheManagerService
+com.aviary.android.feather.library.services.PluginService
+com.aviary.android.feather.services.BackgroundService
+com.aviary.android.feather.library.filters.FilterService
+com.aviary.android.feather.services.ConfigService
+com.aviary.android.feather.effects.EffectLoaderService
+com.aviary.android.feather.library.services.EffectContext
+com.aviary.android.feather.library.services.EffectContextService
+com.aviary.android.feather.services.CacheManagerService
+com.aviary.android.feather.library.services.PluginService
+com.aviary.android.feather.services.BackgroundService
+com.aviary.android.feather.library.filters.FilterService
+com.aviary.android.feather.services.ConfigService
+com.aviary.android.feather.effects.EffectLoaderService
+com.aviary.android.feather.FilterManager
+com.aviary.android.feather.services.CacheManagerService: CacheManagerService(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.TextPanel: TextPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.library.services.PluginService: PluginService(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.services.BackgroundService: BackgroundService(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.CropPanel: CropPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.StickersPanel: StickersPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.library.filters.FilterService: FilterService(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.MemePanel: MemePanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.NativeEffectsPanel: NativeEffectsPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.services.ConfigService: ConfigService(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.DrawingPanel: DrawingPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractContentPanel: AbstractContentPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractOptionPanel: AbstractOptionPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.AbstractEffectPanel: AbstractEffectPanel(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.effects.EffectLoaderService: EffectLoaderService(com.aviary.android.feather.library.services.EffectContext)
+com.aviary.android.feather.library.moa.MoaResult: java.lang.String inputString
+com.aviary.android.feather.library.moa.MoaResult: java.lang.String outputString
+com.aviary.android.feather.library.moa.MoaResult: android.graphics.Bitmap inputBitmap
+com.aviary.android.feather.library.moa.MoaResult: android.graphics.Bitmap outputBitmap
+com.aviary.android.feather.library.moa.MoaResult: int active
+com.aviary.android.feather.library.moa.MoaHD
+com.aviary.android.feather.library.moa.MoaHD: long m_nativeCtor(java.lang.String)
+com.aviary.android.feather.library.moa.MoaHD: boolean m_nativeIsValid(long)
+com.aviary.android.feather.library.moa.MoaHD: void m_nativeDispose(long)
+com.aviary.android.feather.library.moa.MoaHD: void m_nativeApplyActions(long,java.lang.String)
+com.aviary.android.feather.library.moa.MoaHD: boolean m_nativeSave(long,java.lang.String)
+com.aviary.android.feather.library.moa.Moa
+com.aviary.android.feather.library.moa.Moa: void init(java.lang.String)
+com.aviary.android.feather.library.moa.Moa: void applyActions(com.aviary.android.feather.library.moa.MoaResult)
+com.aviary.android.feather.library.moa.Moa: java.lang.String queryActions(java.lang.String)
+com.aviary.android.feather.library.moa.Moa: java.lang.String[] getActions()
+com.aviary.android.feather.library.moa.Moa: boolean cpuIsArmv7()
+com.aviary.android.feather.library.moa.Moa: long loadSharedLibrary(java.lang.String)
+com.aviary.android.feather.library.moa.Moa: boolean installSharedLibrary(long,java.lang.String)
+com.aviary.android.feather.library.moa.Moa: boolean unloadSharedLibrary(long,java.lang.String)
+com.aviary.android.feather.library.moa.Moa: long loadFile(java.lang.String)
+com.aviary.android.feather.widget.ImageSwitcher
+com.aviary.android.feather.widget.ImageSwitcher: ImageSwitcher(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.CropImageView
+com.aviary.android.feather.widget.CropImageView: CropImageView(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouch: ImageViewTouch(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.wp.Workspace
+com.aviary.android.feather.widget.wp.Workspace: Workspace(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.Wheel
+com.aviary.android.feather.widget.Wheel: Wheel(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageButtonRadioGroup$LayoutParams
+com.aviary.android.feather.widget.ImageButtonRadioGroup$LayoutParams: ImageButtonRadioGroup$LayoutParams(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageViewTouchAndDraw
+com.aviary.android.feather.widget.ImageViewTouchAndDraw: ImageViewTouchAndDraw(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouch: ImageViewTouch(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.wp.CellLayout
+com.aviary.android.feather.widget.wp.CellLayout: CellLayout(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageButtonRadioGroup
+com.aviary.android.feather.widget.ImageButtonRadioGroup: ImageButtonRadioGroup(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ToolbarView
+com.aviary.android.feather.widget.ToolbarView: ToolbarView(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageViewTouchBrush
+com.aviary.android.feather.widget.ImageViewTouchBrush: ImageViewTouchBrush(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouch: ImageViewTouch(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.Gallery$LayoutParams
+com.aviary.android.feather.widget.Gallery$LayoutParams: Gallery$LayoutParams(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.wp.CellLayout$LayoutParams
+com.aviary.android.feather.widget.wp.CellLayout$LayoutParams: CellLayout$LayoutParams(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.BottombarViewFlipper
+com.aviary.android.feather.widget.BottombarViewFlipper: BottombarViewFlipper(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageViewSpotDraw
+com.aviary.android.feather.widget.ImageViewSpotDraw: ImageViewSpotDraw(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouch: ImageViewTouch(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.Gallery
+com.aviary.android.feather.widget.Gallery: Gallery(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.AbsSpinner: AbsSpinner(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.AdapterView: AdapterView(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.AdjustImageView
+com.aviary.android.feather.widget.AdjustImageView: AdjustImageView(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.WheelRadio
+com.aviary.android.feather.widget.WheelRadio: WheelRadio(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageViewDrawableOverlay
+com.aviary.android.feather.widget.ImageViewDrawableOverlay: ImageViewDrawableOverlay(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouch: ImageViewTouch(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.AdapterView
+com.aviary.android.feather.widget.AdapterView: AdapterView(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.AbsSpinner
+com.aviary.android.feather.widget.AbsSpinner: AbsSpinner(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.AdapterView: AdapterView(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.wp.WorkspaceIndicator
+com.aviary.android.feather.widget.wp.WorkspaceIndicator: WorkspaceIndicator(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.HorizontialFixedListView
+com.aviary.android.feather.widget.HorizontialFixedListView: HorizontialFixedListView(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouch
+it.sephiroth.android.library.imagezoom.ImageViewTouch: ImageViewTouch(android.content.Context,android.util.AttributeSet)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase: ImageViewTouchBase(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.ImageButtonRadioButton
+com.aviary.android.feather.widget.ImageButtonRadioButton: ImageButtonRadioButton(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.HorizontialListView
+com.aviary.android.feather.widget.HorizontialListView: HorizontialListView(android.content.Context,android.util.AttributeSet)
+com.aviary.android.feather.widget.wp.Workspace
+com.aviary.android.feather.widget.wp.Workspace: Workspace(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.Wheel
+com.aviary.android.feather.widget.Wheel: Wheel(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.wp.CellLayout
+com.aviary.android.feather.widget.wp.CellLayout: CellLayout(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.Gallery
+com.aviary.android.feather.widget.Gallery: Gallery(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.AbsSpinner: AbsSpinner(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.AdapterView: AdapterView(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.AdjustImageView
+com.aviary.android.feather.widget.AdjustImageView: AdjustImageView(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.WheelRadio
+com.aviary.android.feather.widget.WheelRadio: WheelRadio(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.AdapterView
+com.aviary.android.feather.widget.AdapterView: AdapterView(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.AbsSpinner
+com.aviary.android.feather.widget.AbsSpinner: AbsSpinner(android.content.Context,android.util.AttributeSet,int)
+com.aviary.android.feather.widget.AdapterView: AdapterView(android.content.Context,android.util.AttributeSet,int)
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase$Command: it.sephiroth.android.library.imagezoom.ImageViewTouchBase$Command[] values()
+it.sephiroth.android.library.imagezoom.ImageViewTouchBase$Command: it.sephiroth.android.library.imagezoom.ImageViewTouchBase$Command valueOf(java.lang.String)
+com.aviary.android.feather.library.utils.UserTask$Status: com.aviary.android.feather.library.utils.UserTask$Status[] values()
+com.aviary.android.feather.library.utils.UserTask$Status: com.aviary.android.feather.library.utils.UserTask$Status valueOf(java.lang.String)
+com.aviary.android.feather.widget.ImageViewSpotDraw$TouchMode: com.aviary.android.feather.widget.ImageViewSpotDraw$TouchMode[] values()
+com.aviary.android.feather.widget.ImageViewSpotDraw$TouchMode: com.aviary.android.feather.widget.ImageViewSpotDraw$TouchMode valueOf(java.lang.String)
+com.aviary.android.feather.library.filters.EnhanceFilter$Types: com.aviary.android.feather.library.filters.EnhanceFilter$Types[] values()
+com.aviary.android.feather.library.filters.EnhanceFilter$Types: com.aviary.android.feather.library.filters.EnhanceFilter$Types valueOf(java.lang.String)
+com.aviary.android.feather.library.utils.BitmapUtils$ROTATION: com.aviary.android.feather.library.utils.BitmapUtils$ROTATION[] values()
+com.aviary.android.feather.library.utils.BitmapUtils$ROTATION: com.aviary.android.feather.library.utils.BitmapUtils$ROTATION valueOf(java.lang.String)
+com.aviary.android.feather.effects.StickersPanel$Status: com.aviary.android.feather.effects.StickersPanel$Status[] values()
+com.aviary.android.feather.effects.StickersPanel$Status: com.aviary.android.feather.effects.StickersPanel$Status valueOf(java.lang.String)
+com.aviary.android.feather.widget.ImageViewTouchAndDraw$TouchMode: com.aviary.android.feather.widget.ImageViewTouchAndDraw$TouchMode[] values()
+com.aviary.android.feather.widget.ImageViewTouchAndDraw$TouchMode: com.aviary.android.feather.widget.ImageViewTouchAndDraw$TouchMode valueOf(java.lang.String)
+com.aviary.android.feather.widget.DrawableHighlightView$AlignModeV: com.aviary.android.feather.widget.DrawableHighlightView$AlignModeV[] values()
+com.aviary.android.feather.widget.DrawableHighlightView$AlignModeV: com.aviary.android.feather.widget.DrawableHighlightView$AlignModeV valueOf(java.lang.String)
+com.aviary.android.feather.effects.DrawingPanel$DrawinTool: com.aviary.android.feather.effects.DrawingPanel$DrawinTool[] values()
+com.aviary.android.feather.effects.DrawingPanel$DrawinTool: com.aviary.android.feather.effects.DrawingPanel$DrawinTool valueOf(java.lang.String)
+com.aviary.android.feather.FilterManager$STATE: com.aviary.android.feather.FilterManager$STATE[] values()
+com.aviary.android.feather.FilterManager$STATE: com.aviary.android.feather.FilterManager$STATE valueOf(java.lang.String)
+com.aviary.android.feather.widget.AdjustImageView$ScaleType: com.aviary.android.feather.widget.AdjustImageView$ScaleType[] values()
+com.aviary.android.feather.widget.AdjustImageView$ScaleType: com.aviary.android.feather.widget.AdjustImageView$ScaleType valueOf(java.lang.String)
+com.aviary.android.feather.library.utils.BitmapUtils$FLIP_MODE: com.aviary.android.feather.library.utils.BitmapUtils$FLIP_MODE[] values()
+com.aviary.android.feather.library.utils.BitmapUtils$FLIP_MODE: com.aviary.android.feather.library.utils.BitmapUtils$FLIP_MODE valueOf(java.lang.String)
+com.aviary.android.feather.widget.HighlightView$Mode: com.aviary.android.feather.widget.HighlightView$Mode[] values()
+com.aviary.android.feather.widget.HighlightView$Mode: com.aviary.android.feather.widget.HighlightView$Mode valueOf(java.lang.String)
+com.aviary.android.feather.widget.ToolbarView$STATE: com.aviary.android.feather.widget.ToolbarView$STATE[] values()
+com.aviary.android.feather.widget.ToolbarView$STATE: com.aviary.android.feather.widget.ToolbarView$STATE valueOf(java.lang.String)
+com.aviary.android.feather.widget.AdjustImageView$FlipType: com.aviary.android.feather.widget.AdjustImageView$FlipType[] values()
+com.aviary.android.feather.widget.AdjustImageView$FlipType: com.aviary.android.feather.widget.AdjustImageView$FlipType valueOf(java.lang.String)
+com.aviary.android.feather.library.filters.FilterLoaderFactory$Filters: com.aviary.android.feather.library.filters.FilterLoaderFactory$Filters[] values()
+com.aviary.android.feather.library.filters.FilterLoaderFactory$Filters: com.aviary.android.feather.library.filters.FilterLoaderFactory$Filters valueOf(java.lang.String)
+com.aviary.android.feather.library.log.LoggerFactory$LoggerType: com.aviary.android.feather.library.log.LoggerFactory$LoggerType[] values()
+com.aviary.android.feather.library.log.LoggerFactory$LoggerType: com.aviary.android.feather.library.log.LoggerFactory$LoggerType valueOf(java.lang.String)
+com.aviary.android.feather.widget.DrawableHighlightView$Mode: com.aviary.android.feather.widget.DrawableHighlightView$Mode[] values()
+com.aviary.android.feather.widget.DrawableHighlightView$Mode: com.aviary.android.feather.widget.DrawableHighlightView$Mode valueOf(java.lang.String)
+com.aviary.android.feather.MonitoredActivity
+com.aviary.android.feather.FeatherActivity
+com.aviary.launcher.MainActivity
+com.aviary.android.feather.receivers.FeatherSystemReceiver
+com.aviary.android.feather.library.content.FeatherIntent
+com.aviary.android.feather.widget.wp.Workspace$SavedState
+com.aviary.android.feather.widget.wp.Workspace$SavedState: android.os.Parcelable$Creator CREATOR
+com.aviary.android.feather.widget.AbsSpinner$SavedState
+com.aviary.android.feather.widget.AbsSpinner$SavedState: android.os.Parcelable$Creator CREATOR
