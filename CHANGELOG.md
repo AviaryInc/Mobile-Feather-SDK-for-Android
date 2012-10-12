@@ -2,6 +2,35 @@
 
 Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom) | [Twitter](http://twitter.com/aviarychangelog)
 
+## Version 2.1.91 - October, 2012
+* Fixed stickers pack support for paid encrypted apps
+* Fixed bug in orientation tool when rotating 90 and straightening
+* Smoother animations
+* Fixed a bug which was causing a crash in the stickers tool on small screen devices
+* Added more crop options
+* Fixed sharing from other apps (QuickPic)
+* Fixed and error during drag and drop
+
+## Version 2.1.8 - September, 2012
+* Updated stickers and text zoom/pan behavior. Now while panning and zooming the content will be zoomed and pannel as well.
+* The load of images that are just a bit bigger than the max size is improved.
+* Added support for hi-res stickers.
+* Fixed wrong orientation in some cases.
+* Fixed png image load.
+* Updated Exif library.
+* Updated saturation filter to work like all the others wheel tools.
+* Updated native library for ndk-r8b.
+* Rotation panel: fixed reset animation when leaving the panel.
+* Fixed crop rect sometimes appeared in the wrong place.
+* Fixed a bug when the adding a sticker bigger than the current screen.
+* Added the possibility to use custom fonts for all the ui elements.
+* Fixed crop tool, now handles will stop at edges correctly.
+* Better support for large screens ( tablets ).
+* Updated crop tool, now only tapped side will be moved.
+* vibration toggle now works in every tool.
+* Fixed recycled bitmap crash on drawing tool.
+
+
 ## Version 2.1.5 - July 9, 2012
 * Updated to Android SDK r20 (http://developer.android.com/sdk/index.html)
 * Added the possibility to disable vibration feedback in certain tools (see the README for more info)

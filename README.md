@@ -37,8 +37,8 @@ sample application using the Aviary Android library (codename: Feather).
 
 The Aviary Android SDK supports Android 2.2+ as the 
 [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), 
-but it must be compiled using Android 4.0 (API level 14) as the target sdk. 
-This means that your application must have "Android 4.0" selected 
+but it must be compiled using Android 4.1 (API level 16) as the target sdk. 
+This means that your application must have "Android 4.1" selected 
 in the "Project Build Target" Eclipse panel.
 
 This guide assumes that you already have the Android environment installed 
@@ -111,7 +111,7 @@ here's a step by step guide on how to include it in a new Android application.
 ### 4.1 Create a new Android project
 
 Just create a new Android project as usual from Eclipse and select 
-Android 4.0 in the Build Target Panel.
+Android 4.1 in the Build Target Panel.
 
 ![new eclipse project](http://labs.sephiroth.it/tmp/android/4.png)
 
@@ -193,7 +193,7 @@ If you plan to enable the High Resolution image processing (see [section 10](#hi
             android:authorities="com.aviary.launcher.HiResProvider">
         </provider>
 		
-Note that the `android:authorities` is arbitrary; you can use any string value you prefer.
+Note that the `android:authorities` is arbitrary; you must use your own string value.
 
 <a name="theme"></a>
 ### 4.3 Theme and Styles
@@ -265,6 +265,13 @@ FeatherActivity. Here's an example of how to invoke the new activity:
     // you want to hide the exit alert dialog shown when back is pressed
     // without saving image first
     // newIntent.putExtra( "hide-exit-unsave-confirmation", true );
+    
+	// -- VIBRATION --
+	// Some aviary tools use the device vibration in order to give a better experience
+	// to the final user. But if you want to disable this feature, just pass
+	// any value with the key "tools-vibration-disabled" in the calling intent.
+	// This option has been added to version 2.1.5 of the Aviary SDK
+	newIntent.putExtra( Constants.EXTRA_TOOLS_DISABLE_VIBRATION, true );
     
     // ..and start feather
     startActivityForResult( newIntent, ACTION_REQUEST_FEATHER );
@@ -397,135 +404,14 @@ The sample application includes a couple of demo stickers which will be shown as
 <a name="other-configurations"></a>
 ### 6.2 Other configurations
 
-Inside the AviaryFeather/res/values folder is a `config.xml` file. This file contains some 
-application default values and can be modified before compilation.
-
-Here is the description for tool-specific configuration variables:
-
-#### Orientation Tool
-`feather_adjust_tool_anim_time` Defines the duration of the rotation/flip animation.
-
-`feather_adjust_tool_reset_anim_time` Defines the reset animation duration 
-(i.e., when the user clicks the cancel/back button).
-
-`feather_adjust_tool_enable_3d_flip` If the device is running Android 4.x, 
-you can enable a flip animation in 3D style by setting this param to 1.
-
-`feather_rotate_enable_free_rotate` If set to `1` the adjust panel will enable the free rotation using fingers. Users will be able to rotate the image, other than using the panel's buttons, also using fingers.
-
-`feather_rotate_highlight_stroke_color` (only with free rotate enabled) stroke color or the clipping rectangle 
-
-`feather_rotate_highlight_stroke_width` (only with free rotate enabled) stroke width of the clipping rectangle
-
-`feather_rotate_highlight_outside` (only with free rotate enabled) color of the masked area outside the clipping rectangle
-
-`feather_rotate_highlight_grid_stroke_color` (only with free rotate enabled) color of the internal grid
-
-
-`feather_rotate_highlight_grid_stroke_width` (only with free rotate enabled) stroke width of the internal grid lines
-
-
-
-
-#### Brightness, Contrast, Saturation
-`feather_brightness_live_preview` Enable/Disable the live preview while the wheel component is scrolling. Default is enabled.
-
-#### Text Tool
-`feather_text_minSize` Minimum text size allowed when user is resizing the text rect.
-
-`feather_text_defaultSize` Initial text size when a new text is added to the canvas.
-
-`feather_text_padding` Padding space between the text edges and the move/resize area rectangle.
-
-`feather_text_highlight_stroke_width` Stroke with of the move/resize rect.
-
-`feather_text_highlight_stroke` Stroke color of the move/resize rect.
-
-`feather_text_highlight_stroke_down` Stroke color of the move/resize rect on pressed state.
-
-`feather_text_highlight_ellipse` Move/resize round rectangle ellipse size.
-
-`feather_text_selected_color` Fill color of the move/resize rectangle on pressed state.
-
-`feather_text_fill_colors` An array of all the available colors available for the text tool.
-
-`feather_text_stroke_colors` This array must have the same length of the `feather_text_fill_colors`. 
-For every fill color you can specify a different stroke color.
-
-#### Crop Tool
-`feather_crop_min_size` Minimum area size while resizing the crop area.
-
-`feather_crop_allow_inverse` If value is 1, allow user to invert the current crop 
-area with a simple click on the crop rect itself.
-
-`feather_crop_highlight` Stroke color of the crop area.
-
-`feather_crop_highlight_down` Stroke color of the crop area when pressed.
-
-`feather_crop_highlight_outside` Fill color of the inactive area. The one outside the crop rect.
-
-`feather_crop_highlight_outside_down` Inactive area color when crop rect is pressed.
-
-`feather_crop_highlight_stroke_width` Stroke size of the crop area.
-
-`feather_crop_highlight_internal` Internal crop lines color.
-
-`feather_crop_highlight_internal_down` Internal crop lines when crop rect is pressed.
-
-Feather by default comes with a predefined number of crop ratios available
-to the user (original, custom, square, 4:3, etc). If you want to change them, 
-read this carefully. There are 2 xml entries responsible for this: `feather_crop_names` 
-and `feather_crop_values`.
-
-`feather_crop_values` Defines the crop predefined ratio for each button.
-
-`feather_crop_names` Defines the labels for each button.
-
-Every item in the `feather_crop_values` defines how the crop rect will be presented. For instance, the following item:
-    
-	<item>3:2</item>
-	
-will create a crop area restricted in its proportions to 3 by 2. Or the following one:
-
-    <item>-1:-1</item>
-	
-will create a crop area restricted to the original image width and height.
-
-All the previous examples will create a crop area with restricted proportions. 
-If you want to allow the user to have a crop rect without limitations, just use an item like this:
-
-    <item>0:0</item>
-	
-#### Red Eye, Whiten, Blemish and Draw Tool
-`feather_brush_sizes` An array containing all the brush sizes available for the user.
-
-#### Draw Panel
-`feather_brush_softValue` Defines the softness value for the brush pen.
-
-`feather_default_colors` defines the available brush colors.
-
-#### Stickers
-`feather_sticker_highlight_minsize` Minimum size of stickers while resizing.
-
-`feather_sticker_highlight_padding` Padding of the highlight area from the sticker edges.
-
-`feather_sticker_highlight_stroke_width` Stroke size of the highlight area.
-
-`feather_sticker_highlight_ellipse` Ellipse size of the highlight area borders.
-
-`feather_sticker_highlight_stroke` Highlight stroke color.
-
-`feather_sticker_highlight_stroke_down` Highlight stroke color when pressed.
-
-`feather_sticker_highlight_outline` Highlight fill color.
-
-`feather_sticker_highlight_outline_down` Highlight fill color when pressed.
+Most of the tools functionalities can be customized ( like the list of colors of the drawing panel, the default selected color, the aspect ratios of the crop panel, and many others ). 
+All the items are placed inside the `config.xml` file inside the res folder.
 
 <a name="customization"></a>
 ### 6.3 UI Customization
 
-You can customize almost every aspect of the application by editing the `styles.xml` 
-file included in the res folder.
+There are a lot of possible customizations available for the Aviary SDK. All the layout elements can be customized by changing values in the `styles.xml`/`colors.xml`/`dimen.xml` files.
+
 
 <a name="localization"></a>
 7 Localization
