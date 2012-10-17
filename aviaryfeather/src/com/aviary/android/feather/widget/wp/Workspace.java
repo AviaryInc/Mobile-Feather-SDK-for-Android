@@ -22,6 +22,8 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
@@ -33,6 +35,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Adapter;
 import android.widget.LinearLayout;
@@ -50,13 +53,13 @@ public class Workspace extends ViewGroup {
 
 	/** The Constant INVALID_SCREEN. */
 	private static final int INVALID_SCREEN = -1;
-	
+
 	/** The Constant OVER_SCROLL_NEVER. */
 	public static final int OVER_SCROLL_NEVER = 0;
-	
+
 	/** The Constant OVER_SCROLL_ALWAYS. */
 	public static final int OVER_SCROLL_ALWAYS = 1;
-	
+
 	/** The Constant OVER_SCROLL_IF_CONTENT_SCROLLS. */
 	public static final int OVER_SCROLL_IF_CONTENT_SCROLLS = 2;
 
@@ -65,40 +68,40 @@ public class Workspace extends ViewGroup {
 
 	/** The m default screen. */
 	private int mDefaultScreen;
-	
+
 	/** The m padding bottom. */
 	private int mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom;
-	
+
 	/** The m first layout. */
 	private boolean mFirstLayout = true;
 
 	/** The m current screen. */
 	private int mCurrentScreen;
-	
+
 	/** The m next screen. */
 	private int mNextScreen = INVALID_SCREEN;
-	
+
 	/** The m old selected position. */
 	private int mOldSelectedPosition = INVALID_SCREEN;
 
 	/** The m scroller. */
 	private Scroller mScroller;
-	
+
 	/** The m velocity tracker. */
 	private VelocityTracker mVelocityTracker;
 
 	/** The m last motion x. */
 	private float mLastMotionX;
-	
+
 	/** The m last motion x2. */
 	private float mLastMotionX2;
-	
+
 	/** The m last motion y. */
 	private float mLastMotionY;
 
 	/** The Constant TOUCH_STATE_REST. */
 	private final static int TOUCH_STATE_REST = 0;
-	
+
 	/** The Constant TOUCH_STATE_SCROLLING. */
 	private final static int TOUCH_STATE_SCROLLING = 1;
 
@@ -110,7 +113,7 @@ public class Workspace extends ViewGroup {
 
 	/** The m touch slop. */
 	private int mTouchSlop;
-	
+
 	/** The m maximum velocity. */
 	private int mMaximumVelocity;
 
@@ -125,89 +128,88 @@ public class Workspace extends ViewGroup {
 
 	/** The Constant NANOTIME_DIV. */
 	private static final float NANOTIME_DIV = 1000000000.0f;
-	
+
 	/** The Constant SMOOTHING_SPEED. */
 	private static final float SMOOTHING_SPEED = 0.75f;
-	
+
 	/** The Constant SMOOTHING_CONSTANT. */
 	private static final float SMOOTHING_CONSTANT = (float) ( 0.016 / Math.log( SMOOTHING_SPEED ) );
-	
-	/** The Constant BASELINE_FLING_VELOCITY. */
-	private static final float BASELINE_FLING_VELOCITY = 1500.f;
-	
-	/** The Constant FLING_VELOCITY_INFLUENCE. */
-	private static final float FLING_VELOCITY_INFLUENCE = .1f;
 
+	/** The Constant BASELINE_FLING_VELOCITY. */
+	private static final float BASELINE_FLING_VELOCITY = 2500.f;
+
+	/** The Constant FLING_VELOCITY_INFLUENCE. */
+	private static final float FLING_VELOCITY_INFLUENCE = 0.4f;
+	
 	/** The m smoothing time. */
 	private float mSmoothingTime;
-	
+
 	/** The m touch x. */
 	private float mTouchX;
 
 	/** The m scroll interpolator. */
-	private WorkspaceOvershootInterpolator mScrollInterpolator;
+	private Interpolator mScrollInterpolator;
 
 	/** The m adapter. */
 	protected Adapter mAdapter;
-	
+
 	/** The m observer. */
 	protected DataSetObserver mObserver;
-	
+
 	/** The m data changed. */
 	protected boolean mDataChanged;
-	
+
 	/** The m first position. */
 	protected int mFirstPosition;
-	
+
 	/** The m item count. */
 	protected int mItemCount = 0;
-	
+
 	/** The m item type count. */
 	protected int mItemTypeCount = 1;
-	
+
 	/** The m recycler. */
 	protected RecycleBin mRecycler;
-	
+
 	/** The m height measure spec. */
 	private int mHeightMeasureSpec;
-	
+
 	/** The m width measure spec. */
 	private int mWidthMeasureSpec;
-	
+
 	/** The m edge glow left. */
 	private EdgeGlow mEdgeGlowLeft;
-	
+
 	/** The m edge glow right. */
 	private EdgeGlow mEdgeGlowRight;
-	
+
 	/** The m over scroll mode. */
 	private int mOverScrollMode;
-	
+
 	/** The m allow child selection. */
 	private boolean mAllowChildSelection = true;
-	
+
 	private boolean mCacheEnabled = false;
 
 	/** The logger. */
 	private Logger logger;
 
 	/**
-	 * The listener interface for receiving onPageChange events.
-	 * The class that is interested in processing a onPageChange
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnPageChangeListener<code> method. When
+	 * The listener interface for receiving onPageChange events. The class that is interested in processing a onPageChange event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnPageChangeListener<code> method. When
 	 * the onPageChange event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnPageChangeEvent
 	 */
 	public interface OnPageChangeListener {
 
 		/**
 		 * On page changed.
-		 *
-		 * @param which the which
+		 * 
+		 * @param which
+		 *           the which
 		 */
 		void onPageChanged( int which, int old );
 	}
@@ -217,8 +219,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the on page change listener.
-	 *
-	 * @param listener the new on page change listener
+	 * 
+	 * @param listener
+	 *           the new on page change listener
 	 */
 	public void setOnPageChangeListener( OnPageChangeListener listener ) {
 		mOnPageChangeListener = listener;
@@ -230,8 +233,8 @@ public class Workspace extends ViewGroup {
 	private static class WorkspaceOvershootInterpolator implements Interpolator {
 
 		/** The Constant DEFAULT_TENSION. */
-		private static final float DEFAULT_TENSION = 1.3f;
-		
+		private static final float DEFAULT_TENSION = 1.0f;
+
 		/** The m tension. */
 		private float mTension;
 
@@ -244,8 +247,9 @@ public class Workspace extends ViewGroup {
 
 		/**
 		 * Sets the distance.
-		 *
-		 * @param distance the new distance
+		 * 
+		 * @param distance
+		 *           the new distance
 		 */
 		public void setDistance( int distance ) {
 			mTension = distance > 0 ? DEFAULT_TENSION / distance : DEFAULT_TENSION;
@@ -258,7 +262,9 @@ public class Workspace extends ViewGroup {
 			mTension = 0.f;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.animation.TimeInterpolator#getInterpolation(float)
 		 */
 		@Override
@@ -270,9 +276,11 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Instantiates a new workspace.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public Workspace( Context context, AttributeSet attrs ) {
 		this( context, attrs, 0 );
@@ -281,10 +289,13 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Instantiates a new workspace.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
-	 * @param defStyle the def style
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
+	 * @param defStyle
+	 *           the def style
 	 */
 	public Workspace( Context context, AttributeSet attrs, int defStyle ) {
 		super( context, attrs, defStyle );
@@ -293,10 +304,13 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Inits the workspace.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
-	 * @param defStyle the def style
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
+	 * @param defStyle
+	 *           the def style
 	 */
 	private void initWorkspace( Context context, AttributeSet attrs, int defStyle ) {
 		TypedArray a = context.obtainStyledAttributes( attrs, R.styleable.Workspace, defStyle, 0 );
@@ -306,7 +320,7 @@ public class Workspace extends ViewGroup {
 		logger = LoggerFactory.getLogger( "Workspace", LoggerType.ConsoleLoggerType );
 		setHapticFeedbackEnabled( false );
 
-		mScrollInterpolator = new WorkspaceOvershootInterpolator();
+		mScrollInterpolator = new DecelerateInterpolator( 1.0f );
 		mScroller = new Scroller( context, mScrollInterpolator );
 		mCurrentScreen = mDefaultScreen;
 
@@ -325,17 +339,19 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the over scroll.
-	 *
-	 * @param mode the new over scroll
+	 * 
+	 * @param mode
+	 *           the new over scroll
 	 */
 	public void setOverScroll( int mode ) {
 		if ( mode != OVER_SCROLL_NEVER ) {
 			if ( mEdgeGlowLeft == null ) {
 				final Resources res = getContext().getResources();
-				// final Drawable edge = res.getDrawable( R.drawable.overscroll_edge );
+				final Drawable edge = res.getDrawable( R.drawable.feather_overscroll_edge );
 				final Drawable glow = res.getDrawable( R.drawable.feather_overscroll_glow );
-				mEdgeGlowLeft = new EdgeGlow( null, glow );
-				mEdgeGlowRight = new EdgeGlow( null, glow );
+				mEdgeGlowLeft = new EdgeGlow( edge, glow );
+				mEdgeGlowRight = new EdgeGlow( edge, glow );
+				mEdgeGlowLeft.setColorFilter( 0xFF454545, Mode.MULTIPLY );
 			}
 		} else {
 			mEdgeGlowLeft = null;
@@ -346,7 +362,7 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the over scroll.
-	 *
+	 * 
 	 * @return the over scroll
 	 */
 	public int getOverScroll() {
@@ -355,8 +371,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the allow child selection.
-	 *
-	 * @param value the new allow child selection
+	 * 
+	 * @param value
+	 *           the new allow child selection
 	 */
 	public void setAllowChildSelection( boolean value ) {
 		mAllowChildSelection = value;
@@ -364,7 +381,7 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the adapter.
-	 *
+	 * 
 	 * @return the adapter
 	 */
 	public Adapter getAdapter() {
@@ -373,8 +390,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the adapter.
-	 *
-	 * @param adapter the new adapter
+	 * 
+	 * @param adapter
+	 *           the new adapter
 	 */
 	public void setAdapter( Adapter adapter ) {
 
@@ -400,7 +418,9 @@ public class Workspace extends ViewGroup {
 		requestLayout();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#addView(android.view.View, int, android.view.ViewGroup.LayoutParams)
 	 */
 	@Override
@@ -411,7 +431,9 @@ public class Workspace extends ViewGroup {
 		super.addView( child, index, params );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#addView(android.view.View)
 	 */
 	@Override
@@ -422,7 +444,9 @@ public class Workspace extends ViewGroup {
 		super.addView( child );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#addView(android.view.View, int)
 	 */
 	@Override
@@ -433,7 +457,9 @@ public class Workspace extends ViewGroup {
 		super.addView( child, index );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#addView(android.view.View, int, int)
 	 */
 	@Override
@@ -444,7 +470,9 @@ public class Workspace extends ViewGroup {
 		super.addView( child, width, height );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#addView(android.view.View, android.view.ViewGroup.LayoutParams)
 	 */
 	@Override
@@ -457,7 +485,7 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Checks if is default screen showing.
-	 *
+	 * 
 	 * @return true, if is default screen showing
 	 */
 	boolean isDefaultScreenShowing() {
@@ -475,7 +503,7 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the total pages.
-	 *
+	 * 
 	 * @return the total pages
 	 */
 	public int getTotalPages() {
@@ -484,8 +512,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the current screen.
-	 *
-	 * @param currentScreen the new current screen
+	 * 
+	 * @param currentScreen
+	 *           the new current screen
 	 */
 	void setCurrentScreen( int currentScreen ) {
 		if ( !mScroller.isFinished() ) mScroller.abortAnimation();
@@ -495,7 +524,9 @@ public class Workspace extends ViewGroup {
 		invalidate();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#scrollTo(int, int)
 	 */
 	@Override
@@ -505,7 +536,9 @@ public class Workspace extends ViewGroup {
 		mSmoothingTime = System.nanoTime() / NANOTIME_DIV;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#computeScroll()
 	 */
 	@Override
@@ -541,11 +574,14 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * On finished animation.
-	 *
-	 * @param newScreen the new screen
+	 * 
+	 * @param newScreen
+	 *           the new screen
 	 */
 	private void onFinishedAnimation( int newScreen ) {
-		
+
+		logger.log( "onFinishedAnimation: " + newScreen );
+
 		final int previousScreen = mCurrentScreen;
 
 		final boolean toLeft = newScreen > mCurrentScreen;
@@ -568,7 +604,7 @@ public class Workspace extends ViewGroup {
 		if ( changed || mItemCount == 1 || true ) {
 
 			View child = getChildAt( mCurrentScreen - mFirstPosition );
-			
+
 			if ( null != child ) {
 				if ( mAllowChildSelection ) {
 
@@ -580,7 +616,7 @@ public class Workspace extends ViewGroup {
 					child.setSelected( true );
 					mOldSelectedChild = child;
 				}
-				//int index = indexOfChild( child ) + mFirstPosition;
+				// int index = indexOfChild( child ) + mFirstPosition;
 				child.requestFocus();
 			}
 		}
@@ -596,12 +632,15 @@ public class Workspace extends ViewGroup {
 				}
 			} );
 		}
+
+		postUpdateIndicator( mCurrentScreen, mItemCount );
 	}
 
 	/**
 	 * Detach off screen children.
-	 *
-	 * @param toLeft the to left
+	 * 
+	 * @param toLeft
+	 *           the to left
 	 */
 	private void detachOffScreenChildren( boolean toLeft ) {
 		int numChildren = getChildCount();
@@ -640,10 +679,13 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
+	private Matrix mEdgeMatrix = new Matrix();
+
 	/**
 	 * Draw edges.
-	 *
-	 * @param canvas the canvas
+	 * 
+	 * @param canvas
+	 *           the canvas
 	 */
 	private void drawEdges( Canvas canvas ) {
 
@@ -652,23 +694,31 @@ public class Workspace extends ViewGroup {
 				final int restoreCount = canvas.save();
 				final int height = getHeight();
 
-				canvas.rotate( -90 );
-				canvas.translate( -height / 1.5f, 0 );
-				mEdgeGlowLeft.setSize( (int) ( height / 2.5f ), height / 5 );
+				mEdgeMatrix.reset();
+				mEdgeMatrix.postRotate( -90 );
+				mEdgeMatrix.postTranslate( 0, height );
+				canvas.concat( mEdgeMatrix );
+
+				mEdgeGlowLeft.setSize( height, height / 5 );
 
 				if ( mEdgeGlowLeft.draw( canvas ) ) {
 					invalidate();
 				}
 				canvas.restoreToCount( restoreCount );
 			}
+
 			if ( !mEdgeGlowRight.isFinished() ) {
 				final int restoreCount = canvas.save();
 				final int width = getWidth();
 				final int height = getHeight();
 
-				canvas.translate( getScrollX() + width, height / 3f );
-				canvas.rotate( 90 );
-				mEdgeGlowRight.setSize( (int) ( height / 2.5f ), height / 5 );
+				mEdgeMatrix.reset();
+				mEdgeMatrix.postRotate( 90 );
+				mEdgeMatrix.postTranslate( getScrollX() + width, 0 );
+				canvas.concat( mEdgeMatrix );
+
+				mEdgeGlowRight.setSize( height, height / 5 );
+
 				if ( mEdgeGlowRight.draw( canvas ) ) {
 					invalidate();
 				}
@@ -677,7 +727,9 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#dispatchDraw(android.graphics.Canvas)
 	 */
 	@Override
@@ -693,7 +745,7 @@ public class Workspace extends ViewGroup {
 		if ( fastDraw ) {
 			try {
 				drawChild( canvas, getChildAt( mCurrentScreen - mFirstPosition ), getDrawingTime() );
-			} catch( RuntimeException e ){
+			} catch ( RuntimeException e ) {
 				logger.error( e.getMessage() );
 			}
 		} else {
@@ -704,14 +756,14 @@ public class Workspace extends ViewGroup {
 			if ( leftScreen >= 0 ) {
 				try {
 					drawChild( canvas, getChildAt( leftScreen - mFirstPosition ), drawingTime );
-				} catch( RuntimeException e ){
+				} catch ( RuntimeException e ) {
 					logger.error( e.getMessage() );
 				}
 			}
 			if ( scrollPos != leftScreen && rightScreen < mItemCount ) {
 				try {
 					drawChild( canvas, getChildAt( rightScreen - mFirstPosition ), drawingTime );
-				} catch( RuntimeException e ){
+				} catch ( RuntimeException e ) {
 					logger.error( e.getMessage() );
 				}
 			}
@@ -727,7 +779,9 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onAttachedToWindow()
 	 */
 	@Override
@@ -736,7 +790,9 @@ public class Workspace extends ViewGroup {
 		computeScroll();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onMeasure(int, int)
 	 */
 	@Override
@@ -759,7 +815,7 @@ public class Workspace extends ViewGroup {
 		}
 
 		final int width = MeasureSpec.getSize( widthMeasureSpec );
-		//final int height = MeasureSpec.getSize( heightMeasureSpec );
+		// final int height = MeasureSpec.getSize( heightMeasureSpec );
 		final int widthMode = MeasureSpec.getMode( widthMeasureSpec );
 
 		if ( widthMode != MeasureSpec.EXACTLY ) {
@@ -810,7 +866,9 @@ public class Workspace extends ViewGroup {
 			setNextSelectedPositionInt( -1 );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#onLayout(boolean, int, int, int, int)
 	 */
 	@Override
@@ -827,9 +885,11 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Layout.
-	 *
-	 * @param delta the delta
-	 * @param animate the animate
+	 * 
+	 * @param delta
+	 *           the delta
+	 * @param animate
+	 *           the animate
 	 */
 	void layout( int delta, boolean animate ) {
 
@@ -870,11 +930,15 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Make and add view.
-	 *
-	 * @param position the position
-	 * @param offset the offset
-	 * @param x the x
-	 * @param fromLeft the from left
+	 * 
+	 * @param position
+	 *           the position
+	 * @param offset
+	 *           the offset
+	 * @param x
+	 *           the x
+	 * @param fromLeft
+	 *           the from left
 	 * @return the view
 	 */
 	private View makeAndAddView( int position, int offset, int x, boolean fromLeft ) {
@@ -895,16 +959,21 @@ public class Workspace extends ViewGroup {
 
 		// Position the view
 		setUpChild( child, offset, x, fromLeft );
+		logger.info( "adding view: " + child );
 		return child;
 	}
 
 	/**
 	 * Sets the up child.
-	 *
-	 * @param child the child
-	 * @param offset the offset
-	 * @param x the x
-	 * @param fromLeft the from left
+	 * 
+	 * @param child
+	 *           the child
+	 * @param offset
+	 *           the offset
+	 * @param x
+	 *           the x
+	 * @param fromLeft
+	 *           the from left
 	 */
 	private void setUpChild( View child, int offset, int x, boolean fromLeft ) {
 
@@ -953,9 +1022,11 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Calculate top.
-	 *
-	 * @param child the child
-	 * @param duringLayout the during layout
+	 * 
+	 * @param child
+	 *           the child
+	 * @param duringLayout
+	 *           the during layout
 	 * @return the int
 	 */
 	private int calculateTop( View child, boolean duringLayout ) {
@@ -964,7 +1035,7 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the total width.
-	 *
+	 * 
 	 * @return the total width
 	 */
 	private int getTotalWidth() {
@@ -973,8 +1044,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the screen scroll position x.
-	 *
-	 * @param screen the screen
+	 * 
+	 * @param screen
+	 *           the screen
 	 * @return the screen scroll position x
 	 */
 	private int getScreenScrollPositionX( int screen ) {
@@ -1045,7 +1117,9 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#generateDefaultLayoutParams()
 	 */
 	@Override
@@ -1072,14 +1146,14 @@ public class Workspace extends ViewGroup {
 	void resetList() {
 
 		recycleAllViews();
-		
-		while( getChildCount() > 0 ){
+
+		while ( getChildCount() > 0 ) {
 			View view = getChildAt( 0 );
 			detachViewFromParent( view );
 			removeDetachedView( view, false );
 		}
-		
-		//detachAllViewsFromParent();
+
+		// detachAllViewsFromParent();
 
 		if ( mRecycler != null ) mRecycler.clear();
 
@@ -1091,8 +1165,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the next selected position int.
-	 *
-	 * @param screen the new next selected position int
+	 * 
+	 * @param screen
+	 *           the new next selected position int
 	 */
 	private void setNextSelectedPositionInt( int screen ) {
 		mNextScreen = screen;
@@ -1100,20 +1175,23 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the selected position int.
-	 *
-	 * @param screen the new selected position int
+	 * 
+	 * @param screen
+	 *           the new selected position int
 	 */
 	private void setSelectedPositionInt( int screen ) {
 		mCurrentScreen = screen;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#requestChildRectangleOnScreen(android.view.View, android.graphics.Rect, boolean)
 	 */
 	@Override
 	public boolean requestChildRectangleOnScreen( View child, Rect rectangle, boolean immediate ) {
 		int screen = indexOfChild( child ) + mFirstPosition;
-		
+
 		if ( screen != mCurrentScreen || !mScroller.isFinished() ) {
 			snapToScreen( screen );
 			return true;
@@ -1121,7 +1199,9 @@ public class Workspace extends ViewGroup {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#onRequestFocusInDescendants(int, android.graphics.Rect)
 	 */
 	@Override
@@ -1145,7 +1225,9 @@ public class Workspace extends ViewGroup {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#dispatchUnhandledMove(android.view.View, int)
 	 */
 	@Override
@@ -1165,7 +1247,9 @@ public class Workspace extends ViewGroup {
 		return super.dispatchUnhandledMove( focused, direction );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#setEnabled(boolean)
 	 */
 	@Override
@@ -1178,7 +1262,9 @@ public class Workspace extends ViewGroup {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#addFocusables(java.util.ArrayList, int, int)
 	 */
 	@Override
@@ -1208,7 +1294,9 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#onInterceptTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -1301,8 +1389,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * On secondary pointer up.
-	 *
-	 * @param ev the ev
+	 * 
+	 * @param ev
+	 *           the ev
 	 */
 	private void onSecondaryPointerUp( MotionEvent ev ) {
 		final int pointerIndex = ( ev.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK ) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
@@ -1326,8 +1415,9 @@ public class Workspace extends ViewGroup {
 	 * If one of our descendant views decides that it could be focused now, only pass that along if it's on the current screen.
 	 * 
 	 * This happens when live folders requery, and if they're off screen, they end up calling requestFocus, which pulls it on screen.
-	 *
-	 * @param focused the focused
+	 * 
+	 * @param focused
+	 *           the focused
 	 */
 	@Override
 	public void focusableViewAvailable( View focused ) {
@@ -1352,14 +1442,16 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Enable children cache.
-	 *
-	 * @param fromScreen the from screen
-	 * @param toScreen the to screen
+	 * 
+	 * @param fromScreen
+	 *           the from screen
+	 * @param toScreen
+	 *           the to screen
 	 */
-	void enableChildrenCache( int fromScreen, int toScreen ) {
-		
-		if( !mCacheEnabled ) return;
-		
+	public void enableChildrenCache( int fromScreen, int toScreen ) {
+
+		if ( !mCacheEnabled ) return;
+
 		if ( fromScreen > toScreen ) {
 			final int temp = fromScreen;
 			fromScreen = toScreen;
@@ -1381,10 +1473,10 @@ public class Workspace extends ViewGroup {
 	/**
 	 * Clear children cache.
 	 */
-	void clearChildrenCache() {
-		
-		if( !mCacheEnabled ) return;
-		
+	public void clearChildrenCache() {
+
+		if ( !mCacheEnabled ) return;
+
 		final int count = getChildCount();
 		for ( int i = 0; i < count; i++ ) {
 			final CellLayout layout = (CellLayout) getChildAt( i );
@@ -1393,7 +1485,13 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
-	/* (non-Javadoc)
+	public void setCacheEnabled( boolean value ) {
+		mCacheEnabled = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -1440,7 +1538,7 @@ public class Workspace extends ViewGroup {
 
 					mLastMotionX = x;
 
-					//Log.d( "hv", "delta: " + deltaX );
+					// Log.d( "hv", "delta: " + deltaX );
 
 					if ( deltaX < 0 ) {
 						mTouchX += deltaX;
@@ -1546,8 +1644,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Acquire velocity tracker and add movement.
-	 *
-	 * @param ev the ev
+	 * 
+	 * @param ev
+	 *           the ev
 	 */
 	private void acquireVelocityTrackerAndAddMovement( MotionEvent ev ) {
 		if ( mVelocityTracker == null ) {
@@ -1568,8 +1667,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Snap to screen.
-	 *
-	 * @param whichScreen the which screen
+	 * 
+	 * @param whichScreen
+	 *           the which screen
 	 */
 	void snapToScreen( int whichScreen ) {
 		snapToScreen( whichScreen, 0, false );
@@ -1577,21 +1677,21 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Snap to screen.
-	 *
-	 * @param whichScreen the which screen
-	 * @param velocity the velocity
-	 * @param settle the settle
+	 * 
+	 * @param whichScreen
+	 *           the which screen
+	 * @param velocity
+	 *           the velocity
+	 * @param settle
+	 *           the settle
 	 */
 	private void snapToScreen( int whichScreen, int velocity, boolean settle ) {
-		// if (!mScroller.isFinished()) return;
 
 		whichScreen = Math.max( 0, Math.min( whichScreen, mItemCount - 1 ) );
 
 		enableChildrenCache( mCurrentScreen, whichScreen );
 
 		mNextScreen = whichScreen;
-
-		if ( mIndicator != null ) mIndicator.setLevel( mNextScreen, mItemCount );
 
 		View focusedChild = getFocusedChild();
 		if ( focusedChild != null && whichScreen != mCurrentScreen && focusedChild == getChildAt( mCurrentScreen ) ) {
@@ -1607,20 +1707,23 @@ public class Workspace extends ViewGroup {
 			mScroller.abortAnimation();
 		}
 
-		if ( settle ) {
-			mScrollInterpolator.setDistance( screenDelta );
-		} else {
-			mScrollInterpolator.disableSettle();
+		/*
+		if ( mScrollInterpolator instanceof WorkspaceOvershootInterpolator ) {
+			if ( settle ) {
+				( (WorkspaceOvershootInterpolator) mScrollInterpolator ).setDistance( screenDelta );
+			} else {
+				( (WorkspaceOvershootInterpolator) mScrollInterpolator ).disableSettle();
+			}
 		}
+		*/
 
 		velocity = Math.abs( velocity );
 		if ( velocity > 0 ) {
-			duration += ( duration / ( velocity / BASELINE_FLING_VELOCITY ) ) * FLING_VELOCITY_INFLUENCE;
+			duration += (duration / (velocity / BASELINE_FLING_VELOCITY)) * FLING_VELOCITY_INFLUENCE;
 		} else {
 			duration += 100;
 		}
 
-		awakenScrollBars( duration );
 		mScroller.startScroll( getScrollX(), 0, delta, 0, duration );
 
 		int mode = getOverScroll();
@@ -1629,15 +1732,29 @@ public class Workspace extends ViewGroup {
 			edgeReached( whichScreen, delta, velocity );
 		}
 
+		// postUpdateIndicator( mNextScreen, mItemCount );
 		invalidate();
+	}
+
+	private void postUpdateIndicator( final int screen, final int count ) {
+		getHandler().post( new Runnable() {
+
+			@Override
+			public void run() {
+				if ( mIndicator != null ) mIndicator.setLevel( screen, count );
+			}
+		} );
 	}
 
 	/**
 	 * Edge reached.
-	 *
-	 * @param whichscreen the whichscreen
-	 * @param delta the delta
-	 * @param vel the vel
+	 * 
+	 * @param whichscreen
+	 *           the whichscreen
+	 * @param delta
+	 *           the delta
+	 * @param vel
+	 *           the vel
 	 */
 	void edgeReached( int whichscreen, int delta, int vel ) {
 
@@ -1650,7 +1767,9 @@ public class Workspace extends ViewGroup {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onSaveInstanceState()
 	 */
 	@Override
@@ -1660,7 +1779,9 @@ public class Workspace extends ViewGroup {
 		return state;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onRestoreInstanceState(android.os.Parcelable)
 	 */
 	@Override
@@ -1696,8 +1817,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the screen for view.
-	 *
-	 * @param v the v
+	 * 
+	 * @param v
+	 *           the v
 	 * @return the screen for view
 	 */
 	public int getScreenForView( View v ) {
@@ -1716,8 +1838,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the view for tag.
-	 *
-	 * @param tag the tag
+	 * 
+	 * @param tag
+	 *           the tag
 	 * @return the view for tag
 	 */
 	public View getViewForTag( Object tag ) {
@@ -1737,7 +1860,7 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Allow long press.
-	 *
+	 * 
 	 * @return True is long presses are still allowed for the current touch
 	 */
 	public boolean allowLongPress() {
@@ -1747,8 +1870,9 @@ public class Workspace extends ViewGroup {
 	/**
 	 * Set true to allow long-press events to be triggered, usually checked by {@link Launcher} to accept or block dpad-initiated
 	 * long-presses.
-	 *
-	 * @param allowLongPress the new allow long press
+	 * 
+	 * @param allowLongPress
+	 *           the new allow long press
 	 */
 	public void setAllowLongPress( boolean allowLongPress ) {
 		mAllowLongPress = allowLongPress;
@@ -1756,8 +1880,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Move to default screen.
-	 *
-	 * @param animate the animate
+	 * 
+	 * @param animate
+	 *           the animate
 	 */
 	void moveToDefaultScreen( boolean animate ) {
 		if ( animate ) {
@@ -1770,8 +1895,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Sets the indicator.
-	 *
-	 * @param indicator the new indicator
+	 * 
+	 * @param indicator
+	 *           the new indicator
 	 */
 	public void setIndicator( WorkspaceIndicator indicator ) {
 		mIndicator = indicator;
@@ -1788,8 +1914,9 @@ public class Workspace extends ViewGroup {
 
 		/**
 		 * Instantiates a new saved state.
-		 *
-		 * @param superState the super state
+		 * 
+		 * @param superState
+		 *           the super state
 		 */
 		SavedState( Parcelable superState ) {
 			super( superState );
@@ -1797,15 +1924,18 @@ public class Workspace extends ViewGroup {
 
 		/**
 		 * Instantiates a new saved state.
-		 *
-		 * @param in the in
+		 * 
+		 * @param in
+		 *           the in
 		 */
 		private SavedState( Parcel in ) {
 			super( in );
 			currentScreen = in.readInt();
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.view.AbsSavedState#writeToParcel(android.os.Parcel, int)
 		 */
 		@Override
@@ -1830,12 +1960,14 @@ public class Workspace extends ViewGroup {
 	}
 
 	/**
-	 * An asynchronous update interface for receiving notifications
-	 * about WorkspaceDataSet information as the WorkspaceDataSet is constructed.
+	 * An asynchronous update interface for receiving notifications about WorkspaceDataSet information as the WorkspaceDataSet is
+	 * constructed.
 	 */
 	class WorkspaceDataSetObserver extends DataSetObserver {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.database.DataSetObserver#onChanged()
 		 */
 		@Override
@@ -1843,7 +1975,9 @@ public class Workspace extends ViewGroup {
 			super.onChanged();
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.database.DataSetObserver#onInvalidated()
 		 */
 		@Override
@@ -1859,24 +1993,26 @@ public class Workspace extends ViewGroup {
 
 		/** The array. */
 		protected View[][] array;
-		
+
 		/** The start. */
 		protected int start[];
-		
+
 		/** The end. */
 		protected int end[];
-		
+
 		/** The max size. */
 		protected int maxSize;
-		
+
 		/** The full. */
 		protected boolean full[];
 
 		/**
 		 * Instantiates a new recycle bin.
-		 *
-		 * @param typeCount the type count
-		 * @param size the size
+		 * 
+		 * @param typeCount
+		 *           the type count
+		 * @param size
+		 *           the size
 		 */
 		public RecycleBin( int typeCount, int size ) {
 			maxSize = size;
@@ -1888,8 +2024,9 @@ public class Workspace extends ViewGroup {
 
 		/**
 		 * Checks if is empty.
-		 *
-		 * @param type the type
+		 * 
+		 * @param type
+		 *           the type
 		 * @return true, if is empty
 		 */
 		public boolean isEmpty( int type ) {
@@ -1898,9 +2035,11 @@ public class Workspace extends ViewGroup {
 
 		/**
 		 * Adds the.
-		 *
-		 * @param type the type
-		 * @param o the o
+		 * 
+		 * @param type
+		 *           the type
+		 * @param o
+		 *           the o
 		 */
 		public void add( int type, View o ) {
 			if ( !full[type] ) array[type][start[type] = ( ++start[type] % array[type].length )] = o;
@@ -1909,8 +2048,9 @@ public class Workspace extends ViewGroup {
 
 		/**
 		 * Removes the.
-		 *
-		 * @param type the type
+		 * 
+		 * @param type
+		 *           the type
 		 * @return the view
 		 */
 		public View remove( int type ) {
@@ -1944,8 +2084,9 @@ public class Workspace extends ViewGroup {
 
 	/**
 	 * Gets the screen at.
-	 *
-	 * @param screen the screen
+	 * 
+	 * @param screen
+	 *           the screen
 	 * @return the screen at
 	 */
 	public View getScreenAt( int screen ) {

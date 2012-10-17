@@ -13,7 +13,7 @@ import android.graphics.drawable.GradientDrawable.Orientation;
 
 /**
  * Draw a linear gradient.
- *
+ * 
  * @author alessandro
  */
 public class LinearGradientDrawable extends Drawable {
@@ -31,10 +31,13 @@ public class LinearGradientDrawable extends Drawable {
 
 	/**
 	 * Instantiates a new linear gradient drawable.
-	 *
-	 * @param orientation the orientation
-	 * @param colors the colors
-	 * @param positions the positions
+	 * 
+	 * @param orientation
+	 *           the orientation
+	 * @param colors
+	 *           the colors
+	 * @param positions
+	 *           the positions
 	 */
 	public LinearGradientDrawable( Orientation orientation, int[] colors, float[] positions ) {
 		mOrientation = orientation;
@@ -42,12 +45,14 @@ public class LinearGradientDrawable extends Drawable {
 		mPositions = positions;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#draw(android.graphics.Canvas)
 	 */
 	@Override
 	public void draw( Canvas canvas ) {
-		
+
 		if ( !ensureValidRect() ) return;
 
 		mFillPaint.setAlpha( mAlpha );
@@ -69,7 +74,7 @@ public class LinearGradientDrawable extends Drawable {
 
 	/**
 	 * Ensure valid rect.
-	 *
+	 * 
 	 * @return true, if successful
 	 */
 	private boolean ensureValidRect() {
@@ -145,7 +150,9 @@ public class LinearGradientDrawable extends Drawable {
 		return !mRect.isEmpty();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#onBoundsChange(android.graphics.Rect)
 	 */
 	@Override
@@ -154,7 +161,9 @@ public class LinearGradientDrawable extends Drawable {
 		mRectIsDirty = true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getOpacity()
 	 */
 	@Override
@@ -162,7 +171,9 @@ public class LinearGradientDrawable extends Drawable {
 		return PixelFormat.TRANSLUCENT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setAlpha(int)
 	 */
 	@Override
@@ -173,7 +184,9 @@ public class LinearGradientDrawable extends Drawable {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setDither(boolean)
 	 */
 	@Override
@@ -184,7 +197,9 @@ public class LinearGradientDrawable extends Drawable {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setColorFilter(android.graphics.ColorFilter)
 	 */
 	@Override
@@ -197,8 +212,9 @@ public class LinearGradientDrawable extends Drawable {
 
 	/**
 	 * Sets the corner radius.
-	 *
-	 * @param radius the new corner radius
+	 * 
+	 * @param radius
+	 *           the new corner radius
 	 */
 	public void setCornerRadius( float radius ) {
 		mCornerRadius = radius;

@@ -1,8 +1,6 @@
 package com.aviary.android.feather.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -13,6 +11,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextSwitcher;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher.ViewFactory;
 import com.aviary.android.feather.R;
@@ -24,14 +23,12 @@ import com.aviary.android.feather.R;
 public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
-	 * The listener interface for receiving onToolbarClick events.
-	 * The class that is interested in processing a onToolbarClick
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnToolbarClickListener<code> method. When
+	 * The listener interface for receiving onToolbarClick events. The class that is interested in processing a onToolbarClick event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnToolbarClickListener<code> method. When
 	 * the onToolbarClick event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnToolbarClickEvent
 	 */
 	public static interface OnToolbarClickListener {
@@ -56,44 +53,41 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 	 * The Enum STATE.
 	 */
 	public static enum STATE {
-		
+
 		/** The STAT e_ save. */
-		STATE_SAVE, 
- /** The STAT e_ apply. */
- STATE_APPLY,
+		STATE_SAVE,
+		/** The STAT e_ apply. */
+		STATE_APPLY,
 	};
 
 	/** The m apply button. */
 	private Button mApplyButton;
-	
+
 	/** The m save button. */
 	private Button mSaveButton;
-	
+
 	/** The m title text. */
 	private TextSwitcher mTitleText;
-	
+
 	/** The m aviary logo. */
-	private View mAviaryLogo;
+	private TextView mAviaryLogo;
 
 	/** The is animating. */
 	@SuppressWarnings("unused")
 	private boolean isAnimating;
-	
+
 	/** The m current state. */
 	private STATE mCurrentState;
-	
+
 	/** The m out animation. */
 	private Animation mOutAnimation;
-	
+
 	/** The m in animation. */
 	private Animation mInAnimation;
-	
+
 	/** The m listener. */
 	private OnToolbarClickListener mListener;
-	
-	/** The m type face. */
-	private Typeface mTypeFace = null;
-	
+
 	/** The m clickable. */
 	private boolean mClickable;
 
@@ -115,8 +109,9 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Instantiates a new toolbar view.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public ToolbarView( Context context ) {
 		super( context );
@@ -125,9 +120,11 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Instantiates a new toolbar view.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public ToolbarView( Context context, AttributeSet attrs ) {
 		super( context, attrs );
@@ -136,31 +133,21 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Inits the.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	private void init( Context context, AttributeSet attrs ) {
 		mCurrentState = STATE.STATE_SAVE;
-
-		if ( attrs != null ) {
-			TypedArray a = getContext().obtainStyledAttributes( attrs, R.styleable.ToolbarView );
-
-			String fontName = a.getString( R.styleable.ToolbarView_fontname );
-			if ( fontName != null && fontName.length() > 0 ) {
-				try {
-					mTypeFace = Typeface.createFromAsset( context.getAssets(), fontName );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		}
-
 		setAnimationCacheEnabled( true );
 		setAlwaysDrawnWithCacheEnabled( true );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#setClickable(boolean)
 	 */
 	@Override
@@ -168,33 +155,37 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 		mClickable = clickable;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#isClickable()
 	 */
 	@Override
 	public boolean isClickable() {
 		return mClickable;
 	}
-	
+
 	/**
 	 * Gets the in animation time.
-	 *
+	 * 
 	 * @return the in animation time
 	 */
-	public long getInAnimationTime(){
+	public long getInAnimationTime() {
 		return mInAnimation.getDuration() + mInAnimation.getStartOffset();
 	}
-	
+
 	/**
 	 * Gets the out animation time.
-	 *
+	 * 
 	 * @return the out animation time
 	 */
-	public long getOutAnimationTime(){
+	public long getOutAnimationTime() {
 		return mOutAnimation.getDuration() + mOutAnimation.getStartOffset();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onFinishInflate()
 	 */
 	@Override
@@ -204,20 +195,15 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 		mApplyButton = (Button) findViewById( R.id.toolbar_content_panel ).findViewById( R.id.button_apply );
 		mSaveButton = (Button) findViewById( R.id.toolbar_main_panel ).findViewById( R.id.button_save );
 		mTitleText = (TextSwitcher) findViewById( R.id.toolbar_title );
-		mTitleText.setFactory(this);
-		mAviaryLogo = findViewById( R.id.aviary_logo );
-
-		if ( mTypeFace != null ) {
-			mApplyButton.setTypeface( mTypeFace );
-			mSaveButton.setTypeface( mTypeFace );
-			//mTitleText.setTypeface( mTypeFace );
-		}
+		mTitleText.setFactory( this );
+		mAviaryLogo = (TextView) findViewById( R.id.aviary_logo );
+		
 
 		mInAnimation = AnimationUtils.loadAnimation( getContext(), R.anim.feather_push_up_in );
 		mInAnimation.setStartOffset( 100 );
 		mOutAnimation = AnimationUtils.loadAnimation( getContext(), R.anim.feather_push_up_out );
 		mOutAnimation.setStartOffset( 100 );
-		
+
 		mOutAnimation.setAnimationListener( mInAnimationListener );
 		mInAnimation.setAnimationListener( mInAnimationListener );
 
@@ -239,21 +225,15 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 				if ( mListener != null && mCurrentState == STATE.STATE_SAVE && isClickable() ) mListener.onSaveClick();
 			}
 		} );
-
-		mAviaryLogo.setOnClickListener( new OnClickListener() {
-
-			@Override
-			public void onClick( View v ) {
-				// TODO: check the internet connection first
-			}
-		} );
 	}
 
 	/**
 	 * Change the current toolbar state creating an animation between the current and the new view state.
-	 *
-	 * @param state the state
-	 * @param showMiddle the show middle
+	 * 
+	 * @param state
+	 *           the state
+	 * @param showMiddle
+	 *           the show middle
 	 */
 	public void setState( STATE state, final boolean showMiddle ) {
 		if ( state != mCurrentState ) {
@@ -279,7 +259,7 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Return the current toolbar state.
-	 *
+	 * 
 	 * @return the state
 	 * @see #STATE
 	 */
@@ -289,8 +269,9 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Set the toolbar click listener.
-	 *
-	 * @param listener the new on toolbar click listener
+	 * 
+	 * @param listener
+	 *           the new on toolbar click listener
 	 * @see OnToolbarClickListener
 	 */
 	public void setOnToolbarClickListener( OnToolbarClickListener listener ) {
@@ -299,14 +280,17 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Sets the apply enabled.
-	 *
-	 * @param value the new apply enabled
+	 * 
+	 * @param value
+	 *           the new apply enabled
 	 */
 	public void setApplyEnabled( boolean value ) {
 		mApplyButton.setEnabled( value );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#setSaveEnabled(boolean)
 	 */
 	@Override
@@ -316,21 +300,41 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Sets the title.
-	 *
-	 * @param value the new title
+	 * 
+	 * @param value
+	 *           the new title
 	 */
 	public void setTitle( CharSequence value ) {
 		mTitleText.setText( value );
 	}
+	
+	public void setTitle( CharSequence value, boolean animate ) {
+		if( !animate ){
+			Animation inAnimation = mTitleText.getInAnimation();
+			Animation outAnimation = mTitleText.getOutAnimation();
+			mTitleText.setInAnimation( null );
+			mTitleText.setOutAnimation( null );
+			mTitleText.setText( value );
+			mTitleText.setInAnimation( inAnimation );
+			mTitleText.setOutAnimation( outAnimation );
+		} else {
+			setTitle( value );
+		}
+	}
 
 	/**
 	 * Sets the title.
-	 *
-	 * @param resourceId the new title
+	 * 
+	 * @param resourceId
+	 *           the new title
 	 */
 	public void setTitle( int resourceId ) {
 		setTitle( getContext().getString( resourceId ) );
 	}
+	
+	public void setTitle( int resourceId, boolean animate ) {
+		setTitle( getContext().getString( resourceId ), animate );
+	}	
 
 	/**
 	 * Show apply state.
@@ -341,8 +345,9 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Show save state.
-	 *
-	 * @param showMiddle the show middle
+	 * 
+	 * @param showMiddle
+	 *           the show middle
 	 */
 	private void showSaveState( boolean showMiddle ) {
 		if ( showMiddle && getChildCount() == 3 )
@@ -377,9 +382,11 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 
 	/**
 	 * Sets the apply enabled.
-	 *
-	 * @param applyEnabled the apply enabled
-	 * @param cancelEnabled the cancel enabled
+	 * 
+	 * @param applyEnabled
+	 *           the apply enabled
+	 * @param cancelEnabled
+	 *           the cancel enabled
 	 */
 	public void setApplyEnabled( boolean applyEnabled, boolean cancelEnabled ) {
 		mApplyButton.setEnabled( applyEnabled );
@@ -420,12 +427,14 @@ public class ToolbarView extends ViewFlipper implements ViewFactory {
 		}
 	};
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ViewSwitcher.ViewFactory#makeView()
 	 */
 	@Override
 	public View makeView() {
-      View text = LayoutInflater.from( getContext() ).inflate( R.layout.feather_toolbar_title_text, null );
-      return text;		
+		View text = LayoutInflater.from( getContext() ).inflate( R.layout.feather_toolbar_title_text, null );
+		return text;
 	}
 }

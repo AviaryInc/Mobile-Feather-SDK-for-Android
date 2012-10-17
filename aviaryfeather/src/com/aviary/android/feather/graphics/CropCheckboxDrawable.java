@@ -12,8 +12,9 @@ import com.aviary.android.feather.widget.Gallery;
 /**
  * Default checkbox drawable for {@link Gallery} views.<br />
  * Draw a checkbox drawable in order to simulate a checkbox component.<br/>
+ * 
  * @author alessandro
- *
+ * 
  */
 public class CropCheckboxDrawable extends OverlayGalleryCheckboxDrawable {
 
@@ -22,12 +23,17 @@ public class CropCheckboxDrawable extends OverlayGalleryCheckboxDrawable {
 
 	/**
 	 * Instantiates a new crop checkbox drawable.
-	 *
-	 * @param res the res
-	 * @param pressed the pressed
-	 * @param resId the res id
-	 * @param bottomOffset the bottom offset
-	 * @param padding the padding
+	 * 
+	 * @param res
+	 *           the res
+	 * @param pressed
+	 *           the pressed
+	 * @param resId
+	 *           the res id
+	 * @param bottomOffset
+	 *           the bottom offset
+	 * @param padding
+	 *           the padding
 	 */
 	public CropCheckboxDrawable( Resources res, boolean pressed, int resId, float bottomOffset, float paddingW, float paddingH ) {
 		this( res, pressed, res.getDrawable( resId ), bottomOffset, paddingW, paddingH );
@@ -35,20 +41,28 @@ public class CropCheckboxDrawable extends OverlayGalleryCheckboxDrawable {
 
 	/**
 	 * Instantiates a new crop checkbox drawable.
-	 *
-	 * @param res the res
-	 * @param pressed the pressed
-	 * @param drawable the drawable
-	 * @param bottomOffset the bottom offset
-	 * @param padding the padding
+	 * 
+	 * @param res
+	 *           the res
+	 * @param pressed
+	 *           the pressed
+	 * @param drawable
+	 *           the drawable
+	 * @param bottomOffset
+	 *           the bottom offset
+	 * @param padding
+	 *           the padding
 	 */
-	public CropCheckboxDrawable( Resources res, boolean pressed, Drawable drawable, float bottomOffset, float paddingW, float paddingH ) {
+	public CropCheckboxDrawable( Resources res, boolean pressed, Drawable drawable, float bottomOffset, float paddingW,
+			float paddingH ) {
 		super( res, pressed, drawable, bottomOffset, paddingW, paddingH );
 		mCropDrawable = res.getDrawable( pressed ? R.drawable.feather_crop_checkbox_selected
 				: R.drawable.feather_crop_checkbox_unselected );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.graphics.OverlayGalleryCheckboxDrawable#draw(android.graphics.Canvas)
 	 */
 	@Override
@@ -57,7 +71,9 @@ public class CropCheckboxDrawable extends OverlayGalleryCheckboxDrawable {
 		mCropDrawable.draw( canvas );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.graphics.OverlayGalleryCheckboxDrawable#onBoundsChange(android.graphics.Rect)
 	 */
 	@Override
@@ -68,11 +84,13 @@ public class CropCheckboxDrawable extends OverlayGalleryCheckboxDrawable {
 		int top = (int) ( rect.height() * 0.6708 );
 		int right = (int) ( rect.width() * 0.7433 );
 		int bottom = (int) ( rect.height() * 0.8037 );
-		
+
 		mCropDrawable.setBounds( left, top, right, bottom );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.graphics.DefaultGalleryCheckboxDrawable#getOpacity()
 	 */
 	@Override
@@ -80,13 +98,17 @@ public class CropCheckboxDrawable extends OverlayGalleryCheckboxDrawable {
 		return PixelFormat.TRANSLUCENT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.graphics.DefaultGalleryCheckboxDrawable#setAlpha(int)
 	 */
 	@Override
 	public void setAlpha( int alpha ) {}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.graphics.DefaultGalleryCheckboxDrawable#setColorFilter(android.graphics.ColorFilter)
 	 */
 	@Override

@@ -20,19 +20,17 @@ import com.aviary.android.feather.library.log.LoggerFactory.LoggerType;
  * The Class BottombarViewFlipper.
  */
 public class BottombarViewFlipper extends ViewFlipper {
-	
+
 	/** The logger. */
 	Logger logger = LoggerFactory.getLogger( "bottombar", LoggerType.ConsoleLoggerType );
 
 	/**
-	 * The listener interface for receiving onPanelOpen events.
-	 * The class that is interested in processing a onPanelOpen
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnPanelOpenListener<code> method. When
+	 * The listener interface for receiving onPanelOpen events. The class that is interested in processing a onPanelOpen event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnPanelOpenListener<code> method. When
 	 * the onPanelOpen event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnPanelOpenEvent
 	 */
 	public static interface OnPanelOpenListener {
@@ -49,14 +47,12 @@ public class BottombarViewFlipper extends ViewFlipper {
 	};
 
 	/**
-	 * The listener interface for receiving onPanelClose events.
-	 * The class that is interested in processing a onPanelClose
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnPanelCloseListener<code> method. When
+	 * The listener interface for receiving onPanelClose events. The class that is interested in processing a onPanelClose event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnPanelCloseListener<code> method. When
 	 * the onPanelClose event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnPanelCloseEvent
 	 */
 	public static interface OnPanelCloseListener {
@@ -110,26 +106,27 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/** The m open listener. */
 	private OnPanelOpenListener mOpenListener;
-	
+
 	/** The m close listener. */
 	private OnPanelCloseListener mCloseListener;
-	
+
 	/** The m animation duration. */
 	private int mAnimationDuration = 500;
-	
+
 	/** The m animation in. */
 	private Animation mAnimationIn;
-	
+
 	/** The m animation out. */
 	private Animation mAnimationOut;
-	
+
 	private int mAnimationOpenStartOffset = 100;
 	private int mAnimationCloseStartOffset = 100;
 
 	/**
 	 * Instantiates a new bottombar view flipper.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public BottombarViewFlipper( Context context ) {
 		this( context, null );
@@ -138,9 +135,11 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/**
 	 * Instantiates a new bottombar view flipper.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public BottombarViewFlipper( Context context, AttributeSet attrs ) {
 		super( context, attrs );
@@ -149,15 +148,16 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/**
 	 * Inits the.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	private void init( Context context ) {
 		setAnimationCacheEnabled( true );
-		//setDrawingCacheEnabled( true );
-		//setAlwaysDrawnWithCacheEnabled( false );
-		//setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
-		
+		// setDrawingCacheEnabled( true );
+		// setAlwaysDrawnWithCacheEnabled( false );
+		// setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+
 		mAnimationDuration = context.getResources().getInteger( R.integer.feather_config_bottom_animTime );
 		mAnimationCloseStartOffset = context.getResources().getInteger( R.integer.feather_bottombar_close_offset );
 		mAnimationOpenStartOffset = context.getResources().getInteger( R.integer.feather_bottombar_open_offset );
@@ -165,31 +165,30 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/**
 	 * Return the view which will contain all the options panel.
-	 *
+	 * 
 	 * @return the content
 	 */
 	public ViewGroup getContent() {
 		return (ViewGroup) getChildAt( mContentPanelIndex );
 	}
-	
+
 	/**
 	 * Gets the tool panel.
-	 *
+	 * 
 	 * @return the tool panel
 	 */
-	public ViewGroup getToolPanel(){
+	public ViewGroup getToolPanel() {
 		return (ViewGroup) getChildAt( mToolPanelIndex );
 	}
-	
+
 	/** The m tool panel index. */
 	final int mToolPanelIndex = 1;
-	
+
 	/** The m content panel index. */
 	final int mContentPanelIndex = 0;
 
 	/**
-	 * Close the option panel and return to the
-	 * tools list view.
+	 * Close the option panel and return to the tools list view.
 	 */
 	public void close() {
 
@@ -198,7 +197,8 @@ public class BottombarViewFlipper extends ViewFlipper {
 		animationOut.setAnimationListener( mCloseAnimationListener );
 
 		height = getToolPanel().getHeight();
-		Animation animationIn = createInAnimation( TranslateAnimation.ABSOLUTE, height, mAnimationDuration, mAnimationCloseStartOffset );
+		Animation animationIn = createInAnimation( TranslateAnimation.ABSOLUTE, height, mAnimationDuration,
+				mAnimationCloseStartOffset );
 		setInAnimation( animationIn );
 		setOutAnimation( animationOut );
 		setDisplayedChild( mToolPanelIndex );
@@ -212,10 +212,10 @@ public class BottombarViewFlipper extends ViewFlipper {
 		// first we must check the height of the content
 		// panel to use within the in animation
 		int height;
-		//getContent().setVisibility( View.INVISIBLE );
+		// getContent().setVisibility( View.INVISIBLE );
 
 		height = getContent().getMeasuredHeight();
-		
+
 		if ( height == 0 ) {
 			getHandler().post( new Runnable() {
 
@@ -235,7 +235,8 @@ public class BottombarViewFlipper extends ViewFlipper {
 		Animation animationIn = createVoidAnimation( mAnimationDuration, mAnimationOpenStartOffset );
 
 		height = getToolPanel().getHeight();
-		Animation animationOut = createOutAnimation( TranslateAnimation.ABSOLUTE, height, mAnimationDuration, mAnimationOpenStartOffset );
+		Animation animationOut = createOutAnimation( TranslateAnimation.ABSOLUTE, height, mAnimationDuration,
+				mAnimationOpenStartOffset );
 		animationIn.setAnimationListener( mOpenAnimationListener );
 
 		setInAnimation( animationIn );
@@ -246,9 +247,11 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/**
 	 * Creates the void animation.
-	 *
-	 * @param durationMillis the duration millis
-	 * @param startOffset the start offset
+	 * 
+	 * @param durationMillis
+	 *           the duration millis
+	 * @param startOffset
+	 *           the start offset
 	 * @return the animation
 	 */
 	private Animation createVoidAnimation( int durationMillis, int startOffset ) {
@@ -260,16 +263,20 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/**
 	 * Creates the out animation.
-	 *
-	 * @param deltaType the delta type
-	 * @param height the height
-	 * @param durationMillis the duration millis
-	 * @param startOffset the start offset
+	 * 
+	 * @param deltaType
+	 *           the delta type
+	 * @param height
+	 *           the height
+	 * @param durationMillis
+	 *           the duration millis
+	 * @param startOffset
+	 *           the start offset
 	 * @return the animation
 	 */
 	private Animation createOutAnimation( int deltaType, int height, int durationMillis, int startOffset ) {
-		
-		if( mAnimationOut == null ){
+
+		if ( mAnimationOut == null ) {
 			mAnimationOut = new TranslateAnimation( deltaType, 0, deltaType, 0, deltaType, 0, deltaType, height );
 			mAnimationOut.setInterpolator( new DecelerateInterpolator( 0.4f ) );
 			mAnimationOut.setDuration( durationMillis );
@@ -277,33 +284,38 @@ public class BottombarViewFlipper extends ViewFlipper {
 		}
 		return mAnimationOut;
 	}
-	
+
 	/**
 	 * Creates the in animation.
-	 *
-	 * @param deltaType the delta type
-	 * @param height the height
-	 * @param durationMillis the duration millis
-	 * @param startOffset the start offset
+	 * 
+	 * @param deltaType
+	 *           the delta type
+	 * @param height
+	 *           the height
+	 * @param durationMillis
+	 *           the duration millis
+	 * @param startOffset
+	 *           the start offset
 	 * @return the animation
 	 */
 	private Animation createInAnimation( int deltaType, int height, int durationMillis, int startOffset ) {
-		
-		if( mAnimationIn == null ){
+
+		if ( mAnimationIn == null ) {
 			mAnimationIn = new TranslateAnimation( deltaType, 0, deltaType, 0, deltaType, height, deltaType, 0 );
 			mAnimationIn.setDuration( durationMillis );
 			mAnimationIn.setStartOffset( startOffset );
 			mAnimationIn.setInterpolator( new AccelerateInterpolator( 0.5f ) );
 		}
 		return mAnimationIn;
-		
-		//return animation;
+
+		// return animation;
 	}
 
 	/**
 	 * Sets the on panel open listener.
-	 *
-	 * @param listener the new on panel open listener
+	 * 
+	 * @param listener
+	 *           the new on panel open listener
 	 */
 	public void setOnPanelOpenListener( OnPanelOpenListener listener ) {
 		mOpenListener = listener;
@@ -311,8 +323,9 @@ public class BottombarViewFlipper extends ViewFlipper {
 
 	/**
 	 * Sets the on panel close listener.
-	 *
-	 * @param listener the new on panel close listener
+	 * 
+	 * @param listener
+	 *           the new on panel close listener
 	 */
 	public void setOnPanelCloseListener( OnPanelCloseListener listener ) {
 		mCloseListener = listener;

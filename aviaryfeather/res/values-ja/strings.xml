@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">バランス</string>
-	<string name="square">スクエア</string>
+	<string name="border_name">フリー</string>
 	<string name="revert_dialog_title">元のイメージに戻す</string>
 	<string name="feather_plugin_filter_thresh_name">コンコルド</string>
 	<string name="loading_image">イメージを読み込み中…</string>
@@ -14,7 +14,7 @@
 	<string name="crop">切り抜き</string>
 	<string name="feather_view_file">イメージを表示</string>
 	<string name="night_enhance_label">夜</string>
-	<string name="feather_image_saved_in">イメージが%1$sに保存されました。イメージを見ますか?</string>
+	<string name="square">スクエア</string>
 	<string name="feather_plugin_filter_andy_name">雲</string>
 	<string name="mirror">ミラー</string>
 	<string name="apply">適用</string>
@@ -24,7 +24,6 @@
 	<string name="menu_cancel">取消</string>
 	<string name="feather_save_progress">保存中…</string>
 	<string name="save">完了</string>
-	<string name="effet_loading_title">読み込み中</string>
 	<string name="confirm">確定</string>
 	<string name="yes_leave">エディターを閉じる</string>
 	<string name="feather_error_saving_image">イメージの保存中にエラーが発生しました。</string>
@@ -39,18 +38,19 @@
 	<string name="sharpen">鮮明度</string>
 	<string name="back_enhance_label">バックライト</string>
 	<string name="rotate">回転</string>
-	<string name="feather_update">更新</string>
+	<string name="tool">ツール</string>
 	<string name="contrast">強弱</string>
 	<string name="sticker_name">デモ</string>
 	<string name="meme">ミーム</string>
 	<string name="feather_crash_toast_text">クラッシュしました! デベロッパーにエラー報告が送信されました。</string>
 	<string name="draw">ドロー</string>
 	<string name="feather_plugin_filter_sancarmen_name">セイント</string>
+	<string name="feather_plugin_filter_edgewood_name">珊瑚礁</string>
 	<string name="red_eye">赤目補正</string>
 	<string name="sticker_delete_message">ステッカーを削除しますか?</string>
 	<string name="feather_plugin_filter_singe_name">焦がし</string>
 	<string name="zoom_mode">ズーム モード</string>
-	<string name="tool">ツール</string>
+	<string name="feather_borders">国境</string>
 	<string name="attention">注意</string>
 	<string name="get_more">もっとゲットする</string>
 	<string name="menu_reset">リセット</string>
@@ -58,10 +58,11 @@
 	<string name="effects">効果</string>
 	<string name="filter_name">フリー</string>
 	<string name="feather_close">閉じる</string>
-	<string name="feather_plugin_filter_aqua_name">水</string>
+	<string name="feather_loading_title">読み込み中</string>
 	<string name="feather_plugin_filter_softfocus_name">軟焦点</string>
 	<string name="tool_name">アビアリー</string>
 	<string name="feather_delete">削除</string>
+	<string name="feather_plugin_filter_aqua_name">水</string>
 	<string name="sticker_pack_updated_1">ステッカーパックの更新完が完了しました。OKをクリックしてパックリストをリロードしてください。</string>
 	<string name="sticker_pack_updated_2">ステッカーパックの更新が完了しました。更新したパネルのリロードが必要です。</string>
 	<string name="sticker_pack_updated_3">ステッカーパックの更新が完了しました。更新したパネルのリロードが必要です。更新ステッカーを適用しますか?</string>
@@ -77,8 +78,8 @@
 	<string name="menu_premium">ストア</string>
 	<string name="revert_dialog_message">すべての変更内容が失われます。元のイメージに戻しますか?</string>
 	<string name="enhance">強調</string>
-	<string name="feather_plugin_filter_edgewood_name">珊瑚礁</string>
+	<string name="feather_plugin_filter_purple_name">インディゴ</string>
 	<string name="original">基本</string>
-	<string name="feather_plugin_filter_indiglow_name">インディゴ</string>
+	<string name="feather_update">更新</string>
 	<string name="whiten">美白</string>
 </resources>

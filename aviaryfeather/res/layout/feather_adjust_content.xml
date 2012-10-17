@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
-        android:padding="13dp"
+        android:padding="20dp"
         class="com.aviary.android.feather.widget.AdjustImageView" />
 
 </RelativeLayout>

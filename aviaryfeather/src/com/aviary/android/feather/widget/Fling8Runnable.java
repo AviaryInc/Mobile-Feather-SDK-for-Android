@@ -1,19 +1,21 @@
 package com.aviary.android.feather.widget;
 
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
-
 
 class Fling8Runnable extends IFlingRunnable {
 
 	private Scroller mScroller;
 
-	public Fling8Runnable(FlingRunnableView parent, int animationDuration ) {
-		super(parent, animationDuration);
-		Log.i( LOG_TAG, "Fling8Runnable" );
-		mScroller = new Scroller( ((View)parent).getContext(), new DecelerateInterpolator() );
+	public Fling8Runnable( FlingRunnableView parent, int animationDuration ) {
+		super( parent, animationDuration );
+		mScroller = new Scroller( ( (View) parent ).getContext(), new DecelerateInterpolator() );
+	}
+
+	@Override
+	public float getCurrVelocity() {
+		return mScroller.getCurrVelocity();
 	}
 
 	@Override
@@ -44,5 +46,10 @@ class Fling8Runnable extends IFlingRunnable {
 	@Override
 	protected int getCurrX() {
 		return mScroller.getCurrX();
+	}
+
+	@Override
+	public boolean springBack( int startX, int startY, int minX, int maxX, int minY, int maxY ) {
+		return false;
 	}
 }

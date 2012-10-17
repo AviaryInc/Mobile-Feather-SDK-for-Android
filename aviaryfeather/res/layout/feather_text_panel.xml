@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/FeatherOptionPanel"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/feather_options_panel_height_with_shadow"
+    android:layout_height="?attr/optionPanelHeightWithShadow"
     android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/shadow_up"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/feather_options_panel_height_shadow"
+        android:layout_height="?attr/optionPanelShadowHeight"
         android:layout_weight="0"
         android:scaleType="fitXY"
         android:src="@drawable/feather_shadow_up" />
@@ -44,14 +44,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/feather_stickers_panel_shadow_left" >
+                android:background="@drawable/feather_shadow_left" >
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/feather_stickers_panel_shadow_right" >
+                android:background="@drawable/feather_shadow_right" >
             </LinearLayout>
 
             <ImageView

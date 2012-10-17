@@ -1,6 +1,7 @@
 package com.aviary.android.feather.widget.wp;
 
 import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -28,7 +29,7 @@ public class EdgeGlow {
 
 	/** The Constant MAX_ALPHA. */
 	private static final float MAX_ALPHA = 0.8f;
-	
+
 	/** The Constant HELD_EDGE_SCALE_Y. */
 	private static final float HELD_EDGE_SCALE_Y = 0.5f;
 
@@ -37,7 +38,7 @@ public class EdgeGlow {
 
 	/** The Constant PULL_GLOW_BEGIN. */
 	private static final float PULL_GLOW_BEGIN = 1.f;
-	
+
 	/** The Constant PULL_EDGE_BEGIN. */
 	private static final float PULL_EDGE_BEGIN = 0.6f;
 
@@ -50,55 +51,55 @@ public class EdgeGlow {
 
 	/** The m edge. */
 	private final Drawable mEdge;
-	
+
 	/** The m glow. */
 	private final Drawable mGlow;
-	
+
 	/** The m width. */
 	private int mWidth;
-	
+
 	/** The m height. */
 	private int mHeight;
 
 	/** The m edge alpha. */
 	private float mEdgeAlpha;
-	
+
 	/** The m edge scale y. */
 	private float mEdgeScaleY;
-	
+
 	/** The m glow alpha. */
 	private float mGlowAlpha;
-	
+
 	/** The m glow scale y. */
 	private float mGlowScaleY;
 
 	/** The m edge alpha start. */
 	private float mEdgeAlphaStart;
-	
+
 	/** The m edge alpha finish. */
 	private float mEdgeAlphaFinish;
-	
+
 	/** The m edge scale y start. */
 	private float mEdgeScaleYStart;
-	
+
 	/** The m edge scale y finish. */
 	private float mEdgeScaleYFinish;
-	
+
 	/** The m glow alpha start. */
 	private float mGlowAlphaStart;
-	
+
 	/** The m glow alpha finish. */
 	private float mGlowAlphaFinish;
-	
+
 	/** The m glow scale y start. */
 	private float mGlowScaleYStart;
-	
+
 	/** The m glow scale y finish. */
 	private float mGlowScaleYFinish;
 
 	/** The m start time. */
 	private long mStartTime;
-	
+
 	/** The m duration. */
 	private float mDuration;
 
@@ -107,16 +108,16 @@ public class EdgeGlow {
 
 	/** The Constant STATE_IDLE. */
 	private static final int STATE_IDLE = 0;
-	
+
 	/** The Constant STATE_PULL. */
 	private static final int STATE_PULL = 1;
-	
+
 	/** The Constant STATE_ABSORB. */
 	private static final int STATE_ABSORB = 2;
-	
+
 	/** The Constant STATE_RECEDE. */
 	private static final int STATE_RECEDE = 3;
-	
+
 	/** The Constant STATE_PULL_DECAY. */
 	private static final int STATE_PULL_DECAY = 4;
 
@@ -129,13 +130,13 @@ public class EdgeGlow {
 	// Number determined by user testing.
 	/** The Constant PULL_DISTANCE_GLOW_FACTOR. */
 	private static final int PULL_DISTANCE_GLOW_FACTOR = 1;
-	
+
 	/** The Constant PULL_DISTANCE_ALPHA_GLOW_FACTOR. */
 	private static final float PULL_DISTANCE_ALPHA_GLOW_FACTOR = 0.8f;
 
 	/** The Constant VELOCITY_EDGE_FACTOR. */
 	private static final int VELOCITY_EDGE_FACTOR = 8;
-	
+
 	/** The Constant VELOCITY_GLOW_FACTOR. */
 	private static final int VELOCITY_GLOW_FACTOR = 16;
 
@@ -147,22 +148,31 @@ public class EdgeGlow {
 
 	/**
 	 * Instantiates a new edge glow.
-	 *
-	 * @param edge the edge
-	 * @param glow the glow
+	 * 
+	 * @param edge
+	 *           the edge
+	 * @param glow
+	 *           the glow
 	 */
 	public EdgeGlow( Drawable edge, Drawable glow ) {
 		mEdge = edge;
 		mGlow = glow;
-
 		mInterpolator = new DecelerateInterpolator();
+	}
+
+	public void setColorFilter( int color, PorterDuff.Mode mode ) {
+		if ( null != mEdge ) mEdge.setColorFilter( color, mode );
+
+		if ( null != mGlow ) mGlow.setColorFilter( color, mode );
 	}
 
 	/**
 	 * Sets the size.
-	 *
-	 * @param width the width
-	 * @param height the height
+	 * 
+	 * @param width
+	 *           the width
+	 * @param height
+	 *           the height
 	 */
 	public void setSize( int width, int height ) {
 		mWidth = width;
@@ -171,7 +181,7 @@ public class EdgeGlow {
 
 	/**
 	 * Checks if is finished.
-	 *
+	 * 
 	 * @return true, if is finished
 	 */
 	public boolean isFinished() {
@@ -307,8 +317,8 @@ public class EdgeGlow {
 		final float distScale = (float) mHeight / mWidth;
 
 		mGlow.setAlpha( (int) ( Math.max( 0, Math.min( mGlowAlpha, 1 ) ) * 255 ) );
-		mGlow.setBounds( -mWidth, 0, mWidth * 2,
-				(int) Math.min( glowHeight * mGlowScaleY * distScale * 0.6f, mHeight * MAX_GLOW_HEIGHT ) );
+
+		mGlow.setBounds( 0, 0, mWidth, (int) Math.min( glowHeight * mGlowScaleY * distScale * 0.6f, mHeight * MAX_GLOW_HEIGHT ) );
 		mGlow.draw( canvas );
 
 		if ( mEdge != null ) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">Equilibrio</string>
-	<string name="square">Cuadrado</string>
+	<string name="border_name">Libre</string>
 	<string name="revert_dialog_title">¿Volver al original?</string>
 	<string name="infoscreen_submit">¡Más información!</string>
 	<string name="loading_image">Cargando imagen...</string>
@@ -14,6 +14,7 @@
 	<string name="crop">Recortar</string>
 	<string name="feather_view_file">Ver imagen</string>
 	<string name="night_enhance_label">Noche</string>
+	<string name="square">Cuadrado</string>
 	<string name="feather_image_saved_in">Imagen guardada en %1$s. ¿Quieres ver la imagen guardada?</string>
 	<string name="feather_plugin_filter_andy_name">Strato</string>
 	<string name="mirror">Espejo</string>
@@ -24,7 +25,6 @@
 	<string name="menu_cancel">Cancelar</string>
 	<string name="feather_save_progress">Guardando...</string>
 	<string name="save">Listo</string>
-	<string name="effet_loading_title">Cargando</string>
 	<string name="feather_plugin_filter_thresh_name">Concorde</string>
 	<string name="confirm">Confirmar</string>
 	<string name="yes_leave">Salir del editor</string>
@@ -40,7 +40,7 @@
 	<string name="sharpen">Nitidez</string>
 	<string name="back_enhance_label">Contraluz</string>
 	<string name="rotate">Girar</string>
-	<string name="feather_update">Actualizar</string>
+	<string name="tool">Herramienta</string>
 	<string name="contrast">Contraste</string>
 	<string name="sticker_name">Demo</string>
 	<string name="meme">Meme</string>
@@ -52,7 +52,7 @@
 	<string name="sticker_delete_message">¿Estás seguro de que quieres quitar esta pegatina?</string>
 	<string name="feather_plugin_filter_singe_name">Chamuscado</string>
 	<string name="zoom_mode">Modo Zoom</string>
-	<string name="tool">Herramienta</string>
+	<string name="feather_borders">Fronteras</string>
 	<string name="attention">Atención</string>
 	<string name="get_more">Obtener más</string>
 	<string name="menu_reset">Restablecer</string>
@@ -60,13 +60,15 @@
 	<string name="effects">Efectos</string>
 	<string name="filter_name">Libre</string>
 	<string name="feather_close">Cerrar</string>
-	<string name="feather_plugin_filter_aqua_name">Aqua</string>
+	<string name="feather_loading_title">Cargando</string>
 	<string name="feather_plugin_filter_softfocus_name">Soft focus</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">Borrar</string>
+	<string name="feather_plugin_filter_aqua_name">Aqua</string>
 	<string name="sticker_pack_updated_1">Se ha actualizado un paquete de pegatina. Haz clic en “aceptar” para volver a cargar la lista de paquetes</string>
 	<string name="sticker_pack_updated_2">Se ha actualizado un paquete de pegatina. Necesitamos volver a cargar el panel actual</string>
 	<string name="sticker_pack_updated_3">Se ha actualizado un paquete de pegatina. Necesitamos volver a cargar el panel actual. ¿Quieres aplicar la pegatina actual?</string>
+	<string name="feather_plugin_filter_purple_name">Indibrillo</string>
 	<string name="brightness">Brillo</string>
 	<string name="auto_enhance_label">Auto</string>
 	<string name="feather_tool_temperature">Calor</string>
@@ -81,6 +83,6 @@
 	<string name="enhance">Realzar</string>
 	<string name="tool_leave_question">¿Estás seguro de que quieres desechar los cambios de esta herramienta?</string>
 	<string name="original">Original</string>
-	<string name="feather_plugin_filter_indiglow_name">Indibrillo</string>
+	<string name="feather_update">Actualizar</string>
 	<string name="whiten">Blanquear</string>
 </resources>

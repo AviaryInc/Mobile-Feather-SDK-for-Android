@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">Balanço</string>
-	<string name="square">Quadrado</string>
+	<string name="border_name">Livre</string>
 	<string name="revert_dialog_title">Reverter para original?</string>
 	<string name="infoscreen_submit">Saiba mais!</string>
 	<string name="loading_image">Carregando imagem...</string>
 	<string name="effect_loading_message">Aplicando Efeitos</string>
 	<string name="text">Texto</string>
-	<string name="enter_text_here">Insira texto aqui</string>
+	<string name="enter_text_here">Digite seu texto aqui</string>
 	<string name="error_download_image_message">Houve um erro ao baixar a imagem. Tente novamente mais tarde</string>
 	<string name="edit_bottom_text">Editar subescrito</string>
 	<string name="saturation">Saturação</string>
 	<string name="crop">Cortar</string>
 	<string name="feather_view_file">Visualizar Imagem</string>
 	<string name="night_enhance_label">Noite</string>
+	<string name="square">Quadrado</string>
 	<string name="feather_image_saved_in">Imagem salva em %1$s. Você quer visualizar a imagem salva?</string>
 	<string name="feather_plugin_filter_andy_name">Strato</string>
 	<string name="mirror">Espelho</string>
@@ -24,7 +25,6 @@
 	<string name="menu_cancel">Cancelar</string>
 	<string name="feather_save_progress">Salvando...</string>
 	<string name="save">Feito</string>
-	<string name="effet_loading_title">Carregando</string>
 	<string name="feather_plugin_filter_thresh_name">Concorde</string>
 	<string name="confirm">Confirmar</string>
 	<string name="yes_leave">Sair do editor</string>
@@ -40,7 +40,7 @@
 	<string name="sharpen">Nitidez</string>
 	<string name="back_enhance_label">Luz de fundo</string>
 	<string name="rotate">Girar</string>
-	<string name="feather_update">Atualizar</string>
+	<string name="tool">Ferramenta</string>
 	<string name="contrast">Contraste</string>
 	<string name="sticker_name">Demonstração</string>
 	<string name="meme">Meme</string>
@@ -52,7 +52,7 @@
 	<string name="sticker_delete_message">Tem certeza de que deseja remover este sticker?</string>
 	<string name="feather_plugin_filter_singe_name">Chamuscado</string>
 	<string name="zoom_mode">Modo de zoom</string>
-	<string name="tool">Ferramenta</string>
+	<string name="feather_borders">Fronteiras</string>
 	<string name="attention">Atenção</string>
 	<string name="get_more">Obter Mais</string>
 	<string name="menu_reset">Restabelecer</string>
@@ -60,13 +60,15 @@
 	<string name="effects">Efeitos</string>
 	<string name="filter_name">Livre</string>
 	<string name="feather_close">Fechar</string>
-	<string name="feather_plugin_filter_aqua_name">Aqua</string>
+	<string name="feather_loading_title">Carregando</string>
 	<string name="feather_plugin_filter_softfocus_name">Foco Suave</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">Excluir</string>
+	<string name="feather_plugin_filter_aqua_name">Aqua</string>
 	<string name="sticker_pack_updated_1">Um pacote de adesivos foi atualizado.  Clique em OK para recarregar a lista de pacotes</string>
 	<string name="sticker_pack_updated_2">Um pacote de adesivos foi atualizado. Precisamos recarregar o painel atual</string>
 	<string name="sticker_pack_updated_3">Um pacote de sticker foi atualizado. Precisamos recarregar o painel atual. Deseja aplicar o sticker atual?</string>
+	<string name="feather_plugin_filter_purple_name">Indiglow</string>
 	<string name="brightness">Brilho</string>
 	<string name="auto_enhance_label">Auto</string>
 	<string name="feather_tool_temperature">Calor</string>
@@ -81,6 +83,6 @@
 	<string name="enhance">Realçar</string>
 	<string name="tool_leave_question">Tem certeza que quer eliminar as mudanças feitas com esta ferramenta?</string>
 	<string name="original">Original</string>
-	<string name="feather_plugin_filter_indiglow_name">Indiglow</string>
+	<string name="feather_update">Atualizar</string>
 	<string name="whiten">Iluminar</string>
 </resources>

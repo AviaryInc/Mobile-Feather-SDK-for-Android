@@ -1,24 +1,32 @@
 package com.aviary.android.feather.widget;
 
-import android.util.Log;
+import android.annotation.TargetApi;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.OverScroller;
 
-
+@TargetApi(9)
 class Fling9Runnable extends IFlingRunnable {
 
 	private OverScroller mScroller;
 
 	public Fling9Runnable( FlingRunnableView parent, int animationDuration ) {
 		super( parent, animationDuration );
-		Log.i( LOG_TAG, "Fling9Runnable" );
-		mScroller = new OverScroller( ((View)parent).getContext(), new DecelerateInterpolator() );
+		mScroller = new OverScroller( ( (View) parent ).getContext(), new DecelerateInterpolator() );
+	}
+
+	@Override
+	public float getCurrVelocity() {
+		return mScroller.getCurrVelocity();
 	}
 
 	@Override
 	public boolean isFinished() {
 		return mScroller.isFinished();
+	}
+
+	public boolean springBack( int startX, int startY, int minX, int maxX, int minY, int maxY ) {
+		return mScroller.springBack( startX, startY, minX, maxX, minY, maxY );
 	}
 
 	@Override

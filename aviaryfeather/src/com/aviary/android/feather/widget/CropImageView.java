@@ -1,18 +1,22 @@
 package com.aviary.android.feather.widget;
 
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
-import it.sephiroth.android.library.imagezoom.ScaleGestureDetector;
-import it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
 import com.aviary.android.feather.library.graphics.drawable.IBitmapDrawable;
 import com.aviary.android.feather.library.utils.UIConfiguration;
 
@@ -23,43 +27,44 @@ import com.aviary.android.feather.library.utils.UIConfiguration;
 public class CropImageView extends ImageViewTouch {
 
 	/**
-	 * The listener interface for receiving onLayout events.
-	 * The class that is interested in processing a onLayout
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnLayoutListener<code> method. When
+	 * The listener interface for receiving onLayout events. The class that is interested in processing a onLayout event implements
+	 * this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnLayoutListener<code> method. When
 	 * the onLayout event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnLayoutEvent
 	 */
 	public interface OnLayoutListener {
-		
+
 		/**
 		 * On layout changed.
-		 *
-		 * @param changed the changed
-		 * @param left the left
-		 * @param top the top
-		 * @param right the right
-		 * @param bottom the bottom
+		 * 
+		 * @param changed
+		 *           the changed
+		 * @param left
+		 *           the left
+		 * @param top
+		 *           the top
+		 * @param right
+		 *           the right
+		 * @param bottom
+		 *           the bottom
 		 */
 		void onLayoutChanged( boolean changed, int left, int top, int right, int bottom );
 	}
-	
+
 	/**
-	 * The listener interface for receiving onHighlightSingleTapUpConfirmed events.
-	 * The class that is interested in processing a onHighlightSingleTapUpConfirmed
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnHighlightSingleTapUpConfirmedListener<code> method. When
+	 * The listener interface for receiving onHighlightSingleTapUpConfirmed events. The class that is interested in processing a
+	 * onHighlightSingleTapUpConfirmed event implements this interface, and the object created with that class is registered with a
+	 * component using the component's <code>addOnHighlightSingleTapUpConfirmedListener<code> method. When
 	 * the onHighlightSingleTapUpConfirmed event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnHighlightSingleTapUpConfirmedEvent
 	 */
 	public interface OnHighlightSingleTapUpConfirmedListener {
-		
+
 		/**
 		 * On single tap up confirmed.
 		 */
@@ -68,60 +73,68 @@ public class CropImageView extends ImageViewTouch {
 
 	/** The Constant GROW. */
 	public static final int GROW = 0;
-	
+
 	/** The Constant SHRINK. */
 	public static final int SHRINK = 1;
-	
+
 	/** The m motion edge. */
 	private int mMotionEdge = HighlightView.GROW_NONE;
-	
+
 	/** The m highlight view. */
 	private HighlightView mHighlightView;
-	
+
 	/** The m layout listener. */
 	private OnLayoutListener mLayoutListener;
-	
+
 	/** The m highlight single tap up listener. */
 	private OnHighlightSingleTapUpConfirmedListener mHighlightSingleTapUpListener;
-	
+
 	/** The m motion highlight view. */
 	private HighlightView mMotionHighlightView;
-	
+
 	/** The m crop min size. */
 	private int mCropMinSize = 10;
 
+	protected Handler mHandler = new Handler();
+
 	/**
 	 * Instantiates a new crop image view.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public CropImageView( Context context, AttributeSet attrs ) {
 		super( context, attrs );
 	}
-	
+
 	/**
 	 * Sets the on highlight single tap up confirmed listener.
-	 *
-	 * @param listener the new on highlight single tap up confirmed listener
+	 * 
+	 * @param listener
+	 *           the new on highlight single tap up confirmed listener
 	 */
-	public void setOnHighlightSingleTapUpConfirmedListener( OnHighlightSingleTapUpConfirmedListener listener ){
+	public void setOnHighlightSingleTapUpConfirmedListener( OnHighlightSingleTapUpConfirmedListener listener ) {
 		mHighlightSingleTapUpListener = listener;
 	}
-	
+
 	/**
 	 * Sets the min crop size.
-	 *
-	 * @param value the new min crop size
+	 * 
+	 * @param value
+	 *           the new min crop size
 	 */
-	public void setMinCropSize( int value ){
+	public void setMinCropSize( int value ) {
 		mCropMinSize = value;
-		if( mHighlightView != null ){
+		if ( mHighlightView != null ) {
 			mHighlightView.setMinSize( value );
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch#init()
 	 */
 	@Override
@@ -136,19 +149,22 @@ public class CropImageView extends ImageViewTouch {
 		mGestureDetector = new GestureDetector( getContext(), new CropGestureListener(), null, true );
 		mGestureDetector.setIsLongpressEnabled( false );
 
-		//mTouchSlop = 20 * 20;
+		// mTouchSlop = 20 * 20;
 	}
 
 	/**
 	 * Sets the on layout listener.
-	 *
-	 * @param listener the new on layout listener
+	 * 
+	 * @param listener
+	 *           the new on layout listener
 	 */
 	public void setOnLayoutListener( OnLayoutListener listener ) {
 		mLayoutListener = listener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouchBase#setImageBitmap(android.graphics.Bitmap, boolean)
 	 */
 	@Override
@@ -157,7 +173,9 @@ public class CropImageView extends ImageViewTouch {
 		super.setImageBitmap( bitmap, reset );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouchBase#onLayout(boolean, int, int, int, int)
 	 */
 	@Override
@@ -165,18 +183,32 @@ public class CropImageView extends ImageViewTouch {
 		super.onLayout( changed, left, top, right, bottom );
 
 		if ( mLayoutListener != null ) mLayoutListener.onLayoutChanged( changed, left, top, right, bottom );
-
-		final Drawable drawable = getDrawable();
-
-		if ( drawable != null && ( (IBitmapDrawable) drawable ).getBitmap() != null ) {
-			if ( mHighlightView != null ) {
-				mHighlightView.getMatrix().set( getImageMatrix() );
-				mHighlightView.invalidate();
-			}
-		}
+		mHandler.post( onLayoutRunnable );
 	}
 
-	/* (non-Javadoc)
+	Runnable onLayoutRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			final Drawable drawable = getDrawable();
+
+			if ( drawable != null && ( (IBitmapDrawable) drawable ).getBitmap() != null ) {
+				if ( mHighlightView != null ) {
+					if ( mHighlightView.isRunning() ) {
+						mHandler.post( this );
+					} else {
+						// Log.d( LOG_TAG, "onLayoutRunnable.. running" );
+						mHighlightView.getMatrix().set( getImageMatrix() );
+						mHighlightView.invalidate();
+					}
+				}
+			}
+		}
+	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouchBase#postTranslate(float, float)
 	 */
 	@Override
@@ -184,6 +216,10 @@ public class CropImageView extends ImageViewTouch {
 		super.postTranslate( deltaX, deltaY );
 
 		if ( mHighlightView != null ) {
+
+			if ( mHighlightView.isRunning() ) {
+				return;
+			}
 
 			if ( getScale() != 1 ) {
 				float[] mvalues = new float[9];
@@ -197,27 +233,29 @@ public class CropImageView extends ImageViewTouch {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouchBase#postScale(float, float, float)
-	 */
+	private Rect mRect1 = new Rect();
+	private Rect mRect2 = new Rect();
+
 	@Override
 	protected void postScale( float scale, float centerX, float centerY ) {
 		if ( mHighlightView != null ) {
 
+			if ( mHighlightView.isRunning() ) return;
+
 			RectF cropRect = mHighlightView.getCropRectF();
-			Rect rect1 = mHighlightView.getDisplayRect( getImageViewMatrix(), mHighlightView.getCropRectF() );
+			mHighlightView.getDisplayRect( getImageViewMatrix(), mHighlightView.getCropRectF(), mRect1 );
 
 			super.postScale( scale, centerX, centerY );
 
-			Rect rect2 = mHighlightView.getDisplayRect( getImageViewMatrix(), mHighlightView.getCropRectF() );
+			mHighlightView.getDisplayRect( getImageViewMatrix(), mHighlightView.getCropRectF(), mRect2 );
 
 			float[] mvalues = new float[9];
 			getImageViewMatrix().getValues( mvalues );
 			final float currentScale = mvalues[Matrix.MSCALE_X];
 
-			cropRect.offset( ( rect1.left - rect2.left ) / currentScale, ( rect1.top - rect2.top ) / currentScale );
-			cropRect.right += -( rect2.width() - rect1.width() ) / currentScale;
-			cropRect.bottom += -( rect2.height() - rect1.height() ) / currentScale;
+			cropRect.offset( ( mRect1.left - mRect2.left ) / currentScale, ( mRect1.top - mRect2.top ) / currentScale );
+			cropRect.right += -( mRect2.width() - mRect1.width() ) / currentScale;
+			cropRect.bottom += -( mRect2.height() - mRect1.height() ) / currentScale;
 
 			mHighlightView.getMatrix().set( getImageMatrix() );
 			mHighlightView.getCropRectF().set( cropRect );
@@ -229,8 +267,9 @@ public class CropImageView extends ImageViewTouch {
 
 	/**
 	 * Ensure visible.
-	 *
-	 * @param hv the hv
+	 * 
+	 * @param hv
+	 *           the hv
 	 */
 	private void ensureVisible( HighlightView hv ) {
 		Rect r = hv.getDrawRect();
@@ -246,7 +285,9 @@ public class CropImageView extends ImageViewTouch {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
 	 */
 	@Override
@@ -257,8 +298,9 @@ public class CropImageView extends ImageViewTouch {
 
 	/**
 	 * Sets the highlight view.
-	 *
-	 * @param hv the new highlight view
+	 * 
+	 * @param hv
+	 *           the new highlight view
 	 */
 	public void setHighlightView( HighlightView hv ) {
 		if ( mHighlightView != null ) {
@@ -272,14 +314,16 @@ public class CropImageView extends ImageViewTouch {
 
 	/**
 	 * Gets the highlight view.
-	 *
+	 * 
 	 * @return the highlight view
 	 */
 	public HighlightView getHighlightView() {
 		return mHighlightView;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch#onTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -311,18 +355,25 @@ public class CropImageView extends ImageViewTouch {
 
 	/**
 	 * Distance.
-	 *
-	 * @param x2 the x2
-	 * @param y2 the y2
-	 * @param x1 the x1
-	 * @param y1 the y1
+	 * 
+	 * @param x2
+	 *           the x2
+	 * @param y2
+	 *           the y2
+	 * @param x1
+	 *           the x1
+	 * @param y1
+	 *           the y1
 	 * @return the float
 	 */
+	@SuppressLint("FloatMath")
 	static float distance( float x2, float y2, float x1, float y1 ) {
 		return (float) Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch#onDoubleTapPost(float, float)
 	 */
 	@Override
@@ -331,19 +382,19 @@ public class CropImageView extends ImageViewTouch {
 	}
 
 	/**
-	 * The listener interface for receiving cropGesture events.
-	 * The class that is interested in processing a cropGesture
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addCropGestureListener<code> method. When
+	 * The listener interface for receiving cropGesture events. The class that is interested in processing a cropGesture event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addCropGestureListener<code> method. When
 	 * the cropGesture event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see CropGestureEvent
 	 */
 	class CropGestureListener extends GestureDetector.SimpleOnGestureListener {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDown(android.view.MotionEvent)
 		 */
 		@Override
@@ -363,34 +414,39 @@ public class CropImageView extends ImageViewTouch {
 			return super.onDown( e );
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.view.GestureDetector.SimpleOnGestureListener#onSingleTapConfirmed(android.view.MotionEvent)
 		 */
 		@Override
 		public boolean onSingleTapConfirmed( MotionEvent e ) {
 			mMotionHighlightView = null;
-			
-			
+
 			return super.onSingleTapConfirmed( e );
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.view.GestureDetector.SimpleOnGestureListener#onSingleTapUp(android.view.MotionEvent)
 		 */
 		@Override
 		public boolean onSingleTapUp( MotionEvent e ) {
 			mMotionHighlightView = null;
-			
-			if( mHighlightView != null && mMotionEdge == HighlightView.MOVE ){
-				
-				if( mHighlightSingleTapUpListener != null ){
+
+			if ( mHighlightView != null && mMotionEdge == HighlightView.MOVE ) {
+
+				if ( mHighlightSingleTapUpListener != null ) {
 					mHighlightSingleTapUpListener.onSingleTapUpConfirmed();
 				}
 			}
 			return super.onSingleTapUp( e );
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDoubleTap(android.view.MotionEvent)
 		 */
 		@Override
@@ -410,8 +466,11 @@ public class CropImageView extends ImageViewTouch {
 			return super.onDoubleTap( e );
 		}
 
-		/* (non-Javadoc)
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onScroll(android.view.MotionEvent, android.view.MotionEvent, float, float)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.view.GestureDetector.SimpleOnGestureListener#onScroll(android.view.MotionEvent, android.view.MotionEvent,
+		 * float, float)
 		 */
 		@Override
 		public boolean onScroll( MotionEvent e1, MotionEvent e2, float distanceX, float distanceY ) {
@@ -430,8 +489,11 @@ public class CropImageView extends ImageViewTouch {
 			}
 		}
 
-		/* (non-Javadoc)
-		 * @see android.view.GestureDetector.SimpleOnGestureListener#onFling(android.view.MotionEvent, android.view.MotionEvent, float, float)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.view.GestureDetector.SimpleOnGestureListener#onFling(android.view.MotionEvent, android.view.MotionEvent,
+		 * float, float)
 		 */
 		@Override
 		public boolean onFling( MotionEvent e1, MotionEvent e2, float velocityX, float velocityY ) {
@@ -451,36 +513,46 @@ public class CropImageView extends ImageViewTouch {
 	}
 
 	/**
-	 * The listener interface for receiving cropScale events.
-	 * The class that is interested in processing a cropScale
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addCropScaleListener<code> method. When
+	 * The listener interface for receiving cropScale events. The class that is interested in processing a cropScale event implements
+	 * this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addCropScaleListener<code> method. When
 	 * the cropScale event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see CropScaleEvent
 	 */
 	class CropScaleListener extends SimpleOnScaleGestureListener {
 
-		/* (non-Javadoc)
-		 * @see it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener#onScaleBegin(it.sephiroth.android.library.imagezoom.ScaleGestureDetector)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener#onScaleBegin(it.sephiroth.android
+		 * .library.imagezoom.ScaleGestureDetector)
 		 */
 		@Override
 		public boolean onScaleBegin( ScaleGestureDetector detector ) {
 			return super.onScaleBegin( detector );
 		}
 
-		/* (non-Javadoc)
-		 * @see it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener#onScaleEnd(it.sephiroth.android.library.imagezoom.ScaleGestureDetector)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener#onScaleEnd(it.sephiroth.android
+		 * .library.imagezoom.ScaleGestureDetector)
 		 */
 		@Override
 		public void onScaleEnd( ScaleGestureDetector detector ) {
 			super.onScaleEnd( detector );
 		}
 
-		/* (non-Javadoc)
-		 * @see it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener#onScale(it.sephiroth.android.library.imagezoom.ScaleGestureDetector)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * it.sephiroth.android.library.imagezoom.ScaleGestureDetector.SimpleOnScaleGestureListener#onScale(it.sephiroth.android.library
+		 * .imagezoom.ScaleGestureDetector)
 		 */
 		@Override
 		public boolean onScale( ScaleGestureDetector detector ) {
@@ -498,7 +570,7 @@ public class CropImageView extends ImageViewTouch {
 
 	/** The m aspect ratio. */
 	protected double mAspectRatio = 0;
-	
+
 	/** The m aspect ratio fixed. */
 	private boolean mAspectRatioFixed;
 
@@ -519,57 +591,115 @@ public class CropImageView extends ImageViewTouch {
 
 	/**
 	 * Sets the aspect ratio.
-	 *
-	 * @param value the value
-	 * @param isFixed the is fixed
+	 * 
+	 * @param value
+	 *           the value
+	 * @param isFixed
+	 *           the is fixed
 	 */
 	public void setAspectRatio( double value, boolean isFixed ) {
+		// Log.d( LOG_TAG, "setAspectRatio" );
+
 		if ( getDrawable() != null ) {
 			mAspectRatio = value;
 			mAspectRatioFixed = isFixed;
-			setImageDrawable( getDrawable() );
+			updateCropView( false );
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch#onBitmapChanged(android.graphics.drawable.Drawable)
 	 */
 	@Override
 	protected void onBitmapChanged( Drawable drawable ) {
 		super.onBitmapChanged( drawable );
-		updateCropView();
+		if ( null != getHandler() ) {
+			getHandler().post( new Runnable() {
+
+				@Override
+				public void run() {
+					updateCropView( true );
+				}
+			} );
+		}
 	}
 
 	/**
 	 * Update crop view.
 	 */
-	private void updateCropView() {
-		if ( getHighlightView() != null ) {
+	public void updateCropView( boolean bitmapChanged ) {
+
+		if ( bitmapChanged ) {
 			setHighlightView( null );
 		}
 
-		if ( getDrawable() != null ) {
+		if ( getDrawable() == null ) {
+			setHighlightView( null );
+			invalidate();
+			return;
+		}
+
+		if ( getHighlightView() != null ) {
+			updateAspectRatio( mAspectRatio, getHighlightView(), true );
+		} else {
 			HighlightView hv = new HighlightView( this );
 			hv.setMinSize( mCropMinSize );
-			updateAspectRatio( mAspectRatio, hv );
+			updateAspectRatio( mAspectRatio, hv, false );
 			setHighlightView( hv );
 		}
+		invalidate();
 	}
 
 	/**
 	 * Update aspect ratio.
-	 *
-	 * @param aspectRatio the aspect ratio
-	 * @param hv the hv
+	 * 
+	 * @param aspectRatio
+	 *           the aspect ratio
+	 * @param hv
+	 *           the hv
 	 */
-	private void updateAspectRatio( double aspectRatio, HighlightView hv ) {
+	private void updateAspectRatio( double aspectRatio, HighlightView hv, boolean animate ) {
+		// Log.d( LOG_TAG, "updateAspectRatio" );
 
 		float width = getDrawable().getIntrinsicWidth();
 		float height = getDrawable().getIntrinsicHeight();
-
 		Rect imageRect = new Rect( 0, 0, (int) width, (int) height );
+		Matrix mImageMatrix = getImageMatrix();
+		RectF cropRect = computeFinalCropRect( aspectRatio );
 
-		float cropWidth = Math.min( width, height ) * 0.8f;
+		if ( animate ) {
+			hv.animateTo( mImageMatrix, imageRect, cropRect, mAspectRatioFixed );
+		} else {
+			hv.setup( mImageMatrix, imageRect, cropRect, mAspectRatioFixed );
+		}
+	}
+
+	public void onConfigurationChanged( Configuration config ) {
+		// Log.d( LOG_TAG, "onConfigurationChanged" );
+		if ( null != getHandler() ) {
+			getHandler().postDelayed( new Runnable() {
+
+				@Override
+				public void run() {
+					setAspectRatio( mAspectRatio, getAspectRatioIsFixed() );
+				}
+			}, 500 );
+		}
+		postInvalidate();
+	}
+
+	private RectF computeFinalCropRect( double aspectRatio ) {
+		float scale = getScale();
+
+		float width = getDrawable().getIntrinsicWidth();
+		float height = getDrawable().getIntrinsicHeight();
+		
+		final int viewWidth = getWidth();
+		final int viewHeight = getHeight();
+
+		float cropWidth = Math.min( Math.min( width / scale, viewWidth ), Math.min( height / scale, viewHeight ) ) * 0.8f;
 		float cropHeight = cropWidth;
 
 		if ( aspectRatio != 0 ) {
@@ -579,24 +709,34 @@ public class CropImageView extends ImageViewTouch {
 				cropWidth = cropWidth * (float) aspectRatio;
 			}
 		}
-
-		float x = ( width - cropWidth ) / 2.0f;
-		float y = ( height - cropHeight ) / 2.0f;
-		RectF cropRect = new RectF( x, y, x + cropWidth, y + cropHeight );
+		
 		Matrix mImageMatrix = getImageMatrix();
-		hv.setup( mImageMatrix, imageRect, cropRect, mAspectRatioFixed );
+		
+		Matrix tmpMatrix = new Matrix();
+
+		if( !mImageMatrix.invert( tmpMatrix ) ){
+			Log.e( LOG_TAG, "cannot invert matrix" );
+		}
+		
+		RectF r = new RectF( 0, 0, viewWidth, viewHeight );
+		tmpMatrix.mapRect( r );
+
+		float x = r.centerX() - cropWidth / 2;
+		float y = r.centerY() - cropHeight / 2;
+		RectF cropRect = new RectF( x, y, x + cropWidth, y + cropHeight );
+		return cropRect;
 	}
-	
+
 	/**
 	 * Gets the aspect ratio.
-	 *
+	 * 
 	 * @return the aspect ratio
 	 */
-	public double getAspectRatio(){
+	public double getAspectRatio() {
 		return mAspectRatio;
 	}
-	
-	public boolean getAspectRatioIsFixed(){
+
+	public boolean getAspectRatioIsFixed() {
 		return mAspectRatioFixed;
 	}
 }

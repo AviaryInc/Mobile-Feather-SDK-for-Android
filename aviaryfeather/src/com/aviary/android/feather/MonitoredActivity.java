@@ -15,57 +15,61 @@ public class MonitoredActivity extends Activity {
 	private final ArrayList<LifeCycleListener> mListeners = new ArrayList<LifeCycleListener>();
 
 	/**
-	 * The listener interface for receiving lifeCycle events.
-	 * The class that is interested in processing a lifeCycle
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addLifeCycleListener<code> method. When
+	 * The listener interface for receiving lifeCycle events. The class that is interested in processing a lifeCycle event implements
+	 * this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addLifeCycleListener<code> method. When
 	 * the lifeCycle event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see LifeCycleEvent
 	 */
 	public static interface LifeCycleListener {
 
 		/**
 		 * Invoked when on activity is created.
-		 *
-		 * @param activity the activity
+		 * 
+		 * @param activity
+		 *           the activity
 		 */
 		public void onActivityCreated( MonitoredActivity activity );
 
 		/**
 		 * On activity destroyed.
-		 *
-		 * @param activity the activity
+		 * 
+		 * @param activity
+		 *           the activity
 		 */
 		public void onActivityDestroyed( MonitoredActivity activity );
 
 		/**
 		 * On activity paused.
-		 *
-		 * @param activity the activity
+		 * 
+		 * @param activity
+		 *           the activity
 		 */
 		public void onActivityPaused( MonitoredActivity activity );
 
 		/**
 		 * On activity resumed.
-		 *
-		 * @param activity the activity
+		 * 
+		 * @param activity
+		 *           the activity
 		 */
 		public void onActivityResumed( MonitoredActivity activity );
 
 		/**
 		 * On activity started.
-		 *
-		 * @param activity the activity
+		 * 
+		 * @param activity
+		 *           the activity
 		 */
 		public void onActivityStarted( MonitoredActivity activity );
 
 		/**
 		 * On activity stopped.
-		 *
-		 * @param activity the activity
+		 * 
+		 * @param activity
+		 *           the activity
 		 */
 		public void onActivityStopped( MonitoredActivity activity );
 	}
@@ -75,38 +79,62 @@ public class MonitoredActivity extends Activity {
 	 */
 	public static class LifeCycleAdapter implements LifeCycleListener {
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityCreated(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityCreated(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityCreated( MonitoredActivity activity ) {}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityDestroyed(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityDestroyed(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityDestroyed( MonitoredActivity activity ) {}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityPaused(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityPaused(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityPaused( MonitoredActivity activity ) {}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityResumed(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityResumed(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityResumed( MonitoredActivity activity ) {}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityStarted(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityStarted(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityStarted( MonitoredActivity activity ) {}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityStopped(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleListener#onActivityStopped(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityStopped( MonitoredActivity activity ) {}
@@ -114,8 +142,9 @@ public class MonitoredActivity extends Activity {
 
 	/**
 	 * Adds the life cycle listener.
-	 *
-	 * @param listener the listener
+	 * 
+	 * @param listener
+	 *           the listener
 	 */
 	public void addLifeCycleListener( LifeCycleListener listener ) {
 		if ( mListeners.contains( listener ) ) return;
@@ -124,14 +153,17 @@ public class MonitoredActivity extends Activity {
 
 	/**
 	 * Removes the life cycle listener.
-	 *
-	 * @param listener the listener
+	 * 
+	 * @param listener
+	 *           the listener
 	 */
 	public void removeLifeCycleListener( LifeCycleListener listener ) {
 		mListeners.remove( listener );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -145,7 +177,9 @@ public class MonitoredActivity extends Activity {
 		Tracker.upload();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onDestroy()
 	 */
 	@Override
@@ -156,7 +190,9 @@ public class MonitoredActivity extends Activity {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onStart()
 	 */
 	@Override
@@ -167,7 +203,9 @@ public class MonitoredActivity extends Activity {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onStop()
 	 */
 	@Override
@@ -178,7 +216,9 @@ public class MonitoredActivity extends Activity {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onPause()
 	 */
 	@Override
@@ -188,7 +228,9 @@ public class MonitoredActivity extends Activity {
 		super.onPause();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onResume()
 	 */
 	@Override

@@ -12,19 +12,21 @@ import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 /**
- * Default drawable used to display the {@link Toast} preview for panels like
- * the RedEye panel, Whiten, etc..
+ * Default drawable used to display the {@link Toast} preview for panels like the RedEye panel, Whiten, etc..
+ * 
  * @author alessandro
- *
+ * 
  */
 public class PreviewCircleDrawable extends Drawable {
+
 	Paint mPaint;
 	float mRadius;
 
 	/**
 	 * Instantiates a new preview circle drawable.
-	 *
-	 * @param radius the radius
+	 * 
+	 * @param radius
+	 *           the radius
 	 */
 	public PreviewCircleDrawable( final float radius ) {
 
@@ -39,8 +41,9 @@ public class PreviewCircleDrawable extends Drawable {
 
 	/**
 	 * Sets the paint.
-	 *
-	 * @param value the new paint
+	 * 
+	 * @param value
+	 *           the new paint
 	 */
 	public void setPaint( Paint value ) {
 		mPaint.set( value );
@@ -48,8 +51,9 @@ public class PreviewCircleDrawable extends Drawable {
 
 	/**
 	 * Sets the Paint style.
-	 *
-	 * @param value the new style
+	 * 
+	 * @param value
+	 *           the new style
 	 */
 	public void setStyle( Paint.Style value ) {
 		mPaint.setStyle( value );
@@ -57,8 +61,9 @@ public class PreviewCircleDrawable extends Drawable {
 
 	/**
 	 * Sets the radius.
-	 *
-	 * @param value the new radius
+	 * 
+	 * @param value
+	 *           the new radius
 	 */
 	public void setRadius( float value ) {
 		mRadius = value;
@@ -67,8 +72,9 @@ public class PreviewCircleDrawable extends Drawable {
 
 	/**
 	 * Sets the color.
-	 *
-	 * @param color the new color
+	 * 
+	 * @param color
+	 *           the new color
 	 */
 	public void setColor( int color ) {
 		mPaint.setColor( color );
@@ -76,8 +82,9 @@ public class PreviewCircleDrawable extends Drawable {
 
 	/**
 	 * Sets the blur.
-	 *
-	 * @param value the new blur
+	 * 
+	 * @param value
+	 *           the new blur
 	 */
 	public void setBlur( int value ) {
 		if ( value > 0 ) {
@@ -87,7 +94,9 @@ public class PreviewCircleDrawable extends Drawable {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#draw(android.graphics.Canvas)
 	 */
 	@Override
@@ -96,7 +105,9 @@ public class PreviewCircleDrawable extends Drawable {
 		canvas.drawCircle( rect.centerX(), rect.centerY(), mRadius, mPaint );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getOpacity()
 	 */
 	@Override
@@ -104,13 +115,17 @@ public class PreviewCircleDrawable extends Drawable {
 		return PixelFormat.OPAQUE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setAlpha(int)
 	 */
 	@Override
 	public void setAlpha( final int alpha ) {}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setColorFilter(android.graphics.ColorFilter)
 	 */
 	@Override

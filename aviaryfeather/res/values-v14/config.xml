@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<integer name="feather_config_bottom_animTime">300</integer>
-	<integer name="feather_cannister_in_animation_duration">300</integer>
-	<integer name="feather_bottombar_close_offset">300</integer>
-	<integer name="feather_bottombar_open_offset">100</integer>
+	<integer name="feather_adjust_tool_enable_3d_flip">1</integer>
 </resources>

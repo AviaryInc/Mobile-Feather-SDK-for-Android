@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/tool_image"
         style="@style/FeatherTool"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:clickable="true"
@@ -17,7 +17,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/feather_tool_icon_blemish" />
 
-    <TextView
+    <com.aviary.android.feather.widget.TextViewCustomFont
         android:id="@+id/tool_text"
         style="@style/FeatherToolText"
         android:layout_width="match_parent"

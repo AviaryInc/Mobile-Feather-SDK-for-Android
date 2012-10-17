@@ -1,14 +1,19 @@
 package com.aviary.android.feather.widget;
 
 abstract class IFlingRunnable implements Runnable {
-	
-	public static interface FlingRunnableView
-	{
-		boolean removeCallbacks(Runnable action);
-		boolean post(Runnable action);
+
+	public static interface FlingRunnableView {
+
+		boolean removeCallbacks( Runnable action );
+
+		boolean post( Runnable action );
+
 		void scrollIntoSlots();
+
 		void trackMotionScroll( int newX );
+
 		int getMinX();
+
 		int getMaxX();
 	}
 
@@ -16,15 +21,15 @@ abstract class IFlingRunnable implements Runnable {
 	protected boolean mShouldStopFling;
 	protected FlingRunnableView mParent;
 	protected int mAnimationDuration;
-	
+
 	protected static final String LOG_TAG = "fling";
-	
+
 	public IFlingRunnable( FlingRunnableView parent, int animationDuration ) {
 		mParent = parent;
 		mAnimationDuration = animationDuration;
 	}
-	
-	public int getLastFlingX(){
+
+	public int getLastFlingX() {
 		return mLastFlingX;
 	}
 
@@ -79,9 +84,13 @@ abstract class IFlingRunnable implements Runnable {
 		}
 	}
 
+	public abstract boolean springBack( int startX, int startY, int minX, int maxX, int minY, int maxY );
+
 	protected abstract boolean computeScrollOffset();
 
 	protected abstract int getCurrX();
+
+	public abstract float getCurrVelocity();
 
 	protected abstract void forceFinished( boolean finished );
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">Equilibre</string>
-	<string name="square">Carré</string>
+	<string name="border_name">Libre</string>
 	<string name="revert_dialog_title">Revenir à l\'original ?</string>
 	<string name="infoscreen_submit">En savoir plus !</string>
 	<string name="loading_image">Chargement de l\'image…</string>
@@ -14,6 +14,7 @@
 	<string name="crop">Recadrage</string>
 	<string name="feather_view_file">Afficher l\'image</string>
 	<string name="night_enhance_label">Nuit</string>
+	<string name="square">Carré</string>
 	<string name="feather_image_saved_in">Image enregistrée en %1$s. Voulez-vous voir l\'image enregistrée ?</string>
 	<string name="feather_plugin_filter_andy_name">Strato</string>
 	<string name="mirror">Mirroir</string>
@@ -24,7 +25,6 @@
 	<string name="menu_cancel">Annuler</string>
 	<string name="feather_save_progress">Enregistrement…</string>
 	<string name="save">Terminé</string>
-	<string name="effet_loading_title">Chargement</string>
 	<string name="feather_plugin_filter_thresh_name">Concorde</string>
 	<string name="confirm">Confirmer</string>
 	<string name="yes_leave">Quitter l\'éditeur</string>
@@ -40,7 +40,7 @@
 	<string name="sharpen">Netteté</string>
 	<string name="back_enhance_label">Rétroéclairé</string>
 	<string name="rotate">Pivoter</string>
-	<string name="feather_update">Mettre à jour</string>
+	<string name="tool">Outil</string>
 	<string name="contrast">Contraste</string>
 	<string name="sticker_name">Démo</string>
 	<string name="meme">Meme</string>
@@ -52,7 +52,7 @@
 	<string name="sticker_delete_message">Êtes-vous sûr de vouloir supprimer cet autocollant ?</string>
 	<string name="feather_plugin_filter_singe_name">Singe</string>
 	<string name="zoom_mode">Mode Zoom</string>
-	<string name="tool">Outil</string>
+	<string name="feather_borders">Limites</string>
 	<string name="attention">Attention</string>
 	<string name="get_more">Obtenir davantage</string>
 	<string name="menu_reset">Réinitialiser</string>
@@ -60,13 +60,15 @@
 	<string name="effects">Effets</string>
 	<string name="filter_name">Libre</string>
 	<string name="feather_close">Fermer</string>
-	<string name="feather_plugin_filter_aqua_name">Aqua</string>
+	<string name="feather_loading_title">Chargement</string>
 	<string name="feather_plugin_filter_softfocus_name">Soft focus</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">Supprimer</string>
+	<string name="feather_plugin_filter_aqua_name">Aqua</string>
 	<string name="sticker_pack_updated_1">Un pack d\'autocollants a été mis à jour. Cliquez sur ok pour actualiser la liste du pack</string>
 	<string name="sticker_pack_updated_2">Un pack d\'autocollants a été mis à jour. Nous devons actualiser le panneau actuel</string>
 	<string name="sticker_pack_updated_3">Un pack d\'autocollants a été mis à jour. Nous devons actualiser le panneau actuel. Voulez-vous appliquer l\'autocollant sélectionné ?</string>
+	<string name="feather_plugin_filter_purple_name">Brillance</string>
 	<string name="brightness">Luminosité</string>
 	<string name="auto_enhance_label">Auto</string>
 	<string name="feather_tool_temperature">Chaleur</string>
@@ -81,6 +83,6 @@
 	<string name="enhance">Renforcer</string>
 	<string name="tool_leave_question">Êtes-vous sûr de vouloir supprimer les modifications effectuées avec cet outil ?</string>
 	<string name="original">Original</string>
-	<string name="feather_plugin_filter_indiglow_name">Brillance</string>
+	<string name="feather_update">Mettre à jour</string>
 	<string name="whiten">Blanchir</string>
 </resources>

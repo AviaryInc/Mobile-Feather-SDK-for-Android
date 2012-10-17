@@ -16,43 +16,47 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 
 	/** The m brush highlight. */
 	private BrushHighlight mBrushHighlight;
-	
+
 	/** The m single tap confirmed listener. */
 	private OnSingleTapConfirmedListener mSingleTapConfirmedListener;
 
 	/**
-	 * The listener interface for receiving onSingleTapConfirmed events.
-	 * The class that is interested in processing a onSingleTapConfirmed
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnSingleTapConfirmedListener<code> method. When
+	 * The listener interface for receiving onSingleTapConfirmed events. The class that is interested in processing a
+	 * onSingleTapConfirmed event implements this interface, and the object created with that class is registered with a component
+	 * using the component's <code>addOnSingleTapConfirmedListener<code> method. When
 	 * the onSingleTapConfirmed event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnSingleTapConfirmedEvent
 	 */
 	public static interface OnSingleTapConfirmedListener {
 
 		/**
 		 * On single tap.
-		 *
-		 * @param x the x
-		 * @param y the y
+		 * 
+		 * @param x
+		 *           the x
+		 * @param y
+		 *           the y
 		 */
 		void onSingleTap( float x, float y );
 	}
 
 	/**
 	 * Instantiates a new image view touch brush.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public ImageViewTouchBrush( Context context, AttributeSet attrs ) {
 		super( context, attrs );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch#init()
 	 */
 	@Override
@@ -61,7 +65,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 		mBrushHighlight = new BrushHighlight( this );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
 	 */
 	@Override
@@ -70,7 +76,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 		mBrushHighlight.draw( canvas );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch#getGestureListener()
 	 */
 	@Override
@@ -78,7 +86,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 		return new GestureListenerNoDoubleTap();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onDetachedFromWindow()
 	 */
 	@Override
@@ -90,8 +100,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 
 	/**
 	 * Sets the on single tap confirmed listener.
-	 *
-	 * @param listener the new on single tap confirmed listener
+	 * 
+	 * @param listener
+	 *           the new on single tap confirmed listener
 	 */
 	public void setOnSingleTapConfirmedListener( OnSingleTapConfirmedListener listener ) {
 		mSingleTapConfirmedListener = listener;
@@ -99,9 +110,11 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 
 	/**
 	 * Do some stuff.
-	 *
-	 * @param x the x
-	 * @param y the y
+	 * 
+	 * @param x
+	 *           the x
+	 * @param y
+	 *           the y
 	 */
 	private void doSomeStuff( float x, float y ) {
 
@@ -119,7 +132,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 	 */
 	class GestureListenerNoDoubleTap extends GestureListener {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.view.GestureDetector.SimpleOnGestureListener#onSingleTapConfirmed(android.view.MotionEvent)
 		 */
 		@Override
@@ -128,7 +143,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 			return super.onSingleTapConfirmed( e );
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see it.sephiroth.android.library.imagezoom.ImageViewTouch.GestureListener#onDoubleTap(android.view.MotionEvent)
 		 */
 		@Override
@@ -140,14 +157,15 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 
 	/** The m brush end size. */
 	private float mBrushEndSize = 10.f;
-	
+
 	/** The m brush duration. */
 	private long mBrushDuration = 400;
 
 	/**
 	 * Sets the tap radius.
-	 *
-	 * @param f the new tap radius
+	 * 
+	 * @param f
+	 *           the new tap radius
 	 */
 	public void setTapRadius( float f ) {
 		mBrushEndSize = f;
@@ -155,8 +173,9 @@ public class ImageViewTouchBrush extends ImageViewTouch {
 
 	/**
 	 * Sets the brush duration.
-	 *
-	 * @param duration the new brush duration
+	 * 
+	 * @param duration
+	 *           the new brush duration
 	 */
 	public void setBrushDuration( long duration ) {
 		mBrushDuration = duration;

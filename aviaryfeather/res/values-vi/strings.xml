@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">Cân bằng</string>
-	<string name="square">Vuông</string>
+	<string name="border_name">Miễn phí</string>
 	<string name="revert_dialog_title">Trở về nguyên bản?</string>
 	<string name="infoscreen_submit">Tìm hiểu thêm!</string>
 	<string name="loading_image">Đang tải hình ảnh...</string>
@@ -13,6 +13,7 @@
 	<string name="saturation">Bão hòa</string>
 	<string name="crop">Cắt</string>
 	<string name="night_enhance_label">Ban đêm</string>
+	<string name="square">Vuông</string>
 	<string name="whiten">Làm trắng</string>
 	<string name="feather_plugin_filter_andy_name">Phân tầng</string>
 	<string name="mirror">Phản chiếu</string>
@@ -21,7 +22,6 @@
 	<string name="stickers">Nhãn dán</string>
 	<string name="menu_cancel">Hủy</string>
 	<string name="save">Xong</string>
-	<string name="effet_loading_title">Đang tải</string>
 	<string name="feather_plugin_filter_thresh_name">Concorde</string>
 	<string name="confirm">Xác nhận</string>
 	<string name="yes_leave">Thoát trình sửa ảnh</string>
@@ -36,7 +36,7 @@
 	<string name="sharpen">Độ sắc nét</string>
 	<string name="back_enhance_label">Ngược sáng</string>
 	<string name="rotate">Xoay</string>
-	<string name="feather_update">Cập nhật</string>
+	<string name="tool">Công cụ</string>
 	<string name="contrast">Tương phản</string>
 	<string name="sticker_name">Bản giới thiệu</string>
 	<string name="meme">Trào lưu</string>
@@ -47,20 +47,23 @@
 	<string name="sticker_delete_message">Bạn có chắc muốn xóa nhãn dán này không?</string>
 	<string name="feather_plugin_filter_singe_name">Cháy xém</string>
 	<string name="zoom_mode">Chế độ thu phóng</string>
-	<string name="tool">Công cụ</string>
+	<string name="feather_borders">Biên giới</string>
 	<string name="attention">Lưu ý</string>
 	<string name="get_more">Tải thêm</string>
+	<string name="feather_update">Cập nhật</string>
 	<string name="blemish">Làm trầy</string>
 	<string name="effects">Hiệu ứng</string>
 	<string name="filter_name">Miễn phí</string>
 	<string name="feather_close">Đóng</string>
-	<string name="feather_plugin_filter_aqua_name">Nước</string>
+	<string name="feather_loading_title">Đang tải</string>
 	<string name="feather_plugin_filter_softfocus_name">Làm mờ phần giữa</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">Xóa</string>
+	<string name="feather_plugin_filter_aqua_name">Nước</string>
 	<string name="sticker_pack_updated_1">Gói nhãn dán đã được cập nhật. Nhấp ok để tải lại danh sách gói</string>
 	<string name="sticker_pack_updated_2">Gói nhãn dán đã được cập nhật. Chúng tôi cần tải lại bảng điều khiển hiện tại</string>
 	<string name="sticker_pack_updated_3">Gói nhãn dán đã được cập nhật. Chúng tôi cần tải lại bảng điều khiển hiện tại. Bạn có muốn áp dụng nhãn dán hiện tại không?</string>
+	<string name="feather_plugin_filter_purple_name">Ánh sáng xanh</string>
 	<string name="brightness">Độ sáng</string>
 	<string name="auto_enhance_label">Tự động</string>
 	<string name="feather_tool_temperature">Ấm áp</string>
@@ -75,5 +78,4 @@
 	<string name="enhance">Tăng cường</string>
 	<string name="tool_leave_question">Bạn có chắc muốn hủy bỏ những thay đổi khỏi công cụ này không?</string>
 	<string name="original">Gốc</string>
-	<string name="feather_plugin_filter_indiglow_name">Ánh sáng xanh</string>
 </resources>

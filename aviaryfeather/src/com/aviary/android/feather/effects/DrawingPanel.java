@@ -77,7 +77,7 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	private DrawinTool mSelectedTool;
 	IToast mToast;
 	PreviewCircleDrawable mCircleDrawablePreview;
-	
+
 	// width and height of the bitmap
 	int mWidth, mHeight;
 	MoaActionList mActionList;
@@ -161,7 +161,7 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 		mConfig = getContext().getService( ConfigService.class );
 
 		mBrushSizes = mConfig.getSizeArray( R.array.feather_brush_sizes );
-		
+
 		int colors[] = mConfig.getIntArray( R.array.feather_default_colors );
 
 		mBrushColors = new int[colors.length + 2];
@@ -185,22 +185,21 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 		mGalleryColor.setSpacing( 0 );
 
 		mImageView = (ImageViewTouchAndDraw) getContentView().findViewById( R.id.image );
-		
+
 		mWidth = mBitmap.getWidth();
 		mHeight = mBitmap.getHeight();
-		
+
 		resetBitmap();
 
 		mSelectedColorPosition = 1;
 		mSelectedSizePosition = 0;
-		
+
 		// init the actionlist
 		mActionList = MoaActionFactory.actionList( "draw" );
 		mAction = mActionList.get( 0 );
 		mOperations = new ArrayList<MoaGraphicsOperationParameter>();
 		mCurrentOperation = null;
 		mAction.setValue( "commands", mOperations );
-		
 
 		initAdapter( mGallerySize, new GallerySizeAdapter( getContext().getBaseContext(), mBrushSizes ), 0 );
 		initAdapter( mGalleryColor, new GalleryColorAdapter( getContext().getBaseContext(), mBrushColors ), 1 );
@@ -231,7 +230,7 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 		}
 
 		gallery.setAdapter( adapter );
-		gallery.setSelection( selectedPosition, false );
+		gallery.setSelection( selectedPosition, false, true );
 	}
 
 	/**
@@ -240,7 +239,7 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	private void resetBitmap() {
 		mImageView.setImageBitmap( mBitmap, true, getContext().getCurrentImageViewMatrix(), UIConfiguration.IMAGE_VIEW_MAX_ZOOM );
 		( (ImageViewTouchAndDraw) mImageView ).setDrawMode( TouchMode.DRAW );
-		
+
 	}
 
 	/*
@@ -252,6 +251,7 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	public void onActivate() {
 		super.onActivate();
 
+		disableHapticIsNecessary( mGalleryColor, mGallerySize );
 		initToast();
 
 		mGallerySize.setOnItemsScrollListener( new OnItemsScrollListener() {
@@ -464,6 +464,8 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	 *           the new panel enabled
 	 */
 	public void setPanelEnabled( boolean value ) {
+		
+		if( !isActive() ) return;
 
 		if ( value ) {
 			getContext().restoreToolbarTitle();
@@ -556,18 +558,19 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onGenerateResult()
 	 */
 	@Override
-	protected void onGenerateResult( ) {
-		
+	protected void onGenerateResult() {
+
 		Bitmap bitmap = null;
-		
-		if( !mBitmap.isMutable() ){
+
+		if ( !mBitmap.isMutable() ) {
 			bitmap = BitmapUtils.copy( mBitmap, mBitmap.getConfig() );
 		} else {
 			bitmap = mBitmap;
 		}
-		
+
 		Canvas canvas = new Canvas( bitmap );
 		( (ImageViewTouchAndDraw) mImageView ).commit( canvas );
+		( (ImageViewTouchAndDraw) mImageView ).setImageBitmap( bitmap, false );
 		onComplete( bitmap, mActionList );
 	}
 
@@ -585,6 +588,9 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	 * The Class GallerySizeAdapter.
 	 */
 	class GallerySizeAdapter extends BaseAdapter {
+		
+		private static final int VALID_POSITION = 0;
+		private static final int INVALID_POSITION = 1;
 
 		/** The sizes. */
 		private int[] sizes;
@@ -653,21 +659,33 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 		public long getItemId( int position ) {
 			return position;
 		}
+		
+		@Override
+		public int getItemViewType( int position ) {
+			final boolean valid = position >= 0 && position < getCount();
+			return valid ? VALID_POSITION : INVALID_POSITION;
+		}
+		
+		@Override
+		public int getViewTypeCount() {
+			return 2;
+		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
 		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
 		 */
+		@SuppressWarnings("deprecation")
 		@Override
 		public View getView( int position, View convertView, ViewGroup parent ) {
 
-			final boolean valid = position >= 0 && position < getCount();
+			final int type = getItemViewType( position );
 			GalleryCircleDrawable mCircleDrawable = null;
 
 			View view;
 			if ( convertView == null ) {
-				if ( valid ) {
+				if ( type == VALID_POSITION ) {
 					view = mLayoutInflater.inflate( R.layout.feather_checkbox_button, mGallerySize, false );
 					mCircleDrawable = new GalleryCircleDrawable( 1, 0 );
 					Drawable unselectedBackground = new OverlayGalleryCheckboxDrawable( mRes, false, mCircleDrawable, 1.0f, 0.4f );
@@ -685,12 +703,12 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 				}
 			} else {
 				view = convertView;
-				if ( valid ) {
+				if ( type == VALID_POSITION ) {
 					mCircleDrawable = (GalleryCircleDrawable) view.getTag();
 				}
 			}
 
-			if ( valid && mCircleDrawable != null ) {
+			if ( type == VALID_POSITION && mCircleDrawable != null ) {
 				int size = (Integer) getItem( position );
 				float value = (float) size / mBiggest;
 				mCircleDrawable.update( value, 0 );
@@ -704,6 +722,9 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 	 * The Class GalleryColorAdapter.
 	 */
 	class GalleryColorAdapter extends BaseAdapter {
+		
+		private static final int VALID_POSITION = 0;
+		private static final int INVALID_POSITION = 1;
 
 		/** The colors. */
 		private int[] colors;
@@ -757,12 +778,24 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 		public long getItemId( int position ) {
 			return 0;
 		}
+		
+		@Override
+		public int getViewTypeCount() {
+			return 2;
+		}
+		
+		@Override
+		public int getItemViewType( int position ) {
+			final boolean valid = position >= 0 && position < getCount();
+			return valid ? VALID_POSITION : INVALID_POSITION;
+		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
 		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
 		 */
+		@SuppressWarnings("deprecation")
 		@Override
 		public View getView( int position, View convertView, ViewGroup parent ) {
 
@@ -770,10 +803,10 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 			View rubber = null;
 			View view;
 
-			final boolean valid = position >= 0 && position < getCount();
+			final int type = getItemViewType( position );
 
 			if ( convertView == null ) {
-				if ( valid ) {
+				if ( type == VALID_POSITION ) {
 					view = mLayoutInflater.inflate( R.layout.feather_color_button, mGalleryColor, false );
 					Drawable unselectedBackground = new OverlayGalleryCheckboxDrawable( mRes, false, null, 1.0f, 20 );
 					Drawable selectedBackground = new OverlayGalleryCheckboxDrawable( mRes, true, null, 1.0f, 20 );
@@ -794,24 +827,24 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 
 			} else {
 				view = convertView;
-				if ( valid ) {
+				if ( type == VALID_POSITION ) {
 					rubber = view.findViewById( R.id.rubber );
 					mask = (ImageView) view.findViewById( R.id.color_mask );
 				}
 			}
 
-			if ( valid ) {
+			if ( type == VALID_POSITION ) {
 				final int color = (Integer) getItem( position );
 				final boolean is_eraser = position == 0 || position == getCount() - 1;
 
 				view.setSelected( position == mSelectedColorPosition );
 
 				if ( !is_eraser ) {
-					
+
 					LayerDrawable layer = (LayerDrawable) mask.getDrawable();
 					GradientDrawable shape = (GradientDrawable) layer.findDrawableByLayerId( R.id.masked );
 					shape.setColor( color );
-					
+
 					mask.setVisibility( View.VISIBLE );
 					rubber.setVisibility( View.GONE );
 				} else {
@@ -823,26 +856,30 @@ public class DrawingPanel extends AbstractContentPanel implements OnDrawStartLis
 			return view;
 		}
 	}
-	
+
 	@Override
 	public void onStart() {
 		final float scale = mImageView.getScale();
-		mCurrentOperation = new MoaGraphicsOperationParameter( mBlur, ((float)mSize/scale)/mWidth, mColor, getSelectedTool() == DrawinTool.Erase ? 1 : 0 );
+		mCurrentOperation = new MoaGraphicsOperationParameter( mBlur, ( (float) mSize / scale ) / mWidth, mColor,
+				getSelectedTool() == DrawinTool.Erase ? 1 : 0 );
 	}
 
 	@Override
 	public void onMoveTo( float x, float y ) {
-		mCurrentOperation.addCommand( new MoaGraphicsCommandParameter( MoaGraphicsCommandParameter.COMMAND_MOVETO, x/mWidth, y/mHeight ) );
+		mCurrentOperation.addCommand( new MoaGraphicsCommandParameter( MoaGraphicsCommandParameter.COMMAND_MOVETO, x / mWidth, y
+				/ mHeight ) );
 	}
 
 	@Override
 	public void onLineTo( float x, float y ) {
-		mCurrentOperation.addCommand( new MoaGraphicsCommandParameter( MoaGraphicsCommandParameter.COMMAND_LINETO, x/mWidth, y/mHeight ) );
+		mCurrentOperation.addCommand( new MoaGraphicsCommandParameter( MoaGraphicsCommandParameter.COMMAND_LINETO, x / mWidth, y
+				/ mHeight ) );
 	}
 
 	@Override
 	public void onQuadTo( float x, float y, float x1, float y1 ) {
-		mCurrentOperation.addCommand( new MoaGraphicsCommandParameter( MoaGraphicsCommandParameter.COMMAND_QUADTO, x/mWidth, y/mHeight, x1/mWidth, y1/mHeight ) );
+		mCurrentOperation.addCommand( new MoaGraphicsCommandParameter( MoaGraphicsCommandParameter.COMMAND_QUADTO, x / mWidth, y
+				/ mHeight, x1 / mWidth, y1 / mHeight ) );
 	}
 
 	@Override

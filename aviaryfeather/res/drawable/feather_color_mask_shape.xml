@@ -4,13 +4,13 @@
     <!-- stroke -->
     <item>
         <shape android:shape="rectangle" android:dither="true" >
-            <corners android:radius="5dp" />
+            <corners android:radius="4dp" />
 
             <gradient
                 android:angle="90"
                 android:centerY="0.5"
                 android:endColor="#FF000000"
-                android:startColor="#FF3b3b3b"
+                android:startColor="#FF545454"
                 android:type="linear" />
         </shape>
     </item>
@@ -18,13 +18,13 @@
     <!-- fill color -->
     <item
         android:id="@+id/masked"
-        android:bottom="2sp"
-        android:left="2sp"
-        android:right="2sp"
-        android:top="2sp">
+        android:bottom="1sp"
+        android:left="1sp"
+        android:right="1sp"
+        android:top="1sp">
         
         <shape android:shape="rectangle" android:dither="true" >
-            <corners android:radius="4dp" />
+            <corners android:radius="3dp" />
             <solid android:color="#FFFFFFFF" />
         </shape>
     </item>
@@ -32,12 +32,12 @@
     <!-- shadow -->
     <item
         android:id="@+id/mask"
-        android:bottom="2sp"
-        android:left="2sp"
-        android:right="2sp"
-        android:top="2sp">
+        android:bottom="1sp"
+        android:left="1sp"
+        android:right="1sp"
+        android:top="1sp">
         <shape android:shape="rectangle" >
-            <corners android:radius="4dp" />
+            <corners android:radius="3dp" />
 
             <gradient
                 android:angle="90"

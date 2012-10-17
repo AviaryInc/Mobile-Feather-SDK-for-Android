@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +17,8 @@ import android.widget.ImageView;
 import com.aviary.android.feather.library.log.LoggerFactory;
 import com.aviary.android.feather.library.log.LoggerFactory.Logger;
 import com.aviary.android.feather.library.log.LoggerFactory.LoggerType;
+import com.aviary.android.feather.library.plugins.PluginManager.InternalPlugin;
+import com.aviary.android.feather.library.services.PluginService.StickerType;
 import com.aviary.android.feather.library.utils.BitmapUtils;
 import com.aviary.android.feather.library.utils.BitmapUtils.FLIP_MODE;
 import com.aviary.android.feather.library.utils.BitmapUtils.ROTATION;
@@ -26,6 +27,7 @@ import com.aviary.android.feather.utils.SimpleBitmapCache;
 
 /**
  * Load an internal asset asynchronous.
+ * 
  * @author alessandro
  */
 public class AssetsAsyncDownloadManager {
@@ -48,9 +50,9 @@ public class AssetsAsyncDownloadManager {
 
 	/** The current runnable queue. */
 	private final LinkedList<MyRunnable> mQueue;
-	
+
 	private SimpleBitmapCache mBitmapCache;
-	
+
 	private Logger logger = LoggerFactory.getLogger( "AssetAsyncDownloadManager", LoggerType.ConsoleLoggerType );
 
 	/**
@@ -65,7 +67,7 @@ public class AssetsAsyncDownloadManager {
 		mContext = context;
 		mHandler = handler;
 		mBitmapCache = new SimpleBitmapCache();
-		
+
 		nThreads = 1;
 		mQueue = new LinkedList<MyRunnable>();
 		threads = new PoolWorker[nThreads];
@@ -100,20 +102,20 @@ public class AssetsAsyncDownloadManager {
 	 */
 	public void shutDownNow() {
 		logger.info( "shutDownNow" );
-		
+
 		mStopped = true;
 
 		synchronized ( mQueue ) {
 			mQueue.clear();
 			mQueue.notify();
 		}
-		
+
 		clearCache();
 		mContext = null;
-		
+
 		for ( int i = 0; i < nThreads; i++ ) {
 			threads[i] = null;
-		}		
+		}
 	}
 
 	/**
@@ -147,7 +149,7 @@ public class AssetsAsyncDownloadManager {
 	 * @param view
 	 *           the view
 	 */
-	public void loadAsset( final Resources resource, final String srcFile, final Drawable background, final ImageView view ) {
+	public void loadStickerAsset( final InternalPlugin plugin, final String srcFile, final Drawable background, final ImageView view ) {
 
 		if ( mStopped || mThumbSize < 1 ) return;
 
@@ -166,7 +168,7 @@ public class AssetsAsyncDownloadManager {
 					message.what = THUMBNAIL_LOADED;
 					message.obj = new Thumb( bitmap, view.get() );
 				} else {
-					bitmap = downloadBitmap( resource, srcFile, background, view.get() );
+					bitmap = downloadBitmap( plugin, srcFile, background, view.get() );
 					if ( bitmap != null ) mBitmapCache.addBitmapToCache( srcFile, bitmap );
 
 					ImageView imageView = view.get();
@@ -286,24 +288,28 @@ public class AssetsAsyncDownloadManager {
 	 *           the view
 	 * @return the bitmap
 	 */
-	Bitmap downloadBitmap( Resources resource, String url, Drawable background, View view ) {
+	Bitmap downloadBitmap( InternalPlugin plugin, String url, Drawable background, View view ) {
 
 		if ( view == null ) return null;
 
 		try {
-			Bitmap bitmap = ImageLoader.loadFromAsset( resource, url, mThumbSize, mThumbSize );
+			Bitmap bitmap;
 			Bitmap result;
 
+			bitmap = ImageLoader.loadStickerBitmap( plugin, url, StickerType.Small, mThumbSize, mThumbSize );
+
 			if ( background != null ) {
-				result = BitmapUtils.createThumbnail( bitmap, mThumbSize, mThumbSize, ROTATION.ROTATE_NULL, FLIP_MODE.None, null,
-						background, 20, 10 );
+				result = BitmapUtils.createThumbnail( bitmap, mThumbSize, mThumbSize, ROTATION.ROTATE_NULL, FLIP_MODE.None, null, background, 20, 10 );
 			} else {
-				result = BitmapUtils.createThumbnail( bitmap, mThumbSize, mThumbSize, FLIP_MODE.None, 0 );
+				result = bitmap;
 			}
 
-			bitmap.recycle();
+			if( result != bitmap ){
+				bitmap.recycle();
+			}
 			return result;
 		} catch ( Exception e ) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -354,10 +360,10 @@ public class AssetsAsyncDownloadManager {
 							mQueue.wait();
 						} catch ( InterruptedException ignored ) {}
 					}
-					
+
 					try {
 						r = (Runnable) mQueue.removeFirst();
-					} catch( NoSuchElementException e ){
+					} catch ( NoSuchElementException e ) {
 						// queue is empty
 						break;
 					}
@@ -426,7 +432,6 @@ public class AssetsAsyncDownloadManager {
 	public void clearCache() {
 		mBitmapCache.clearCache();
 	}
-
 
 	/**
 	 * The Class Thumb.

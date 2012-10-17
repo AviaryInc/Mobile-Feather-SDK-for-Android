@@ -130,7 +130,7 @@ public class WheelRadio extends View {
 			mIndicatorBig = makeBitmap3( mRealRect.width() / mBigTicksCount, bottom - top, mLineBigSize );
 			mShader1 = new BitmapShader( mIndicatorBig, Shader.TileMode.REPEAT, Shader.TileMode.CLAMP );
 			mIndicator = makeIndicator( bottom - top, mLineBigSize );
-			mCorrectionX = (((float)mRealRect.width() / mBigTicksCount) % 1)*mBigTicksCount;
+			mCorrectionX = ( ( (float) mRealRect.width() / mBigTicksCount ) % 1 ) * mBigTicksCount;
 			mForceLayout = false;
 		}
 	}
@@ -138,7 +138,6 @@ public class WheelRadio extends View {
 	@Override
 	protected void onDraw( Canvas canvas ) {
 		super.onDraw( canvas );
-		
 
 		if ( mShader != null ) {
 			canvas.setDrawFilter( mFast );
@@ -147,20 +146,18 @@ public class WheelRadio extends View {
 
 			mPaint.setShader( mShader );
 			canvas.drawRect( mRealRect, mPaint );
-			
+
 			canvas.translate( mPaddingLeft - mLineBigSize / 2, 0 );
 			mPaint.setShader( mShader1 );
 			canvas.drawPaint( mPaint );
 
 			mPaint.setShader( null );
 
-			float rw = ((float) mRealRect.width() - (mCorrectionX)) / 2;
+			float rw = ( (float) mRealRect.width() - ( mCorrectionX ) ) / 2;
 			canvas.drawBitmap( mIndicator, ( rw + ( rw * mValue ) ), 0, mPaint );
 			canvas.restoreToCount( saveCount );
 		}
 	}
-
-	
 
 	/**
 	 * Sets the current value.

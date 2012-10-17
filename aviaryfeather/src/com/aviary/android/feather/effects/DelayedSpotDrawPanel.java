@@ -15,6 +15,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
+import android.util.FloatMath;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,8 +28,8 @@ import com.aviary.android.feather.graphics.CropCheckboxDrawable;
 import com.aviary.android.feather.graphics.DefaultGalleryCheckboxDrawable;
 import com.aviary.android.feather.graphics.GalleryCircleDrawable;
 import com.aviary.android.feather.graphics.PreviewCircleDrawable;
+import com.aviary.android.feather.library.filters.FilterLoaderFactory;
 import com.aviary.android.feather.library.filters.FilterLoaderFactory.Filters;
-import com.aviary.android.feather.library.filters.FilterService;
 import com.aviary.android.feather.library.filters.IFilter;
 import com.aviary.android.feather.library.filters.SpotBrushFilter;
 import com.aviary.android.feather.library.graphics.FlattenPath;
@@ -215,7 +216,8 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 		}
 
 		mGallery.setAdapter( new GalleryAdapter( getContext().getBaseContext(), mBrushSizes ) );
-		mGallery.setSelection( defaultOption, false );
+		mGallery.setSelection( defaultOption, false, true );
+		mSelectedPosition = defaultOption;
 	}
 
 	/*
@@ -227,11 +229,11 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 	public void onActivate() {
 		super.onActivate();
 
+		disableHapticIsNecessary( mGallery );
+
 		( (ImageViewSpotDraw) mImageView ).setOnDrawStartListener( this );
 		mBackgroundDrawThread.start();
 		mBackgroundDrawThread.setRadius( (float) Math.max( 1, mBrushSizes[0] ), mPreview.getWidth() );
-
-		// updateSelection( (View) mGallery.getSelectedView(), mGallery.getSelectedItemPosition() );
 
 		mToast = IToast.make( getContext().getBaseContext(), -1 );
 		mCircleDrawablePreview = new PreviewCircleDrawable( 0 );
@@ -248,6 +250,8 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 		} );
 		mLensButton.setVisibility( View.VISIBLE );
 
+		// TODO: check if selection is correct when panel opens
+		// updateSelection( (View) mGallery.getSelectedView(), mGallery.getSelectedItemPosition() );
 		contentReady();
 	}
 
@@ -441,8 +445,7 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 	 * @return the i filter
 	 */
 	protected IFilter createFilter() {
-		FilterService service = getContext().getService( FilterService.class );
-		return service.load( mFilterType );
+		return FilterLoaderFactory.get( mFilterType );
 	}
 
 	/*
@@ -654,7 +657,7 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 
 						float x = Math.abs( firstPoint.x - lastPoint.x );
 						float y = Math.abs( firstPoint.y - lastPoint.y );
-						float length = (float) Math.sqrt( x * x + y * y );
+						float length = FloatMath.sqrt( x * x + y * y );
 						float currentPosition = 0;
 						float lerp;
 
@@ -705,6 +708,9 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 	 */
 	class GalleryAdapter extends BaseAdapter {
 
+		private final int VALID_POSITION = 0;
+		private final int INVALID_POSITION = 1;
+		
 		private int[] sizes;
 		LayoutInflater mLayoutInflater;
 		Drawable checkbox_unselected, checkbox_selected;
@@ -756,16 +762,28 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 		public long getItemId( int position ) {
 			return 0;
 		}
+		
+		@Override
+		public int getViewTypeCount() {
+			return 2;
+		}
+		
+		@Override
+		public int getItemViewType( int position ) {
+			final boolean valid = position >= 0 && position < getCount();
+			return valid ? VALID_POSITION : INVALID_POSITION;
+		}		
 
 		/*
 		 * (non-Javadoc)
 		 * 
 		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
 		 */
+		@SuppressWarnings("deprecation")
 		@Override
 		public View getView( int position, View convertView, ViewGroup parent ) {
 
-			final boolean valid = position >= 0 && position < getCount();
+			final int type = getItemViewType( position );
 
 			GalleryCircleDrawable mCircleDrawable = null;
 			int biggest = sizes[sizes.length - 1];
@@ -773,7 +791,7 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 
 			View view;
 			if ( convertView == null ) {
-				if ( valid ) {
+				if ( type == VALID_POSITION ) {
 					mCircleDrawable = new GalleryCircleDrawable( 1, 0 );
 					view = mLayoutInflater.inflate( R.layout.feather_checkbox_button, mGallery, false );
 					StateListDrawable st = new StateListDrawable();
@@ -791,12 +809,12 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 				}
 			} else {
 				view = convertView;
-				if ( valid ) {
+				if ( type == VALID_POSITION ) {
 					mCircleDrawable = (GalleryCircleDrawable) view.getTag();
 				}
 			}
 
-			if ( mCircleDrawable != null && valid ) {
+			if ( mCircleDrawable != null && type == VALID_POSITION ) {
 				size = sizes[position];
 				float value = (float) size / biggest;
 				mCircleDrawable.update( value, 0 );
@@ -824,7 +842,7 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgress.setTitle( getContext().getBaseContext().getString( R.string.effet_loading_title ) );
+			mProgress.setTitle( getContext().getBaseContext().getString( R.string.feather_loading_title ) );
 			mProgress.setMessage( getContext().getBaseContext().getString( R.string.effect_loading_message ) );
 			mProgress.setIndeterminate( true );
 			mProgress.setCancelable( false );

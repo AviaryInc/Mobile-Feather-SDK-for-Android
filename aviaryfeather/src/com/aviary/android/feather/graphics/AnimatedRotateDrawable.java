@@ -30,6 +30,7 @@ import android.os.SystemClock;
 import android.util.AttributeSet;
 import com.aviary.android.feather.Constants;
 import com.aviary.android.feather.library.utils.ReflectionUtils;
+import com.aviary.android.feather.library.utils.ReflectionUtils.ReflectionException;
 
 /**
  * Rotate Drawable.
@@ -282,8 +283,13 @@ public class AnimatedRotateDrawable extends Drawable implements Drawable.Callbac
 	@Override
 	public void invalidateDrawable( Drawable who ) {
 		if ( Constants.ANDROID_SDK > 10 ) {
-			
-			final Callback callback = (Callback) ReflectionUtils.invokeMethod( this, "getCallback" );
+
+			Callback callback;
+			try {
+				callback = (Callback) ReflectionUtils.invokeMethod( this, "getCallback" );
+			} catch ( ReflectionException e ) {
+				return;
+			}
 			if ( callback != null ) {
 				callback.invalidateDrawable( this );
 			}
@@ -299,7 +305,12 @@ public class AnimatedRotateDrawable extends Drawable implements Drawable.Callbac
 	@Override
 	public void scheduleDrawable( Drawable who, Runnable what, long when ) {
 		if ( Constants.ANDROID_SDK > 10 ) {
-			final Callback callback = (Callback) ReflectionUtils.invokeMethod( this, "getCallback" );
+			Callback callback;
+			try {
+				callback = (Callback) ReflectionUtils.invokeMethod( this, "getCallback" );
+			} catch ( ReflectionException e ) {
+				return;
+			}
 			if ( callback != null ) {
 				callback.scheduleDrawable( this, what, when );
 			}
@@ -311,11 +322,16 @@ public class AnimatedRotateDrawable extends Drawable implements Drawable.Callbac
 	 * 
 	 * @see android.graphics.drawable.Drawable.Callback#unscheduleDrawable(android.graphics.drawable.Drawable, java.lang.Runnable)
 	 */
-	
+
 	@Override
 	public void unscheduleDrawable( Drawable who, Runnable what ) {
 		if ( Constants.ANDROID_SDK > 10 ) {
-			final Callback callback = (Callback) ReflectionUtils.invokeMethod( this, "getCallback" );
+			Callback callback;
+			try {
+				callback = (Callback) ReflectionUtils.invokeMethod( this, "getCallback" );
+			} catch ( ReflectionException e ) {
+				return;
+			}
 			if ( callback != null ) {
 				callback.unscheduleDrawable( this, what );
 			}

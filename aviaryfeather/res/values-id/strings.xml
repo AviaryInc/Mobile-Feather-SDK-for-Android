@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">Keseimbangan</string>
-	<string name="square">Persegi</string>
+	<string name="border_name">Gratis</string>
 	<string name="revert_dialog_title">Kembali ke asli?</string>
 	<string name="infoscreen_submit">Pelajari lebih lanjut!</string>
 	<string name="loading_image">Memuat Gambar...</string>
@@ -13,6 +13,7 @@
 	<string name="saturation">Saturasi</string>
 	<string name="crop">Crop</string>
 	<string name="night_enhance_label">Malam</string>
+	<string name="square">Persegi</string>
 	<string name="whiten">Putihkan</string>
 	<string name="feather_plugin_filter_andy_name">Strato</string>
 	<string name="mirror">Cermin</string>
@@ -21,7 +22,6 @@
 	<string name="stickers">Stiker</string>
 	<string name="menu_cancel">Batal</string>
 	<string name="save">Selesai</string>
-	<string name="effet_loading_title">Memuat</string>
 	<string name="feather_plugin_filter_thresh_name">Concorde</string>
 	<string name="confirm">Konfirmasi</string>
 	<string name="yes_leave">Keluar dari editor</string>
@@ -36,7 +36,7 @@
 	<string name="sharpen">Ketajaman</string>
 	<string name="back_enhance_label">Cahaya latar</string>
 	<string name="rotate">Putar</string>
-	<string name="feather_update">Memperbarui</string>
+	<string name="tool">Alat</string>
 	<string name="contrast">Kontras</string>
 	<string name="sticker_name">Demo</string>
 	<string name="meme">Tanda mata</string>
@@ -47,20 +47,23 @@
 	<string name="sticker_delete_message">Anda yakin ingin menghapus stiker ini?</string>
 	<string name="feather_plugin_filter_singe_name">Gosong</string>
 	<string name="zoom_mode">Mode Perbesaran</string>
-	<string name="tool">Alat</string>
+	<string name="feather_borders">Batas</string>
 	<string name="attention">Perhatian</string>
 	<string name="get_more">Dapatkan Lainnya</string>
+	<string name="feather_update">Memperbarui</string>
 	<string name="blemish">Belang</string>
 	<string name="effects">Efek</string>
 	<string name="filter_name">Gratis</string>
 	<string name="feather_close">Tutup</string>
-	<string name="feather_plugin_filter_aqua_name">Aqua</string>
+	<string name="feather_loading_title">Memuat</string>
 	<string name="feather_plugin_filter_softfocus_name">Fokus Lunak</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">Hapus</string>
+	<string name="feather_plugin_filter_aqua_name">Aqua</string>
 	<string name="sticker_pack_updated_1">Paket stiker telah diperbarui. Klik ok untuk memuat kembali daftar paket</string>
 	<string name="sticker_pack_updated_2">Paket stiker telah diperbarui. Kami harus memuat ulang panel yang sekarang</string>
 	<string name="sticker_pack_updated_3">Paket stiker telah diperbarui. Kami harus memuat ulang panel yang sekarang. Apakah Anda ingin menerapkan stiker yang sekarang?</string>
+	<string name="feather_plugin_filter_purple_name">Brilian</string>
 	<string name="brightness">Kecerahan</string>
 	<string name="auto_enhance_label">Otomatis</string>
 	<string name="feather_tool_temperature">Kehangatan</string>
@@ -75,5 +78,4 @@
 	<string name="enhance">Tingkatkan</string>
 	<string name="tool_leave_question">Anda yakin ingin membuang perubahan dari alat ini?</string>
 	<string name="original">Asli</string>
-	<string name="feather_plugin_filter_indiglow_name">Brilian</string>
 </resources>

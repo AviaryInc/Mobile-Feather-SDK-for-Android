@@ -21,7 +21,7 @@ import com.aviary.android.feather.library.services.EffectContext;
 // TODO: Auto-generated Javadoc
 /**
  * Base class for all the feather tools.
- *
+ * 
  * @author alessandro
  */
 public abstract class AbstractEffectPanel {
@@ -38,180 +38,182 @@ public abstract class AbstractEffectPanel {
 	static final int PROGRESS_MODAL_END = 7;
 
 	/**
-	 * If the current panel implements {@link #AbstractEffectPanel.ContentPanel} this listener
-	 * is used by the FilterManager to hide the main application image when the content panel send the 
-	 * onReady event.
+	 * If the current panel implements {@link #AbstractEffectPanel.ContentPanel} this listener is used by the FilterManager to hide the main
+	 * application image when the content panel send the onReady event.
+	 * 
 	 * @author alessandro
-	 *
+	 * 
 	 */
 	public static interface OnContentReadyListener {
 
 		/**
 		 * On ready. Panel is ready to display its contents
-		 *
-		 * @param panel the panel
+		 * 
+		 * @param panel
+		 *           the panel
 		 */
 		void onReady( AbstractEffectPanel panel );
 	};
-	
+
 	/**
-	 * The listener interface for receiving onProgress events.
-	 * The class that is interested in processing a onProgress
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnProgressListener<code> method. When
+	 * The listener interface for receiving onProgress events. The class that is interested in processing a onProgress event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnProgressListener<code> method. When
 	 * the onProgress event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnProgressEvent
 	 */
 	public static interface OnProgressListener {
-		
+
 		/**
 		 * On progress start.
 		 */
 		void onProgressStart();
-		
+
 		/**
 		 * On progress end.
 		 */
 		void onProgressEnd();
-		
+
 		/** a progress modal has been requested */
 		void onProgressModalStart();
-		
+
 		/** hide the progress modal */
 		void onProgressModalEnd();
 	}
 
 	/**
-	 * The listener interface for receiving onPreview events.
-	 * The class that is interested in processing a onPreview
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnPreviewListener<code> method. When
+	 * The listener interface for receiving onPreview events. The class that is interested in processing a onPreview event implements
+	 * this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnPreviewListener<code> method. When
 	 * the onPreview event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnPreviewEvent
 	 */
 	public static interface OnPreviewListener {
 
 		/**
 		 * Some parameters have changed and the effect has generated a new bitmap with the new parameters applied on it.
-		 *
-		 * @param result the result
+		 * 
+		 * @param result
+		 *           the result
 		 */
 		void onPreviewChange( Bitmap result );
 
 		/**
 		 * On preview change.
-		 *
-		 * @param colorFilter the color filter
+		 * 
+		 * @param colorFilter
+		 *           the color filter
 		 */
 		void onPreviewChange( ColorFilter colorFilter );
 	};
 
 	/**
-	 * The listener interface for receiving onApplyResult events.
-	 * The class that is interested in processing a onApplyResult
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnApplyResultListener<code> method. When
+	 * The listener interface for receiving onApplyResult events. The class that is interested in processing a onApplyResult event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnApplyResultListener<code> method. When
 	 * the onApplyResult event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnApplyResultEvent
 	 */
 	public static interface OnApplyResultListener {
 
 		/**
 		 * On complete.
-		 *
-		 * @param result the result
-		 * @param actions the actions executed
-		 * @param trackingAttributes the tracking attributes
+		 * 
+		 * @param result
+		 *           the result
+		 * @param actions
+		 *           the actions executed
+		 * @param trackingAttributes
+		 *           the tracking attributes
 		 */
 		void onComplete( Bitmap result, MoaActionList actions, HashMap<String, String> trackingAttributes );
 	}
 
 	/**
-	 * The listener interface for receiving onError events.
-	 * The class that is interested in processing a onError
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnErrorListener<code> method. When
+	 * The listener interface for receiving onError events. The class that is interested in processing a onError event implements
+	 * this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnErrorListener<code> method. When
 	 * the onError event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnErrorEvent
 	 */
 	public static interface OnErrorListener {
 
 		/**
 		 * On error.
-		 *
-		 * @param error the error
+		 * 
+		 * @param error
+		 *           the error
 		 */
 		void onError( String error );
+
 		void onError( String error, int yesLabel, OnClickListener yesListener, int noLabel, OnClickListener noListener );
 	}
 
 	/**
 	 * Base interface for all the tools.
-	 *
+	 * 
 	 * @author alessandro
 	 */
 	public static interface OptionPanel {
 
 		/**
 		 * Returns a view used to populate the option panel.
-		 *
-		 * @param inflater the inflater
-		 * @param viewGroup the view group
+		 * 
+		 * @param inflater
+		 *           the inflater
+		 * @param viewGroup
+		 *           the view group
 		 * @return the option view
 		 */
 		View getOptionView( LayoutInflater inflater, ViewGroup viewGroup );
 	}
 
 	/**
-	 * Base interface for the tools which will provide a
-	 * content panel.
+	 * Base interface for the tools which will provide a content panel.
 	 * 
 	 * @author alessandro
-	 *
+	 * 
 	 */
 	public static interface ContentPanel {
 
 		/**
 		 * Sets the on ready listener.
-		 *
-		 * @param listener the new on ready listener
+		 * 
+		 * @param listener
+		 *           the new on ready listener
 		 */
 		void setOnReadyListener( OnContentReadyListener listener );
 
 		/**
-		 * Creates and return a new view which will be placed over
-		 * the original image and its used by the contentpanel to draw
-		 * its own preview.
-		 *
-		 * @param inflater the inflater
+		 * Creates and return a new view which will be placed over the original image and its used by the contentpanel to draw its own
+		 * preview.
+		 * 
+		 * @param inflater
+		 *           the inflater
 		 * @return the content view
 		 */
 		View getContentView( LayoutInflater inflater );
 
 		/**
 		 * Return the current content view.
-		 *
+		 * 
 		 * @return the content view
 		 */
 		View getContentView();
 
 		/**
-		 * Returns the current Image display matrix used in the content panel. This is useful when the application
-		 * leaves the current tool and the original image needs to be updated using the content panel image. We need
-		 * to know the content's panel image matrix in order to present the same image size/position to the user.
-		 *
+		 * Returns the current Image display matrix used in the content panel. This is useful when the application leaves the current
+		 * tool and the original image needs to be updated using the content panel image. We need to know the content's panel image
+		 * matrix in order to present the same image size/position to the user.
+		 * 
 		 * @return the content display matrix
 		 */
 		Matrix getContentDisplayMatrix();
@@ -219,7 +221,7 @@ public abstract class AbstractEffectPanel {
 
 	/** If a tool need to store a copy of the input bitmap, use this member which will be automatically recycled. */
 	protected Bitmap mPreview;
-	
+
 	/**
 	 * This is the input Bitmap passed from the FilterManager class.
 	 */
@@ -242,8 +244,9 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Instantiates a new abstract effect panel.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public AbstractEffectPanel( EffectContext context ) {
 		mFilterContext = context;
@@ -253,59 +256,63 @@ public abstract class AbstractEffectPanel {
 		setIsChanged( false );
 		mLogger = LoggerFactory.getLogger( this.getClass().getSimpleName(), LoggerType.ConsoleLoggerType );
 	}
-	
-	
+
+	public Handler getHandler() {
+		return mListenerHandler;
+	}
+
 	/**
 	 * On progress start.
 	 */
-	protected void onProgressStart(){
+	protected void onProgressStart() {
 		if ( isActive() ) {
 			mListenerHandler.sendEmptyMessage( PROGRESS_START );
 		}
 	}
-	
+
 	/**
 	 * On progress end.
 	 */
-	protected void onProgressEnd(){
-		if( isActive() ){
+	protected void onProgressEnd() {
+		if ( isActive() ) {
 			mListenerHandler.sendEmptyMessage( PROGRESS_END );
 		}
 	}
-	
-	protected void onProgressModalStart(){
-		if( isActive() ){
+
+	protected void onProgressModalStart() {
+		if ( isActive() ) {
 			mListenerHandler.sendEmptyMessage( PROGRESS_MODAL_START );
 		}
 	}
-	
-	protected void onProgressModalEnd(){
-		if( isActive() ){
+
+	protected void onProgressModalEnd() {
+		if ( isActive() ) {
 			mListenerHandler.sendEmptyMessage( PROGRESS_MODAL_END );
 		}
 	}
-	
+
 	/**
 	 * Sets the panel enabled state.
-	 *
-	 * @param value the new enabled
+	 * 
+	 * @param value
+	 *           the new enabled
 	 */
-	public void setEnabled( boolean value ){
+	public void setEnabled( boolean value ) {
 		mEnabled = value;
 	}
-	
+
 	/**
 	 * Checks if is enabled.
-	 *
+	 * 
 	 * @return true, if is enabled
 	 */
-	public boolean isEnabled(){
+	public boolean isEnabled() {
 		return mEnabled;
 	}
 
 	/**
 	 * Return true if current panel state is between the onActivate/onDeactivate states.
-	 *
+	 * 
 	 * @return true, if is active
 	 */
 	public boolean isActive() {
@@ -314,7 +321,7 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Return true if current panel state is between onCreate/onDestroy states.
-	 *
+	 * 
 	 * @return true, if is created
 	 */
 	public boolean isCreated() {
@@ -323,8 +330,9 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Sets the on preview listener.
-	 *
-	 * @param listener the new on preview listener
+	 * 
+	 * @param listener
+	 *           the new on preview listener
 	 */
 	public void setOnPreviewListener( OnPreviewListener listener ) {
 		mListener = listener;
@@ -332,8 +340,9 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Sets the on apply result listener.
-	 *
-	 * @param listener the new on apply result listener
+	 * 
+	 * @param listener
+	 *           the new on apply result listener
 	 */
 	public void setOnApplyResultListener( OnApplyResultListener listener ) {
 		mApplyListener = listener;
@@ -341,51 +350,54 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Sets the on error listener.
-	 *
-	 * @param listener the new on error listener
+	 * 
+	 * @param listener
+	 *           the new on error listener
 	 */
 	public void setOnErrorListener( OnErrorListener listener ) {
 		mErrorListener = listener;
 	}
-	
+
 	/**
 	 * Sets the on progress listener.
-	 *
-	 * @param listener the new on progress listener
+	 * 
+	 * @param listener
+	 *           the new on progress listener
 	 */
-	public void setOnProgressListener( OnProgressListener listener ){
+	public void setOnProgressListener( OnProgressListener listener ) {
 		mProgressListener = listener;
 	}
 
 	/**
 	 * Called first when the panel has been created and it is ready to be shown.
-	 *
-	 * @param bitmap the bitmap
+	 * 
+	 * @param bitmap
+	 *           the bitmap
 	 */
 	public void onCreate( Bitmap bitmap ) {
-		mLogger.info("onCreate");
+		mLogger.info( "onCreate" );
 		mBitmap = bitmap;
 		mCreated = true;
 	}
-	
+
 	/**
 	 * panel is being shown.
 	 */
-	public void onOpening(){
+	public void onOpening() {
 		mLogger.info( "onOpening" );
-	}
-	
-	/**
-	 * panel is being closed.
-	 */
-	public void onClosing(){
-		mLogger.info("onClosing");
 	}
 
 	/**
-	 * Return true if you want to the back event has been handled by the current panel otherwise return false and the back button
-	 * will be handled by the system.
-	 *
+	 * panel is being closed.
+	 */
+	public void onClosing() {
+		mLogger.info( "onClosing" );
+	}
+
+	/**
+	 * Return true if you want the back event handled by the current panel otherwise return false and the back button will be handled
+	 * by the system.
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean onBackPressed() {
@@ -394,8 +406,9 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Device configuration changed.
-	 *
-	 * @param newConfig the new config
+	 * 
+	 * @param newConfig
+	 *           the new config
 	 */
 	public void onConfigurationChanged( Configuration newConfig, Configuration oldConfig ) {
 
@@ -420,7 +433,7 @@ public abstract class AbstractEffectPanel {
 	 * can then cancel the panel by calling {@link EffectContext#cancel()} on the current context
 	 * 
 	 * onCancel -> onCancelled -> onDeactivate -> onDestroy
-	 *
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean onCancel() {
@@ -442,7 +455,7 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Check if the current panel has pending changes.
-	 *
+	 * 
 	 * @return the checks if is changed
 	 */
 	public boolean getIsChanged() {
@@ -451,8 +464,9 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Sets the 'changed' status of the current panel.
-	 *
-	 * @param value the new checks if is changed
+	 * 
+	 * @param value
+	 *           the new checks if is changed
 	 */
 	protected void setIsChanged( boolean value ) {
 		mChanged = value;
@@ -489,33 +503,33 @@ public abstract class AbstractEffectPanel {
 							mListener.onPreviewChange( (ColorFilter) msg.obj );
 						}
 						break;
-						
+
 					case PREVIEW_BITMAP_CHANGED:
-						if( mListener != null && isActive() ){
-							mListener.onPreviewChange( (Bitmap ) msg.obj );
+						if ( mListener != null && isActive() ) {
+							mListener.onPreviewChange( (Bitmap) msg.obj );
 						}
 						break;
-						
+
 					case PROGRESS_START:
-						if( mProgressListener != null && isCreated() ){
+						if ( mProgressListener != null && isCreated() ) {
 							mProgressListener.onProgressStart();
 						}
 						break;
-						
+
 					case PROGRESS_END:
-						if( mProgressListener != null && isCreated() ){
+						if ( mProgressListener != null && isCreated() ) {
 							mProgressListener.onProgressEnd();
 						}
 						break;
-						
+
 					case PROGRESS_MODAL_START:
-						if( mProgressListener != null && isCreated() ){
+						if ( mProgressListener != null && isCreated() ) {
 							mProgressListener.onProgressModalStart();
 						}
 						break;
-						
+
 					case PROGRESS_MODAL_END:
-						if( mProgressListener != null && isCreated() ){
+						if ( mProgressListener != null && isCreated() ) {
 							mProgressListener.onProgressModalEnd();
 						}
 						break;
@@ -540,7 +554,7 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * Return the current Effect Context.
-	 *
+	 * 
 	 * @return the context
 	 */
 	public EffectContext getContext() {
@@ -581,8 +595,9 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * On preview changed.
-	 *
-	 * @param bitmap the bitmap
+	 * 
+	 * @param bitmap
+	 *           the bitmap
 	 */
 	protected void onPreviewChanged( Bitmap bitmap ) {
 		onPreviewChanged( bitmap, true );
@@ -590,9 +605,11 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * On preview changed.
-	 *
-	 * @param colorFilter the color filter
-	 * @param notify the notify
+	 * 
+	 * @param colorFilter
+	 *           the color filter
+	 * @param notify
+	 *           the notify
 	 */
 	protected void onPreviewChanged( ColorFilter colorFilter, boolean notify ) {
 		setIsChanged( colorFilter != null );
@@ -609,9 +626,11 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * On preview changed.
-	 *
-	 * @param bitmap the bitmap
-	 * @param notify the notify
+	 * 
+	 * @param bitmap
+	 *           the bitmap
+	 * @param notify
+	 *           the notify
 	 */
 	protected void onPreviewChanged( Bitmap bitmap, boolean notify ) {
 		setIsChanged( bitmap != null );
@@ -627,25 +646,27 @@ public abstract class AbstractEffectPanel {
 			msg.obj = bitmap;
 			mListenerHandler.sendMessage( msg );
 		}
-		
-		//if ( mListener != null && notify && isActive() ) mListener.onPreviewChange( bitmap );
+
+		// if ( mListener != null && notify && isActive() ) mListener.onPreviewChange( bitmap );
 	}
 
 	/**
 	 * Called when the current effect panel has completed the generation of the final bitmap.
-	 *
-	 * @param bitmap the bitmap
-	 * @param actions list of the current applied actions
+	 * 
+	 * @param bitmap
+	 *           the bitmap
+	 * @param actions
+	 *           list of the current applied actions
 	 */
 	protected void onComplete( Bitmap bitmap, MoaActionList actions ) {
 		mLogger.info( "onComplete" );
 		long t = System.currentTimeMillis();
 		if ( mApplyListener != null && isActive() ) {
-			
+
 			if ( !mTrackingAttributes.containsKey( "renderTime" ) )
 				mTrackingAttributes.put( "renderTime", Long.toString( t - mRenderTime ) );
 			mApplyListener.onComplete( bitmap, actions, mTrackingAttributes );
-			
+
 		}
 		mPreview = null;
 		mSaving = false;
@@ -653,52 +674,53 @@ public abstract class AbstractEffectPanel {
 
 	/**
 	 * On generic error.
-	 *
-	 * @param error the error
+	 * 
+	 * @param error
+	 *           the error
 	 */
 	protected void onGenericError( String error ) {
 		if ( mErrorListener != null && isActive() ) mErrorListener.onError( error );
 	}
-	
-	protected void onGenericError( int resId ){
-		if ( mErrorListener != null && isActive() ){
+
+	protected void onGenericError( int resId ) {
+		if ( mErrorListener != null && isActive() ) {
 			String label = getContext().getBaseContext().getString( resId );
 			mErrorListener.onError( label );
 		}
 	}
-	
-	protected void onGenericError( int resId, int yesLabel, OnClickListener yesListener, int noLabel, OnClickListener noListener ){
-		if ( mErrorListener != null && isActive() ){
+
+	protected void onGenericError( int resId, int yesLabel, OnClickListener yesListener, int noLabel, OnClickListener noListener ) {
+		if ( mErrorListener != null && isActive() ) {
 			String message = getContext().getBaseContext().getString( resId );
 			onGenericError( message, yesLabel, yesListener, noLabel, noListener );
 		}
 	}
-	
-	protected void onGenericError( String message, int yesLabel, OnClickListener yesListener, int noLabel, OnClickListener noListener ){
-		if ( mErrorListener != null && isActive() ){
+
+	protected void onGenericError( String message, int yesLabel, OnClickListener yesListener, int noLabel, OnClickListener noListener ) {
+		if ( mErrorListener != null && isActive() ) {
 			mErrorListener.onError( message, yesLabel, yesListener, noLabel, noListener );
 		}
 	}
 
 	/**
 	 * On generic error.
-	 *
-	 * @param e the e
+	 * 
+	 * @param e
+	 *           the e
 	 */
 	protected void onGenericError( Exception e ) {
 		onGenericError( e.getMessage() );
 	}
 
 	/**
-	 * This methods is called by the {@link #onSave()} method. 
-	 * Here the implementation of the current option panel should generate the result bitmap, even asyncronously,
-	 * and when completed it must call the {@link #onComplete(Bitmap)} event.
+	 * This methods is called by the {@link #onSave()} method. Here the implementation of the current option panel should generate
+	 * the result bitmap, even asyncronously, and when completed it must call the {@link #onComplete(Bitmap)} event.
 	 */
 	protected void onGenerateResult() {
 		onGenerateResult( null );
 	}
-	
-	protected void onGenerateResult( MoaActionList actions ){
+
+	protected void onGenerateResult( MoaActionList actions ) {
 		onComplete( mPreview, actions );
 	}
 }

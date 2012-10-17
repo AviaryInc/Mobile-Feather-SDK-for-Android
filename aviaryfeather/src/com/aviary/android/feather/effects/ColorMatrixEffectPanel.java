@@ -1,6 +1,6 @@
 package com.aviary.android.feather.effects;
 
-import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -14,12 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.aviary.android.feather.R;
 import com.aviary.android.feather.library.filters.AbstractColorMatrixFilter;
+import com.aviary.android.feather.library.filters.FilterLoaderFactory;
 import com.aviary.android.feather.library.filters.FilterLoaderFactory.Filters;
-import com.aviary.android.feather.library.filters.FilterService;
 import com.aviary.android.feather.library.services.ConfigService;
 import com.aviary.android.feather.library.services.EffectContext;
 import com.aviary.android.feather.library.utils.BitmapUtils;
-import com.aviary.android.feather.library.utils.ResourceManager;
 import com.aviary.android.feather.widget.Wheel;
 import com.aviary.android.feather.widget.Wheel.OnScrollListener;
 import com.aviary.android.feather.widget.WheelRadio;
@@ -47,8 +46,7 @@ public class ColorMatrixEffectPanel extends AbstractOptionPanel implements OnScr
 	public ColorMatrixEffectPanel( EffectContext context, Filters type, String resourcesBaseName ) {
 		super( context );
 
-		FilterService service = context.getService( FilterService.class );
-		mFilter = service.load( type );
+		mFilter = FilterLoaderFactory.get( type );
 
 		if ( mFilter instanceof AbstractColorMatrixFilter ) {
 			mMinValue = ( (AbstractColorMatrixFilter) mFilter ).getMinValue();
@@ -75,25 +73,19 @@ public class ColorMatrixEffectPanel extends AbstractOptionPanel implements OnScr
 	protected void onCreateIcons() {
 		ImageView icon_small = (ImageView) getOptionView().findViewById( R.id.icon_small );
 		ImageView icon_big = (ImageView) getOptionView().findViewById( R.id.icon_big );
-		ResourceManager manager = null;
+		Resources res = getContext().getBaseContext().getResources();
 
-		try {
-			manager = new ResourceManager( getContext().getBaseContext(), getContext().getBaseContext().getPackageName() );
-		} catch ( NameNotFoundException e ) {
-			e.printStackTrace();
-		}
-
-		if ( null != manager ) {
-			int id = manager.getIdentifier( "feather_tool_icon_" + mResourceName, "drawable" );
+		if ( null != res ) {
+			int id = res.getIdentifier( "feather_tool_icon_" + mResourceName, "drawable", getContext().getBaseContext().getPackageName() );
 			if ( id > 0 ) {
 
 				Bitmap big, small;
 
 				try {
-					Bitmap bmp = BitmapFactory.decodeResource( manager.getResources(), id );
-					big = ThumbnailUtils.extractThumbnail( bmp, (int)(bmp.getWidth() / 1.5), (int)(bmp.getHeight() / 1.5) );
+					Bitmap bmp = BitmapFactory.decodeResource( res, id );
+					big = ThumbnailUtils.extractThumbnail( bmp, (int) ( bmp.getWidth() / 1.5 ), (int) ( bmp.getHeight() / 1.5 ) );
 					bmp.recycle();
-					small = ThumbnailUtils.extractThumbnail( big, (int)(big.getWidth() / 1.5), (int)(big.getHeight() / 1.5) );
+					small = ThumbnailUtils.extractThumbnail( big, (int) ( big.getWidth() / 1.5 ), (int) ( big.getHeight() / 1.5 ) );
 				} catch ( OutOfMemoryError e ) {
 					e.printStackTrace();
 					return;
@@ -112,6 +104,8 @@ public class ColorMatrixEffectPanel extends AbstractOptionPanel implements OnScr
 	@Override
 	public void onActivate() {
 		super.onActivate();
+
+		disableHapticIsNecessary( mWheel );
 
 		int ticksCount = mWheel.getTicksCount();
 		mWheelRadio.setTicksNumber( ticksCount / 2, mWheel.getWheelScaleFactor() );

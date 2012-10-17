@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">平衡</string>
-	<string name="square">和諧</string>
+	<string name="border_name">免費</string>
 	<string name="revert_dialog_title">恢復到原始狀態？</string>
 	<string name="feather_plugin_filter_thresh_name">協和</string>
 	<string name="loading_image">正在載入圖片...</string>
@@ -13,6 +13,7 @@
 	<string name="saturation">飽和度</string>
 	<string name="crop">裁切</string>
 	<string name="night_enhance_label">夜晚</string>
+	<string name="square">和諧</string>
 	<string name="whiten">漂白</string>
 	<string name="feather_plugin_filter_andy_name">層雲</string>
 	<string name="mirror">鏡像</string>
@@ -21,7 +22,6 @@
 	<string name="stickers">貼紙</string>
 	<string name="menu_cancel">取消</string>
 	<string name="save">完成</string>
-	<string name="effet_loading_title">正在載入</string>
 	<string name="confirm">確認</string>
 	<string name="yes_leave">離開編輯器</string>
 	<string name="menu_reset">重置</string>
@@ -35,7 +35,7 @@
 	<string name="sharpen">銳利度</string>
 	<string name="back_enhance_label">背光</string>
 	<string name="rotate">旋轉</string>
-	<string name="feather_update">更新</string>
+	<string name="tool">工具</string>
 	<string name="contrast">對比度</string>
 	<string name="sticker_name">演示</string>
 	<string name="meme">瀰因</string>
@@ -46,20 +46,23 @@
 	<string name="sticker_delete_message">是否確定要移除這個貼紙？</string>
 	<string name="feather_plugin_filter_singe_name">燒灼</string>
 	<string name="zoom_mode">縮放模式</string>
-	<string name="tool">工具</string>
+	<string name="feather_borders">邊界</string>
 	<string name="attention">注意</string>
 	<string name="get_more">取得更多</string>
+	<string name="feather_update">更新</string>
 	<string name="blemish">清除污點</string>
 	<string name="effects">效果</string>
 	<string name="filter_name">免費</string>
 	<string name="feather_close">關閉</string>
-	<string name="feather_plugin_filter_aqua_name">水向</string>
+	<string name="feather_loading_title">正在載入</string>
 	<string name="feather_plugin_filter_softfocus_name">柔焦</string>
 	<string name="tool_name">鳥籠</string>
 	<string name="feather_delete">刪除</string>
+	<string name="feather_plugin_filter_aqua_name">水向</string>
 	<string name="sticker_pack_updated_1">貼紙包已經更新。 按一下「確定」重新載入包清單</string>
 	<string name="sticker_pack_updated_2">貼紙包已經更新。 我們需要重新載入當前視窗</string>
 	<string name="sticker_pack_updated_3">貼紙包已經更新。 我們需要重新載入當前視窗。 是否要套用當前貼紙？</string>
+	<string name="feather_plugin_filter_purple_name">絢彩</string>
 	<string name="brightness">亮度</string>
 	<string name="auto_enhance_label">自動</string>
 	<string name="feather_tool_temperature">熱情</string>
@@ -74,5 +77,4 @@
 	<string name="enhance">增強</string>
 	<string name="tool_leave_question">你確定要放棄在此工具中所做的修改？</string>
 	<string name="original">原始照片</string>
-	<string name="feather_plugin_filter_indiglow_name">絢彩</string>
 </resources>

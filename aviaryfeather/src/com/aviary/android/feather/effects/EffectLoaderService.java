@@ -20,18 +20,19 @@ public class EffectLoaderService extends EffectContextService {
 
 	/**
 	 * Instantiates a new effect loader service.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public EffectLoaderService( EffectContext context ) {
 		super( context );
 	}
 
 	/**
-	 * Passing a {@link EffectEntry} return an instance of {@link AbstractEffectPanel}
-	 * used to create the requested tool.
-	 *
-	 * @param entry the entry
+	 * Passing a {@link EffectEntry} return an instance of {@link AbstractEffectPanel} used to create the requested tool.
+	 * 
+	 * @param entry
+	 *           the entry
 	 * @return the abstract effect panel
 	 */
 	public AbstractEffectPanel load( EffectEntry entry ) {
@@ -49,7 +50,7 @@ public class EffectLoaderService extends EffectContextService {
 				break;
 
 			case SATURATION:
-				panel = new ColorMatrixEffectPanel( context, Filters.SATURATION, "saturation" );
+				panel = new NativeEffectRangePanel( context, Filters.SATURATION, "saturation" );
 				break;
 
 			case CONTRAST:
@@ -59,18 +60,23 @@ public class EffectLoaderService extends EffectContextService {
 			case SHARPNESS:
 				panel = new NativeEffectRangePanel( context, Filters.SHARPNESS, "sharpen" );
 				break;
-				
+
 			case COLORTEMP:
 				panel = new NativeEffectRangePanel( context, Filters.COLORTEMP, "temperature" );
 				break;
-				
+
 			case ENHANCE:
 				panel = new EnhanceEffectPanel( context, Filters.ENHANCE );
 				break;
 
 			case EFFECTS:
 				panel = new NativeEffectsPanel( context );
+				//panel = new EffectsPanel( context, FeatherIntent.PluginType.TYPE_FILTER );
 				break;
+
+			//case BORDERS:
+			//	panel = new EffectsPanel( context, FeatherIntent.PluginType.TYPE_BORDER );
+			//	break;
 
 			case CROP:
 				panel = new CropPanel( context );
@@ -119,11 +125,13 @@ public class EffectLoaderService extends EffectContextService {
 		mAllEntries = new EffectEntry[] {
 			new EffectEntry( FilterLoaderFactory.Filters.ENHANCE, R.drawable.feather_tool_icon_enhance, R.string.enhance ),
 			new EffectEntry( FilterLoaderFactory.Filters.EFFECTS, R.drawable.feather_tool_icon_effects, R.string.effects ),
+			/*new EffectEntry( FilterLoaderFactory.Filters.BORDERS, R.drawable.feather_tool_icon_borders, R.string.feather_borders ),*/
 			new EffectEntry( FilterLoaderFactory.Filters.STICKERS, R.drawable.feather_tool_icon_stickers, R.string.stickers ),
-			new EffectEntry( FilterLoaderFactory.Filters.ADJUST, R.drawable.feather_tool_icon_adjust, R.string.adjust ), 
+			new EffectEntry( FilterLoaderFactory.Filters.ADJUST, R.drawable.feather_tool_icon_adjust, R.string.adjust ),
 			new EffectEntry( FilterLoaderFactory.Filters.CROP, R.drawable.feather_tool_icon_crop, R.string.crop ),
 			new EffectEntry( FilterLoaderFactory.Filters.BRIGHTNESS, R.drawable.feather_tool_icon_brightness, R.string.brightness ),
-			new EffectEntry( FilterLoaderFactory.Filters.COLORTEMP, R.drawable.feather_tool_icon_temperature, R.string.feather_tool_temperature ),
+			new EffectEntry( FilterLoaderFactory.Filters.COLORTEMP, R.drawable.feather_tool_icon_temperature,
+					R.string.feather_tool_temperature ),
 			new EffectEntry( FilterLoaderFactory.Filters.CONTRAST, R.drawable.feather_tool_icon_contrast, R.string.contrast ),
 			new EffectEntry( FilterLoaderFactory.Filters.SATURATION, R.drawable.feather_tool_icon_saturation, R.string.saturation ),
 			new EffectEntry( FilterLoaderFactory.Filters.SHARPNESS, R.drawable.feather_tool_icon_sharpen, R.string.sharpen ),
@@ -132,27 +140,25 @@ public class EffectLoaderService extends EffectContextService {
 			new EffectEntry( FilterLoaderFactory.Filters.MEME, R.drawable.feather_tool_icon_meme, R.string.meme ),
 			new EffectEntry( FilterLoaderFactory.Filters.RED_EYE, R.drawable.feather_tool_icon_redeye, R.string.red_eye ),
 			new EffectEntry( FilterLoaderFactory.Filters.WHITEN, R.drawable.feather_tool_icon_whiten, R.string.whiten ),
-			new EffectEntry( FilterLoaderFactory.Filters.BLEMISH, R.drawable.feather_tool_icon_blemish, R.string.blemish ),
-			};
+			new EffectEntry( FilterLoaderFactory.Filters.BLEMISH, R.drawable.feather_tool_icon_blemish, R.string.blemish ), };
 	}
 
 	/**
 	 * Return a list of available effects.
-	 *
+	 * 
 	 * @return the effects
 	 */
 	public EffectEntry[] getEffects() {
 		return mAllEntries;
 	}
-	
-	public static final EffectEntry[] getAllEntries(){
+
+	public static final EffectEntry[] getAllEntries() {
 		return mAllEntries;
 	}
-	
+
 	/**
-	 * Check if the current application context has a valid folder "stickers" inside its
-	 * assets folder.
-	 *
+	 * Check if the current application context has a valid folder "stickers" inside its assets folder.
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean hasStickers() {
@@ -165,8 +171,9 @@ public class EffectLoaderService extends EffectContextService {
 		return false;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.library.services.EffectContextService#dispose()
 	 */
 	@Override

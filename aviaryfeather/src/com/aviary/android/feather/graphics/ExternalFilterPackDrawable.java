@@ -47,7 +47,7 @@ public class ExternalFilterPackDrawable extends Drawable {
 
 		bitmapWidth = effect.getWidth();
 		bitmapHeight = effect.getHeight();
-		
+
 		Log.d( "xxx", "size: " + bitmapWidth + "x" + bitmapHeight );
 
 		xRatio = (float) defaultWidth / bitmapWidth;
@@ -112,7 +112,6 @@ public class ExternalFilterPackDrawable extends Drawable {
 		mPaint.setColor( mColor );
 		canvas.drawRect( 17 / xRatio, 37 / yRatio, 145 / xRatio, 225 / yRatio, mPaint );
 
-
 		int saveCount = canvas.save( Canvas.MATRIX_SAVE_FLAG );
 		canvas.rotate( 90 );
 
@@ -125,10 +124,9 @@ public class ExternalFilterPackDrawable extends Drawable {
 		mPaint.setTextSize( titleTextSize );
 		canvas.drawText( mTitle, 69 / xRatio, -88 / yRatio, mPaint );
 
-		
 		// NUM EFFECTS
 		mPaint.setARGB( 255, 35, 31, 42 );
-		canvas.drawRect( 135 / yRatio, -16 / xRatio, 216 / yRatio, -57 / xRatio, mPaint );		
+		canvas.drawRect( 135 / yRatio, -16 / xRatio, 216 / yRatio, -57 / xRatio, mPaint );
 		mPaint.setColor( Color.WHITE );
 		mPaint.setTextSize( leftTextSize );
 		String text = mNumEffects + "fx";
@@ -137,7 +135,7 @@ public class ExternalFilterPackDrawable extends Drawable {
 
 		// restore canvas
 		canvas.restoreToCount( saveCount );
-		
+
 		// cannister
 		if ( null != mEffectBitmap ) {
 			bmp = mEffectBitmap.get();
@@ -157,10 +155,10 @@ public class ExternalFilterPackDrawable extends Drawable {
 
 	@Override
 	public void setColorFilter( ColorFilter cf ) {}
-	
+
 	@Override
 	public void setBounds( int left, int top, int right, int bottom ) {
 		Log.d( "xxx", "setBounds: " + left + ", " + top + ", " + right + ", " + bottom );
 		super.setBounds( left, top, right, bottom );
-	}	
+	}
 }

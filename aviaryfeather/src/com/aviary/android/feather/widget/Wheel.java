@@ -21,7 +21,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -30,13 +32,14 @@ import android.view.ViewConfiguration;
 import com.aviary.android.feather.R;
 import com.aviary.android.feather.graphics.LinearGradientDrawable;
 import com.aviary.android.feather.library.utils.ReflectionUtils;
+import com.aviary.android.feather.library.utils.ReflectionUtils.ReflectionException;
 import com.aviary.android.feather.widget.IFlingRunnable.FlingRunnableView;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Wheel.
  */
-public class Wheel extends View implements OnGestureListener, FlingRunnableView {
+public class Wheel extends View implements OnGestureListener, FlingRunnableView, VibrationWidget {
 
 	/** The Constant LOG_TAG. */
 	static final String LOG_TAG = "wheel";
@@ -174,7 +177,7 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 	Vibrator mVibrator;
 
 	/** The m vibration handler. */
-	Handler mVibrationHandler;
+	static Handler mVibrationHandler;
 
 	/**
 	 * Instantiates a new wheel.
@@ -249,11 +252,16 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 	 */
 	private void init( Context context, AttributeSet attrs, int defStyle ) {
 
-		if ( android.os.Build.VERSION.SDK_INT > 8 )
-			mFlingRunnable = (IFlingRunnable) ReflectionUtils.newInstance( "com.aviary.android.feather.widget.Fling9Runnable",
-					new Class<?>[] { FlingRunnableView.class, int.class }, this, mAnimationDuration );
-		else
+		if ( android.os.Build.VERSION.SDK_INT > 8 ) {
+			try {
+				mFlingRunnable = (IFlingRunnable) ReflectionUtils.newInstance( "com.aviary.android.feather.widget.Fling9Runnable",
+						new Class<?>[] { FlingRunnableView.class, int.class }, this, mAnimationDuration );
+			} catch ( ReflectionException e ) {
+				mFlingRunnable = new Fling8Runnable( this, mAnimationDuration );
+			}
+		} else {
 			mFlingRunnable = new Fling8Runnable( this, mAnimationDuration );
+		}
 
 		TypedArray a = context.obtainStyledAttributes( attrs, R.styleable.Wheel, defStyle, 0 );
 
@@ -270,8 +278,12 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 		setFocusable( true );
 		setFocusableInTouchMode( true );
 
-		mTouchSlop = ViewConfiguration.getTouchSlop();
-
+		mTouchSlop = ViewConfiguration.get( context ).getScaledTouchSlop();
+		
+		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+		
+		TypedValue.complexToDimensionPixelSize( 25, metrics  );
+		
 		try {
 			mVibrator = (Vibrator) context.getSystemService( Context.VIBRATOR_SERVICE );
 		} catch ( Exception e ) {
@@ -362,15 +374,20 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 		p.setDither( true );
 
 		p.setColor( 0xFF888888 );
-		RectF rect = new RectF( 0, 10, width, height - 25 );
+		
+		float h = (float)height;
+		float y = (h+10.0f)/10.0f;
+		float y2 = y*2.5f;
+		
+		RectF rect = new RectF( 0, y, width, height - y2 );
 		c.drawRoundRect( rect, ellipse, ellipse, p );
 
 		p.setColor( 0xFFFFFFFF );
-		rect = new RectF( 0, 25, width, height - 10 );
+		rect = new RectF( 0, y2, width, height - y );
 		c.drawRoundRect( rect, ellipse, ellipse, p );
 
 		p.setColor( 0xFFCCCCCC );
-		rect = new RectF( 0, 12, width, height - 12 );
+		rect = new RectF( 0, y+2, width, height - (y+2) );
 		c.drawRoundRect( rect, ellipse, ellipse, p );
 		return bm;
 	}
@@ -387,6 +404,9 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 	private static Bitmap makeBitmapIndicator( int width, int height ) {
 
 		float ellipse = width / 2;
+		float h = (float)height;
+		float y = (h+10.0f)/10.0f;
+		float y2 = y*2.5f;		
 
 		Bitmap bm = Bitmap.createBitmap( width, height, Bitmap.Config.ARGB_8888 );
 		Canvas c = new Canvas( bm );
@@ -395,14 +415,14 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 		p.setDither( true );
 
 		p.setColor( 0xFF666666 );
-		RectF rect = new RectF( 0, 10, width, height - 25 );
+		RectF rect = new RectF( 0, y, width, height - y2 );
 		c.drawRoundRect( rect, ellipse, ellipse, p );
 
 		p.setColor( 0xFFFFFFFF );
-		rect = new RectF( 0, 25, width, height - 10 );
+		rect = new RectF( 0, y2, width, height - y );
 		c.drawRoundRect( rect, ellipse, ellipse, p );
 
-		rect = new RectF( 0, 12, width, height - 12 );
+		rect = new RectF( 0, y+2, width, height - (y+2) );
 		int colors[] = { 0xFF0076E7, 0xFF00BBFF, 0xFF0076E7 };
 		float positions[] = { 0f, 0.5f, 1f };
 		LinearGradient gradient = new LinearGradient( 0, 0, width, 0, colors, positions, TileMode.REPEAT );
@@ -510,7 +530,8 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 		postInvalidate();
 	}
 
-	public void setVibrationEnabled( boolean value ) {
+	@Override
+	public synchronized void setVibrationEnabled( boolean value ) {
 		if ( !value ) {
 			mVibrationHandler = null;
 		} else {
@@ -533,6 +554,11 @@ public class Wheel extends View implements OnGestureListener, FlingRunnableView 
 				};
 			}
 		}
+	}
+
+	@Override
+	public synchronized boolean getVibrationEnabled() {
+		return mVibrationHandler != null;
 	}
 
 	/**

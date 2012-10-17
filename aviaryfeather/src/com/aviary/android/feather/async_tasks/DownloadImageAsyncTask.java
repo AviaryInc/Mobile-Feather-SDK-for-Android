@@ -15,20 +15,18 @@ import com.aviary.android.feather.library.utils.ImageLoader.ImageSizes;
 // TODO: Auto-generated Javadoc
 /**
  * Load an Image bitmap asynchronous.
- *
+ * 
  * @author alessandro
  */
 public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 
 	/**
-	 * The listener interface for receiving onImageDownload events.
-	 * The class that is interested in processing a onImageDownload
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnImageDownloadListener<code> method. When
+	 * The listener interface for receiving onImageDownload events. The class that is interested in processing a onImageDownload
+	 * event implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnImageDownloadListener<code> method. When
 	 * the onImageDownload event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnImageDownloadEvent
 	 */
 	public static interface OnImageDownloadListener {
@@ -40,19 +38,20 @@ public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 
 		/**
 		 * On download complete.
-		 *
-		 * @param result the result
+		 * 
+		 * @param result
+		 *           the result
 		 */
 		void onDownloadComplete( Bitmap result, ImageSizes sizes );
 
 		/**
 		 * On download error.
-		 *
-		 * @param error the error
+		 * 
+		 * @param error
+		 *           the error
 		 */
 		void onDownloadError( String error );
 	};
-
 
 	private OnImageDownloadListener mListener;
 	private Uri mUri;
@@ -61,8 +60,9 @@ public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 
 	/**
 	 * Instantiates a new download image async task.
-	 *
-	 * @param uri the uri
+	 * 
+	 * @param uri
+	 *           the uri
 	 */
 	public DownloadImageAsyncTask( Uri uri ) {
 		super();
@@ -71,14 +71,17 @@ public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 
 	/**
 	 * Sets the on load listener.
-	 *
-	 * @param listener the new on load listener
+	 * 
+	 * @param listener
+	 *           the new on load listener
 	 */
 	public void setOnLoadListener( OnImageDownloadListener listener ) {
 		mListener = listener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.os.AsyncTask#onPreExecute()
 	 */
 	@Override
@@ -89,7 +92,9 @@ public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 		mImageSize = new ImageLoader.ImageSizes();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.os.AsyncTask#doInBackground(Params[])
 	 */
 	@Override
@@ -107,7 +112,9 @@ public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 	 */
 	@Override
@@ -121,8 +128,8 @@ public class DownloadImageAsyncTask extends AsyncTask<Context, Void, Bitmap> {
 				mListener.onDownloadError( error );
 			}
 		}
-		
-		if( mImageSize.getOriginalSize() == null ){
+
+		if ( mImageSize.getOriginalSize() == null ) {
 			mImageSize.setOriginalSize( mImageSize.getNewSize() );
 		}
 

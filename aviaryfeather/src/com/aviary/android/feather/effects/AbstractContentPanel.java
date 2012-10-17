@@ -18,22 +18,29 @@ abstract class AbstractContentPanel extends AbstractOptionPanel implements Conte
 
 	/**
 	 * Instantiates a new abstract content panel.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public AbstractContentPanel( EffectContext context ) {
 		super( context );
 	}
 
-	/* (non-Javadoc)
-	 * @see com.aviary.android.feather.effects.AbstractEffectPanel.ContentPanel#setOnReadyListener(com.aviary.android.feather.effects.AbstractEffectPanel.OnContentReadyListener)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.aviary.android.feather.effects.AbstractEffectPanel.ContentPanel#setOnReadyListener(com.aviary.android.feather.effects.
+	 * AbstractEffectPanel.OnContentReadyListener)
 	 */
 	@Override
 	public final void setOnReadyListener( OnContentReadyListener listener ) {
 		mContentReadyListener = listener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel.ContentPanel#getContentView(android.view.LayoutInflater)
 	 */
 	@Override
@@ -42,7 +49,9 @@ abstract class AbstractContentPanel extends AbstractOptionPanel implements Conte
 		return mDrawingPanel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel.ContentPanel#getContentView()
 	 */
 	@Override
@@ -50,7 +59,9 @@ abstract class AbstractContentPanel extends AbstractOptionPanel implements Conte
 		return mDrawingPanel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractOptionPanel#onDispose()
 	 */
 	@Override
@@ -58,8 +69,10 @@ abstract class AbstractContentPanel extends AbstractOptionPanel implements Conte
 		mContentReadyListener = null;
 		super.onDispose();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractOptionPanel#setEnabled(boolean)
 	 */
 	@Override
@@ -69,8 +82,8 @@ abstract class AbstractContentPanel extends AbstractOptionPanel implements Conte
 	}
 
 	/**
-	 * Call this method when your tool is ready to display its overlay. After this call the main
-	 * context will remove the main image and will replace it with the content of this panel
+	 * Call this method when your tool is ready to display its overlay. After this call the main context will remove the main image
+	 * and will replace it with the content of this panel
 	 */
 	protected void contentReady() {
 		if ( mContentReadyListener != null && isActive() ) mContentReadyListener.onReady( this );
@@ -78,15 +91,16 @@ abstract class AbstractContentPanel extends AbstractOptionPanel implements Conte
 
 	/**
 	 * Generate content view.
-	 *
-	 * @param inflater the inflater
+	 * 
+	 * @param inflater
+	 *           the inflater
 	 * @return the view
 	 */
 	protected abstract View generateContentView( LayoutInflater inflater );
 
 	/**
 	 * Return the current content image display matrix.
-	 *
+	 * 
 	 * @return the content display matrix
 	 */
 	@Override

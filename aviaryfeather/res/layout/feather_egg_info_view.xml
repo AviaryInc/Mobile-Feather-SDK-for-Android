@@ -10,7 +10,7 @@
     android:paddingRight="20dp"
     android:orientation="vertical" >
 
-    <ToggleButton
+    <com.aviary.android.feather.widget.ToggleButtonCustomFont
         android:id="@+id/tool_image"
         style="@style/FeatherTool.Info"
         android:layout_width="match_parent"

@@ -6,19 +6,24 @@ import com.aviary.android.feather.MonitoredActivity;
 
 /**
  * Some thread related utilities.
- *
+ * 
  * @author alessandro
  */
 public class ThreadUtils {
 
 	/**
 	 * Start background job.
-	 *
-	 * @param activity the activity
-	 * @param title the title
-	 * @param message the message
-	 * @param job the job
-	 * @param handler the handler
+	 * 
+	 * @param activity
+	 *           the activity
+	 * @param title
+	 *           the title
+	 * @param message
+	 *           the message
+	 * @param job
+	 *           the job
+	 * @param handler
+	 *           the handler
 	 */
 	public static void startBackgroundJob( MonitoredActivity activity, String title, String message, Runnable job, Handler handler ) {
 		ProgressDialog dialog = ProgressDialog.show( activity, title, message, true, false );
@@ -31,13 +36,13 @@ public class ThreadUtils {
 	private static class BackgroundJob extends MonitoredActivity.LifeCycleAdapter implements Runnable {
 
 		private final MonitoredActivity mActivity;
-		
+
 		private final ProgressDialog mDialog;
-		
+
 		private final Runnable mJob;
-		
+
 		private final Handler mHandler;
-		
+
 		private final Runnable mCleanupRunner = new Runnable() {
 
 			@Override
@@ -49,11 +54,15 @@ public class ThreadUtils {
 
 		/**
 		 * Instantiates a new background job.
-		 *
-		 * @param activity the activity
-		 * @param job the job
-		 * @param dialog the dialog
-		 * @param handler the handler
+		 * 
+		 * @param activity
+		 *           the activity
+		 * @param job
+		 *           the job
+		 * @param dialog
+		 *           the dialog
+		 * @param handler
+		 *           the handler
 		 */
 		public BackgroundJob( MonitoredActivity activity, Runnable job, ProgressDialog dialog, Handler handler ) {
 			mActivity = activity;
@@ -63,7 +72,9 @@ public class ThreadUtils {
 			mHandler = handler;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -75,8 +86,12 @@ public class ThreadUtils {
 			}
 		}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleAdapter#onActivityDestroyed(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleAdapter#onActivityDestroyed(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityDestroyed( MonitoredActivity activity ) {
@@ -84,16 +99,24 @@ public class ThreadUtils {
 			mHandler.removeCallbacks( mCleanupRunner );
 		}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleAdapter#onActivityStopped(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleAdapter#onActivityStopped(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityStopped( MonitoredActivity activity ) {
 			mDialog.hide();
 		}
 
-		/* (non-Javadoc)
-		 * @see com.aviary.android.feather.MonitoredActivity.LifeCycleAdapter#onActivityStarted(com.aviary.android.feather.MonitoredActivity)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * com.aviary.android.feather.MonitoredActivity.LifeCycleAdapter#onActivityStarted(com.aviary.android.feather.MonitoredActivity
+		 * )
 		 */
 		@Override
 		public void onActivityStarted( MonitoredActivity activity ) {

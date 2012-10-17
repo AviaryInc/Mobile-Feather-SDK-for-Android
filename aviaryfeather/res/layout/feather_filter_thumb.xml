@@ -37,18 +37,12 @@
 
         <TextView
             android:id="@+id/text"
+            style="@style/FeatherEffectThumbText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="0dp"
             android:layout_weight="0"
-            android:ellipsize="marquee"
             android:gravity="center"
-            android:text="blur"
-            android:textColor="@color/feather_effect_text_color_selector"
-            android:textSize="@dimen/feather_filter_text_size" />
+            android:text="blur" />
     </LinearLayout>
 
 </RelativeLayout>

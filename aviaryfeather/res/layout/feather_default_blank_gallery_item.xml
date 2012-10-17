@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/feather_default_panel_checkbox_width"
     android:id="@+id/blank"
+    android:layout_width="?attr/optionPanelButtonCheckboxWidth"
     android:layout_height="match_parent" >
 
     <LinearLayout
-        style="@style/FeatherPanelCropCheckbox"
+        style="@style/FeatherPanelCustomCheckbox"
         android:layout_height="match_parent"
         android:clickable="false"
         android:focusable="false"

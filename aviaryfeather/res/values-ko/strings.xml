@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">밸런스</string>
-	<string name="square">사각형</string>
+	<string name="border_name">무료</string>
 	<string name="revert_dialog_title">원본으로 되돌릴까요?</string>
 	<string name="infoscreen_submit">자세히 알아보기!</string>
 	<string name="loading_image">이미지 로딩 중...</string>
@@ -13,6 +13,7 @@
 	<string name="saturation">채도</string>
 	<string name="crop">자르기</string>
 	<string name="night_enhance_label">밤</string>
+	<string name="square">사각형</string>
 	<string name="whiten">희게</string>
 	<string name="feather_plugin_filter_andy_name">층운</string>
 	<string name="mirror">거울</string>
@@ -21,7 +22,6 @@
 	<string name="stickers">스티커</string>
 	<string name="menu_cancel">취소</string>
 	<string name="save">완료</string>
-	<string name="effet_loading_title">로딩 중</string>
 	<string name="feather_plugin_filter_thresh_name">콩코드</string>
 	<string name="confirm">확인</string>
 	<string name="yes_leave">편집기 종료</string>
@@ -36,7 +36,7 @@
 	<string name="sharpen">명도</string>
 	<string name="back_enhance_label">배경 조명</string>
 	<string name="rotate">회전</string>
-	<string name="feather_update">업데이트</string>
+	<string name="tool">도구</string>
 	<string name="contrast">대비</string>
 	<string name="sticker_name">데모</string>
 	<string name="meme">밈</string>
@@ -47,20 +47,23 @@
 	<string name="sticker_delete_message">이 스티커를 제거할까요?</string>
 	<string name="feather_plugin_filter_singe_name">그을림</string>
 	<string name="zoom_mode">확대/축소 모드</string>
-	<string name="tool">도구</string>
+	<string name="feather_borders">테두리</string>
 	<string name="attention">주의</string>
 	<string name="get_more">더 가져오기</string>
+	<string name="feather_update">업데이트</string>
 	<string name="blemish">잡티</string>
 	<string name="effects">효과</string>
 	<string name="filter_name">무료</string>
 	<string name="feather_close">닫기</string>
-	<string name="feather_plugin_filter_aqua_name">아쿠아</string>
+	<string name="feather_loading_title">로딩 중</string>
 	<string name="feather_plugin_filter_softfocus_name">부드러운 초점</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">삭제</string>
+	<string name="feather_plugin_filter_aqua_name">아쿠아</string>
 	<string name="sticker_pack_updated_1">스티커 팩이 업데이트되었습니다. 팩 목록을 다시 로딩하려면 확인을 클릭하세요.</string>
 	<string name="sticker_pack_updated_2">스티커 팩이 업데이트되었습니다. 현재 패널을 다시 로딩해야 합니다.</string>
 	<string name="sticker_pack_updated_3">스티커 팩이 업데이트되었습니다. 현재 패널을 다시 로딩해야 합니다. 현재 스티커를 적용할까요?</string>
+	<string name="feather_plugin_filter_purple_name">인디글로우</string>
 	<string name="brightness">밝기</string>
 	<string name="auto_enhance_label">자동</string>
 	<string name="feather_tool_temperature">따뜻함</string>
@@ -75,5 +78,4 @@
 	<string name="enhance">개선</string>
 	<string name="tool_leave_question">이 도구로 적용한 변경 사항을 취소할까요?</string>
 	<string name="original">원본</string>
-	<string name="feather_plugin_filter_indiglow_name">인디글로우</string>
 </resources>

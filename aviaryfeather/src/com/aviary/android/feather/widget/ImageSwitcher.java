@@ -19,8 +19,9 @@ public class ImageSwitcher extends ViewSwitcher {
 
 	/**
 	 * Instantiates a new image switcher.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public ImageSwitcher( Context context ) {
 		super( context );
@@ -28,9 +29,11 @@ public class ImageSwitcher extends ViewSwitcher {
 
 	/**
 	 * Instantiates a new image switcher.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public ImageSwitcher( Context context, AttributeSet attrs ) {
 		super( context, attrs );
@@ -38,11 +41,15 @@ public class ImageSwitcher extends ViewSwitcher {
 
 	/**
 	 * Sets the image bitmap.
-	 *
-	 * @param bitmap the bitmap
-	 * @param reset the reset
-	 * @param matrix the matrix
-	 * @param maxZoom the max zoom
+	 * 
+	 * @param bitmap
+	 *           the bitmap
+	 * @param reset
+	 *           the reset
+	 * @param matrix
+	 *           the matrix
+	 * @param maxZoom
+	 *           the max zoom
 	 */
 	public void setImageBitmap( Bitmap bitmap, boolean reset, Matrix matrix, float maxZoom ) {
 		ImageViewTouch image = null;
@@ -62,11 +69,15 @@ public class ImageSwitcher extends ViewSwitcher {
 
 	/**
 	 * Sets the image drawable.
-	 *
-	 * @param drawable the drawable
-	 * @param reset the reset
-	 * @param matrix the matrix
-	 * @param maxZoom the max zoom
+	 * 
+	 * @param drawable
+	 *           the drawable
+	 * @param reset
+	 *           the reset
+	 * @param matrix
+	 *           the matrix
+	 * @param maxZoom
+	 *           the max zoom
 	 */
 	public void setImageDrawable( Drawable drawable, boolean reset, Matrix matrix, float maxZoom ) {
 		ImageViewTouch image = null;
@@ -86,8 +97,9 @@ public class ImageSwitcher extends ViewSwitcher {
 
 	/**
 	 * Sets the switch enabled.
-	 *
-	 * @param enable the new switch enabled
+	 * 
+	 * @param enable
+	 *           the new switch enabled
 	 */
 	public void setSwitchEnabled( boolean enable ) {
 		mSwitchEnabled = enable;

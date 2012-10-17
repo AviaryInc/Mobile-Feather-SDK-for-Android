@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aviary="http://schemas.android.com/apk/res/com.aviary.android.feather"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -20,7 +19,7 @@
         android:layout_width="match_parent"
          />
 
-    <TextView
+    <com.aviary.android.feather.widget.TextViewCustomFont
         android:id="@+id/text"
         style="@style/FeatherOptionPanelTextButton"
         android:singleLine="true"
@@ -29,7 +28,6 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="0dp"
         android:layout_weight="0"
-        android:ellipsize="marquee"
         android:text="@string/auto_enhance_label" />
 
 </LinearLayout>

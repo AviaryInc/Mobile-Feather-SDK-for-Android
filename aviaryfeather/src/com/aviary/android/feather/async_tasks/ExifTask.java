@@ -10,10 +10,10 @@ public class ExifTask extends BGCallable<String, Bundle> {
 	@Override
 	public Bundle call( Context context, String path ) {
 
-		if( path == null ){
+		if ( path == null ) {
 			return null;
 		}
-		
+
 		Bundle result = new Bundle();
 
 		try {

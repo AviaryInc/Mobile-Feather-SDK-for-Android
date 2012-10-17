@@ -24,8 +24,8 @@ import com.aviary.android.feather.graphics.CropCheckboxDrawable;
 import com.aviary.android.feather.graphics.DefaultGalleryCheckboxDrawable;
 import com.aviary.android.feather.graphics.GalleryCircleDrawable;
 import com.aviary.android.feather.graphics.PreviewCircleDrawable;
+import com.aviary.android.feather.library.filters.FilterLoaderFactory;
 import com.aviary.android.feather.library.filters.FilterLoaderFactory.Filters;
-import com.aviary.android.feather.library.filters.FilterService;
 import com.aviary.android.feather.library.filters.IFilter;
 import com.aviary.android.feather.library.filters.SpotBrushFilter;
 import com.aviary.android.feather.library.graphics.FlattenPath;
@@ -79,7 +79,7 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 	PreviewCircleDrawable mCircleDrawablePreview;
 
 	MoaActionList mActions = MoaActionFactory.actionList();
-	
+
 	private int mPreviewWidth, mPreviewHeight;
 
 	/**
@@ -155,12 +155,12 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 		( (ImageViewSpotDraw) mImageView ).setBrushSize( (float) mBrushSize );
 
 		mPreview = BitmapUtils.copy( mBitmap, Config.ARGB_8888 );
-		
+
 		mPreviewWidth = mPreview.getWidth();
 		mPreviewHeight = mPreview.getHeight();
-		
+
 		mImageView.setImageBitmap( mPreview, true, getContext().getCurrentImageViewMatrix(), UIConfiguration.IMAGE_VIEW_MAX_ZOOM );
-		
+
 		int defaultOption = config.getInteger( R.integer.feather_spot_brush_selected_size_index );
 		defaultOption = Math.min( Math.max( defaultOption, 0 ), mBrushSizes.length - 1 );
 
@@ -213,7 +213,7 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 			return;
 		}
 
-		mGallery.setSelection( 2, false );
+		mGallery.setSelection( 2, false, true );
 		mGallery.setAdapter( new GalleryAdapter( getContext().getBaseContext(), mBrushSizes ) );
 	}
 
@@ -434,8 +434,7 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 	 * @return the i filter
 	 */
 	protected IFilter createFilter() {
-		FilterService service = getContext().getService( FilterService.class );
-		return service.load( mFilterType );
+		return FilterLoaderFactory.get( mFilterType );
 	}
 
 	/*
@@ -695,8 +694,7 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 					float lerp;
 
 					if ( length == 0 ) {
-						( (SpotBrushFilter) mFilter ).draw( firstPoint.x / mPreviewWidth, firstPoint.y / mPreviewHeight,
-								mPreview );
+						( (SpotBrushFilter) mFilter ).draw( firstPoint.x / mPreviewWidth, firstPoint.y / mPreviewHeight, mPreview );
 						try {
 							mActions.add( (MoaAction) ( (SpotBrushFilter) mFilter ).getActions().get( 0 ).clone() );
 						} catch ( CloneNotSupportedException e ) {
@@ -863,7 +861,7 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgress.setTitle( getContext().getBaseContext().getString( R.string.effet_loading_title ) );
+			mProgress.setTitle( getContext().getBaseContext().getString( R.string.feather_loading_title ) );
 			mProgress.setMessage( getContext().getBaseContext().getString( R.string.effect_loading_message ) );
 			mProgress.setIndeterminate( true );
 			mProgress.setCancelable( false );
@@ -906,12 +904,12 @@ public class SpotDrawPanel extends AbstractContentPanel implements OnDrawListene
 
 			mLogger.info( "GenerateResultTask::onPostExecute" );
 
-			if( getContext().getBaseActivity().isFinishing() ) return;
-			
+			if ( getContext().getBaseActivity().isFinishing() ) return;
+
 			if ( mProgress.isShowing() ) {
 				try {
 					mProgress.dismiss();
-				} catch( IllegalArgumentException e ){}
+				} catch ( IllegalArgumentException e ) {}
 			}
 
 			onComplete( mPreview, mActions );

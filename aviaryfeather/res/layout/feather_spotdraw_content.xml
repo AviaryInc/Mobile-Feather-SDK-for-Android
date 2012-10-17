@@ -24,6 +24,6 @@
         android:padding="8dp"
         android:background="@drawable/feather_lens_button_background_selector"
         android:visibility="invisible"
-        android:src="@drawable/feather_lens_button_selector" />    
+        android:src="@drawable/feather_lens_normal" />    
     
 </RelativeLayout>

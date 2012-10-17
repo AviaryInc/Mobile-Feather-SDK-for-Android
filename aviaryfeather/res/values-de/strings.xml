@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="balance_enhance_label">Abgleich</string>
-	<string name="square">Quadrat</string>
+	<string name="border_name">Frei</string>
 	<string name="revert_dialog_title">Original wiederherstellen?</string>
 	<string name="infoscreen_submit">Weitere Informationen</string>
 	<string name="loading_image">Bild wird geladen…</string>
@@ -13,6 +13,7 @@
 	<string name="saturation">Sättigung</string>
 	<string name="crop">Ausschnitt</string>
 	<string name="night_enhance_label">Nacht</string>
+	<string name="square">Quadrat</string>
 	<string name="whiten">Aufhellen</string>
 	<string name="feather_plugin_filter_andy_name">Strato</string>
 	<string name="mirror">Spiegel</string>
@@ -21,7 +22,6 @@
 	<string name="stickers">Sticker</string>
 	<string name="menu_cancel">Abbr.</string>
 	<string name="save">Fertig</string>
-	<string name="effet_loading_title">Wird geladen…</string>
 	<string name="feather_plugin_filter_thresh_name">Concorde</string>
 	<string name="confirm">Bestätigen</string>
 	<string name="yes_leave">Editor verlassen</string>
@@ -36,7 +36,7 @@
 	<string name="sharpen">Schärfe</string>
 	<string name="back_enhance_label">Gegenlicht</string>
 	<string name="rotate">Drehen</string>
-	<string name="feather_update">Aktualisieren</string>
+	<string name="tool">Werkzeug</string>
 	<string name="contrast">Kontrast</string>
 	<string name="sticker_name">Demo</string>
 	<string name="meme">Mem</string>
@@ -47,20 +47,23 @@
 	<string name="sticker_delete_message">Möchten Sie diesen Sticker wirklich entfernen?</string>
 	<string name="feather_plugin_filter_singe_name">Abgesengt</string>
 	<string name="zoom_mode">Zoom-Modus</string>
-	<string name="tool">Werkzeug</string>
+	<string name="feather_borders">Borders</string>
 	<string name="attention">Achtung</string>
 	<string name="get_more">Holen Sie sich mehr</string>
+	<string name="feather_update">Aktualisieren</string>
 	<string name="blemish">Heilen</string>
 	<string name="effects">Effekte</string>
 	<string name="filter_name">Frei</string>
 	<string name="feather_close">Schließen</string>
-	<string name="feather_plugin_filter_aqua_name">Aqua</string>
+	<string name="feather_loading_title">Wird geladen…</string>
 	<string name="feather_plugin_filter_softfocus_name">Weicher Fokus</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_delete">Löschen</string>
+	<string name="feather_plugin_filter_aqua_name">Aqua</string>
 	<string name="sticker_pack_updated_1">Ein Stickerpack wurde aktualisiert. Klicken Sie OK, um die Pack-Liste erneut zu laden.</string>
 	<string name="sticker_pack_updated_2">Ein Stickerpack wurde aktualisiert. Der aktuelle Bereich muss neu geladen werden.</string>
 	<string name="sticker_pack_updated_3">Ein Stickerpack wurde aktualisiert. Der aktuelle Bereich muss neu geladen werden. Möchten Sie den aktuellen Sticker hinzufügen?</string>
+	<string name="feather_plugin_filter_purple_name">Indiglow</string>
 	<string name="brightness">Helligkeit</string>
 	<string name="auto_enhance_label">Auto</string>
 	<string name="feather_tool_temperature">Wärme</string>
@@ -75,5 +78,4 @@
 	<string name="enhance">Verbessern</string>
 	<string name="tool_leave_question">Sind Sie sicher, dass Sie die Änderungen verwerfen möchten?</string>
 	<string name="original">Original</string>
-	<string name="feather_plugin_filter_indiglow_name">Indiglow</string>
 </resources>

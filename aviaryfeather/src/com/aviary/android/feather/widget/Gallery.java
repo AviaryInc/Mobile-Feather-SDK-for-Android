@@ -17,6 +17,7 @@
 package com.aviary.android.feather.widget;
 
 import android.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Transformation;
 import com.aviary.android.feather.library.utils.ReflectionUtils;
+import com.aviary.android.feather.library.utils.ReflectionUtils.ReflectionException;
 import com.aviary.android.feather.widget.IFlingRunnable.FlingRunnableView;
 
 // TODO: Auto-generated Javadoc
@@ -56,63 +58,73 @@ import com.aviary.android.feather.widget.IFlingRunnable.FlingRunnableView;
  * @attr ref android.R.styleable#Gallery_spacing
  * @attr ref android.R.styleable#Gallery_gravity
  */
-public class Gallery extends AbsSpinner implements GestureDetector.OnGestureListener, FlingRunnableView {
+public class Gallery extends AbsSpinner implements GestureDetector.OnGestureListener, FlingRunnableView, VibrationWidget {
 
 	/**
-	 * The listener interface for receiving onItemsScroll events.
-	 * The class that is interested in processing a onItemsScroll
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addOnItemsScrollListener<code> method. When
+	 * The listener interface for receiving onItemsScroll events. The class that is interested in processing a onItemsScroll event
+	 * implements this interface, and the object created with that class is registered with a component using the component's
+	 * <code>addOnItemsScrollListener<code> method. When
 	 * the onItemsScroll event occurs, that object's appropriate
 	 * method is invoked.
-	 *
+	 * 
 	 * @see OnItemsScrollEvent
 	 */
 	public interface OnItemsScrollListener {
 
 		/**
 		 * On scroll started.
-		 *
-		 * @param parent the parent
-		 * @param view the view
-		 * @param position the position
-		 * @param id the id
+		 * 
+		 * @param parent
+		 *           the parent
+		 * @param view
+		 *           the view
+		 * @param position
+		 *           the position
+		 * @param id
+		 *           the id
 		 */
 		void onScrollStarted( AdapterView<?> parent, View view, int position, long id );
 
 		/**
 		 * On scroll.
-		 *
-		 * @param parent the parent
-		 * @param view the view
-		 * @param position the position
-		 * @param id the id
+		 * 
+		 * @param parent
+		 *           the parent
+		 * @param view
+		 *           the view
+		 * @param position
+		 *           the position
+		 * @param id
+		 *           the id
 		 */
 		void onScroll( AdapterView<?> parent, View view, int position, long id );
 
 		/**
 		 * On scroll finished.
-		 *
-		 * @param parent the parent
-		 * @param view the view
-		 * @param position the position
-		 * @param id the id
+		 * 
+		 * @param parent
+		 *           the parent
+		 * @param view
+		 *           the view
+		 * @param position
+		 *           the position
+		 * @param id
+		 *           the id
 		 */
 		void onScrollFinished( AdapterView<?> parent, View view, int position, long id );
 	}
 
 	/** The Constant TAG. */
 	private static final String TAG = "gallery";
-	
+
 	/** The Constant MSG_VIBRATE. */
 	private static final int MSG_VIBRATE = 1;
 
 	/** Vibration. */
 	Vibrator mVibrator;
-	
+
 	/** The m vibration handler. */
-	Handler mVibrationHandler;
+	static Handler mVibrationHandler;
 
 	/** set child selected automatically. */
 	private boolean mAutoSelectChild = false;
@@ -237,14 +249,15 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 	 * If true, mFirstPosition is the position of the rightmost child, and the children are ordered right to left.
 	 */
 	private boolean mIsRtl = true;
-	
+
 	/** The m last motion value. */
 	private int mLastMotionValue;
 
 	/**
 	 * Instantiates a new gallery.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	public Gallery( Context context ) {
 		this( context, null );
@@ -252,9 +265,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Instantiates a new gallery.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
 	 */
 	public Gallery( Context context, AttributeSet attrs ) {
 		this( context, attrs, R.attr.galleryStyle );
@@ -262,10 +277,13 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Instantiates a new gallery.
-	 *
-	 * @param context the context
-	 * @param attrs the attrs
-	 * @param defStyle the def style
+	 * 
+	 * @param context
+	 *           the context
+	 * @param attrs
+	 *           the attrs
+	 * @param defStyle
+	 *           the def style
 	 */
 	public Gallery( Context context, AttributeSet attrs, int defStyle ) {
 		super( context, attrs, defStyle );
@@ -273,12 +291,21 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		mGestureDetector = new GestureDetector( context, this );
 		mGestureDetector.setIsLongpressEnabled( false );
 
-		mTouchSlop = ViewConfiguration.getTouchSlop();
+		ViewConfiguration configuration = ViewConfiguration.get( context );
+		mTouchSlop = configuration.getScaledTouchSlop();
 
-		if ( android.os.Build.VERSION.SDK_INT > 8 )
-			mFlingRunnable = (IFlingRunnable) ReflectionUtils.newInstance( "com.aviary.android.feather.widget.Fling9Runnable", new Class<?>[] { FlingRunnableView.class, int.class }, this, mAnimationDuration );
-		else
+		if ( android.os.Build.VERSION.SDK_INT > 8 ) {
+			try {
+				mFlingRunnable = (IFlingRunnable) ReflectionUtils.newInstance( "com.aviary.android.feather.widget.Fling9Runnable",
+						new Class<?>[] { FlingRunnableView.class, int.class }, this, mAnimationDuration );
+			} catch ( ReflectionException e ) {
+				mFlingRunnable = new Fling8Runnable( this, mAnimationDuration );
+			}
+		} else {
 			mFlingRunnable = new Fling8Runnable( this, mAnimationDuration );
+		}
+
+		Log.d( VIEW_LOG_TAG, "fling class: " + mFlingRunnable.getClass().getName() );
 
 		try {
 			mVibrator = (Vibrator) context.getSystemService( Context.VIBRATOR_SERVICE );
@@ -287,29 +314,47 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		}
 
 		if ( mVibrator != null ) {
-			mVibrationHandler = new Handler() {
-
-				@Override
-				public void handleMessage( Message msg ) {
-					super.handleMessage( msg );
-
-					switch ( msg.what ) {
-						case MSG_VIBRATE:
-							try {
-								mVibrator.vibrate( 10 );
-							} catch ( SecurityException e ) {
-								// missing VIBRATE permission
-							}
-					}
-				}
-			};
+			setVibrationEnabled( true );
 		}
+	}
+
+	@Override
+	public synchronized void setVibrationEnabled( boolean value ) {
+		if ( !value ) {
+			mVibrationHandler = null;
+		} else {
+			if ( null == mVibrationHandler ) {
+				mVibrationHandler = new Handler() {
+
+					@Override
+					public void handleMessage( Message msg ) {
+						super.handleMessage( msg );
+
+						switch ( msg.what ) {
+							case MSG_VIBRATE:
+								try {
+									mVibrator.vibrate( 10 );
+								} catch ( SecurityException e ) {
+									// missing VIBRATE permission
+								}
+						}
+					}
+				};
+			}
+		}
+	}
+
+	@Override
+	@SuppressLint("HandlerLeak")
+	public synchronized boolean getVibrationEnabled() {
+		return mVibrationHandler != null;
 	}
 
 	/**
 	 * Sets the on items scroll listener.
-	 *
-	 * @param value the new on items scroll listener
+	 * 
+	 * @param value
+	 *           the new on items scroll listener
 	 */
 	public void setOnItemsScrollListener( OnItemsScrollListener value ) {
 		mItemsScrollListener = value;
@@ -317,8 +362,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Sets the auto scroll to center.
-	 *
-	 * @param value the new auto scroll to center
+	 * 
+	 * @param value
+	 *           the new auto scroll to center
 	 */
 	public void setAutoScrollToCenter( boolean value ) {
 		mAutoScrollToCenter = value;
@@ -335,7 +381,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		mShouldCallbackDuringFling = shouldCallback;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.widget.AdapterView#onDetachedFromWindow()
 	 */
 	@Override
@@ -370,8 +418,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Sets the spacing between items in a Gallery.
-	 *
-	 * @param spacing The spacing in pixels between items in the Gallery
+	 * 
+	 * @param spacing
+	 *           The spacing in pixels between items in the Gallery
 	 * @attr ref android.R.styleable#Gallery_spacing
 	 */
 	public void setSpacing( int spacing ) {
@@ -390,7 +439,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		mUnselectedAlpha = unselectedAlpha;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#getChildStaticTransformation(android.view.View, android.view.animation.Transformation)
 	 */
 	@Override
@@ -402,7 +453,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#computeHorizontalScrollExtent()
 	 */
 	@Override
@@ -411,7 +464,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return 1;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#computeHorizontalScrollOffset()
 	 */
 	@Override
@@ -419,7 +474,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return mSelectedPosition;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#computeHorizontalScrollRange()
 	 */
 	@Override
@@ -428,7 +485,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return mItemCount;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#checkLayoutParams(android.view.ViewGroup.LayoutParams)
 	 */
 	@Override
@@ -436,7 +495,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return p instanceof LayoutParams;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#generateLayoutParams(android.view.ViewGroup.LayoutParams)
 	 */
 	@Override
@@ -444,7 +505,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return new LayoutParams( p );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#generateLayoutParams(android.util.AttributeSet)
 	 */
 	@Override
@@ -452,7 +515,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return new LayoutParams( getContext(), attrs );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.widget.AbsSpinner#generateDefaultLayoutParams()
 	 */
 	@Override
@@ -463,7 +528,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return new Gallery.LayoutParams( ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.widget.AdapterView#onLayout(boolean, int, int, int, int)
 	 */
 	@Override
@@ -474,11 +541,13 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		 * Remember that we are in layout to prevent more layout request from being generated.
 		 */
 		mInLayout = true;
-		layout( 0, false );
+		layout( 0, false, changed );
 		mInLayout = false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.widget.AbsSpinner#getChildHeight(android.view.View)
 	 */
 	@Override
@@ -495,9 +564,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 	 */
 	@Override
 	public void trackMotionScroll( int delta ) {
-		
+
 		int deltaX = mFlingRunnable.getLastFlingX() - delta;
-		
+
 		// Pretend that each frame of a fling scroll is a touch scroll
 		if ( delta > 0 ) {
 			mDownTouchPosition = mIsRtl ? ( mFirstPosition + getChildCount() - 1 ) : mFirstPosition;
@@ -525,8 +594,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		if ( limitedDeltaX != deltaX ) {
 			mFlingRunnable.endFling( false );
-			if( limitedDeltaX == 0 )
-				onFinishedMovement();
+			if ( limitedDeltaX == 0 ) onFinishedMovement();
 		}
 
 		offsetChildrenLeftAndRight( limitedDeltaX );
@@ -541,8 +609,8 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		}
 
 		// Clear unused views
-		//mRecycler.clear();
-		//mRecyclerInvalidItems.clear();
+		// mRecycler.clear();
+		// mRecyclerInvalidItems.clear();
 
 		setSelectionToCenterChild();
 
@@ -553,9 +621,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Gets the limited motion scroll amount.
-	 *
-	 * @param motionToLeft the motion to left
-	 * @param deltaX the delta x
+	 * 
+	 * @param motionToLeft
+	 *           the motion to left
+	 * @param deltaX
+	 *           the delta x
 	 * @return the limited motion scroll amount
 	 */
 	int getLimitedMotionScrollAmount( boolean motionToLeft, int deltaX ) {
@@ -589,9 +659,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Gets the limited motion scroll amount2.
-	 *
-	 * @param motionToLeft the motion to left
-	 * @param deltaX the delta x
+	 * 
+	 * @param motionToLeft
+	 *           the motion to left
+	 * @param deltaX
+	 *           the delta x
 	 * @return the limited motion scroll amount2
 	 */
 	int getLimitedMotionScrollAmount2( boolean motionToLeft, int deltaX ) {
@@ -611,9 +683,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Gets the over scroll delta.
-	 *
-	 * @param motionToLeft the motion to left
-	 * @param deltaX the delta x
+	 * 
+	 * @param motionToLeft
+	 *           the motion to left
+	 * @param deltaX
+	 *           the delta x
 	 * @return the over scroll delta
 	 */
 	int getOverScrollDelta( boolean motionToLeft, int deltaX ) {
@@ -639,8 +713,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return 0;
 	}
 
-	protected void onOverScrolled( int scrollX, int scrollY, boolean clampedX, boolean clampedY ) {
-	}
+	protected void onOverScrolled( int scrollX, int scrollY, boolean clampedX, boolean clampedY ) {}
 
 	/**
 	 * Offset the horizontal location of all children of this view by the specified number of pixels.
@@ -656,7 +729,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Gets the center of gallery.
-	 *
+	 * 
 	 * @return The center of this Gallery.
 	 */
 	private int getCenterOfGallery() {
@@ -665,8 +738,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Gets the center of view.
-	 *
-	 * @param view the view
+	 * 
+	 * @param view
+	 *           the view
 	 * @return The center of the given view.
 	 */
 	private static int getCenterOfView( View view ) {
@@ -684,7 +758,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		int firstPosition = mFirstPosition;
 		int start = 0;
 		int count = 0;
-		
+
 		if ( toLeft ) {
 			final int galleryLeft = mPaddingLeft;
 			for ( int i = 0; i < numChildren; i++ ) {
@@ -695,17 +769,21 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 				} else {
 					start = n;
 					count++;
-					if( firstPosition + n < 0 ){
-						mRecyclerInvalidItems.put( firstPosition + n, child );
-					} else {
-						mRecycler.put( firstPosition + n, child );
-					}
+					
+					int viewType = mAdapter.getItemViewType( firstPosition + n );
+					mRecycleBin.get( viewType ).add( child );
+					
+					//if ( firstPosition + n < 0 ) {
+					//	mRecyclerInvalidItems.put( firstPosition + n, child );
+					//} else {
+					//	mRecycler.put( firstPosition + n, child );
+					//}
 				}
 			}
 			if ( !mIsRtl ) {
 				start = 0;
 			}
-			
+
 		} else {
 			final int galleryRight = getWidth() - mPaddingRight;
 			for ( int i = numChildren - 1; i >= 0; i-- ) {
@@ -717,11 +795,14 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 					start = n;
 					count++;
 					
-					if( firstPosition + n >= mItemCount ){
-						mRecyclerInvalidItems.put( firstPosition + n, child );
-					} else {
-						mRecycler.put( firstPosition + n, child );
-					}
+					int viewType = mAdapter.getItemViewType( firstPosition + n );
+					mRecycleBin.get( viewType ).add( child );
+
+					//if ( firstPosition + n >= mItemCount ) {
+					//	mRecyclerInvalidItems.put( firstPosition + n, child );
+					//} else {
+					//	mRecycler.put( firstPosition + n, child );
+					//}
 				}
 			}
 			if ( mIsRtl ) {
@@ -751,8 +832,8 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 			if ( scrollAmount != 0 ) {
 				mFlingRunnable.startUsingDistance( 0, -scrollAmount );
-				//fireVibration();
-				
+				// fireVibration();
+
 			} else {
 				onFinishedMovement();
 			}
@@ -763,7 +844,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Scrolls the items so that the selected item is in its 'slot' (its center is the gallery's center).
-	 *
+	 * 
 	 * @return true, if is over scrolled
 	 */
 	private boolean isOverScrolled() {
@@ -787,8 +868,8 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 	 * On finished movement.
 	 */
 	private void onFinishedMovement() {
-		if( isDown ) return;
-		
+		if ( isDown ) return;
+
 		if ( mSuppressSelectionChanged ) {
 			mSuppressSelectionChanged = false;
 
@@ -799,7 +880,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		invalidate();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.widget.AdapterView#selectionChanged()
 	 */
 	@Override
@@ -848,9 +931,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		int newPos = mFirstPosition + newSelectedChildIndex;
 
 		if ( newPos != mSelectedPosition ) {
-			
+
 			newPos = Math.min( Math.max( newPos, 0 ), mItemCount - 1 );
-			
+
 			setSelectedPositionInt( newPos, true );
 			setNextSelectedPositionInt( newPos );
 			checkSelectionChanged();
@@ -861,13 +944,15 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 	 * Creates and positions all views for this Gallery.
 	 * <p>
 	 * We layout rarely, most of the time {@link #trackMotionScroll(int)} takes care of repositioning, adding, and removing children.
-	 *
-	 * @param delta Change in the selected position. +1 means the selection is moving to the right, so views are scrolling to the left.
-	 * -1 means the selection is moving to the left.
-	 * @param animate the animate
+	 * 
+	 * @param delta
+	 *           Change in the selected position. +1 means the selection is moving to the right, so views are scrolling to the left.
+	 *           -1 means the selection is moving to the left.
+	 * @param animate
+	 *           the animate
 	 */
 	@Override
-	void layout( int delta, boolean animate ) {
+	void layout( int delta, boolean animate, boolean changed ) {
 
 		mIsRtl = false;
 
@@ -918,8 +1003,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		fillToGalleryLeft();
 
 		// Flush any cached views that did not get reused above
-		mRecycler.clear();
-		mRecyclerInvalidItems.clear();
+		//mRecycler.clear();
+		//mRecyclerInvalidItems.clear();
+		emptySubRecycler();
 
 		invalidate();
 		checkSelectionChanged();
@@ -928,7 +1014,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		mNeedSync = false;
 		setNextSelectedPositionInt( mSelectedPosition );
 
-		updateSelectedItemMetadata( animate );
+		updateSelectedItemMetadata( animate, changed );
 	}
 
 	/**
@@ -996,7 +1082,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 			mShouldStopFling = true;
 		}
 
-		while ( curRightEdge > galleryLeft /*&& curPosition >= 0*/ ) {
+		while ( curRightEdge > galleryLeft /* && curPosition >= 0 */) {
 			prevIterationView = makeAndAddView( curPosition, curPosition - mSelectedPosition, curRightEdge, false );
 
 			// Remember some state
@@ -1074,7 +1160,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 			mShouldStopFling = true;
 		}
 
-		while ( curLeftEdge < galleryRight /*&& curPosition < numItems*/ ) {
+		while ( curLeftEdge < galleryRight /* && curPosition < numItems */) {
 			prevIterationView = makeAndAddView( curPosition, curPosition - mSelectedPosition, curLeftEdge, true );
 
 			// Set state for next iteration
@@ -1099,17 +1185,22 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 	 * @return A view that has been added to the gallery
 	 */
 	private View makeAndAddView( int position, int offset, int x, boolean fromLeft ) {
-		
+
 		View child;
-		final boolean valid = position >= 0 && position < mItemCount;
-		
+		int viewType = mAdapter.getItemViewType( position );
+
 		if ( !mDataChanged ) {
-			if( valid ){
+			
+			child = mRecycleBin.get( viewType ).poll();
+			
+			/*
+			if ( valid ) {
 				child = mRecycler.get( position );
 			} else {
 				child = mRecyclerInvalidItems.get( position );
 			}
-			
+			*/
+
 			if ( child != null ) {
 				// Can reuse an existing view
 				child = mAdapter.getView( position, child, this );
@@ -1134,10 +1225,10 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		return child;
 	}
-	
-	public void invalidateViews(){
+
+	public void invalidateViews() {
 		int count = getChildCount();
-		for( int i = 0; i < count; i++ ){
+		for ( int i = 0; i < count; i++ ) {
 			View child = getChildAt( i );
 			mAdapter.getView( mFirstPosition + i, child, this );
 		}
@@ -1199,9 +1290,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Figure out vertical placement based on mGravity.
-	 *
-	 * @param child Child to place
-	 * @param duringLayout the during layout
+	 * 
+	 * @param child
+	 *           Child to place
+	 * @param duringLayout
+	 *           the during layout
 	 * @return Where the top of the child should be
 	 */
 	private int calculateTop( View child, boolean duringLayout ) {
@@ -1225,7 +1318,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return childTop;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -1245,7 +1340,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return retValue;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.GestureDetector.OnGestureListener#onSingleTapUp(android.view.MotionEvent)
 	 */
 	@Override
@@ -1254,7 +1351,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		if ( mDownTouchPosition >= 0 && mDownTouchPosition < mItemCount ) {
 
 			// An item tap should make it selected, so scroll to this child.
-			
+
 			scrollToChild( mDownTouchPosition - mFirstPosition );
 
 			// Also pass the click so the client knows, if it wants to.
@@ -1268,12 +1365,14 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.GestureDetector.OnGestureListener#onFling(android.view.MotionEvent, android.view.MotionEvent, float, float)
 	 */
 	@Override
 	public boolean onFling( MotionEvent e1, MotionEvent e2, float velocityX, float velocityY ) {
-		
+
 		if ( !mShouldCallbackDuringFling ) {
 			// We want to suppress selection changes
 
@@ -1292,7 +1391,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.GestureDetector.OnGestureListener#onScroll(android.view.MotionEvent, android.view.MotionEvent, float, float)
 	 */
 	@Override
@@ -1347,16 +1448,18 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		mIsFirstScroll = false;
 		return true;
 	}
-	
+
 	/** The is down. */
 	private boolean isDown;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.GestureDetector.OnGestureListener#onDown(android.view.MotionEvent)
 	 */
 	@Override
 	public boolean onDown( MotionEvent e ) {
-		
+
 		isDown = true;
 
 		// Kill any existing fling/scroll
@@ -1364,7 +1467,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		// Get the item's view that was touched
 		mDownTouchPosition = pointToPosition( (int) e.getX(), (int) e.getY() );
-		
+
 		if ( mDownTouchPosition >= 0 && mDownTouchPosition < mItemCount ) {
 			mDownTouchView = getChildAt( mDownTouchPosition - mFirstPosition );
 			mDownTouchView.setPressed( true );
@@ -1400,7 +1503,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		onUp();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.GestureDetector.OnGestureListener#onLongPress(android.view.MotionEvent)
 	 */
 	@Override
@@ -1417,7 +1522,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	// Unused methods from GestureDetector.OnGestureListener below
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.GestureDetector.OnGestureListener#onShowPress(android.view.MotionEvent)
 	 */
 	@Override
@@ -1427,8 +1534,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Dispatch press.
-	 *
-	 * @param child the child
+	 * 
+	 * @param child
+	 *           the child
 	 */
 	private void dispatchPress( View child ) {
 
@@ -1451,7 +1559,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		setPressed( false );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#dispatchSetSelected(boolean)
 	 */
 	@Override
@@ -1462,7 +1572,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		 */
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#dispatchSetPressed(boolean)
 	 */
 	@Override
@@ -1474,7 +1586,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#getContextMenuInfo()
 	 */
 	@Override
@@ -1482,7 +1596,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return mContextMenuInfo;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#showContextMenuForChild(android.view.View)
 	 */
 	@Override
@@ -1497,7 +1613,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return dispatchLongPress( originalView, longPressPosition, longPressId );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#showContextMenu()
 	 */
 	@Override
@@ -1514,10 +1632,13 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Dispatch long press.
-	 *
-	 * @param view the view
-	 * @param position the position
-	 * @param id the id
+	 * 
+	 * @param view
+	 *           the view
+	 * @param position
+	 *           the position
+	 * @param id
+	 *           the id
 	 * @return true, if successful
 	 */
 	private boolean dispatchLongPress( View view, int position, long id ) {
@@ -1541,9 +1662,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Handles left, right, and clicking.
-	 *
-	 * @param keyCode the key code
-	 * @param event the event
+	 * 
+	 * @param keyCode
+	 *           the key code
+	 * @param event
+	 *           the event
 	 * @return true, if successful
 	 * @see android.view.View#onKeyDown
 	 */
@@ -1571,14 +1694,16 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		return false;
 	}
-	
+
 	@Override
 	public boolean dispatchKeyEvent( KeyEvent event ) {
-		boolean handled = event.dispatch(this, null, null);
+		boolean handled = event.dispatch( this, null, null );
 		return handled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onKeyUp(int, android.view.KeyEvent)
 	 */
 	@Override
@@ -1616,7 +1741,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Move previous.
-	 *
+	 * 
 	 * @return true, if successful
 	 */
 	boolean movePrevious() {
@@ -1630,7 +1755,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Move next.
-	 *
+	 * 
 	 * @return true, if successful
 	 */
 	boolean moveNext() {
@@ -1644,8 +1769,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Scroll to child.
-	 *
-	 * @param childPosition the child position
+	 * 
+	 * @param childPosition
+	 *           the child position
 	 * @return true, if successful
 	 */
 	private boolean scrollToChild( int childPosition ) {
@@ -1669,18 +1795,20 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.widget.AdapterView#setSelectedPositionInt(int)
 	 */
 	void setSelectedPositionInt( int position, boolean animate ) {
 		super.setSelectedPositionInt( position );
-		updateSelectedItemMetadata( animate );
+		updateSelectedItemMetadata( animate, false );
 	}
 
 	/**
 	 * Update selected item metadata.
 	 */
-	private void updateSelectedItemMetadata( boolean animate ) {
+	private void updateSelectedItemMetadata( boolean animate, boolean changed ) {
 
 		View oldSelectedChild = mSelectedChild;
 
@@ -1694,13 +1822,12 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		if ( mItemsScrollListener != null ) {
 			mItemsScrollListener.onScroll( this, child, mSelectedPosition, getAdapter().getItemId( mSelectedPosition ) );
 		}
-		
+
 		// fire vibration
 		if ( mSelectedPosition != mLastMotionValue && animate ) {
 			fireVibration();
 		}
 		mLastMotionValue = mSelectedPosition;
-		
 
 		child.setFocusable( true );
 
@@ -1718,15 +1845,15 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 			// Make sure it is not focusable anymore, since otherwise arrow keys
 			// can make this one be focused
 			oldSelectedChild.setFocusable( false );
-			
-			if( !animate ) scrollCompleted();
+
+			if ( !animate && changed ) scrollCompleted();
 		}
 	}
-	
+
 	/**
 	 * Fire vibration.
 	 */
-	private void fireVibration(){
+	private void fireVibration() {
 		if ( mVibrationHandler != null ) {
 			mVibrationHandler.sendEmptyMessage( MSG_VIBRATE );
 		}
@@ -1734,8 +1861,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 	/**
 	 * Describes how the child views are aligned.
-	 *
-	 * @param gravity the new gravity
+	 * 
+	 * @param gravity
+	 *           the new gravity
 	 * @attr ref android.R.styleable#Gallery_gravity
 	 */
 	public void setGravity( int gravity ) {
@@ -1745,7 +1873,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.ViewGroup#getChildDrawingOrder(int, int)
 	 */
 	@Override
@@ -1767,7 +1897,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onFocusChanged(boolean, int, android.graphics.Rect)
 	 */
 	@Override
@@ -1792,7 +1924,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 	 */
 	private class ScrollSelectionNotifier implements Runnable {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -1848,9 +1982,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		/**
 		 * Instantiates a new layout params.
-		 *
-		 * @param c the c
-		 * @param attrs the attrs
+		 * 
+		 * @param c
+		 *           the c
+		 * @param attrs
+		 *           the attrs
 		 */
 		public LayoutParams( Context c, AttributeSet attrs ) {
 			super( c, attrs );
@@ -1858,9 +1994,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		/**
 		 * Instantiates a new layout params.
-		 *
-		 * @param w the w
-		 * @param h the h
+		 * 
+		 * @param w
+		 *           the w
+		 * @param h
+		 *           the h
 		 */
 		public LayoutParams( int w, int h ) {
 			super( w, h );
@@ -1868,8 +2006,9 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
 		/**
 		 * Instantiates a new layout params.
-		 *
-		 * @param source the source
+		 * 
+		 * @param source
+		 *           the source
 		 */
 		public LayoutParams( ViewGroup.LayoutParams source ) {
 			super( source );

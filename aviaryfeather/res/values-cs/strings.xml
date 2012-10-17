@@ -7,7 +7,6 @@
 	<string name="edit_bottom_text">Upravit spodní text</string>
 	<string name="night_enhance_label">Noc</string>
 	<string name="revert_dialog_title">Vrátit do původního stavu?</string>
-	<string name="effet_loading_title">Nahrávám</string>
 	<string name="red_eye">Červené oči</string>
 	<string name="tool_name">Aviary</string>
 	<string name="feather_error_saving_aviary_folder">Jejda! Došlo k chybě při pokusu o uložení obrázku do složky Aviary. Chcete se pokusit obrázek uložit do normální složky s fotkami?</string>
@@ -24,7 +23,6 @@
 	<string name="brightness">Jas</string>
 	<string name="feather_effects_error_update_editor">Omlouvám se, ale musíte aktualizovat editor Aviary, abyste mohl(a) použít tyto efekty.</string>
 	<string name="adjust">Orientace</string>
-	<string name="feather_plugin_filter_indiglow_name">Svítící tachometr</string>
 	<string name="revert_dialog_message">Tímto ztratíte všechny změny, které jste provedli. Vážně se chcete vrátit k původnímu obrázku?</string>
 	<string name="enhance">Vylepšit</string>
 	<string name="tool_leave_question">Opravdu chcete zrušit změny provedené tímto nástrojem?</string>
@@ -65,10 +63,13 @@
 	<string name="tool">Nástroj</string>
 	<string name="filter_name">Volný</string>
 	<string name="feather_tool_temperature">Teplo</string>
+	<string name="feather_loading_title">Nahrávám</string>
 	<string name="sharpen">Ostrost</string>
 	<string name="feather_plugin_filter_softfocus_name">Lehce zaostřit</string>
 	<string name="menu_premium">Obchod</string>
+	<string name="feather_plugin_filter_purple_name">Svítící tachometr</string>
 	<string name="balance_enhance_label">Vyvážení</string>
+	<string name="border_name">Volný</string>
 	<string name="loading_image">Nahrávám obrázek</string>
 	<string name="effect_loading_message">Přidávám efekty</string>
 	<string name="feather_effects_error_loading_pack">Omlouvám se, ale došlo k chybě při načítání balíčku efektů</string>
@@ -80,6 +81,7 @@
 	<string name="feather_update">Aktualizovat</string>
 	<string name="infoscreen_text">Aviary je volně dostupný SDK pro iOS a Android, který vám umožní díky několika řádkům kódu přidat do svých aplikací možnost editace fotografií a přidávání efektů.</string>
 	<string name="draw">Kreslit</string>
+	<string name="feather_borders">Hranice</string>
 	<string name="zoom_mode">Mód zoomu</string>
 	<string name="feather_plugin_filter_aqua_name">Voda</string>
 	<string name="edit_top_text">Upravit vrchní text</string>

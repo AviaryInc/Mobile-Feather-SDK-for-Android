@@ -1,7 +1,5 @@
 package com.aviary.android.feather.widget;
 
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -207,20 +205,9 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 	 */
 	@Override
 	protected void onDraw( Canvas canvas ) {
-		// This is to fix RuntimeException: trying to use a recycled bitmap
-		// Check and only continue drawing when the IBitmapDrawable is not recycled
-		// There might be a better fix, since I haven't looked deeply into the source code
-		// and found dangerous recycle() calls.
-		if((getDrawable() instanceof IBitmapDrawable)
-			&& ((IBitmapDrawable)getDrawable()).getBitmap().isRecycled()) {
-			// Don't continue drawing.
-			// We won't lose user's drawing input since the drawing effect was applied before
-			return;
-		}
-		
 		super.onDraw( canvas );
 
-		//canvas.drawPath( tmpPath, mPaint );
+		// canvas.drawPath( tmpPath, mPaint );
 
 		if ( mCopy != null ) {
 			final int saveCount = canvas.getSaveCount();
@@ -281,10 +268,10 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 
 		if ( mDrawListener != null ) mDrawListener.onDrawStart();
 		if ( mDrawPathListener != null ) {
-			
+
 			mDrawPathListener.onStart();
-			
-			float[] pts = new float[]{ x, y };
+
+			float[] pts = new float[] { x, y };
 			mInvertedMatrix.mapPoints( pts );
 			mDrawPathListener.onMoveTo( pts[0], pts[1] );
 		}
@@ -302,19 +289,19 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 		float dx = Math.abs( x - mX );
 		float dy = Math.abs( y - mY );
 		if ( dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE ) {
-			
+
 			float x1 = ( x + mX ) / 2;
 			float y1 = ( y + mY ) / 2;
-			
+
 			tmpPath.quadTo( mX, mY, x1, y1 );
 
 			mCanvas.drawPath( tmpPath, mPaint );
 			tmpPath.reset();
 			tmpPath.moveTo( x1, y1 );
-			
-			if( mDrawPathListener != null ){
-				
-				float[] pts = new float[]{ mX, mY, x1, y1 };
+
+			if ( mDrawPathListener != null ) {
+
+				float[] pts = new float[] { mX, mY, x1, y1 };
 				mInvertedMatrix.mapPoints( pts );
 				mDrawPathListener.onQuadTo( pts[0], pts[1], pts[2], pts[3] );
 			}
@@ -328,17 +315,16 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 	 * Touch_up.
 	 */
 	private void touch_up() {
-		
-		//mCanvas.drawPath( tmpPath, mPaint );
-		
+
+		// mCanvas.drawPath( tmpPath, mPaint );
+
 		tmpPath.reset();
-		
-		if( mDrawPathListener != null ){
+
+		if ( mDrawPathListener != null ) {
 			mDrawPathListener.onEnd();
 		}
 	}
-	
-	
+
 	/**
 	 * Gets the matrix values.
 	 * 
@@ -351,7 +337,6 @@ public class ImageViewTouchAndDraw extends ImageViewTouch {
 		m.getValues( values );
 		return values;
 	}
-
 
 	/*
 	 * (non-Javadoc)

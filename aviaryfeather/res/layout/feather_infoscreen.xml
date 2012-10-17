@@ -28,28 +28,21 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/aviary_logo_big" />
 
-            <TextView
+            <com.aviary.android.feather.widget.TextViewCustomFont
                 android:id="@+id/version_text"
                 style="@style/FeatherInfoScreen.Version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="" />
 
-            <TextView
+            <com.aviary.android.feather.widget.TextViewCustomFont
+                style="@style/FeatherInfoScreen.Content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:shadowColor="#FFFFFFFF"
-                android:shadowDx="0.0"
-                android:shadowDy="1.0"
-                android:shadowRadius="0.5"
-                android:text="@string/infoscreen_text"
-                android:textColor="#FF858889"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:text="@string/infoscreen_text" />
 
-            <Button
+            <com.aviary.android.feather.widget.ButtonCustomFont
                 android:id="@+id/aviary_infoscreen_submit"
                 style="@style/FeatherTool"
                 android:layout_width="match_parent"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aviary="http://schemas.android.com/apk/res/com.aviary.android.feather"
+    xmlns:aviary="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="@dimen/feather_effects_panel_height"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
@@ -11,19 +11,19 @@
     <RelativeLayout
         android:id="@+id/RelativeLayout01"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_height="?attr/optionPanelHeight"
         android:layout_alignParentBottom="true"
+        android:background="#FF363636"
         android:paddingBottom="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:paddingTop="0dp"
-        android:background="#FF363636"
         android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/roll_open_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_height="?attr/optionPanelHeight"
         android:layout_alignBottom="@+id/RelativeLayout01" >
 
         <LinearLayout
@@ -35,7 +35,7 @@
             android:orientation="vertical"
             android:weightSum="1" >
 
-            <com.aviary.android.feather.widget.HorizontialFixedListView
+            <com.aviary.android.feather.widget.HorizontalFixedListView
                 android:id="@+id/gallery"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -48,7 +48,7 @@
     <LinearLayout
         android:id="@+id/top_shadow"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/feather_options_panel_height_shadow"
+        android:layout_height="?attr/optionPanelShadowHeight"
         android:layout_above="@+id/RelativeLayout01"
         android:background="@drawable/feather_shadow_up" >
     </LinearLayout>
@@ -67,7 +67,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/feather_options_panel_height_with_shadow"
+            android:layout_height="?attr/optionPanelHeightWithShadow"
             android:background="@drawable/feather_stickers_panel_background_upper" >
 
             <com.aviary.android.feather.widget.wp.Workspace
@@ -76,12 +76,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="invisible" />
+
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:background="@drawable/feather_stickers_panel_background_lower">
+            android:background="@drawable/feather_stickers_panel_background_lower" >
 
             <com.aviary.android.feather.widget.wp.WorkspaceIndicator
                 android:id="@+id/workspace_indicator"
@@ -93,25 +94,27 @@
                 android:layout_marginTop="5dp"
                 android:gravity="bottom|center_horizontal" />
         </LinearLayout>
+        
     </LinearLayout>
+	<include layout="@layout/feather_include_small_loader" android:layout_width="match_parent" android:layout_height="?attr/optionPanelHeight" android:layout_alignParentBottom="true" />
 
     <!-- end of content -->
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_height="?attr/optionPanelHeight"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/feather_stickers_panel_shadow_left"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:src="@drawable/feather_shadow_left" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/feather_options_panel_height"
+        android:layout_height="?attr/optionPanelHeight"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/feather_stickers_panel_shadow_right"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:src="@drawable/feather_shadow_right" />
 
     <AbsoluteLayout
         android:id="@+id/cannister_container"

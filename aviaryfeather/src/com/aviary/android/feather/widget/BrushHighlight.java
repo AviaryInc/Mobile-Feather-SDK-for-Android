@@ -18,17 +18,18 @@ class BrushHighlight {
 
 	/** The m context. */
 	private View mContext;
-	
+
 	/** The Constant LOG_TAG. */
 	static final String LOG_TAG = ImageViewTouchBrush.LOG_TAG;
-	
+
 	/** The m brushes. */
 	List<Brush> mBrushes = Collections.synchronizedList( new ArrayList<Brush>() );
 
 	/**
 	 * Instantiates a new brush highlight.
-	 *
-	 * @param context the context
+	 * 
+	 * @param context
+	 *           the context
 	 */
 	BrushHighlight( View context ) {
 		mContext = context;
@@ -36,11 +37,15 @@ class BrushHighlight {
 
 	/**
 	 * Adds the touch.
-	 *
-	 * @param x the x
-	 * @param y the y
-	 * @param duration the duration
-	 * @param endSize the end size
+	 * 
+	 * @param x
+	 *           the x
+	 * @param y
+	 *           the y
+	 * @param duration
+	 *           the duration
+	 * @param endSize
+	 *           the end size
 	 */
 	public void addTouch( final float x, final float y, final long duration, final float endSize ) {
 		if ( mContext != null ) {
@@ -65,8 +70,9 @@ class BrushHighlight {
 
 	/**
 	 * Draw.
-	 *
-	 * @param canvas the canvas
+	 * 
+	 * @param canvas
+	 *           the canvas
 	 */
 	protected void draw( Canvas canvas ) {
 
@@ -99,32 +105,36 @@ class BrushHighlight {
 
 		/** The m paint. */
 		private Paint mPaint;
-		
+
 		/** The m start time. */
 		private long mStartTime;
-		
+
 		/** The m duration ms. */
 		private long mDurationMs;
-		
+
 		/** The m active. */
 		private boolean mActive;
-		
+
 		/** The m y. */
 		private double mX, mY;
-		
+
 		/** The m end size. */
 		private double mEndSize;
-		
+
 		/** The m easing. */
 		private Easing mEasing = new Cubic();
 
 		/**
 		 * Instantiates a new brush.
-		 *
-		 * @param x the x
-		 * @param y the y
-		 * @param duration the duration
-		 * @param endSize the end size
+		 * 
+		 * @param x
+		 *           the x
+		 * @param y
+		 *           the y
+		 * @param duration
+		 *           the duration
+		 * @param endSize
+		 *           the end size
 		 */
 		public Brush( double x, double y, long duration, double endSize ) {
 			mX = x;
@@ -139,8 +149,9 @@ class BrushHighlight {
 
 		/**
 		 * Draw.
-		 *
-		 * @param canvas the canvas
+		 * 
+		 * @param canvas
+		 *           the canvas
 		 */
 		protected void draw( Canvas canvas ) {
 

@@ -1,6 +1,7 @@
 package com.aviary.android.feather.effects;
 
 import org.json.JSONException;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.view.LayoutInflater;
@@ -9,8 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.aviary.android.feather.R;
 import com.aviary.android.feather.library.filters.AdjustFilter;
+import com.aviary.android.feather.library.filters.FilterLoaderFactory;
 import com.aviary.android.feather.library.filters.FilterLoaderFactory.Filters;
-import com.aviary.android.feather.library.filters.FilterService;
 import com.aviary.android.feather.library.moa.MoaActionList;
 import com.aviary.android.feather.library.services.ConfigService;
 import com.aviary.android.feather.library.services.EffectContext;
@@ -28,33 +29,40 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 	private int animDuration = 400;
 	private int resetAnimDuration = 200;
 	boolean isClosing;
-	
+	int currentStraightenPosition = 45;
+	static final int NEGATIVE_DIRECTION = -1;
+	static final int POSITIVE_DIRECTION = 1;
+
 	/** The enable3 d animation. */
 	boolean enable3DAnimation;
 	boolean enableFreeRotate;
 
 	/**
 	 * Instantiates a new adjust effect panel.
-	 *
-	 * @param context the context
-	 * @param adjust the adjust
+	 * 
+	 * @param context
+	 *           the context
+	 * @param adjust
+	 *           the adjust
 	 */
 	public AdjustEffectPanel( EffectContext context, Filters adjust ) {
 		super( context );
 
-		FilterService service = context.getService( FilterService.class );
-		mFilter = service.load( adjust );
+		mFilter = FilterLoaderFactory.get( adjust );
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onCreate(android.graphics.Bitmap)
 	 */
 	@Override
 	public void onCreate( Bitmap bitmap ) {
 		super.onCreate( bitmap );
-		
+
 		ConfigService config = getContext().getService( ConfigService.class );
-		if( null != config ){
+		if ( null != config ) {
 			animDuration = config.getInteger( R.integer.feather_adjust_tool_anim_time );
 			resetAnimDuration = config.getInteger( R.integer.feather_adjust_tool_reset_anim_time );
 			enable3DAnimation = config.getBoolean( R.integer.feather_adjust_tool_enable_3d_flip );
@@ -63,14 +71,16 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 			enable3DAnimation = false;
 			enableFreeRotate = false;
 		}
-		
 		mView = (AdjustImageView) getContentView().findViewById( R.id.image );
 		mView.setResetAnimDuration( resetAnimDuration );
 		mView.setCameraEnabled( enable3DAnimation );
 		mView.setEnableFreeRotate( enableFreeRotate );
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onActivate()
 	 */
 	@Override
@@ -85,10 +95,18 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		v.findViewById( R.id.button2 ).setOnClickListener( this );
 		v.findViewById( R.id.button3 ).setOnClickListener( this );
 		v.findViewById( R.id.button4 ).setOnClickListener( this );
+
+		//
+		// straighten stuff
+		//
+
 		contentReady();
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onDeactivate()
 	 */
 	@Override
@@ -97,7 +115,9 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		super.onDeactivate();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onDestroy()
 	 */
 	@Override
@@ -106,15 +126,20 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		super.onDestroy();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.aviary.android.feather.effects.AbstractOptionPanel#generateOptionView(android.view.LayoutInflater, android.view.ViewGroup)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.aviary.android.feather.effects.AbstractOptionPanel#generateOptionView(android.view.LayoutInflater,
+	 * android.view.ViewGroup)
 	 */
 	@Override
 	protected ViewGroup generateOptionView( LayoutInflater inflater, ViewGroup parent ) {
 		return (ViewGroup) inflater.inflate( R.layout.feather_adjust_panel, parent, false );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractContentPanel#generateContentView(android.view.LayoutInflater)
 	 */
 	@Override
@@ -122,7 +147,9 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		return inflater.inflate( R.layout.feather_adjust_content, null );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	@Override
@@ -143,19 +170,25 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#getIsChanged()
 	 */
+	@SuppressLint("NewApi")
 	@Override
 	public boolean getIsChanged() {
 		mLogger.info( "getIsChanged" );
 
+		boolean straightenStarted = mView.getStraightenStarted();
 		final int rotation = (int) mView.getRotation();
 		final int flip_type = mView.getFlipType();
-		return rotation != 0 || ( flip_type != FlipType.FLIP_NONE.nativeInt );
+		return rotation != 0 || ( flip_type != FlipType.FLIP_NONE.nativeInt ) || straightenStarted;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractContentPanel#getContentDisplayMatrix()
 	 */
 	@Override
@@ -163,35 +196,45 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onGenerateResult()
 	 */
 	@Override
 	protected void onGenerateResult() {
-		mLogger.info( "onGenerateResult" );
-
 		final int rotation = (int) mView.getRotation();
+		final double rotationFromStraighten = mView.getStraightenAngle();
 		final boolean horizontal = mView.getHorizontalFlip();
 		final boolean vertical = mView.getVerticalFlip();
-		
+		final double growthFactor = ( 1 / mView.getGrowthFactor() );
+
 		AdjustFilter filter = (AdjustFilter) mFilter;
-		filter.setRotation( rotation );
+		filter.setFixedRotation( rotation );
 		filter.setFlip( horizontal, vertical );
-		
+		filter.setStraighten( rotationFromStraighten, growthFactor, growthFactor );
+
+		Bitmap output;
+
 		try {
-			final Bitmap result = filter.execute( mBitmap, null, -1, -1 );
-			mView.setImageBitmap( result );
-			onComplete( result, (MoaActionList) filter.getActions().clone() );
+			output = filter.execute( mBitmap, null, 1, 1 );
 		} catch ( JSONException e ) {
 			e.printStackTrace();
 			onGenericError( e );
+			return;
 		}
-		
+
+		mView.setImageBitmap( output );
+		onComplete( output, (MoaActionList) filter.getActions().clone() );
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.effects.AbstractEffectPanel#onCancel()
 	 */
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCancel() {
 		if ( isClosing ) return true;
@@ -202,8 +245,10 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 		final int rotation = (int) mView.getRotation();
 		final boolean hflip = mView.getHorizontalFlip();
 		final boolean vflip = mView.getVerticalFlip();
+		boolean straightenStarted = mView.getStraightenStarted();
+		final double rotationFromStraighten = mView.getStraightenAngle();
 
-		if ( rotation != 0 || hflip || vflip ) {
+		if ( rotation != 0 || hflip || vflip || ( straightenStarted && rotationFromStraighten != 0) ) {
 			mView.reset();
 			return true;
 		} else {
@@ -212,9 +257,7 @@ public class AdjustEffectPanel extends AbstractContentPanel implements OnClickLi
 	}
 
 	/**
-	 * Reset animation is complete, now it is safe
-	 * to call the parent {@link EffectContext#cancel()} method
-	 * and close the panel.
+	 * Reset animation is complete, now it is safe to call the parent {@link EffectContext#cancel()} method and close the panel.
 	 */
 	@Override
 	public void onResetComplete() {

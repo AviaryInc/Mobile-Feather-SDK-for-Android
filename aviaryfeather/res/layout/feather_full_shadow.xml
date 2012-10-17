@@ -3,25 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:id="@+id/top_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/feather_stickers_panel_shadow_top" >
-    </LinearLayout>
+    <include layout="@layout/feather_shadow_top"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/feather_stickers_panel_shadow_left" >
+        android:background="@drawable/feather_shadow_left" >
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:background="@drawable/feather_stickers_panel_shadow_right" >
+        android:background="@drawable/feather_shadow_right" >
     </LinearLayout>
 
 </RelativeLayout>

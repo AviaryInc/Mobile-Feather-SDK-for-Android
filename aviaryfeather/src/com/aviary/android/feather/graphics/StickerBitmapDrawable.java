@@ -1,6 +1,5 @@
 package com.aviary.android.feather.graphics;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -26,71 +25,59 @@ public class StickerBitmapDrawable extends Drawable implements IBitmapDrawable {
 
 	/**
 	 * Instantiates a new sticker bitmap drawable.
-	 *
-	 * @param b the b
-	 * @param inset the inset
+	 * 
+	 * @param b
+	 *           the b
+	 * @param inset
+	 *           the inset
 	 */
 	public StickerBitmapDrawable( Bitmap b, int inset ) {
 		mBitmap = b;
 		mPaint = new Paint();
-		mPaint.setAntiAlias( false );
+		mPaint.setAntiAlias( true );
 		mPaint.setDither( true );
-		mPaint.setFilterBitmap( true );
+		mPaint.setFilterBitmap( false );
 		mInset = inset;
-		
+
 		mShadowPaint = new Paint( mPaint );
 		mShadowPaint.setAntiAlias( true );
-		
+
 		srcRect = new Rect( 0, 0, b.getWidth(), b.getHeight() );
 		dstRect = new Rect();
-		
-		blackColorFilter = new ColorMatrixColorFilter( new float[]{
-			1,0,0,-255,0,
-			0,1,0,-255,0,
-			0,0,1,-255,0,
-			0,0,0,0.3f,0,
-		});
-		
-		whiteColorFilter = new ColorMatrixColorFilter( new float[]{
-			1,0,0,0,255,
-			0,1,0,0,255,
-			0,0,1,0,255,
-			0,0,0,1,0,
-		});
-		
+
+		blackColorFilter = new ColorMatrixColorFilter( new float[] { 1, 0, 0, -255, 0, 0, 1, 0, -255, 0, 0, 0, 1, -255, 0, 0, 0, 0, 0.3f, 0, } );
+
+		whiteColorFilter = new ColorMatrixColorFilter( new float[] { 1, 0, 0, 0, 255, 0, 1, 0, 0, 255, 0, 0, 1, 0, 255, 0, 0, 0, 1, 0, } );
+
 		mShadowPaint.setColorFilter( blackColorFilter );
-		//mShadowPaint.setShadowLayer( 5.0f, 2.0f, 2.0f, 0xFF000000 );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#draw(android.graphics.Canvas)
 	 */
 	@Override
 	public void draw( Canvas canvas ) {
-		
-		// radius=10, y-offset=2, color=black 
-		//mShadow.setShadowLayer(10.0f, 0.0f, 2.0f, 0xFF000000); 
-		// in onDraw(Canvas) 
-		//mPaint.setColorFilter( blackColorFilter );
+
 		dstRect.set( srcRect );
-		dstRect.inset( -mInset/2, -mInset/2 );
-		dstRect.offset( mInset/2 + 1, mInset/2 + 1 );
-		
-		canvas.drawBitmap( mBitmap, srcRect, dstRect, mShadowPaint );		
-		
+		dstRect.inset( -mInset / 2, -mInset / 2 );
+		dstRect.offset( mInset / 2 + 1, mInset / 2 + 1 );
+
+		canvas.drawBitmap( mBitmap, srcRect, dstRect, mShadowPaint );
+
 		mPaint.setColorFilter( whiteColorFilter );
 		dstRect.offset( -1, -1 );
 		canvas.drawBitmap( mBitmap, srcRect, dstRect, mPaint );
-		
+
 		mPaint.setColorFilter( null );
-		canvas.drawBitmap( mBitmap, mInset/2, mInset/2, mPaint );
-		
-		//dstRect.set( srcRect );
-		//dstRect.inset( 6, 6 );
-		//canvas.drawBitmap( mBitmap, srcRect, dstRect, null );
+		canvas.drawBitmap( mBitmap, mInset / 2, mInset / 2, mPaint );
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getOpacity()
 	 */
 	@Override
@@ -98,13 +85,17 @@ public class StickerBitmapDrawable extends Drawable implements IBitmapDrawable {
 		return PixelFormat.TRANSLUCENT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setAlpha(int)
 	 */
 	@Override
 	public void setAlpha( int alpha ) {}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#setColorFilter(android.graphics.ColorFilter)
 	 */
 	@Override
@@ -112,39 +103,49 @@ public class StickerBitmapDrawable extends Drawable implements IBitmapDrawable {
 		mPaint.setColorFilter( cf );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getIntrinsicWidth()
 	 */
 	@Override
 	public int getIntrinsicWidth() {
-		return mBitmap.getWidth() + (mInset*2);
+		return mBitmap.getWidth() + ( mInset * 2 );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getIntrinsicHeight()
 	 */
 	@Override
 	public int getIntrinsicHeight() {
-		return mBitmap.getHeight() + (mInset*2);
+		return mBitmap.getHeight() + ( mInset * 2 );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getMinimumWidth()
 	 */
 	@Override
 	public int getMinimumWidth() {
-		return mBitmap.getWidth() + (mInset*2);
+		return mBitmap.getWidth() + ( mInset * 2 );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.graphics.drawable.Drawable#getMinimumHeight()
 	 */
 	@Override
 	public int getMinimumHeight() {
-		return mBitmap.getHeight() + (mInset*2);
+		return mBitmap.getHeight() + ( mInset * 2 );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.aviary.android.feather.library.graphics.drawable.IBitmapDrawable#getBitmap()
 	 */
 	@Override
