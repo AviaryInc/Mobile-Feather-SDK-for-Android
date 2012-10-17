@@ -30,7 +30,7 @@
         <attr name="optionPanelBackground" format="reference|color"></attr>
         <attr name="optionPanelBackground2" format="reference"></attr>
         <attr name="textAppearanceThumbSmall" format="reference"></attr>
-        <attr name="textAppearanceSmall" format="reference"></attr>
+        <attr name="featherTextAppearanceSmall" format="reference"></attr>
         
     </declare-styleable>
     

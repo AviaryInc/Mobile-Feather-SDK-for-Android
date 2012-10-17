@@ -8,7 +8,7 @@
         <item name="android:textColorPrimaryInverse">@android:color/white</item>
         <item name="android:windowBackground">@android:color/background_dark</item>
         <item name="android:textAppearanceLarge">@style/TextAppearance.Title</item>
-        <item name="textAppearanceSmall">@style/TextAppearance.Text</item>
+        <item name="featherTextAppearanceSmall">@style/TextAppearance.Text</item>
         <item name="android:textAppearanceMedium">@style/TextAppearance.Medium</item>
         <item name="textAppearanceThumbSmall">@style/TextAppearance.ThumbText</item>
         <item name="textSizeSmall">@dimen/feather_text_size_small</item>
@@ -162,7 +162,7 @@
     </style>
 
     <style name="FeatherToolText">
-        <item name="android:textAppearance">?attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">?attr/featherTextAppearanceSmall</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:shadowDx">?attr/shadowDxSmall</item>
@@ -384,7 +384,7 @@
         <item name="android:shadowRadius">2.0</item>
         <item name="android:shadowColor">@android:color/black</item>
         <item name="font">?attr/fontFamilyLight</item>
-        <item name="android:textAppearance">?attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">?attr/featherTextAppearanceSmall</item>
         <item name="android:textColor">@color/feather_option_panel_text_selector</item>
     </style>
 
@@ -400,7 +400,7 @@
         <item name="android:paddingTop">10dip</item>
         <item name="android:paddingBottom">10dip</item>
         <item name="android:paddingRight">26dip</item>
-        <item name="android:textAppearance">?attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">?attr/featherTextAppearanceSmall</item>
         <item name="android:textColor">@color/feather_option_panel_text_selector</item>
     </style>
 
@@ -414,7 +414,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:ellipsize">end</item>
         <item name="font">?attr/fontFamilyLight</item>
-        <item name="android:textAppearance">?attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">?attr/featherTextAppearanceSmall</item>
     </style>
 
     <style name="FeatherHiddenEditText" parent="@android:style/Widget.EditText">
@@ -430,7 +430,7 @@
 
     <style name="FeatherInlineProgressText">
         <item name="font">?attr/fontFamilyLight</item>
-        <item name="android:textAppearance">?attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">?attr/featherTextAppearanceSmall</item>
         <item name="android:textColor">@color/feather_inline_loading_color</item>
     </style>
 
