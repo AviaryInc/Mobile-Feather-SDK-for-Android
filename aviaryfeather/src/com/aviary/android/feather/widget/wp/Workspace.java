@@ -628,7 +628,15 @@ public class Workspace extends ViewGroup {
 
 				@Override
 				public void run() {
-					mOnPageChangeListener.onPageChanged( mCurrentScreen, previousScreen );
+                    // NullPointerException can be thrown at
+                    // com.aviary.android.feather.widget.wp.Workspace$1.run(Workspace.java:595).
+                    // mOnPageChangeListener is checked at line 626.
+                    // But mOnPageChangeListener can be null at the time this
+                    // Runnable is executed, because this Runnable is put in a
+                    // message queue. To be safe, check it again here.
+                    if (mOnPageChangeListener != null) {
+					    mOnPageChangeListener.onPageChanged( mCurrentScreen, previousScreen );
+                    }
 				}
 			} );
 		}
