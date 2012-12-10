@@ -1,0 +1,12 @@
+.*.swp
+*.DS_Store
+*.project
+bin/
+gen/
+*.class
+*.dex
+*.classpath
+*.iml
+*.eml
+.idea/
+.metadata
