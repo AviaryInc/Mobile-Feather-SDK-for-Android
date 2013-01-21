@@ -7,7 +7,7 @@ Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-
 * Updated default effects: effects are now more subtle and generally usable, based on your feedback
 * Added brand new Frames Tool
 * Added support for x86
-* **IMPORTANT** Changed the way the SDK is passed the API-KEY (please read README.md for more information)
+* **IMPORTANT**: Changed the way the SDK is passed the API-KEY (please read README.md for more information)
 * Fixed a bug that was affecting the Orientation tool
 
 ## Version 2.1.91 - October, 2012
