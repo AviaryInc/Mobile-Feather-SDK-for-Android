@@ -87,8 +87,7 @@ you must include in your application if you want to use Aviary to manipulate ima
 ------------------
 
 Next, we need to create an Android application in order to use the Aviary editor. 
-You can see a real example of how to use the Aviary editor by opening 
-the included `sample-app.zip` project.
+You can see a real example of how to use the Aviary editor by opening the sample app found <a href="http://d1wufgde20uhiw.cloudfront.net/sdk/android/Aviary-Android-Sample-App.zip">here</a>.
 
 Just import the sample application by following the same procedures 
 described above, but select `sample-app.zip` at step 3. 
