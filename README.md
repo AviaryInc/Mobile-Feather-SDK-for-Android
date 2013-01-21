@@ -10,8 +10,9 @@ Contents
 * [3 Sample Application](#sample-app)
 * [4 Include AviaryFeather in a new Application](#include)
 	* [4.1 Create a new Android project](#create-new)
-	* [4.2 AndroidManifest.xml](#manifest)
-	* [4.3 themes.xml](#themes)
+	* [4.2 API-KEY](#api_key)
+	* [4.3 AndroidManifest.xml](#manifest)
+	* [4.4 themes.xml](#themes)
 * [5 Invoke the Editor](#invoke)
 	* [5.1 Intent parameters](#intent-parameters)
 	* [5.2 Result parameters](#result-parameters)
@@ -130,8 +131,19 @@ dialog and click on "Add JARs..." button of the "Libraries" subsection.
 You need to add the `android-support-v4.jar` library. 
 Please go to the official android [support package page](http://developer.android.com/sdk/compatibility-library.html#Downloading) in order to obtain your copy of the jar file.
 
+<a name="api_key"></a>
+### 4.2 API-KEY
+
+Starting from 2.2.1 of the SDK, the way to pass the developer api key to the FeatherActivity has changed.<br />
+The API KEY should not be passed in the calling Intent anymore.<br />
+Now you must save your api-key string inside a file called "aviary-credentials.txt" placed inside your "assets" folder ( See the  sample application for an example ).
+
+Be sure to update your application according to this change, next versions of the Aviary SDK will throw an error if this file cannot be found or the api-key is not valid.
+
+**Grab your api key from http://aviary.com/android**
+
 <a name="manifest"></a>
-### 4.2 AndroidManifest.xml
+### 4.3 AndroidManifest.xml
 
 Add some entries to the manifest file of your application.
 
@@ -196,7 +208,7 @@ If you plan to enable the High Resolution image processing (see [section 10](#hi
 Note that the `android:authorities` is arbitrary; you must use your own string value.
 
 <a name="theme"></a>
-### 4.3 Theme and Styles
+### 4.4 Theme and Styles
 
 The `android:theme` entry in the manifest file is also required for Aviary to work properly, 
 so add an entry to your `themes.xml` file (if you don't have one, create a new file called 
@@ -286,11 +298,11 @@ Here's a description of the required parameters:
 
 (intent data) This is the source URI of the image to be used as input by Aviary.
 
-**API_KEY**
+**~~API_KEY~~**
 
-An api key IS REQUIRED to use remote filters. Please visit 
+~~An api key IS REQUIRED to use remote filters. Please visit 
 [http://www.aviary.com/android-key](http://www.aviary.com/android-key) 
-for more information on how to obtain your api key and secret.
+for more information on how to obtain your api key and secret.~~
 
 
 **output**
@@ -328,7 +340,7 @@ If specified in the extras of the passed intent, it will tell Aviary to display 
 The value must be a String[] array and the available values are: 
 
     SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE, COLORTEMP
+    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE, COLORTEMP, BORDERS
 
 
 **hide-exit-unsave-confirmation**
@@ -343,6 +355,13 @@ application will terminate without a warning to the user.
 By default, the Aviary editor allows users to download and install external filter packs from the Android Market.
 If you want to disable this feature, you can pass this extra boolean to the launching intent as "false".
 The default behavior is to enable the external filters.
+
+**frames-enable-external-pack**
+
+(added in 2.2.1) By default, the Aviary editor allows users to download and install external frames packs from the Android Market.
+If you want to disable this feature, you can pass this extra boolean to the launching intent as "false".
+The default behavior is to enable the external packs. 
+Note that if you pass "false" the frames tool will be hidden.
 
 
 **stickers-enable-external-pack**
@@ -360,12 +379,6 @@ By default, the Aviary editor will resize the loaded image according to the devi
 **output-hires-session-id**
 
 If you want to enable the high resolution image processing, once FeatherActivity has completed (but eventually also during its execution), you need to pass a unique session id to the calling Intent. The session id string must be unique and must be 64 chars in length.
-
-
-**effect-enable-borders**
-
-By default, most of the filters (those in the Effects tool) come with additional borders. If you want to disable the default borders you can pass this extra with a boolean false value and it will turn off ALL borders.
-It is true by default.
 
 
 **tools-vibration-disabled**
@@ -446,7 +459,18 @@ The current version of the SDK comes with a bunch of localized languages, you ca
 8 Proguard
 ------
 
-If your application is compiled using [proguard](http://developer.android.com/guide/developing/tools/proguard.html), you need to update your `proguard.cfg` file according to the proguard.cfg file included in the sample application.
+If your application is compiled using [proguard](http://developer.android.com/guide/developing/tools/proguard.html), you need to update your `proguard-project.txt` file according to the proguard-project.txt file included in the sample application.
+
+If you're using ant to compile your project.
+First be sure your project is up to date:
+
+    $ android update project -p .
+
+Then check your `project.properties` file should look like:
+
+    proguard.config=${sdk.dir}/tools/proguard/proguard-android.txt:proguard-project.txt
+    
+And then content of your `proguard-project.txt` file should include the contents of [this file](https://github.com/sephiroth74/AviaryLauncher/blob/master/proguard-project.txt).
 
 
 <a name="crash_report"></a>
