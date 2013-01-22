@@ -329,7 +329,7 @@ a small image preview. User will almost immediately see the small preview while 
 image is being processed in background. Once the full size image is processed, it will replace 
 the small preview image. The default behavior is to enable this feature only on fast devices 
 (fast enough to allow the small preview to be rendered immediately). Pass "false" if you want 
-to force the "progress modal" rendering model. No small preview, only a modal progress bar while 
+to force the "progress modal" rendering model. No small preview will appear with this model, only a modal progress bar while 
 rendering the image.
 
 
