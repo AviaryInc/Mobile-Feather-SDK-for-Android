@@ -137,7 +137,7 @@ Starting from 2.2.1 of the SDK, the way to pass the developer api key to the Fea
 The API KEY should not be passed in the calling Intent anymore.<br />
 Now you must save your api-key string inside a file called "aviary-credentials.txt" placed inside your "assets" folder ( See the  sample application for an example ).
 
-Be sure to update your application according to this change, next versions of the Aviary SDK will throw an error if this file cannot be found or the api-key is not valid.
+It is extremely important that you update your application according to this change, as future versions of the Aviary SDK will throw an error if this file cannot be found or the api-key is not valid.
 
 **Grab your api key from http://aviary.com/android**
 
