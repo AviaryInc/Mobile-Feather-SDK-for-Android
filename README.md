@@ -193,18 +193,6 @@ And a reference to the plugins receiver is also necessary:
                 <data android:scheme="package" />
             </intent-filter>
     </receiver>
-	
-If you plan to enable the High Resolution image processing (see [section 10](#hires)), you also need to include this entry in the AndroidManifest:
-
-        <!-- Required for the hi-res image processing -->
-        <!-- authorities can have the value you prefer -->
-        <provider 
-            android:name="com.aviary.android.feather.library.providers.FeatherContentProvider"
-            android:exported="false"
-            android:authorities="com.aviary.launcher.HiResProvider">
-        </provider>
-		
-Note that the `android:authorities` is arbitrary; you must use your own string value.
 
 <a name="theme"></a>
 ### 4.4 Theme and Styles
@@ -565,6 +553,20 @@ But you can also enable hi-res saving of images, up to 3MP. If you need higher r
 	...And remember to close the cursor:
 	
 		cursor.close();
+		
+When you enable the High Resolution image processing, you also need to include this entry in the AndroidManifest:
+
+        <!-- Required for the hi-res image processing -->
+        <!-- authorities can have the value you prefer -->
+        <provider 
+            android:name="com.aviary.android.feather.library.providers.FeatherContentProvider"
+            android:exported="false"
+            android:authorities="com.aviary.launcher.HiResProvider">
+        </provider>
+		
+IMPORTANT: Do not use the sample `android:authorities` value included in this code. You MUST use the package name 
+of your own app as the string value. If you leave the sample package name (com.aviary.launcher) in your code, users 
+may have trouble installing your app from Google Play.
 
 
 <a name="exif"></a>
