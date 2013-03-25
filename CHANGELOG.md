@@ -2,6 +2,24 @@
 
 Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom) | [Twitter](http://twitter.com/aviarychangelog)
 
+## Version 2.4.1 - March 25, 2013
+* Enhance effects speed improvement
+* Added focus tool
+* Added color splash tool
+* Fixed blur/sharpen effects on hi-res images
+* Fixed android.media.process leak
+* Text Tool
+	* text color is changed even if the text shape is not selected
+	* removed strokes
+* Fixed ImageView zoom/orientation issue
+* Update proguard-project.txt settings
+* Update sample project, now FeatherActivity runs in a different process
+* Added Exceptions to the MoaHD class ( removed the Error enum )
+* updated some translations and added some missing
+* Now all the tools will reset the imageview after opening
+* Screen orientation is fixed to portrait on non tablets devices
+
+
 ## Version 2.2.1 - January 21, 2013
 * Overhauled Effects and Stickers tools with completely redesigned UI
 * Updated default effects: effects are now more subtle and generally usable, based on your feedback

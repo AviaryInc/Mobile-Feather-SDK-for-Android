@@ -8,7 +8,7 @@ Contents
 	* [1.1 Prerequisites](#prerequisites)
 * [2 Workspace setup](#workspace-setup)
 * [3 Sample Application](#sample-app)
-* [4 Include AviaryFeather in a new Application](#include)
+* [4 Include Aviary-SDK in a new Application](#include)
 	* [4.1 Create a new Android project](#create-new)
 	* [4.2 API-KEY](#api_key)
 	* [4.3 AndroidManifest.xml](#manifest)
@@ -17,30 +17,30 @@ Contents
 	* [5.1 Intent parameters](#intent-parameters)
 	* [5.2 Result parameters](#result-parameters)
 * [6 Extras](#extras)
-	* [6.1 Stickers](#stickers)
-	* [6.2 Other configurations](#other-configurations)
-	* [6.3 UI Customization](#customization)
+	* [6.1 Other configurations](#other-configurations)
+	* [6.2 UI Customization](#customization)
 * [7 Localization](#localization)
 * [8 Proguard](#proguard)
 * [9 Crash Report](#crash_report)
 * [10 Hi-Resolution editing](#hires)
 * [11 Retain EXIF Tags](#exif)
+* [12 Using Aviary without the SDK](#no-sdk)
 
 <a name="introduction"></a>
 1 Introduction
 ------------
 
-This document will guide you through the creation of a 
-sample application using the Aviary Android library (codename: Feather).
+This document will guide you through the creation of a sample application using the `Aviary SDK` Android library.
 
 <a name="prerequisites"></a>
 ### 1.1 Prerequisites
 
-The Aviary Android SDK supports Android 2.2+ as the 
+The Aviary Android SDK supports Android 2.2+ ( API level 8 ) as the 
 [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), 
-but it must be compiled using Android 4.1 (API level 16) as the target sdk. 
-This means that your application must have "Android 4.1" selected 
-in the "Project Build Target" Eclipse panel.
+but it must be compiled using Android 4.2 ( API level 17 ) as the target sdk. 
+This means that your application must have "Android 4.2" selected  in the "Project Build Target" Eclipse panel.
+
+> Note: we will deprecate android 2.2 as soon as its usage statistic will drop under 5% (according to the [Google stats](http://developer.android.com/about/dashboards/index.html))
 
 This guide assumes that you already have the Android environment installed 
 on your system and Eclipse with the required ADT plugin.
@@ -61,24 +61,23 @@ First, we'll need to import the 2 Eclipse projects into our workspace.
 
 Open Eclipse and select "Import" from the file menu.
 
-![import project in eclipse](http://labs.sephiroth.it/tmp/android/1.png)
+![import project in eclipse](http://testassets.aviary.com.s3.amazonaws.com/android/docs/sdk/img-3.png)
 
 
 The import dialog will appear. From the list of import options, 
 select "Existing Projects into Workspace," and then click "Next."
 
-![import project in eclipse](http://labs.sephiroth.it/tmp/android/2.png)
+![import project in eclipse](http://testassets.aviary.com.s3.amazonaws.com/android/docs/sdk/img-4.png)
 
 
 In the new dialog, click on the "Select archive file" radio button 
 and then click the "Browse" button on the right. From here, select 
-the `aviaryfeather.zip` file included with this document.
+the `Avoary-SDK-xxx.zip` file included with this document ( xxx is the version number ).
 Click on the "Finish" button at the bottom of the dialog. 
-A new Android library project called "Android-Feather" will be created 
-in your current workspace. This is the required library project which 
-you must include in your application if you want to use Aviary to manipulate images.
+A new Android library project called `Aviary-SDK` will be created in your current workspace. 
+This is the required library project which you must include in your application if you want to use Aviary to manipulate images.
 
-![import project in eclipse](http://labs.sephiroth.it/tmp/android/3.png)
+![import project in eclipse](http://testassets.aviary.com.s3.amazonaws.com/android/docs/sdk/img-1.png)
 
 
 
@@ -87,7 +86,7 @@ you must include in your application if you want to use Aviary to manipulate ima
 ------------------
 
 Next, we need to create an Android application in order to use the Aviary editor. 
-You can see a real example of how to use the Aviary editor by opening the sample app found <a href="http://d1wufgde20uhiw.cloudfront.net/sdk/android/Aviary-Android-Sample-App.zip">here</a>.
+You can see a real example of how to use the Aviary editor by opening the [sample app](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/raw/master/sample-app.zip).
 
 Just import the sample application by following the same procedures 
 described above, but select `sample-app.zip` at step 3. 
@@ -101,7 +100,7 @@ different Android project or add it to a new one, follow the instructions
 in step 4; otherwise you can skip to step 5.
 
 <a name="include"></a>
-4 Include AviaryFeather in a new Application
+4 Include Aviary-SDK in a new Application
 ------------------------------------------
 
 If you don't want to use the included sample application to test Aviary, 
@@ -111,24 +110,15 @@ here's a step by step guide on how to include it in a new Android application.
 ### 4.1 Create a new Android project
 
 Just create a new Android project as usual from Eclipse and select 
-Android 4.1 in the Build Target Panel.
+Android 4.2 in the Build Target Panel.
 
-![new eclipse project](http://labs.sephiroth.it/tmp/android/4.png)
+![new eclipse project](http://testassets.aviary.com.s3.amazonaws.com/android/docs/sdk/img-5.png)
 
 Once the new project has been created, open the project properties 
 and navigate to the "Android" section. Click the "Add..." button of 
-the "Library" subsection and select "AviaryFeather" from the dialog.
+the "Library" subsection and select `Aviary-SDK` from the dialog.
 
-![project setup](http://labs.sephiroth.it/tmp/android/6.png)
-
-
-Next, navigate to the "Java Build Path" section of the project properties 
-dialog and click on "Add JARs..." button of the "Libraries" subsection.
-
-![project setup](http://labs.sephiroth.it/tmp/android/7.png)
-
-You need to add the `android-support-v4.jar` library. 
-Please go to the official android [support package page](http://developer.android.com/sdk/compatibility-library.html#Downloading) in order to obtain your copy of the jar file.
+![project setup](http://testassets.aviary.com.s3.amazonaws.com/android/docs/sdk/img-6.png)
 
 <a name="api_key"></a>
 ### 4.2 API-KEY
@@ -179,6 +169,9 @@ Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity
         android:hardwareAccelerated="true"
         android:largeHeap="true"
         android:theme="@style/FeatherDefaultTheme.Custom" />
+
+>Note: If your application already uses a lot of memory then you should consider to run the FeatherActivity in a separate process. <br />
+>Just add the `android:process=":your_name"` in previous xml entry.
 
 And a reference to the plugins receiver is also necessary:
 
@@ -279,11 +272,11 @@ FeatherActivity. Here's an example of how to invoke the new activity:
 <a name="intent-parameters"></a>
 ### 5.1 Intent parameters
 
-Here's a description of the required parameters:
+Here's a description of the parameters:
 
 **Uri**
 
-(intent data) This is the source URI of the image to be used as input by Aviary.
+(intent data) This is the source URI of the image to be used as input by Aviary ( required ).
 
 **~~API_KEY~~**
 
@@ -326,8 +319,7 @@ rendering the image.
 If specified in the extras of the passed intent, it will tell Aviary to display only certain tools. 
 The value must be a String[] array and the available values are: 
 
-    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, 
-    STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE, COLORTEMP, BORDERS
+    SHARPNESS, BRIGHTNESS, CONTRAST, SATURATION, EFFECTS, RED_EYE, CROP, WHITEN, DRAWING, STICKERS, TEXT, BLEMISH, MEME, ADJUST, ENHANCE, COLORTEMP, BORDERS, COLOR_SPLASH, TILT_SHIFT
 
 
 **hide-exit-unsave-confirmation**
@@ -377,7 +369,7 @@ Passing this key in the calling intent, with any value, will disable the haptic 
 
 
 Once the user clicks "Done" (save) in the Feather activity, the "onActivityResult" of your Activity 
-will be invoked, passing back **"ACTION_REQUEST_FEATHER"** as requestCode.
+will be invoked, passing back `ACTION_REQUEST_FEATHER` as requestCode.
 The Uri data of the returned intent will be the output path of the resulting image:
 
     @Override
@@ -396,19 +388,14 @@ The Uri data of the returned intent will be the output path of the resulting ima
 6 Extras
 ------
 
-<a name="stickers"></a>
-### 6.1 Stickers
-
-The sample application includes a couple of demo stickers which will be shown as a default pack. The actual Aviary SDK comes with a default pack of stickers which users can install for free from the market (and in the future, there will be more packs to choose from). If you don't want to include the Aviary pack of stickers, just [disable the tool](#intent-parameters).
-
 <a name="other-configurations"></a>
-### 6.2 Other configurations
+### 6.1 Other configurations
 
 Most of the tools functionalities can be customized ( like the list of colors of the drawing panel, the default selected color, the aspect ratios of the crop panel, and many others ). 
 All the items are placed inside the `config.xml` file inside the res folder.
 
 <a name="customization"></a>
-### 6.3 UI Customization
+### 6.2 UI Customization
 
 There are a lot of possible customizations available for the Aviary SDK. All the layout elements can be customized by changing values in the `styles.xml`/`colors.xml`/`dimen.xml` files.
 
@@ -472,7 +459,10 @@ The crash reporting tool provided with the standard Android Market is often usel
 ------
 
 By default, the Aviary editor works on a medium resolution image, to speed up the performance of the editor. 
-But you can also enable hi-res saving of images, up to 3MP. If you need higher resolution output, please contact us at [partners@aviary.com](mailto:partners@aviary.com).
+But you can also enable hi-res saving of images, up to 3MP. 
+
+>If you need higher resolution output, please contact us at [partners@aviary.com](mailto:partners@aviary.com).
+
 
 * In the calling Intent you must pass an extra string, the hi-res session id, like this:
 	
@@ -495,7 +485,7 @@ But you can also enable hi-res saving of images, up to 3MP. If you need higher r
 	
 	session_name is the same session string you passed in the calling intent
 		
-		Uri sessionUri = FeatherContentProvider.SessionsDbColumns.getContentUri( session_name );
+		Uri sessionUri = FeatherContentProvider.SessionsDbColumns.getContentUri( this, session_name );
 		
 	This query will return a cursor with the information about the given session
 		
@@ -516,39 +506,76 @@ But you can also enable hi-res saving of images, up to 3MP. If you need higher r
 		
 	Now you must query the ContentProvider to get the list of actions to be applied on the original image:
 	
-		Uri actionsUri = FeatherContentProvider.ActionsDbColumns.getContentUri( session.session );
-		Cursor cursor = getContentResolver().query( actionsUri, null, null, null, null );
+    	Uri actionsUri = FeatherContentProvider.ActionsDbColumns.getContentUri( this, session.session );
+    	Cursor cursor = getContentResolver().query( actionsUri, null, null, null, null );
 	
 	And finally the steps to load, apply the actions and save the HD image (these steps should be performed in a separate thread, like an AsyncTask):
 	
 	Create an instance of MoaHD class
 	
+		// This must be invoked if the FeatherActivity runs in a separate process (this depends
+		// on your AndroidManifest.xml configuration)
+		try {
+			NativeFilterProxy.init( getBaseContext(), API_KEY );
+		} catch( AviaryInitializationException e ) {
+			// an error occurred!
+			e.printStackTrace();
+			Log.d( LOG_TAG, "message: " + e.getMessage() );
+			return;
+		}
+		
 		MoaHD moa = new MoaHD();
 		
 	Load the image in memory, note that the srcPath can be either a string absolute path or an int (see `ParcelFileDescriptor.getFd()`)
+	
+	Both `load` and `save` methods of the MoaHD class will throw an exception if there is an error. The exception is an instance of the `AviaryExecutionException` class.<br />
+	You can inspect the error code of the exception to get more informations about the error ( using the `getCode` method of the AviaryExecutionException class).<br />
+	possible exceptions are listed below:
+	
+	* `AviaryExecutionException.FILE_NOT_FOUND_ERROR` = 1
+	* `AviaryExecutionException.FILE_EXCEED_MAX_SIZE_ERROR` = 2
+	* `AviaryExecutionException.FILE_NOT_LOADED_ERROR` = 3
+	* `AviaryExecutionException.INVALID_CONTEXT_ERROR` = 4
+	* `AviaryExecutionException.FILE_ALREADY_LOADED_ERROR` = 5
+	* `AviaryExecutionException.DECODER_NOT_FOUND_ERROR` = 6
+	* `AviaryExecutionException.ENCODER_NOT_FOUND_ERROR` = 7
+	* `AviaryExecutionException.DECODE_ERROR` = 8
+	* `AviaryExecutionException.ENCODE_ERROR` = 9
+	* `AviaryExecutionException.INSTANCE_NULL_ERROR` = 10
+	* `AviaryExecutionException.UNKNOWN_ERROR` = 11
+	
 
-		// result will be Error.NoError is load completed succesfully
-		MoaHD.Error result = moa.load( srcPath );
+
+			try {
+				moa.load( srcPath );
+			} catch( AviaryExecutionException e ) {
+				// an error occurred
+				e.printStackTrace();
+				Log.d( LOG_TAG, "error code: " + e.getCode() );
+				return;
+			}
 		
 	Then, for every row in the actions cursor, apply the action to the moa instance:
 	
-		if( result == MoaHD.Error.NoError ){
-			do {
-				// utility to get the action object from the current cursor
-				Action action = Action.Create( cursor );
-				moa.applyActions( action.getActions() );
-			} while( cursor.moveToNext() );
-		}
+		do {
+			// utility to get the action object from the current cursor
+			Action action = Action.Create( cursor );
+			moa.applyActions( action.getActions() );
+		} while( cursor.moveToNext() );
+
 	
 	Finally you can save the output image. `dstPath` must be an absolute string path:
 	
-		result = moa.save( dstPath );
-		// if image was saved result will be Error.NoError
-		if( result == Error.NoError ){
-			// unload the image from memory
-			moa.unload();
+		try {
+			moa.save( dstPath );
+		} catch( AviaryExecutionException e ) {
+			// error
+			e.printStackTrace();
+			Log.d( LOG_TAG, "code: " + e.getCode() );
+		} finally {
+			// remember to call this method once you've done with the moa instance
+			moa.dispose();
 		}
-		moa.dispose();
 		
 	...And remember to close the cursor:
 	
@@ -564,7 +591,7 @@ When you enable the High Resolution image processing, you also need to include t
             android:authorities="com.aviary.launcher.HiResProvider">
         </provider>
 		
-IMPORTANT: Do not use the sample `android:authorities` value included in this code. You MUST use the package name 
+**IMPORTANT**: Do not use the sample `android:authorities` value included in this code. You MUST use the package name 
 of your own app as the string value. If you leave the sample package name (com.aviary.launcher) in your code, users 
 may have trouble installing your app from Google Play.
 
@@ -587,13 +614,27 @@ By default Aviary will retain the original image's EXIF data and save it into th
 
 * Copy the original exif tags into the destination exif:<br/>
 
-		originalExif.copyTo( newExif );<br />
-		// the editor auto rotate the image pixels
+		// remember the current image width an height
+		int imageWidth = newExif.getAttributeInt( ExifInterfaceWrapper.TAG_IMAGE_WIDTH, 0 );
+		int imageLength = newExif.getAttributeInt( ExifInterfaceWrapper.TAG_IMAGE_LENGTH, 0 );
+
+		// This method will copy all the attributes of the original EXIF
+		// into the new EXIF instance
+		originalExif.copyTo( newExif );
+		
+		// restore the correct tags
+		newExif.setAttribute( ExifInterfaceWrapper.TAG_IMAGE_WIDTH, String.valueOf( imageWidth ) );
+		newExif.setAttribute( ExifInterfaceWrapper.TAG_IMAGE_LENGTH, String.valueOf( imageLength ) );
+		
+		// the editor already auto rotate the image pixels
 		newExif.setAttribute( ExifInterfaceWrapper.TAG_ORIENTATION, "0" );
+		
 		// let's update the software tag too
 		newExif.setAttribute( ExifInterfaceWrapper.TAG_SOFTWARE, "Aviary " + FeatherActivity.SDK_VERSION );
+		
 		// update the datetime
-		newExif.setAttribute( ExifInterfaceWrapper.TAG_DATETIME, ExifInterfaceWrapper.getExifFormattedDate( new Date() ) );						
+		newExif.setAttribute( ExifInterfaceWrapper.TAG_DATETIME, ExifInterfaceWrapper.getExifFormattedDate( new Date() ) );
+		
 </code>
 
 * Save the new exif tags:
@@ -605,3 +646,30 @@ By default Aviary will retain the original image's EXIF data and save it into th
 				}
 
 
+<a href="no-sdk"></a>
+12 Using Aviary without the SDK
+-----
+
+You can still use the Aviary Editor and all its features without embedding the SDK inside your application. 
+You just need to check if the Aviary Editor is installed on the device, you can use this snippet:
+
+	public boolean isAviaryInstalled(){
+		Intent intent = new Intent( "aviary.intent.action.EDIT" );
+		intent.setType( "image/*" );
+		List<ResolveInfo> list = getPackageManager().queryIntentActivities( intent, PackageManager.MATCH_DEFAULT_ONLY );  
+		return list.size() > 0; 
+	}
+	
+If Aviary is not installed then you can prompt your user to download the application from the Google play store using this Intent:
+
+	Intent intent = new Intent( Intent.ACTION_VIEW );
+	intent.setData( Uri.parse( "market://details?id=com.aviary.android.feather" ) );
+	startActivity( intent );
+
+Once the Editor is installed on the user's device, you can start the Aviary Editor using this Intent:
+
+	Intent newIntent = new Intent( "aviary.intent.action.EDIT" );
+	newIntent.setDataAndType( uri, "image/*" ); // required
+	newIntent.putExtra( "app-id", getPackageName() ); // required ( it's your app unique package name )
+
+as you can see the Intent is slightly different from the one used previously (using the embedded Aviary-SDK), but all the extras described in the previous paragraphs are still valid.
