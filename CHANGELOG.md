@@ -2,6 +2,10 @@
 
 Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom) | [Twitter](http://twitter.com/aviarychangelog)
 
+## Version 2.4.2 - April 9, 2013
+* The FeatherSystemReceiver has been moved into `com.aviary.android.feather.library.receivers.AviarySystemReceiver`. Please remember to update your `AndroidManifest.xml` file, according to this.
+* Minor bug fixes.
+
 ## Version 2.4.1 - March 25, 2013
 * Enhance tool speed improvements
 * Added brand new Focus Tool: adds a selective circular or rectangular blur to photos

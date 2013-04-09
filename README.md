@@ -35,6 +35,8 @@ This document will guide you through the creation of a sample application using 
 <a name="prerequisites"></a>
 ### 1.1 Prerequisites
 
+Download the Aviary-SDK from the github page: https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android
+
 The Aviary Android SDK supports Android 2.2+ ( API level 8 ) as the 
 [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), 
 but it must be compiled using Android 4.2 ( API level 17 ) as the target sdk. 
@@ -176,7 +178,7 @@ Then, inside the &lt;application&gt; tag, add a reference to the FeatherActivity
 And a reference to the plugins receiver is also necessary:
 
     <receiver
-        android:name="com.aviary.android.feather.receivers.FeatherSystemReceiver"
+        android:name="com.aviary.android.feather.library.receivers.AviarySystemReceiver"
         android:exported="true"
         android:process=":feather_system_receiver" >
             <intent-filter>
