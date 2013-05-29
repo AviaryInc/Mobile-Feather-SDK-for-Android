@@ -30,7 +30,7 @@ Contents
 1 Introduction
 ------------
 
-This document will guide you through the creation of a sample application using the `Download SDK` Android library.
+This document will guide you through the creation of a sample application using the `Aviary SDK` Android library.
 
 <a name="prerequisites"></a>
 ### 1.1 Prerequisites
