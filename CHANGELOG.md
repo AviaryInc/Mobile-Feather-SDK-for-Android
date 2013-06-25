@@ -16,7 +16,7 @@ These 2 new keys are used to manage the case when an user clicks on the "Done" b
 
 
 ## Version 2.4.2 - April 9, 2013
-* The FeatherSystemReceiver has been moved into `com.aviary.android.feather.library.receivers.AviarySystemReceiver`. Please remember to update your `AndroidManifest.xml` file, according to this.
+* The FeatherSystemReceiver has been moved into `com.aviary.android.feather.library.receivers.AviarySystemReceiver`. Please update your `AndroidManifest.xml` file accordingly to reflect this change.
 * Minor bug fixes.
 
 ## Version 2.4.1 - March 25, 2013

@@ -32,7 +32,7 @@ This document will guide you through the creation of a sample application using 
 <a name="prerequisites"></a>
 ### 1.1 Prerequisites
 
-Download the Aviary-SDK from the github page: https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android
+Download the Aviary-SDK using the `Download SDK` link to the left.
 
 The Aviary Android SDK supports Android 2.3+ ( API level 9 ) as the 
 [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), 
@@ -85,7 +85,7 @@ This is the required library project which you must include in your application 
 ------------------
 
 Next, we need to create an Android application in order to use the Aviary editor. 
-You can see a real example of how to use the Aviary editor by opening the [sample app](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/raw/master/sample-app.zip).
+You can see a real example of how to use the Aviary editor by opening the [sample app](http://d1wufgde20uhiw.cloudfront.net/sdk/android/Aviary-Android-Sample-App.zip).
 
 Just import the sample application by following the same procedures 
 described above, but select `sample-app.zip` at step 3. 
