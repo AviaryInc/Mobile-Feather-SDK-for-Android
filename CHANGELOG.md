@@ -2,6 +2,19 @@
 
 Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom) | [Twitter](http://twitter.com/aviarychangelog)
 
+## Version 3.0.0 - June 25, 2013
+* We dropped the support to Android 2.2 ( api level 8 ). Now the minimum version supported is Android 2.3 ( api level 9 ).
+* Completely changed the UI and its styles. Moreover now all the attributes and styles have been renamed adding the "aviary" prefix, this to prevent conflict with your application.
+* There's a new theme which must be associated with the `FeatherActivity` entry in the AndroidManifest.xml file: `AviaryTheme`. This theme is declared inside the `aviary_theme.xml` file.
+
+* Added 1 new constant to the incoming Intent: `Constants.EXTRA_IN_SAVE_ON_NO_CHANGES` and a new extra will be passed to the result Intent: `Constants.EXTRA_OUT_BITMAP_CHANGED`.
+These 2 new keys are used to manage the case when an user clicks on the "Done" button without any modifications to the image. Please read the README file for further informations about this topic.
+
+* Text tool: now allows multiline text editing
+
+* Premium Partners only: The limit for hi-res editing has been increased to 30 megapixels
+
+
 ## Version 2.4.2 - April 9, 2013
 * The FeatherSystemReceiver has been moved into `com.aviary.android.feather.library.receivers.AviarySystemReceiver`. Please remember to update your `AndroidManifest.xml` file, according to this.
 * Minor bug fixes.
