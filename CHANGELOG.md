@@ -2,6 +2,14 @@
 
 Subscribe to updates: [RSS](https://github.com/AviaryInc/Mobile-Feather-SDK-for-Android/commits/master.atom) | [Twitter](http://twitter.com/aviarychangelog)
 
+## Version 3.0.2 - July 28, 2013
+* Now the Aviary API key must be declared inside the AndroidManifest.xml file. See the "README_FIRST.html" file for more informations.
+* Added the restore button. Now users can restore the original image inside the SDK.
+* Added "pre-post". Inside the SDK touch the image to see the original version of the image.
+* Added accessibility descriptions to images/tools/labels
+* Added badges on tools when a new content is available for that specific tool
+* Fixed featured order in the stickers panel
+
 ## Version 3.0.0 - June 25, 2013
 * We dropped the support to Android 2.2 ( api level 8 ). Now the minimum version supported is Android 2.3 ( api level 9 ).
 * Completely changed the UI and its styles. Moreover now all the attributes and styles have been renamed adding the "aviary" prefix, this to prevent conflict with your application.
