@@ -1,1 +1,1 @@
-##As of July 28, 2013, the Aviary Android SDK will no longer be distributed via GitHub. Please visit http://www.aviary.com/android to download the latest version.
+## As of July 28, 2013, the Aviary Android SDK will no longer be distributed via GitHub. Please visit http://www.aviary.com/android to download the latest version.
